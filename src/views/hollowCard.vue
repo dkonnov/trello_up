@@ -37,11 +37,11 @@
     <div class="col-md-6" style="background-color: rgb(243, 241, 241); border-radius: 3px; top: -15px; margin-bottom: 0px; right: -16px; bottom: 0px;padding-left: 30px;padding-right: 30px;">
       <h4 class="title" style="color: #3c4858">Ваши текущие заявки</h4>
 
-      <div class="card" style="width: 100%;" v-for="item of returnActions"  :key="item">
-        <div class="stageLine"></div>
+      <div class="card wow fadeInUp" style="width: 100%;" v-for="(item, index) of cards" :key="item" data-wow-duration="2s" data-wow-delay="1s">
+        <div class="stageLine" :class="stageColor(index)"></div>
         <div class="card-body">
           <h4 class="card-title">{{ item.name }}</h4>
-          <h6 class="card-subtitle mb-2 text-muted">Стадия </h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
           <p class="card-text">{{ item.desc }}</p>
         </div>
       </div>
@@ -64,13 +64,38 @@ export default {
   name: 'hollowCard',
   data () {
     return {
-      returnActions: [],
+      cards: [],
+      lists:[],
       formOk: false,
       desc: '',
       name: ''
     }
   },
   methods: {
+    stageColor(value){
+      if (this.cards[value].closed == true) {
+        return "stageArchiv";
+      }  else {
+        for (var i = 0; i < this.lists.length; ++i){
+          if (this.lists[i].id == this.cards[value].idList){
+            console.log("stage" + i);
+            return "stage" + i; 
+            
+          }
+        }
+      }
+    },
+    stage(value) {
+       if (this.cards[value].closed == true) {
+         return "В архиве";
+       } else {
+        for (var i = 0; i < this.lists.length; ++i){
+          if (this.lists[i].id == this.cards[value].idList){
+            return this.lists[i].name;
+          }
+        }
+       }
+    },
     inputName() {
       if (this.name){this.formOk=true} else {this.formOk = false}
     }
@@ -78,7 +103,13 @@ export default {
   mounted(){ 
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
     .then(response => {
-      this.returnActions =  response.data.cards;
+      this.cards =  response.data.cards;
+      console.log(this.cards);
+    });
+    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+    .then(response => {
+      this.lists =  response.data.lists;
+      console.log(this.lists);
     });
     document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/patrick-tomasso-1272187-unsplash.jpg\')';
   }
@@ -92,5 +123,23 @@ export default {
   background-color: #701c7e;
   position: absolute;
   border-radius: 3px 0 0 3px;
+}
+.stageArchiv{
+  background-color: gray;
+}
+.stage0{
+  background-color: #39843c;
+}
+.stage1{
+  background-color: #701c7e;
+}
+.stage2{
+  background-color: #c27400;
+}
+.stage3{
+  background-color: #008697;
+}
+.stage4{
+  background-color: ##e11b0c;
 }
 </style>
