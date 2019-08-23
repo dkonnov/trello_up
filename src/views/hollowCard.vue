@@ -42,7 +42,13 @@
         <div class="card-body">
           <h4 class="card-title">{{ item.name }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-          <p class="card-text">{{ item.desc }}</p>
+          <p class="card-text">{{ item.desc }}
+            <div align="right">
+              <div v-for="(avatar, index) of item.idMembers">
+                <img src="https://trello-avatars.s3.amazonaws.com/cf69e10484b5ea3cf622bd30536e2b84/30.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+              </div>
+            </div>
+          </p>
         </div>
       </div>
 
@@ -101,12 +107,18 @@ export default {
     }
   },
   mounted(){ 
+
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
     .then(response => {
       this.cards =  response.data.cards;
       console.log(this.cards);
     });
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+    .then(response => {
+      this.lists =  response.data.lists;
+      console.log(this.lists);
+    });
+    axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
     .then(response => {
       this.lists =  response.data.lists;
       console.log(this.lists);
@@ -140,6 +152,6 @@ export default {
   background-color: #008697;
 }
 .stage4{
-  background-color: ##e11b0c;
+  background-color: #e11b0c;
 }
 </style>
