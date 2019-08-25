@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     showRegistrationForm(){
-      eventEmitter.$emit('showRegistrationForm');
+      //eventEmitter.$emit('showRegistrationForm');
     }
   },
   created() {

@@ -21,7 +21,7 @@
           </div>
           <center>
             
-            <button v-show="formOk" class="btn btn-primary btn-round">
+            <button type="button" v-show="formOk" class="btn btn-primary btn-round" @click="sendTicket()">
               Подать заявку
             </button>
             <button v-show="!formOk" class="btn btn-primary btn-round" disabled>
@@ -78,15 +78,35 @@ export default {
     }
   },
   methods: {
+    sendTicket(){
+      // получим ID первого листа
+      axios.get('https://api.trello.com/1/boards/fsA5vKgk/lists?cards=open&card_fields=all&filter=open&fields=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+      .then(response => {
+        // публикуем новую карточку
+        axios.post('https://api.trello.com/1/cards?name=' + this.name + '&desc=' + this.desc + '&idList=' + response.data[0].id + '&keepFromSource=all&pos=top&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+        .then(() => {
+          // обновим правую колонку
+          axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+          .then(response => {
+          this.cards =  response.data.cards;
+            //console.log(this.cards);
+          });
+          // напишем сообщение об успешной публикации карточки
+          eventEmitter.$emit('showMessage', 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.');
+          this.name = '';
+          this.desc = '';
+        });
+      });
+     
+      
+    },
     stageColor(value){
       if (this.cards[value].closed == true) {
         return "stageArchiv";
       }  else {
         for (var i = 0; i < this.lists.length; ++i){
           if (this.lists[i].id == this.cards[value].idList){
-            console.log("stage" + i);
             return "stage" + i; 
-            
           }
         }
       }
@@ -116,12 +136,12 @@ export default {
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
     .then(response => {
       this.lists =  response.data.lists;
-      console.log(this.lists);
+      //console.log(this.lists);
     });
     axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
     .then(response => {
       this.lists =  response.data.lists;
-      console.log(this.lists);
+      //console.log(this.lists);
     });
     document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/patrick-tomasso-1272187-unsplash.jpg\')';
   }
