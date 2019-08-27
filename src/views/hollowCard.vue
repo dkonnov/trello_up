@@ -9,6 +9,16 @@
       
        <form>
          <center><h2 class="title" style="color: #3c4858">Новая заяка</h2></center>
+         
+ <div class="form-group">
+    <label for="exampleFormControlSelect2">Пользователь</label>
+    <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect2">
+      <option v-for="item of users">{{item.value.text}}</option>
+    </select>
+  </div>
+
+
+
           <div class="form-group">
               <label>Задача</label>
               <input type="text" v-model="name" @input="inputName" class="form-control">
@@ -66,12 +76,16 @@ import axios from "axios"
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+
 export default {
   name: 'hollowCard',
   data () {
     return {
       cards: [],
       lists:[],
+      users:[],
       formOk: false,
       desc: '',
       name: ''
@@ -80,13 +94,13 @@ export default {
   methods: {
     sendTicket(){
       // получим ID первого листа
-      axios.get('https://api.trello.com/1/boards/fsA5vKgk/lists?cards=open&card_fields=all&filter=open&fields=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+      axios.get('https://api.trello.com/1/boards/fsA5vKgk/lists?cards=open&card_fields=all&filter=open&fields=all&key=' + key + '&token=' + token)
       .then(response => {
         // публикуем новую карточку
-        axios.post('https://api.trello.com/1/cards?name=' + this.name + '&desc=' + this.desc + '&idList=' + response.data[0].id + '&keepFromSource=all&pos=top&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+        axios.post('https://api.trello.com/1/cards?name=' + this.name + '&desc=' + this.desc + '&idList=' + response.data[0].id + '&keepFromSource=all&pos=top&key=' + key + '&token=' + token)
         .then(() => {
           // обновим правую колонку
-          axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+          axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=' + key + '&token=' + token)
           .then(response => {
           this.cards =  response.data.cards;
             //console.log(this.cards);
@@ -97,8 +111,6 @@ export default {
           this.desc = '';
         });
       });
-     
-      
     },
     stageColor(value){
       if (this.cards[value].closed == true) {
@@ -128,21 +140,31 @@ export default {
   },
   mounted(){ 
 
-    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=' + key + '&token=' + token)
     .then(response => {
       this.cards =  response.data.cards;
       console.log(this.cards);
     });
-    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=' + key + '&token=' + token)
     .then(response => {
       this.lists =  response.data.lists;
       //console.log(this.lists);
     });
-    axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=2a754a93fa902b29d2694a2f71af3f83&token=b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519')
+    axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=' + key + '&token=' + token)
     .then(response => {
       this.lists =  response.data.lists;
       //console.log(this.lists);
     });
+    // получим costom fields
+    axios.get('https://api.trello.com/1/boards/fsA5vKgk/customFields?key=' + key + '&token=' + token)
+    .then(response => {
+      this.users =  response.data[0].options;
+      console.log(this.users[0].value.text);
+      console.log(this.users[1].value.text);
+      console.log(this.users[2].value.text);
+     
+    });
+    // установим фоновое изображение
     document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/patrick-tomasso-1272187-unsplash.jpg\')';
   }
 }
