@@ -13,12 +13,12 @@
  <div class="form-group">
     <label for="exampleFormControlSelect2">Пользователь</label>
     <!-- selectpicker -->
-    <select class="form-control " data-style="btn btn-link" id="exampleFormControlSelect2">
-      <option v-for="item of users">{{item.value.text}}</option>
+    <select class="form-control " v-model="selectedUser" data-style="btn btn-link" id="exampleFormControlSelect2">
+      <option v-for="item of users" :value="item.id">{{item.value.text}} - {{item.id}}</option>
     </select>
   </div>
 
-
+{{ selectedUser}}
 
           <div class="form-group">
               <label>Задача</label>
@@ -79,6 +79,8 @@ import {eventEmitter} from "./../main"
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
 const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+const board = "fsA5vKgk";
+
 
 export default {
   name: 'hollowCard',
@@ -89,23 +91,33 @@ export default {
       users:[],
       formOk: false,
       desc: '',
-      name: ''
+      name: '',
+      selectedUser: '',
+      cfid: ''
     }
   },
   methods: {
     sendTicket(){
       // получим ID первого листа
-      axios.get('https://api.trello.com/1/boards/fsA5vKgk/lists?cards=open&card_fields=all&filter=open&fields=all&key=' + key + '&token=' + token)
+      axios.get('https://api.trello.com/1/boards/' + board + '/lists?cards=open&card_fields=all&filter=open&fields=all&key=' + key + '&token=' + token)
       .then(response => {
         // публикуем новую карточку
         axios.post('https://api.trello.com/1/cards?name=' + this.name + '&desc=' + this.desc + '&idList=' + response.data[0].id + '&keepFromSource=all&pos=top&key=' + key + '&token=' + token)
-        .then(() => {
+        .then(response => {
+
+          // добавим пользователя, создавшего задачу
+          axios.put('https://api.trello.com/1/card/' + response.data.id + '/customField/' + this.cfid + '/item?idValue=' + this.selectedUser + '&key=' + key + '&token=' + token)
+          .then(response => {
+            //console.log(this.cards);
+          });
+
           // обновим правую колонку
-          axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=' + key + '&token=' + token)
+          axios.get('https://api.trello.com/1/boards/' + board + '/?cards=all&key=' + key + '&token=' + token)
           .then(response => {
           this.cards =  response.data.cards;
             //console.log(this.cards);
           });
+
           // напишем сообщение об успешной публикации карточки
           eventEmitter.$emit('showMessage', 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.');
           this.name = '';
@@ -144,7 +156,7 @@ export default {
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=' + key + '&token=' + token)
     .then(response => {
       this.cards =  response.data.cards;
-      console.log(this.cards);
+      //console.log(this.cards);
     });
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=' + key + '&token=' + token)
     .then(response => {
@@ -160,8 +172,10 @@ export default {
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/customFields?key=' + key + '&token=' + token)
     .then(response => {
       this.users =  response.data[0].options;
+      this.cfid = response.data[0].id;
       console.log(this.users[0].value.text);
-      console.log(this.users[1].value.text);
+      console.log(this.users[1].idCustomField);
+      console.log(this.cfid);
       console.log(this.users[2].value.text);
      
     });
