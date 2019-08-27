@@ -12,7 +12,8 @@
          
  <div class="form-group">
     <label for="exampleFormControlSelect2">Пользователь</label>
-    <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect2">
+    <!-- selectpicker -->
+    <select class="form-control " data-style="btn btn-link" id="exampleFormControlSelect2">
       <option v-for="item of users">{{item.value.text}}</option>
     </select>
   </div>
