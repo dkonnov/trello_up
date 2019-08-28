@@ -13,12 +13,10 @@
         <div class="form-group">
           <label for="exampleFormControlSelect2">Пользователь</label>
           <!-- selectpicker -->
-          <select @change="loadCards" class="form-control " v-model="selectedUser" data-style="btn btn-link" id="exampleFormControlSelect2">
-            <option v-for="item of users" :value="item.id">{{item.value.text}}</option>
+          <select @change="loadCards" ref="select" id="selectedUser" class="form-control selectpicker" v-model="selectedUser" data-style="btn btn-link">
+             <option v-for="item of users" :value="item.id">{{item.value.text}}</option> 
           </select>
         </div>
-
-        
 
         <div class="form-group">
           <label>Задача</label>
@@ -55,7 +53,7 @@
 	    <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
     </div>
 
-    <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие заявки</h4>
+    <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
 
     <div class="card wow fadeInUp" style="width: 100%;" v-for="(item, index) of cards" :key="item" v-show="showCustomField(item.customFieldItems[0])" data-wow-duration="2s">
       <div class="stageLine" :class="stageColor(index)"></div>
@@ -97,12 +95,14 @@ export default {
       cards: [],
       lists:[],
       users:[],
+      users0:[],
       formOk: false,
       desc: '',
       name: '',
       selectedUser: '',
       cfid: '',
-      hollowMsg: 'true'
+      hollowMsg: 'true',
+      listData:['a','b','c']
     }
   },
   methods: {
@@ -173,7 +173,7 @@ export default {
     }
   },
   mounted(){ 
-    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=' + key + '&token=' + token)
+    axios.get('https://api.trello.com/1/boards/' + board + '/?lists=all&key=' + key + '&token=' + token)
     .then(response => {
       this.lists =  response.data.lists;
      });
@@ -182,11 +182,13 @@ export default {
       this.lists =  response.data.lists;
     });
     // получим costom fields
-    axios.get('https://api.trello.com/1/boards/fsA5vKgk/customFields?key=' + key + '&token=' + token)
+    axios.get('https://api.trello.com/1/boards/' + board + '/customFields?key=' + key + '&token=' + token)
     .then(response => {
       this.users =  response.data[0].options;
+      this.$nextTick(function(){ $('#selectedUser').selectpicker('refresh'); });
       this.cfid = response.data[0].id;
     });
+   
     // установим фоновое изображение
     document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/patrick-tomasso-1272187-unsplash.jpg\')';
   }
