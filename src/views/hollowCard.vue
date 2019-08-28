@@ -13,8 +13,9 @@
         <div class="form-group">
           <label for="exampleFormControlSelect2">Пользователь</label>
           <!-- selectpicker -->
-          <select @change="loadCards" ref="select" id="selectedUser" class="form-control selectpicker" v-model="selectedUser" data-style="btn btn-link">
-             <option v-for="item of users" :value="item.id">{{item.value.text}}</option> 
+          <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
+            <option data-hidden="true"></option>
+            <option v-for="item of users" :value="item.id">{{item.value.text}}</option> 
           </select>
         </div>
 
