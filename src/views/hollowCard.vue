@@ -12,7 +12,7 @@
          
         <div class="form-group">
           <label for="exampleFormControlSelect2">Пользователь</label>
-          <!-- selectpicker -->
+          <!-- https://developer.snapappointments.com/bootstrap-select/ -->
           <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
             <option data-hidden="true"></option>
             <option v-for="item of users" :value="item.id">{{item.value.text}}</option> 
