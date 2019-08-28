@@ -5,66 +5,74 @@
 <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
   <div class="row">
 
-    <div class="col-md-6" style="padding-left: 30px;padding-right: 30px;">
+    <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
       
-       <form>
-         <center><h2 class="title" style="color: #3c4858">Новая заяка</h2></center>
+      <form>
+        <center><h2 class="title" style="color: #3c4858">Новая задача</h2></center>
          
- <div class="form-group">
-    <label for="exampleFormControlSelect2">Пользователь</label>
-    <!-- selectpicker -->
-    <select class="form-control " v-model="selectedUser" data-style="btn btn-link" id="exampleFormControlSelect2">
-      <option v-for="item of users" :value="item.id">{{item.value.text}} - {{item.id}}</option>
-    </select>
-  </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Пользователь</label>
+          <!-- selectpicker -->
+          <select @change="loadCards" class="form-control " v-model="selectedUser" data-style="btn btn-link" id="exampleFormControlSelect2">
+            <option v-for="item of users" :value="item.id">{{item.value.text}}</option>
+          </select>
+        </div>
 
-{{ selectedUser}}
+        
 
-          <div class="form-group">
-              <label>Задача</label>
-              <input type="text" v-model="name" @input="inputName" class="form-control">
-              <small id="emailHelp" class="form-text text-muted">Обязательное поле</small>
-          </div>
-           <div class="form-group">
-              <label>Описание задачи</label>
-              <textarea class="form-control" v-model="desc" rows="4" placeholder=""></textarea>
-              <small id="emailHelp" class="form-text text-muted">Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные номера или модели устройств, а также сущностей, текст возникшей ошибки. В случае возникновения проблемы опишите последовательность выполнения действий.</small>
-          </div>
-          <center>
-            
-            <button type="button" v-show="formOk" class="btn btn-primary btn-round" @click="sendTicket()">
-              Подать заявку
-            </button>
-            <button v-show="!formOk" class="btn btn-primary btn-round" disabled>
-              Подать заявку
-            </button>
-            <button class="btn btn-primary btn-link">
-              Очистить
-            </button>
-          </center>
-        </form>
+        <div class="form-group">
+          <label>Задача</label>
+          <input type="text" v-model="name" @input="inputName" class="form-control">
+          <small id="emailHelp" class="form-text text-muted">Обязательное поле</small>
+        </div>
+        <div class="form-group">
+          <label>Описание задачи</label>
+          <textarea class="form-control" v-model="desc" rows="4" placeholder=""></textarea>
+          <small id="emailHelp" class="form-text text-muted">Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные номера или модели устройств, а также сущностей, текст возникшей ошибки. В случае возникновения проблемы опишите последовательность выполнения действий.</small>
+        </div>
+        
+        <center>
+          <button type="button" v-show="formOk" class="btn btn-primary btn-round" @click="sendTicket()">
+            Подать заявку
+          </button>
+          <button v-show="!formOk" class="btn btn-primary btn-round" disabled>
+            Подать заявку
+          </button>
+          <button class="btn btn-primary btn-link">
+            Очистить
+          </button>
+        </center>
+      </form>
     </div>
     
     <div class="col-md-6" style="background-color: rgb(243, 241, 241); border-radius: 3px; top: -15px; margin-bottom: 0px; right: -16px; bottom: 0px;padding-left: 30px;padding-right: 30px;">
-      <h4 class="title" style="color: #3c4858">Ваши текущие заявки</h4>
 
-      <div class="card wow fadeInUp" style="width: 100%;" v-for="(item, index) of cards" :key="item" data-wow-duration="2s" data-wow-delay="1s">
-        <div class="stageLine" :class="stageColor(index)"></div>
-        <div class="card-body">
-          <h4 class="card-title">{{ item.name }}</h4>
-          <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-          <p class="card-text">{{ item.desc }}
-            <div align="right">
-              <div v-for="(avatar, index) of item.idMembers">
-                <img src="https://trello-avatars.s3.amazonaws.com/cf69e10484b5ea3cf622bd30536e2b84/30.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
-              </div>
-            </div>
-          </p>
+    <div class="info" v-show="hollowMsg">
+	    <div class="icon icon-primary">
+		    <i class="material-icons">chat</i>
+	    </div>
+	    <h4 class="info-title">Ваши задачи</h4>
+	    <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
+    </div>
+
+    <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие заявки</h4>
+
+    <div class="card wow fadeInUp" style="width: 100%;" v-for="(item, index) of cards" :key="item" v-show="showCustomField(item.customFieldItems[0])" data-wow-duration="2s">
+      <div class="stageLine" :class="stageColor(index)"></div>
+      <div class="card-body">
+        <h4 class="card-title">{{ item.name }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
+        <p class="card-text">{{ item.desc }}
+        <div align="right">
+          <div v-for="(avatar, index) of item.idMembers">
+            <img src="https://trello-avatars.s3.amazonaws.com/cf69e10484b5ea3cf622bd30536e2b84/30.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+          </div>
         </div>
+        </p>
       </div>
+    </div>
 
     </div>
-  
   
 </div>
 </div>
@@ -93,10 +101,30 @@ export default {
       desc: '',
       name: '',
       selectedUser: '',
-      cfid: ''
+      cfid: '',
+      hollowMsg: 'true'
     }
   },
   methods: {
+     showCustomField(value){
+      if (value){
+        if (value.idValue == this.selectedUser){
+          return(true);
+        } else {
+          return(false);
+        }
+        
+      } else {
+        return(false);
+      }
+     },
+    loadCards(){
+      this.hollowMsg = false;
+      axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=' + key + '&token=' + token)
+      .then(response => {
+        this.cards =  response.data.cards;
+      });
+    },
     sendTicket(){
       // получим ID первого листа
       axios.get('https://api.trello.com/1/boards/' + board + '/lists?cards=open&card_fields=all&filter=open&fields=all&key=' + key + '&token=' + token)
@@ -107,21 +135,14 @@ export default {
 
           // добавим пользователя, создавшего задачу
           axios.put('https://api.trello.com/1/card/' + response.data.id + '/customField/' + this.cfid + '/item?idValue=' + this.selectedUser + '&key=' + key + '&token=' + token)
-          .then(response => {
-            //console.log(this.cards);
-          });
-
-          // обновим правую колонку
-          axios.get('https://api.trello.com/1/boards/' + board + '/?cards=all&key=' + key + '&token=' + token)
-          .then(response => {
-          this.cards =  response.data.cards;
-            //console.log(this.cards);
+          .then(() => {
           });
 
           // напишем сообщение об успешной публикации карточки
           eventEmitter.$emit('showMessage', 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.');
           this.name = '';
           this.desc = '';
+          setTimeout(this.loadCards(), 2000);
         });
       });
     },
@@ -148,36 +169,23 @@ export default {
        }
     },
     inputName() {
-      if (this.name){this.formOk=true} else {this.formOk = false}
+      if (this.name && this.selectedUser){this.formOk=true} else {this.formOk = false}
     }
   },
   mounted(){ 
-
-    axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=all&key=' + key + '&token=' + token)
-    .then(response => {
-      this.cards =  response.data.cards;
-      //console.log(this.cards);
-    });
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/?lists=all&key=' + key + '&token=' + token)
     .then(response => {
       this.lists =  response.data.lists;
-      //console.log(this.lists);
-    });
+     });
     axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=' + key + '&token=' + token)
     .then(response => {
       this.lists =  response.data.lists;
-      //console.log(this.lists);
     });
     // получим costom fields
     axios.get('https://api.trello.com/1/boards/fsA5vKgk/customFields?key=' + key + '&token=' + token)
     .then(response => {
       this.users =  response.data[0].options;
       this.cfid = response.data[0].id;
-      console.log(this.users[0].value.text);
-      console.log(this.users[1].idCustomField);
-      console.log(this.cfid);
-      console.log(this.users[2].value.text);
-     
     });
     // установим фоновое изображение
     document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/patrick-tomasso-1272187-unsplash.jpg\')';
