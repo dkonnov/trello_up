@@ -15,7 +15,7 @@
           <!-- https://developer.snapappointments.com/bootstrap-select/ -->
           <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
             <option data-hidden="true"></option>
-            <option v-for="item of users" :value="item.id">{{item.value.text}}</option> 
+            <option v-for="item of users" :value="item.id" :key="item">{{item.value.text}}</option> 
           </select>
         </div>
 
@@ -63,7 +63,7 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
         <p class="card-text">{{ item.desc }}
         <div align="right">
-          <div v-for="(avatar, index) of item.idMembers">
+          <div v-for="(avatar, index) of item.idMembers" :key="avatar">
             <img src="https://trello-avatars.s3.amazonaws.com/cf69e10484b5ea3cf622bd30536e2b84/30.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
           </div>
         </div>
