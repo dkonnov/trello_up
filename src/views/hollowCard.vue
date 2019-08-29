@@ -1,6 +1,4 @@
 <template>
-  
-      
 <div class="card"> 
 <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
   <div class="row">
@@ -15,7 +13,7 @@
           <!-- https://developer.snapappointments.com/bootstrap-select/ -->
           <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
             <option data-hidden="true"></option>
-            <option v-for="item of users" :value="item.id" :key="item">{{item.value.text}}</option> 
+            <option v-for="user of users" :value="user.id" :key="user">{{user.value.text}}</option> 
           </select>
         </div>
 
@@ -56,14 +54,14 @@
 
     <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
 
-    <div class="card wow fadeInUp" style="width: 100%;" v-for="(item, index) of cards" :key="item" v-show="showCustomField(item.customFieldItems[0])" data-wow-duration="2s">
+    <div class="card wow fadeInUp" style="width: 100%;" v-for="(card, index) of cards" :key="card" v-show="showCustomField(card.customFieldItems[0])" data-wow-duration="2s">
       <div class="stageLine" :class="stageColor(index)"></div>
       <div class="card-body">
-        <h4 class="card-title">{{ item.name }}</h4>
+        <h4 class="card-title">{{ card.name }}</h4>
         <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-        <p class="card-text">{{ item.desc }}
+        <p class="card-text">{{ card.desc }}
         <div align="right">
-          <div v-for="(idMember, index) of item.idMembers" :key="avatar" style="display: block;float: right; margin: 2px;">
+          <div v-for="idMember of item.idMembers" :key="idMember" style="display: block;float: right; margin: 2px;">
          
             <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
               <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
@@ -85,6 +83,7 @@
 
 <script>
 import axios from "axios"
+import bootstrap from "bootstrap"
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
