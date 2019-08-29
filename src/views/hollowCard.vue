@@ -29,13 +29,10 @@
         </div>
         
         <center>
-          <button type="button" v-show="formOk" class="btn btn-primary btn-round" @click="sendTicket()">
+          <button type="button" class="btn btn-primary btn-round" @click="sendTicket()" :disabled="!formOk">
             Подать заявку
           </button>
-          <button v-show="!formOk" class="btn btn-primary btn-round" disabled>
-            Подать заявку
-          </button>
-          <button class="btn btn-primary btn-link">
+          <button @click="crearForm" class="btn btn-primary btn-link">
             Очистить
           </button>
         </center>
@@ -61,7 +58,7 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
         <p class="card-text">{{ card.desc }}
         <div align="right">
-          <div v-for="idMember of item.idMembers" :key="idMember" style="display: block;float: right; margin: 2px;">
+          <div v-for="idMember of card.idMembers" :key="idMember" style="display: block;float: right; margin: 2px;">
          
             <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
               <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
@@ -87,9 +84,9 @@ import bootstrap from "bootstrap"
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
-const key = "2a754a93fa902b29d2694a2f71af3f83";
-const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
-const board = "fsA5vKgk";
+var key = "2a754a93fa902b29d2694a2f71af3f83";
+var token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+var board = "fsA5vKgk";
 
 
 export default {
@@ -110,6 +107,10 @@ export default {
     }
   },
   methods: {
+    crearForm(){
+      this.name = '';
+      this.desc = '';
+    },
     getmemberTooltip(value){
       var tooltip;
       this.members.forEach(function(item, i, members){
