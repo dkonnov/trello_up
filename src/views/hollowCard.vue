@@ -63,8 +63,12 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
         <p class="card-text">{{ item.desc }}
         <div align="right">
-          <div v-for="(avatar, index) of item.idMembers" :key="avatar">
-            <img src="https://trello-avatars.s3.amazonaws.com/cf69e10484b5ea3cf622bd30536e2b84/30.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+          <div v-for="(idMember, index) of item.idMembers" :key="avatar" style="display: block;float: right; margin: 2px;">
+         
+            <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+              <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
+            </a>
+
           </div>
         </div>
         </p>
@@ -94,9 +98,9 @@ export default {
   data () {
     return {
       cards: [],
-      lists:[],
-      users:[],
-      users0:[],
+      members: [],
+      lists: [],
+      users: [],
       formOk: false,
       desc: '',
       name: '',
@@ -107,8 +111,30 @@ export default {
     }
   },
   methods: {
-     showCustomField(value){
-      if (value){
+    getmemberTooltip(value){
+      var tooltip;
+      this.members.forEach(function(item, i, members){
+        if (value == item.id) {
+          tooltip = item.fullName;
+        }
+      })
+      return tooltip;
+    },
+    getAvatarURL(value){
+      var url;
+      this.members.forEach(function(item, i, members){
+        if (value == item.id) {
+          if (item.avatarUrl){
+            url = item.avatarUrl + '/30.png'
+          } else {
+            url = "img/placeholder.jpg"
+          }
+        }
+      })
+      return url;
+    },
+    showCustomField(value){
+       if (value){
         if (value.idValue == this.selectedUser){
           return(true);
         } else {
@@ -178,10 +204,11 @@ export default {
     .then(response => {
       this.lists =  response.data.lists;
      });
-    axios.get('https://api.trello.com/1/members/5b273fa55ebcca0b73b5cb7c?fields=all&key=' + key + '&token=' + token)
+    axios.get('https://api.trello.com/1/boards/' + board + '/?members=all&key=' + key + '&token=' + token)
     .then(response => {
-      this.lists =  response.data.lists;
-    });
+      this.members =  response.data.members;
+     });
+  
     // получим costom fields
     axios.get('https://api.trello.com/1/boards/' + board + '/customFields?key=' + key + '&token=' + token)
     .then(response => {
