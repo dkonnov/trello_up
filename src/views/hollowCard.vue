@@ -42,11 +42,11 @@
     <div class="col-md-6" style="background-color: rgb(243, 241, 241); border-radius: 3px; top: -15px; margin-bottom: 0px; right: -16px; bottom: 0px;padding-left: 30px;padding-right: 30px;">
 
     <div class="info" v-show="hollowMsg">
-	    <div class="icon icon-primary">
-		    <i class="material-icons">chat</i>
-	    </div>
-	    <h4 class="info-title">Ваши задачи</h4>
-	    <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
+      <div class="icon icon-primary">
+        <i class="material-icons">chat</i>
+      </div>
+      <h4 class="info-title">Ваши задачи</h4>
+      <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
     </div>
 
     <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
@@ -81,7 +81,6 @@
 <script>
 import axios from "axios"
 import bootstrap from "bootstrap"
-import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {

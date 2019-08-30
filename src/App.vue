@@ -4,7 +4,7 @@
     <div id="backgroundDiv" class="page-header header-filter" style="background-size: cover; background-position: top center;">
       <!-- Desktop -->  
       <div class="container wow fadeIn" data-wow-duration="2s" style="display: flex;  align-items: center; flex-direction: column;">
-        <router-view></router-view> 
+        <hollowCard />
       </div>
     </div>
     <modalWindow />
@@ -14,11 +14,12 @@
 <script>
 import modalWindow from './components/modalWindow'
 import mainMenu from './components/mainMenu'
+import hollowCard from './views/hollowCard'
 
 export default {
   name: 'app',
   components: {
-    modalWindow, mainMenu
+    modalWindow, mainMenu, hollowCard
   }
 }
 </script>
