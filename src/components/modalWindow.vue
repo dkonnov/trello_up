@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
        <div class="modal-header">
@@ -12,10 +12,8 @@
           {{ messageText }}
        </div>
         <div class="modal-footer">
-         <div v-show="sendPassword" v-on:click="sendPasswordF()"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Отправить пароль</button></div>
-         <div v-show="toRegistration" v-on:click="showRegistrationForm()"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Регистрация</button></div>
-         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
-         </div>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+        </div>
      </div>
     </div>
   </div>
@@ -28,28 +26,14 @@ export default {
   name: 'modalWindow',
   data () {
     return {
-      messageText: 'test',
-      sendPassword: false,
-      toRegistration: false
+      messageText: 'test'
      }
   },
-  methods: {
-    showRegistrationForm(){
-      //eventEmitter.$emit('showRegistrationForm');
-    }
-  },
   created() {
-    eventEmitter.$on('showMessage', (value, type) => {
+    eventEmitter.$on('showMessage', (value) => {
       this.messageText = value;
-      this.sendPassword = false;
-      this.toRegistration = false;
-      if (type == 'sendPassword'){
-        this.sendPassword = true;
-      }
-      if (type == 'toRegistration'){
-        this.toRegistration = true;
-      }
       $("#modalWindow").modal('show');
+      
     })
   }
 }

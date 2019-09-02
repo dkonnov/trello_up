@@ -2,12 +2,12 @@
   <div id="app">
     <mainMenu />
     <div id="backgroundDiv" class="page-header header-filter" style="background-size: cover; background-position: top center;">
-      <!-- Desktop -->  
+      <!-- Desktop -->
       <div class="container wow fadeIn" data-wow-duration="2s" style="display: flex;  align-items: center; flex-direction: column;">
         <hollowCard />
       </div>
     </div>
-    <modalWindow />
+   <modalWindow />
    </div>
 </template>
 

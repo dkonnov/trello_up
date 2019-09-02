@@ -13,7 +13,7 @@
           <!-- https://developer.snapappointments.com/bootstrap-select/ -->
           <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
             <option data-hidden="true"></option>
-            <option v-for="user of users" :value="user.id" :key="user">{{user.value.text}}</option> 
+            <option v-for="user of users" :value="user.id">{{user.value.text}}</option> 
           </select>
         </div>
 
@@ -32,7 +32,7 @@
           <button type="button" class="btn btn-primary btn-round" @click="sendTicket()" :disabled="!formOk">
             Подать заявку
           </button>
-          <button @click="crearForm" class="btn btn-primary btn-link">
+          <button type="button" class="btn btn-primary btn-link" @click="crearForm">
             Очистить
           </button>
         </center>
@@ -51,14 +51,14 @@
 
     <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
 
-    <div class="card wow fadeInUp" style="width: 100%;" v-for="(card, index) of cards" :key="card" v-show="showCustomField(card.customFieldItems[0])" data-wow-duration="2s">
+    <div class="card wow fadeInUp" style="width: 100%;" v-for="(card, index) of cards" v-show="showCustomField(card.customFieldItems[0])" data-wow-duration="2s">
       <div class="stageLine" :class="stageColor(index)"></div>
       <div class="card-body">
         <h4 class="card-title">{{ card.name }}</h4>
         <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
         <p class="card-text">{{ card.desc }}
         <div align="right">
-          <div v-for="idMember of card.idMembers" :key="idMember" style="display: block;float: right; margin: 2px;">
+          <div v-for="idMember of card.idMembers" style="display: block;float: right; margin: 2px;">
          
             <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
               <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
@@ -78,9 +78,10 @@
 </div>
 </template>
 
+
+
 <script>
 import axios from "axios"
-import bootstrap from "bootstrap"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -163,7 +164,7 @@ export default {
           eventEmitter.$emit('showMessage', 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.');
           this.name = '';
           this.desc = '';
-          setTimeout(this.loadCards(), 2000);
+          //setTimeout(this.loadCards(), 2000);
         });
       });
     },
