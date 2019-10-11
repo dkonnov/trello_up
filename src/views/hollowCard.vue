@@ -8,28 +8,43 @@
       <form>
         <center><h2 class="title" style="color: #3c4858">Новая задача</h2></center>
          
-        <div class="form-group">
+        <div class="form-group" :class="{'has-danger': $v.selectedUser.$error}">
           <label for="exampleFormControlSelect2">Пользователь</label>
           <!-- https://developer.snapappointments.com/bootstrap-select/ -->
-          <select @change="loadCards" data-live-search="true" id="selectedUser" class="form-control selectpicker show-tick" v-model="selectedUser" data-style="btn btn-link">
+          <select 
+            @change="loadCards"
+            @blur="$v.selectedUser.$touch"
+            data-live-search="true" 
+            id="selectedUser" 
+            class="form-control selectpicker show-tick" 
+            v-model="selectedUser" 
+            data-style="btn btn-link"
+          >
             <option data-hidden="true"></option>
             <option v-for="user of users" :value="user.id">{{user.value.text}}</option> 
           </select>
+          <small id="emailHelp" class="form-text text-muted" v-if="!$v.selectedUser.required">Обязательное поле</small>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" :class="{'has-danger': $v.name.$error}">
           <label>Задача</label>
-          <input type="text" v-model="name" @input="inputName" class="form-control">
-          <small id="emailHelp" class="form-text text-muted">Обязательное поле</small>
+          <input 
+            type="text" 
+            v-model="name" 
+            id="name" 
+            @input="$v.name.$touch" 
+            class="form-control"
+          >
+          <small id="emailHelp" class="form-text text-muted" v-if="!$v.name.required">Обязательное поле</small>
         </div>
         <div class="form-group">
           <label>Описание задачи</label>
           <textarea class="form-control" v-model="desc" rows="4" placeholder=""></textarea>
           <small id="emailHelp" class="form-text text-muted">Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные номера или модели устройств, а также сущностей, текст возникшей ошибки. В случае возникновения проблемы опишите последовательность выполнения действий.</small>
         </div>
-        
+
         <center>
-          <button type="button" class="btn btn-primary btn-round" @click="sendTicket()" :disabled="!formOk">
+          <button type="button" class="btn btn-primary btn-round" @click="sendTicket()" :disabled="$v.$invalid">
             Подать заявку
           </button>
           <button type="button" class="btn btn-primary btn-link" @click="crearForm">
@@ -83,6 +98,7 @@
 <script>
 import axios from "axios"
 import {eventEmitter} from "./../main"
+import {required} from 'vuelidate/lib/validators'
 
 export default {
   name: 'hollowCard',
@@ -92,7 +108,6 @@ export default {
       members: [],
       lists: [],
       users: [],
-      formOk: false,
       desc: '',
       name: '',
       selectedUser: '',
@@ -100,6 +115,14 @@ export default {
       hollowMsg: 'true',
       listData:['a','b','c']
     }
+  },
+  validations: {
+      name: {
+        required
+      },
+      selectedUser: {
+        required
+      }
   },
   methods: {
     crearForm(){
@@ -139,7 +162,7 @@ export default {
       } else {
         return(false);
       }
-     },
+    },
     loadCards(){
       this.hollowMsg = false;
       axios.get('https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=' + key + '&token=' + token)
@@ -189,9 +212,6 @@ export default {
           }
         }
        }
-    },
-    inputName() {
-      if (this.name && this.selectedUser){this.formOk=true} else {this.formOk = false}
     }
   },
   mounted(){ 
