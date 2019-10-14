@@ -71,17 +71,16 @@
         <div class="card-body">
           <h4 class="card-title">{{ card.name }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-          <p class="card-text">{{ card.desc }}
-          <div align="right">
-            <div v-for="idMember of card.idMembers" style="display: block;float: right; margin: 2px;">
+          <p class="card-text">{{ card.desc }} </p>
+            <div align="right">
+              <div v-for="idMember of card.idMembers" style="display: block;float: right; margin: 2px;">
          
-              <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
-                <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
-              </a>
+                <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+                  <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
+                </a>
 
+              </div>
             </div>
-          </div>
-          </p>
         </div>
       </div>
     </div>
