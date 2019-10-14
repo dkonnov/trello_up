@@ -5,7 +5,7 @@
 
     <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
       
-      <form>
+      <form @submit.prevent="sendTicket">
         <center><h2 class="title" style="color: #3c4858">Новая задача</h2></center>
          
         <div class="form-group" :class="{'has-danger': $v.selectedUser.$error}">
@@ -44,7 +44,7 @@
         </div>
 
         <center>
-          <button type="button" class="btn btn-primary btn-round" @click="sendTicket()" :disabled="$v.$invalid">
+          <button type="submit" class="btn btn-primary btn-round" :disabled="$v.$invalid">
             Подать заявку
           </button>
           <button type="button" class="btn btn-primary btn-link" @click="crearForm">
@@ -68,23 +68,22 @@
 
     <div class="card wow fadeInUp" style="width: 100%;" v-for="(card, index) of cards" v-show="showCustomField(card.customFieldItems[0])" data-wow-duration="2s">
       <div class="stageLine" :class="stageColor(index)"></div>
-      <div class="card-body">
-        <h4 class="card-title">{{ card.name }}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-        <p class="card-text">{{ card.desc }}
-        <div align="right">
-          <div v-for="idMember of card.idMembers" style="display: block;float: right; margin: 2px;">
+        <div class="card-body">
+          <h4 class="card-title">{{ card.name }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
+          <p class="card-text">{{ card.desc }}
+          <div align="right">
+            <div v-for="idMember of card.idMembers" style="display: block;float: right; margin: 2px;">
          
-            <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
-              <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
-            </a>
+              <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+                <img :src="getAvatarURL(idMember)" width="30px" class="img-raised rounded-circle img-fluid">
+              </a>
 
+            </div>
           </div>
+          </p>
         </div>
-        </p>
       </div>
-    </div>
-
     </div>
   
 </div>
@@ -92,8 +91,6 @@
 
 </div>
 </template>
-
-
 
 <script>
 import axios from "axios"
