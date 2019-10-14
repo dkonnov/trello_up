@@ -108,8 +108,7 @@ export default {
       name: '',
       selectedUser: '',
       cfid: '',
-      hollowMsg: 'true',
-      listData:['a','b','c']
+      hollowMsg: 'true'
     }
   },
   validations: {
