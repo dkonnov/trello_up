@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card mainCard">
     <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
       <div class="row">
         <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
@@ -21,7 +21,7 @@
                 data-style="btn btn-link"
               >
                 <option data-hidden="true"></option>
-                <option v-for="user of users" :value="user.id">{{user.value.text}}</option>
+                <option v-for="user of users" :value="user.id" :key="user">{{user.value.text}}</option>
               </select>
               <small
                 id="emailHelp"
@@ -30,7 +30,7 @@
               >Обязательное поле</small>
             </div>
 
-            <div class="form-group" :class="{'has-danger': $v.name.$error}">
+            <div class="form-group" :class="{'has-danger': $v.name.$error}" v-show="selectedUser">
               <label>Задача</label>
               <input
                 type="text"
@@ -45,7 +45,7 @@
                 v-if="!$v.name.required"
               >Обязательное поле</small>
             </div>
-            <div class="form-group">
+            <div class="form-group" v-show="selectedUser">
               <label>Описание задачи</label>
               <textarea class="form-control" v-model="desc" rows="4" placeholder></textarea>
               <small
@@ -54,7 +54,7 @@
               >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные номера или модели устройств, а также сущностей, текст возникшей ошибки. В случае возникновения проблемы опишите последовательность выполнения действий.</small>
             </div>
 
-            <center>
+            <center v-show="selectedUser">
               <button
                 type="submit"
                 class="btn btn-primary btn-round"
@@ -65,10 +65,7 @@
           </form>
         </div>
 
-        <div
-          class="col-md-6"
-          style="background-color: rgb(243, 241, 241); border-radius: 3px; top: -15px; margin-bottom: 0px; right: -16px; bottom: 0px;padding-left: 30px;padding-right: 30px;"
-        >
+        <div class="col-md-6 rightCard">
           <div class="info" v-show="hollowMsg">
             <div class="icon icon-primary">
               <i class="material-icons">chat</i>
@@ -83,6 +80,7 @@
             class="card wow fadeInUp"
             style="width: 100%;"
             v-for="(card, index) of cards"
+            :key="card"
             v-show="showCustomField(card.customFieldItems[0])"
             data-wow-duration="2s"
           >
@@ -94,6 +92,7 @@
               <div align="right">
                 <div
                   v-for="idMember of card.idMembers"
+                  :key="idMember"
                   style="display: block;float: right; margin: 2px;"
                 >
                   <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
@@ -117,6 +116,11 @@
 import axios from "axios";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators";
+
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token =
+  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+const board = "fsA5vKgk";
 
 export default {
   name: "hollowCard",
@@ -148,7 +152,8 @@ export default {
     },
     getmemberTooltip(value) {
       var tooltip;
-      this.members.forEach(function(item, i, members) {
+      this.members.forEach(function(item) {
+        //
         if (value == item.id) {
           tooltip = item.fullName;
         }
@@ -157,7 +162,8 @@ export default {
     },
     getAvatarURL(value) {
       var url;
-      this.members.forEach(function(item, i, members) {
+      this.members.forEach(function(item) {
+        //
         if (value == item.id) {
           if (item.avatarUrl) {
             url = item.avatarUrl + "/30.png";
@@ -321,6 +327,23 @@ export default {
 </script>
 
 <style scoped>
+.row {
+  height: 100%;
+}
+.mainCard {
+  margin-top: -25px;
+  min-height: 600px; /* Минимальная высота */
+}
+.rightCard {
+  background-color: rgb(243, 241, 241);
+  border-radius: 3px;
+  top: -15px;
+  margin-bottom: 0px;
+  bottom: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 0px;
+}
 .stageLine {
   width: 3px;
   height: 100%;

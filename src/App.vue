@@ -1,27 +1,37 @@
 <template>
   <div id="app">
     <mainMenu />
-    <div id="backgroundDiv" class="page-header header-filter" style="background-size: cover; background-position: top center;">
+    <div
+      id="backgroundDiv"
+      class="page-header header-filter"
+      style="background-size: cover; background-position: top center;"
+    >
       <!-- Desktop -->
-      <div class="container wow fadeIn" data-wow-duration="2s" style="display: flex;  align-items: center; flex-direction: column;">
-        <hollowCard />
+      <div
+        class="container wow fadeIn"
+        data-wow-duration="2s"
+        style="display: flex;  align-items: center; flex-direction: column;"
+      >
+        <mainCard />
       </div>
     </div>
-   <modalWindow />
-   </div>
+    <modalWindow />
+  </div>
 </template>
 
 <script>
-import modalWindow from './components/modalWindow'
-import mainMenu from './components/mainMenu'
-import hollowCard from './views/hollowCard'
+import modalWindow from "./components/modalWindow";
+import mainMenu from "./components/mainMenu";
+import mainCard from "./views/mainCard";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    modalWindow, mainMenu, hollowCard
+    modalWindow,
+    mainMenu,
+    mainCard
   }
-}
+};
 </script>
 
 <style lang="sass">
