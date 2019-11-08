@@ -3,6 +3,7 @@
     <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
       <div class="row">
         <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
+		<router-view></router-view>
           <form @submit.prevent="sendTicket">
             <center>
               <h2 class="title" style="color: #3c4858">Новая задача</h2>
