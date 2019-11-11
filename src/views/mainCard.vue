@@ -70,8 +70,6 @@
 
 <script>
 import axios from "axios";
-import { eventEmitter } from "./../main";
-import { required } from "vuelidate/lib/validators";
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
 const token =
@@ -79,33 +77,20 @@ const token =
 const board = "fsA5vKgk";
 
 export default {
-  name: "hollowCard",
+  name: "mainCard",
   data() {
     return {
       cards: [],
       members: [],
       lists: [],
       users: [],
-      desc: "",
-      name: "",
-      selectedUser: "",
+
       cfid: "",
       hollowMsg: "true"
     };
   },
-  validations: {
-    name: {
-      required
-    },
-    selectedUser: {
-      required
-    }
-  },
+
   methods: {
-    crearForm() {
-      this.name = "";
-      this.desc = "";
-    },
     getmemberTooltip(value) {
       var tooltip;
       this.members.forEach(function(item) {
@@ -154,60 +139,7 @@ export default {
           this.cards = response.data.cards;
         });
     },
-    sendTicket() {
-      // получим ID первого листа
-      axios
-        .get(
-          "https://api.trello.com/1/boards/" +
-            board +
-            "/lists?cards=open&card_fields=all&filter=open&fields=all&key=" +
-            key +
-            "&token=" +
-            token
-        )
-        .then(response => {
-          // публикуем новую карточку
-          axios
-            .post(
-              "https://api.trello.com/1/cards?name=" +
-                this.name +
-                "&desc=" +
-                this.desc +
-                "&idList=" +
-                response.data[0].id +
-                "&keepFromSource=all&pos=top&key=" +
-                key +
-                "&token=" +
-                token
-            )
-            .then(response => {
-              // добавим пользователя, создавшего задачу
-              axios
-                .put(
-                  "https://api.trello.com/1/card/" +
-                    response.data.id +
-                    "/customField/" +
-                    this.cfid +
-                    "/item?idValue=" +
-                    this.selectedUser +
-                    "&key=" +
-                    key +
-                    "&token=" +
-                    token
-                )
-                .then(() => {});
 
-              // напишем сообщение об успешной публикации карточки
-              eventEmitter.$emit(
-                "showMessage",
-                "Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте."
-              );
-              this.name = "";
-              this.desc = "";
-              //setTimeout(this.loadCards(), 2000);
-            });
-        });
-    },
     stageColor(value) {
       if (this.cards[value].closed == true) {
         return "stageArchiv";

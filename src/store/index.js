@@ -35,9 +35,9 @@ export default new Vuex.Store({
         )
         .then(response => {
           context.commit("setUsers", response.data[0].options);
-          //this.$nextTick(function() {
-          //$("#selectedUser").selectpicker("refresh");
-          //});
+          this.$nextTick(function() {
+            $("#selectedUser").selectpicker("refresh");
+          });
           //this.cfid = response.data[0].id;
         });
     }
