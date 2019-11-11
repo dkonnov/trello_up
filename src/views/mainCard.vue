@@ -9,26 +9,27 @@
         </div>
 
         <div class="col-md-6 rightCard">
-          <div class="info" v-show="hollowMsg">
-            <div class="icon icon-primary">
-              <i class="material-icons">chat</i>
+          <transition name="fade">
+            <div class="info" v-show="!this.$store.state.currentUser">
+              <div class="icon icon-primary">
+                <i class="material-icons">chat</i>
+              </div>
+              <h4 class="info-title">Привет!</h4>
+              <p>
+                Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.
+                <br />
+                <br />Для начала работы необходимо авторизоваться. Если вас нет в списке пользователей, зарегистрируйтесь или обратитесь к администратору по телефону.
+              </p>
             </div>
-            <h4 class="info-title">Привет!</h4>
-            <p>
-              Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.
-              <br />
-              <br />Для начала работы необходимо авторизоваться. Если вас нет в списке пользователей, зарегистрируйтесь или обратитесь к администратору по телефону.
-            </p>
-          </div>
 
-          <!-- <div class="info" v-show="hollowMsg">
-            <div class="icon icon-primary">
-              <i class="material-icons">chat</i>
+            <div class="info" v-show="this.$store.state.currentUser">
+              <div class="icon icon-primary">
+                <i class="material-icons">chat</i>
+              </div>
+              <h4 class="info-title">Ваши задачи</h4>
+              <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
             </div>
-            <h4 class="info-title">Ваши задачи</h4>
-            <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
-          </div>-->
-
+          </transition>
           <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
 
           <div

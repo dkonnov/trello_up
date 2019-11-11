@@ -34,9 +34,7 @@
         >Обязательное поле</small>
       </div>
 
-      <router-link to="newtask">
-        <button class="btn btn-primary btn-round">Вход</button>
-      </router-link>
+      <button class="btn btn-primary btn-round" :disabled="$v.$invalid" @click="login">Вход</button>
       <br />
       <button type="button" class="btn btn-secondary btn-round" disabled>Регистрация</button>
     </center>
@@ -58,6 +56,12 @@ export default {
   validations: {
     selectedUser: {
       required
+    }
+  },
+  methods: {
+    login() {
+      this.$store.commit("setCurrentUser", this.selectedUser);
+      this.$router.push("/newtask");
     }
   },
   mounted() {
