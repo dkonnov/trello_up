@@ -12,6 +12,7 @@ const board = "fsA5vKgk";
 export default new Vuex.Store({
   state: {
     users: {},
+    lists: {},
     currentUser: ""
   },
   mutations: {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
+    },
+    setLists(state, payload) {
+      state.lists = payload;
     }
   },
   actions: {
@@ -39,6 +43,20 @@ export default new Vuex.Store({
             $("#selectedUser").selectpicker("refresh");
           });
           //this.cfid = response.data[0].id;
+        });
+    },
+    getLists(context) {
+      axios
+        .get(
+          "https://api.trello.com/1/boards/" +
+            board +
+            "/?lists=all&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          context.commit("setLists", response.data.lists);
         });
     }
   }

@@ -82,7 +82,6 @@ export default {
     return {
       cards: [],
       members: [],
-      lists: [],
       users: [],
 
       cfid: "",
@@ -164,18 +163,6 @@ export default {
     }
   },
   mounted() {
-    axios
-      .get(
-        "https://api.trello.com/1/boards/" +
-          board +
-          "/?lists=all&key=" +
-          key +
-          "&token=" +
-          token
-      )
-      .then(response => {
-        this.lists = response.data.lists;
-      });
     axios
       .get(
         "https://api.trello.com/1/boards/" +

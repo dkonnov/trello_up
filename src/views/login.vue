@@ -8,7 +8,7 @@
         <h4 class="info-title">Авторизация</h4>
       </div>
 
-      <div class="form-group" :class="{'has-danger': $v.selectedUser.$error}">
+      <div class="form-group" :class="{ 'has-danger': $v.selectedUser.$error }">
         <label for="exampleFormControlSelect2">Пользователь</label>
 
         <select
@@ -25,28 +25,37 @@
             v-for="user of this.$store.state.users"
             :value="user.id"
             :key="user"
-          >{{user.value.text}}</option>
+            >{{ user.value.text }}</option
+          >
         </select>
         <small
           id="emailHelp"
           class="form-text text-muted"
           v-if="!$v.selectedUser.required"
-        >Обязательное поле</small>
+          >Обязательное поле</small
+        >
       </div>
 
-      <button class="btn btn-primary btn-round" :disabled="$v.$invalid" @click="login">Вход</button>
+      <button
+        class="btn btn-primary btn-round"
+        :disabled="$v.$invalid"
+        @click="login"
+      >
+        Вход
+      </button>
       <br />
-      <button type="button" class="btn btn-secondary btn-round" disabled>Регистрация</button>
+      <button type="button" class="btn btn-secondary btn-round" disabled>
+        Регистрация
+      </button>
     </center>
   </div>
 </template>
-
 
 <script>
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "hollowCard",
+  name: "login",
   data() {
     return {
       selectedUser: "",
@@ -61,6 +70,7 @@ export default {
   methods: {
     login() {
       this.$store.commit("setCurrentUser", this.selectedUser);
+      this.$store.dispatch("getLists");
       this.$router.push("/newtask");
     }
   },
