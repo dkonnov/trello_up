@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import login from "./views/login.vue";
-import newTask from "./views/newTask.vue";
+import tasks from "./views/tasks.vue";
 
 Vue.use(Router);
 
@@ -12,8 +12,12 @@ export default new Router({
       component: login
     },
     {
-      path: "/newtask",
-      component: newTask
+      path: "*",
+      redirect: "/"
+    },
+    {
+      path: "/tasks",
+      component: tasks
     }
   ],
   mode: "history"

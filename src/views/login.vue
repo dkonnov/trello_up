@@ -71,7 +71,8 @@ export default {
     login() {
       this.$store.commit("setCurrentUser", this.selectedUser);
       this.$store.dispatch("getLists");
-      this.$router.push("/newtask");
+      this.$store.dispatch("getMembers");
+      this.$router.push("/tasks");
     }
   },
   mounted() {

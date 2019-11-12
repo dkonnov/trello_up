@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     users: {},
     lists: {},
+    members: {},
     currentUser: ""
   },
   mutations: {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     setLists(state, payload) {
       state.lists = payload;
+    },
+    setMembers(state, payload) {
+      state.members = payload;
     }
   },
   actions: {
@@ -57,6 +61,20 @@ export default new Vuex.Store({
         )
         .then(response => {
           context.commit("setLists", response.data.lists);
+        });
+    },
+    getMembers(context) {
+      axios
+        .get(
+          "https://api.trello.com/1/boards/" +
+            board +
+            "/?members=all&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          context.commit("setMembers", response.data.members);
         });
     }
   }

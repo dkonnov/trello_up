@@ -2,7 +2,10 @@
   <div class="card mainCard">
     <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
       <div class="row">
-        <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
+        <div
+          class="col-md-6"
+          style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
+        >
           <transition name="fade">
             <router-view></router-view>
           </transition>
@@ -16,9 +19,12 @@
               </div>
               <h4 class="info-title">Привет!</h4>
               <p>
-                Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.
+                Тут вы можете создать задачу по вашей проблеме, наблюдать за
+                ходом ее исполнения.
                 <br />
-                <br />Для начала работы необходимо авторизоваться. Если вас нет в списке пользователей, зарегистрируйтесь или обратитесь к администратору по телефону.
+                <br />Для начала работы необходимо авторизоваться. Если вас нет
+                в списке пользователей, зарегистрируйтесь или обратитесь к
+                администратору по телефону.
               </p>
             </div>
 
@@ -27,10 +33,15 @@
                 <i class="material-icons">chat</i>
               </div>
               <h4 class="info-title">Ваши задачи</h4>
-              <p>Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их выберите пользователя в правой колонке сервиса</p>
+              <p>
+                Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их
+                выберите пользователя в правой колонке сервиса
+              </p>
             </div>
           </transition>
-          <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">Ваши текущие задачи</h4>
+          <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">
+            Ваши текущие задачи
+          </h4>
 
           <div
             class="card wow fadeInUp"
@@ -51,7 +62,11 @@
                   :key="idMember"
                   style="display: block;float: right; margin: 2px;"
                 >
-                  <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    :title="getmemberTooltip(idMember)"
+                  >
                     <img
                       :src="getAvatarURL(idMember)"
                       width="30px"
@@ -163,19 +178,6 @@ export default {
     }
   },
   mounted() {
-    axios
-      .get(
-        "https://api.trello.com/1/boards/" +
-          board +
-          "/?members=all&key=" +
-          key +
-          "&token=" +
-          token
-      )
-      .then(response => {
-        this.members = response.data.members;
-      });
-
     // получим costom fields
     axios
       .get(

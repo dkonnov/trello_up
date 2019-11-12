@@ -5,22 +5,36 @@
     </center>
 
     <form @submit.prevent="sendTicket">
-      <div class="form-group" :class="{'has-danger': $v.name.$error}">
+      <div class="form-group" :class="{ 'has-danger': $v.name.$error }">
         <label>Задача</label>
-        <input type="text" v-model="name" id="name" @input="$v.name.$touch" class="form-control" />
+        <input
+          type="text"
+          v-model="name"
+          id="name"
+          @input="$v.name.$touch"
+          class="form-control"
+        />
         <small
           id="emailHelp"
           class="form-text text-muted"
           v-if="!$v.name.required"
-        >Обязательное поле</small>
+          >Обязательное поле</small
+        >
       </div>
       <div class="form-group">
         <label>Описание задачи</label>
-        <textarea class="form-control" v-model="desc" rows="4" placeholder></textarea>
-        <small
-          id="emailHelp"
-          class="form-text text-muted"
-        >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные номера, модели устройств или сущностей, текст возникшей ошибки. В случае возникновения проблемы опишите последовательность выполнения действий.</small>
+        <textarea
+          class="form-control"
+          v-model="desc"
+          rows="4"
+          placeholder
+        ></textarea>
+        <small id="emailHelp" class="form-text text-muted"
+          >Максимально подробно опишите вашу заявку. Заявка должна содержать
+          идентификационные номера, модели устройств или сущностей, текст
+          возникшей ошибки. В случае возникновения проблемы опишите
+          последовательность выполнения действий.</small
+        >
       </div>
 
       <center>
@@ -28,8 +42,16 @@
           type="submit"
           class="btn btn-primary btn-round"
           :disabled="$v.$invalid"
-        >Подать заявку</button>
-        <button type="button" class="btn btn-primary btn-link" @click="crearForm">Очистить</button>
+        >
+          Подать заявку
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-link"
+          @click="crearForm"
+        >
+          Очистить
+        </button>
       </center>
     </form>
   </div>
