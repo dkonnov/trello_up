@@ -20,6 +20,6 @@ new Vue({
   render: h => h(App),
   created() {
     // получим первоначальные сведения о пользователе, вошедшем в систему
-    this.$store.dispatch("getUsers");
+    //this.$store.dispatch("getUsers");
   }
 }).$mount("#app");

@@ -76,6 +76,8 @@ export default {
     }
   },
   mounted() {
+    // получим первоначальные сведения о пользователе, вошедшем в систему
+    this.$store.dispatch("getUsers");
     this.$nextTick(function() {
       $("#selectedUser").selectpicker("refresh");
     });
@@ -83,8 +85,10 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .login
     padding-left: 100px
     padding-right: 100px
+.bootstrap-select.btn-group .dropdown-toggle .filter-option
+  text-align: center
 </style>
