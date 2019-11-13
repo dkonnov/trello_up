@@ -81,6 +81,12 @@ export default {
       required
     }
   },
+  mounted() {
+    // своебразная защита роута
+    if (!this.$store.state.currentUser) {
+      this.$router.push("/");
+    }
+  },
   methods: {
     crearForm() {
       this.name = "";

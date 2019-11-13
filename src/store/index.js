@@ -16,6 +16,17 @@ export default new Vuex.Store({
     members: {},
     currentUser: ""
   },
+  getters: {
+    currentUserName(state) {
+      let name;
+      state.users.forEach(function(item) {
+        if (state.currentUser == item.id) {
+          name = item.value.text;
+        }
+      });
+      return name;
+    }
+  },
   mutations: {
     setUsers(state, payload) {
       state.users = payload;
