@@ -6,40 +6,41 @@
           class="col-md-6"
           style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
         >
-          <transition name="fade">
-            <router-view></router-view>
-          </transition>
+          <router-view></router-view>
         </div>
 
         <div class="col-md-6 rightCard">
-          <transition name="fade">
-            <div class="info" v-show="!this.$store.state.currentUser">
-              <div class="icon icon-primary">
-                <i class="material-icons">chat</i>
-              </div>
-              <h4 class="info-title">Привет!</h4>
-              <p>
-                Тут вы можете создать задачу по вашей проблеме, наблюдать за
-                ходом ее исполнения.
-                <br />
-                <br />Для начала работы необходимо авторизоваться. Если вас нет
-                в списке пользователей, зарегистрируйтесь или обратитесь к
-                администратору по телефону.
-              </p>
+          <div class="info" v-show="!this.$store.state.currentUser">
+            <div class="icon icon-primary">
+              <i class="material-icons">chat</i>
             </div>
+            <h4 class="info-title">Привет!</h4>
+            <p>
+              Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом
+              ее исполнения.
+              <br />
+              <br />Для начала работы необходимо авторизоваться. Если вас нет в
+              списке пользователей, зарегистрируйтесь или обратитесь к
+              администратору по телефону.
+            </p>
+          </div>
 
-            <div class="info" v-show="this.$store.state.currentUser">
-              <div class="icon icon-primary">
-                <i class="material-icons">chat</i>
-              </div>
-              <h4 class="info-title">Ваши задачи</h4>
-              <p>
-                Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их
-                выберите пользователя в правой колонке сервиса
-              </p>
+          <div class="info" v-show="this.$store.state.currentUser">
+            <div class="icon icon-primary">
+              <i class="material-icons">chat</i>
             </div>
-          </transition>
-          <h4 v-show="!hollowMsg" class="title" style="color: #3c4858">
+            <h4 class="info-title">Ваши задачи</h4>
+            <p>
+              Задачи, созданные вами, будут отображаться тут. Чтобы увидеть их
+              выберите пользователя в правой колонке сервиса
+            </p>
+          </div>
+
+          <h4
+            v-show="this.$store.state.currentUser"
+            class="title"
+            style="color: #3c4858"
+          >
             Ваши текущие задачи
           </h4>
 
@@ -48,7 +49,6 @@
             style="width: 100%;"
             v-for="(card, index) of cards"
             :key="card"
-            v-show="showCustomField(card.customFieldItems[0])"
             data-wow-duration="2s"
           >
             <div class="stageLine" :class="stageColor(index)"></div>
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+// v-show="showCustomField(card.customFieldItems[0])"
 import axios from "axios";
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
@@ -95,15 +96,10 @@ export default {
   name: "mainCard",
   data() {
     return {
-      cards: [],
-      members: [],
       users: [],
-
-      cfid: "",
-      hollowMsg: "true"
+      tm: [1, 2]
     };
   },
-
   methods: {
     getmemberTooltip(value) {
       var tooltip;
@@ -140,20 +136,6 @@ export default {
         return false;
       }
     },
-    loadCards() {
-      this.hollowMsg = false;
-      axios
-        .get(
-          "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
-            key +
-            "&token=" +
-            token
-        )
-        .then(response => {
-          this.cards = response.data.cards;
-        });
-    },
-
     stageColor(value) {
       if (this.cards[value].closed == true) {
         return "stageArchiv";
@@ -177,8 +159,20 @@ export default {
       }
     }
   },
+  computed: {
+    cards: function() {
+      return this.$store.state.cards;
+    },
+    lists: function() {
+      return this.$store.state.lists;
+    },
+    members: function() {
+      return this.$store.state.members;
+    }
+  },
   mounted() {
     // получим costom fields
+    this.tm = [3, 4];
     axios
       .get(
         "https://api.trello.com/1/boards/" +

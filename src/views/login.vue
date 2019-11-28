@@ -12,7 +12,6 @@
         <label for="exampleFormControlSelect2">Пользователь</label>
 
         <select
-          @change="loadCards"
           @blur="$v.selectedUser.$touch"
           data-live-search="true"
           id="selectedUser"
@@ -72,6 +71,7 @@ export default {
       this.$store.commit("setCurrentUser", this.selectedUser);
       this.$store.dispatch("getLists");
       this.$store.dispatch("getMembers");
+      this.$store.dispatch("getCards");
       this.$router.push("/tasks");
     }
   },

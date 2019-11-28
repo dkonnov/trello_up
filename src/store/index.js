@@ -14,6 +14,7 @@ export default new Vuex.Store({
     users: {},
     lists: {},
     members: {},
+    cards: {},
     currentUser: ""
   },
   getters: {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     setMembers(state, payload) {
       state.members = payload;
+    },
+    setCards(state, payload) {
+      state.cards = payload;
     }
   },
   actions: {
@@ -86,6 +90,18 @@ export default new Vuex.Store({
         )
         .then(response => {
           context.commit("setMembers", response.data.members);
+        });
+    },
+    getCards(context) {
+      axios
+        .get(
+          "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          context.commit("setCards", response.data.cards);
         });
     }
   }
