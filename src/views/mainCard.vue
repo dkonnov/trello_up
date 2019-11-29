@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-md-6 rightCard">
-          <div class="info" v-show="!this.$store.state.currentUser">
+          <div class="info" v-if="!this.$store.state.currentUser">
             <div class="icon icon-primary">
               <i class="material-icons">chat</i>
             </div>
@@ -25,7 +25,7 @@
             </p>
           </div>
 
-          <div class="info" v-show="this.$store.state.currentUser">
+          <div class="info" v-else-if="!cardsCount">
             <div class="icon icon-primary">
               <i class="material-icons">chat</i>
             </div>
@@ -36,12 +36,8 @@
             </p>
           </div>
 
-          <h4
-            v-show="this.$store.state.currentUser"
-            class="title"
-            style="color: #3c4858"
-          >
-            Ваши текущие задачи
+          <h4 v-else-if="cardsCount" class="title" style="color: #3c4858">
+            Ваши текущие задачи {{ cardsCount }}
           </h4>
 
           <div
@@ -168,11 +164,13 @@ export default {
     },
     members: function() {
       return this.$store.state.members;
+    },
+    cardsCount: function() {
+      return this.$store.state.cards.length;
     }
   },
   mounted() {
     // получим costom fields
-    this.tm = [3, 4];
     axios
       .get(
         "https://api.trello.com/1/boards/" +
