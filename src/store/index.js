@@ -101,7 +101,15 @@ export default new Vuex.Store({
             token
         )
         .then(response => {
-          context.commit("setCards", response.data.cards);
+          var newArr = response.data.cards.filter(function(card) {
+            if (card.customFieldItems.length > 0) {
+              return (
+                card.customFieldItems[0].idValue == "5d6c600ae72cf836f036433a"
+              );
+            }
+          });
+
+          context.commit("setCards", newArr);
         });
     }
   }

@@ -37,7 +37,7 @@
           </div>
 
           <h4 v-else-if="cardsCount" class="title" style="color: #3c4858">
-            Ваши текущие задачи {{ cardsCount }}
+            Ваши текущие задачи
           </h4>
 
           <div
@@ -100,7 +100,6 @@ export default {
     getmemberTooltip(value) {
       var tooltip;
       this.members.forEach(function(item) {
-        //
         if (value == item.id) {
           tooltip = item.fullName;
         }
@@ -110,7 +109,6 @@ export default {
     getAvatarURL(value) {
       var url;
       this.members.forEach(function(item) {
-        //
         if (value == item.id) {
           if (item.avatarUrl) {
             url = item.avatarUrl + "/30.png";
