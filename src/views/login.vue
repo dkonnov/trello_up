@@ -71,7 +71,7 @@ export default {
       this.$store.commit("setCurrentUser", this.selectedUser);
       this.$store.dispatch("getLists");
       this.$store.dispatch("getMembers");
-      this.$store.dispatch("getCards");
+      this.$store.dispatch("getCards", this.selectedUser);
       this.$router.push("/tasks");
     }
   },
