@@ -10,7 +10,6 @@
 
       <div class="form-group" :class="{ 'has-danger': $v.selectedUser.$error }">
         <label for="exampleFormControlSelect2">Пользователь</label>
-
         <select
           @blur="$v.selectedUser.$touch"
           data-live-search="true"
@@ -18,14 +17,12 @@
           class="form-control selectpicker show-tick"
           v-model="selectedUser"
           data-style="btn btn-link"
+          :disabled="users.length == 0"
         >
           <option data-hidden="true"></option>
-          <option
-            v-for="user of this.$store.state.users"
-            :value="user.id"
-            :key="user"
-            >{{ user.value.text }}</option
-          >
+          <option v-for="user of users" :value="user.id" :key="user">{{
+            user.value.text
+          }}</option>
         </select>
         <small
           id="emailHelp"
@@ -57,13 +54,17 @@ export default {
   name: "login",
   data() {
     return {
-      selectedUser: "",
-      users: []
+      selectedUser: ""
     };
   },
   validations: {
     selectedUser: {
       required
+    }
+  },
+  computed: {
+    users: function() {
+      return this.$store.state.users;
     }
   },
   methods: {
