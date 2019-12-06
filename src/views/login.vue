@@ -76,9 +76,10 @@ export default {
       this.$router.push("/tasks");
     }
   },
-  mounted() {
-    // получим первоначальные сведения о пользователе, вошедшем в систему
+  beforeMount() {
     this.$store.dispatch("getUsers");
+  },
+  mounted() {
     this.$nextTick(function() {
       $("#selectedUser").selectpicker("refresh");
     });

@@ -125,21 +125,27 @@ export default {
                   "https://api.trello.com/1/card/" +
                     response.data.id +
                     "/customField/" +
-                    this.cfid +
+                    this.$store.state.costomFieldsId +
                     "/item?idValue=" +
-                    this.selectedUser +
+                    this.$store.state.currentUser +
                     "&key=" +
                     key +
                     "&token=" +
                     token
                 )
-                .then(() => {});
+                .then(() => {
+                  this.$store.dispatch(
+                    "getCards",
+                    this.$store.state.currentUser
+                  );
+                });
 
               // напишем сообщение об успешной публикации карточки
               eventEmitter.$emit(
                 "showMessage",
                 "Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте."
               );
+              this.$store.dispatch("getCards", this.$store.state.currentUser);
               this.name = "";
               this.desc = "";
               //setTimeout(this.loadCards(), 2000);

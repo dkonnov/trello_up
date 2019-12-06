@@ -15,7 +15,8 @@ export default new Vuex.Store({
     lists: {},
     members: {},
     cards: {},
-    currentUser: ""
+    currentUser: "",
+    costomFieldsId: ""
   },
   getters: {
     currentUserName(state) {
@@ -30,7 +31,11 @@ export default new Vuex.Store({
   },
   mutations: {
     setUsers(state, payload) {
-      state.users = payload;
+      state.users = payload.options;
+      state.costomFieldsId = payload.id;
+      this.$nextTick(function() {
+        $("#selectedUser").selectpicker("refresh");
+      });
     },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
@@ -57,11 +62,7 @@ export default new Vuex.Store({
             token
         )
         .then(response => {
-          context.commit("setUsers", response.data[0].options);
-          this.$nextTick(function() {
-            $("#selectedUser").selectpicker("refresh");
-          });
-          //this.cfid = response.data[0].id;
+          context.commit("setUsers", response.data[0]);
         });
     },
     getLists(context) {

@@ -92,8 +92,7 @@ export default {
   name: "mainCard",
   data() {
     return {
-      users: [],
-      tm: [1, 2]
+      users: []
     };
   },
   methods: {
@@ -183,7 +182,7 @@ export default {
         this.$nextTick(function() {
           $("#selectedUser").selectpicker("refresh");
         });
-        this.cfid = response.data[0].id;
+        //  this.cfid = response.data[0].id;
       });
 
     // установим фоновое изображение
