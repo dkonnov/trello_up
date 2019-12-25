@@ -40,9 +40,11 @@
         Вход
       </button>
       <br />
-      <button type="button" class="btn btn-secondary btn-round" disabled>
-        Регистрация
-      </button>
+      <router-link to="/registration">
+        <button type="button" class="btn btn-secondary btn-round">
+          Регистрация
+        </button>
+      </router-link>
     </center>
   </div>
 </template>
