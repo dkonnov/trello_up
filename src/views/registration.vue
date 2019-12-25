@@ -84,7 +84,11 @@
       >
       <br />
 
-      <button :disabled="$v.$invalid" class="btn btn-primary btn-round">
+      <button
+        :disabled="$v.$invalid"
+        @click="registration"
+        class="btn btn-primary btn-round"
+      >
         Зарегистрироваться
       </button>
       <br />
@@ -99,6 +103,8 @@
 
 <script>
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
+import { eventEmitter } from "./../main";
+import * as fb from "firebase";
 
 export default {
   data() {
@@ -107,6 +113,22 @@ export default {
       password: "",
       password2: ""
     };
+  },
+  methods: {
+    registration() {
+      fb.auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          eventEmitter.$emit(
+            "showMessage",
+            "Спасибо за регистрацию. Теперь можно войти в систему."
+          );
+          this.$router.push("/");
+        })
+        .catch(error => {
+          eventEmitter.$emit("showMessage", error.message);
+        });
+    }
   },
   validations: {
     email: {

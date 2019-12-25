@@ -6,7 +6,9 @@
           class="col-md-6"
           style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
         >
-          <router-view></router-view>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
         </div>
 
         <div class="col-md-6 rightCard">

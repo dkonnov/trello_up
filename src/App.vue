@@ -35,21 +35,21 @@ export default {
 </script>
 
 <style lang="sass">
-.login-page 
-  .page-header 
+.login-page
+  .page-header
     .container
       padding-top: 15vh
-.fa-instagram 
+.fa-instagram
   color: #125688
-.fa-facebook-square 
+.fa-facebook-square
   color: #3b5998
-.fa-whatsapp 
+.fa-whatsapp
   color: #128c7e
-.fa-vk 
+.fa-vk
   color: #0099e5
-.fa-phone-square 
+.fa-phone-square
   color: #68217a
-.fa-envelope 
+.fa-envelope
   color: #239ab9
 .wa-white
 	color: white
@@ -76,4 +76,3 @@ export default {
 	border-bottom-width: 0px
 	border-bottom-style: solid
 </style>
-
