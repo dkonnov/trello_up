@@ -7,7 +7,7 @@
         </div>
         <h4 class="info-title">Регистрация</h4>
       </div>
-      <form @submit.prevent="login">
+      <form @submit.prevent="registration">
         <div class="fields">
           <div
             class="input-group form-group label-floating"
@@ -109,9 +109,15 @@
 </template>
 
 <script>
+import axios from "axios";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
+
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token =
+  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+// const board = "fsA5vKgk";
 
 export default {
   data() {
@@ -126,6 +132,17 @@ export default {
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          axios.post(
+            "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options" +
+              "?key=" +
+              key +
+              "&token=" +
+              token,
+            {
+              value: { text: this.email },
+              pos: "bottom"
+            }
+          );
           eventEmitter.$emit(
             "showMessage",
             "Спасибо за регистрацию. Теперь можно войти в систему."
