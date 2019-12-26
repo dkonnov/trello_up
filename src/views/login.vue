@@ -8,27 +8,58 @@
         <h4 class="info-title">Авторизация</h4>
       </div>
 
-      <div class="form-group" :class="{ 'has-danger': $v.selectedUser.$error }">
-        <label for="exampleFormControlSelect2">Пользователь</label>
-        <select
-          @blur="$v.selectedUser.$touch"
-          data-live-search="true"
-          id="selectedUser"
-          class="form-control selectpicker show-tick"
-          v-model="selectedUser"
-          data-style="btn btn-link"
-          :disabled="users.length == 0"
+      <div class="fields">
+        <div
+          class="input-group form-group label-floating"
+          :class="{ 'has-danger': $v.email.$error }"
         >
-          <option data-hidden="true"></option>
-          <option v-for="user of users" :value="user.id" :key="user">{{
-            user.value.text
-          }}</option>
-        </select>
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">mail</i>
+            </span>
+          </div>
+          <input
+            v-model="email"
+            @input="$v.email.$touch"
+            type="email"
+            class="form-control"
+            placeholder="Электронная почта ..."
+          />
+          <button v-if="$v.email.$error" class="form-control-feedback">
+            <i class="material-icons">clear</i>
+          </button>
+          <small
+            v-if="$v.email.$error"
+            class="form-text text-muteds small-alert"
+            >Необходимо ввести адрес электронной почты, которого нет в
+            системе.</small
+          >
+        </div>
+
+        <div
+          class="input-group form-group label-floating"
+          :class="{ 'has-danger': $v.password.$error }"
+        >
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">lock_outline</i>
+            </span>
+          </div>
+          <input
+            v-model="password"
+            type="password"
+            @input="$v.password.$touch"
+            class="form-control"
+            placeholder="Пароль ..."
+          />
+          <button v-if="$v.password.$error" class="form-control-feedback">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
         <small
-          id="emailHelp"
-          class="form-text text-muted"
-          v-if="!$v.selectedUser.required"
-          >Обязательное поле</small
+          v-if="$v.password.$error"
+          class="form-text text-muteds small-alert"
+          >Минимум 6 символов.</small
         >
       </div>
 
@@ -45,30 +76,40 @@
           Регистрация
         </button>
       </router-link>
+      <router-link to="/registration">
+        <button type="button" class="btn btn-secondary btn-round" disabled>
+          Забыл пароль
+        </button>
+      </router-link>
     </center>
   </div>
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, email, minLength } from "vuelidate/lib/validators/";
 
 export default {
   name: "login",
   data() {
     return {
-      selectedUser: ""
+      email: "",
+      password: ""
     };
   },
   validations: {
-    selectedUser: {
+    email: {
+      email,
       required
+    },
+    password: {
+      minLength: minLength(6)
     }
   },
-  computed: {
-    users: function() {
-      return this.$store.state.users;
-    }
-  },
+  // computed: {
+  //   users: function() {
+  //     return this.$store.state.users;
+  //   }
+  // },
   methods: {
     login() {
       this.$store.commit("setCurrentUser", this.selectedUser);
@@ -90,6 +131,15 @@ export default {
 </script>
 
 <style lang="sass">
+.input-group-text
+  color: #999
+.fields
+  margin-left: -50px
+.small-alert
+  padding-left: 55px
+  text-align: left
+.form-control-feedback
+    margin-top: -28px
 .login
     padding-left: 100px
     padding-right: 100px
