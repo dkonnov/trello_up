@@ -20,13 +20,7 @@ export default new Vuex.Store({
   },
   getters: {
     currentUserName(state) {
-      let name;
-      state.users.forEach(function(item) {
-        if (state.currentUser == item.id) {
-          name = item.value.text;
-        }
-      });
-      return name;
+      return state.currentUser.email;
     }
   },
   mutations: {
@@ -40,6 +34,9 @@ export default new Vuex.Store({
     setCurrentUser(state, payload) {
       state.currentUser = payload;
     },
+    setSingOut(state) {
+      state.currentUser = {};
+    },
     setLists(state, payload) {
       state.lists = payload;
     },
@@ -51,6 +48,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    singOut(context) {
+      context.commit("setSingOut");
+    },
     getUsers(context) {
       axios
         .get(

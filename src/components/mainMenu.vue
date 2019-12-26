@@ -36,7 +36,7 @@
               <div class="ripple-container"></div
             ></a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a class="dropdown-item" href="./">
+              <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> Выход
               </a>
             </div>
@@ -48,13 +48,27 @@
 </template>
 
 <script>
+import { eventEmitter } from "./../main";
+import * as fb from "firebase";
+
 export default {
   name: "mainMenu",
-  data() {
-    return {};
-  },
-  methods: {},
-  created() {},
-  beforeMount() {}
+  methods: {
+    singOut() {
+      fb.auth()
+        .signOut()
+        .then(function() {
+          this.$store.dispatch("singOut");
+          // this.$router.push("/");
+          eventEmitter.$emit("showMessage", "Надеюсь ты скоро вернешься :(");
+        })
+        .catch(function(error) {
+          eventEmitter.$emit(
+            "showMessage",
+            "Чтото пошло не так :( " + error.message
+          );
+        });
+    }
+  }
 };
 </script>

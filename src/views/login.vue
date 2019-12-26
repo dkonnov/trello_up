@@ -8,68 +8,69 @@
         <h4 class="info-title">Авторизация</h4>
       </div>
 
-      <div class="fields">
-        <div
-          class="input-group form-group label-floating"
-          :class="{ 'has-danger': $v.email.$error }"
-        >
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="material-icons">mail</i>
-            </span>
+      <form @submit.prevent="login">
+        <div class="fields">
+          <div
+            class="input-group form-group label-floating"
+            :class="{ 'has-danger': $v.email.$error }"
+          >
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">mail</i>
+              </span>
+            </div>
+            <input
+              v-model="email"
+              @input="$v.email.$touch"
+              type="email"
+              class="form-control"
+              placeholder="Электронная почта ..."
+            />
+            <button v-if="$v.email.$error" class="form-control-feedback">
+              <i class="material-icons">clear</i>
+            </button>
+            <small
+              v-if="$v.email.$error"
+              class="form-text text-muteds small-alert"
+              >Необходимо ввести адрес электронной почты, которого нет в
+              системе.</small
+            >
           </div>
-          <input
-            v-model="email"
-            @input="$v.email.$touch"
-            type="email"
-            class="form-control"
-            placeholder="Электронная почта ..."
-          />
-          <button v-if="$v.email.$error" class="form-control-feedback">
-            <i class="material-icons">clear</i>
-          </button>
+
+          <div
+            class="input-group form-group label-floating"
+            :class="{ 'has-danger': $v.password.$error }"
+          >
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            <input
+              v-model="password"
+              type="password"
+              @input="$v.password.$touch"
+              class="form-control"
+              placeholder="Пароль ..."
+            />
+            <button v-if="$v.password.$error" class="form-control-feedback">
+              <i class="material-icons">clear</i>
+            </button>
+          </div>
           <small
-            v-if="$v.email.$error"
+            v-if="$v.password.$error"
             class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, которого нет в
-            системе.</small
+            >Минимум 6 символов.</small
           >
         </div>
-
-        <div
-          class="input-group form-group label-floating"
-          :class="{ 'has-danger': $v.password.$error }"
+        <button
+          class="btn btn-primary btn-round"
+          :disabled="$v.$invalid"
+          type="submit"
         >
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="material-icons">lock_outline</i>
-            </span>
-          </div>
-          <input
-            v-model="password"
-            type="password"
-            @input="$v.password.$touch"
-            class="form-control"
-            placeholder="Пароль ..."
-          />
-          <button v-if="$v.password.$error" class="form-control-feedback">
-            <i class="material-icons">clear</i>
-          </button>
-        </div>
-        <small
-          v-if="$v.password.$error"
-          class="form-text text-muteds small-alert"
-          >Минимум 6 символов.</small
-        >
-      </div>
-
-      <button
-        class="btn btn-primary btn-round"
-        :disabled="$v.$invalid"
-        @click="login"
-      >
-        Вход
-      </button>
+          Вход
+        </button>
+      </form>
       <br />
       <router-link to="/registration">
         <button type="button" class="btn btn-secondary btn-round">
@@ -86,6 +87,8 @@
 </template>
 
 <script>
+import { eventEmitter } from "./../main";
+import * as fb from "firebase";
 import { required, email, minLength } from "vuelidate/lib/validators/";
 
 export default {
@@ -105,27 +108,26 @@ export default {
       minLength: minLength(6)
     }
   },
-  // computed: {
-  //   users: function() {
-  //     return this.$store.state.users;
-  //   }
-  // },
   methods: {
     login() {
-      this.$store.commit("setCurrentUser", this.selectedUser);
-      this.$store.dispatch("getLists");
-      this.$store.dispatch("getMembers");
-      this.$store.dispatch("getCards", this.selectedUser);
-      this.$router.push("/tasks");
+      fb.auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          this.$store.commit("setCurrentUser", user.user);
+          this.$router.push("/tasks");
+        })
+        .catch(error => {
+          eventEmitter.$emit("showMessage", error.message);
+        });
+      //
+      // this.$store.dispatch("getLists");
+      // this.$store.dispatch("getMembers");
+      // this.$store.dispatch("getCards", this.selectedUser);
+      // this.$router.push("/tasks");
     }
   },
   beforeMount() {
     this.$store.dispatch("getUsers");
-  },
-  mounted() {
-    this.$nextTick(function() {
-      $("#selectedUser").selectpicker("refresh");
-    });
   }
 };
 </script>
