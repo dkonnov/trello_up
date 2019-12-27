@@ -36,6 +36,9 @@
               <div class="ripple-container"></div
             ></a>
             <div class="dropdown-menu dropdown-with-icons">
+              <a class="dropdown-item" @click="showAccaunt" href="#">
+                <i class="material-icons">assignment_ind</i> Ваши данные
+              </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> Выход
               </a>
@@ -54,6 +57,9 @@ import * as fb from "firebase";
 export default {
   name: "mainMenu",
   methods: {
+    showAccaunt() {
+      this.$router.push("/accaunt");
+    },
     singOut() {
       fb.auth()
         .signOut()

@@ -50,8 +50,8 @@
           class="btn btn-primary btn-link"
           @click="crearForm"
         >
-          Очистить
-        </button>
+          Очистить</button
+        ><br />
       </center>
     </form>
   </div>
@@ -127,7 +127,7 @@ export default {
                     "/customField/" +
                     this.$store.state.costomFieldsId +
                     "/item?idValue=" +
-                    this.$store.state.currentUser +
+                    this.$store.getters.currentCostomFieldUserId +
                     "&key=" +
                     key +
                     "&token=" +

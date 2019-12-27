@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import login from "./views/login.vue";
-import tasks from "./views/tasks.vue";
-import registration from "./views/registration.vue";
+import login from "./views/login";
+import tasks from "./views/tasks";
+import registration from "./views/registration";
+import accaunt from "./views/accaunt.vue";
 
 Vue.use(Router);
 
@@ -23,6 +24,10 @@ export default new Router({
     {
       path: "/registration",
       component: registration
+    },
+    {
+      path: "/accaunt",
+      component: accaunt
     }
   ],
   mode: "history"

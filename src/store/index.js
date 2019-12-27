@@ -21,6 +21,15 @@ export default new Vuex.Store({
   getters: {
     currentUserName(state) {
       return state.currentUser.email;
+    },
+    currentCostomFieldUserId(state) {
+      let res;
+      state.users.forEach(function(item) {
+        if (item.value.text == state.currentUser.email) {
+          res = item.id;
+        }
+      });
+      return res;
     }
   },
   mutations: {
