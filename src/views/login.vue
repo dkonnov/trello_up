@@ -115,14 +115,14 @@ export default {
         .then(user => {
           this.$store.commit("setCurrentUser", user.user);
           this.$router.push("/tasks");
+          this.$store.dispatch("getLists");
+          this.$store.dispatch("getMembers");
+          this.$store.dispatch("getCards");
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
         });
-      //
-      // this.$store.dispatch("getLists");
-      // this.$store.dispatch("getMembers");
-      // this.$store.dispatch("getCards", this.selectedUser);
+
       // this.$router.push("/tasks");
     }
   },

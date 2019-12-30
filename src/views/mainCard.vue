@@ -181,10 +181,6 @@ export default {
       )
       .then(response => {
         this.users = response.data[0].options;
-        this.$nextTick(function() {
-          $("#selectedUser").selectpicker("refresh");
-        });
-        //  this.cfid = response.data[0].id;
       });
 
     // установим фоновое изображение

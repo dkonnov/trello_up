@@ -36,9 +36,6 @@ export default new Vuex.Store({
     setUsers(state, payload) {
       state.users = payload.options;
       state.costomFieldsId = payload.id;
-      this.$nextTick(function() {
-        $("#selectedUser").selectpicker("refresh");
-      });
     },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
@@ -102,7 +99,7 @@ export default new Vuex.Store({
           context.commit("setMembers", response.data.members);
         });
     },
-    getCards(context, userID) {
+    getCards({ commit, getters }) {
       axios
         .get(
           "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
@@ -113,11 +110,14 @@ export default new Vuex.Store({
         .then(response => {
           var newArr = response.data.cards.filter(function(card) {
             if (card.customFieldItems.length > 0) {
-              return card.customFieldItems[0].idValue == userID;
+              return (
+                card.customFieldItems[0].idValue ==
+                getters.currentCostomFieldUserId
+              );
             }
           });
 
-          context.commit("setCards", newArr);
+          commit("setCards", newArr);
         });
     }
   }
