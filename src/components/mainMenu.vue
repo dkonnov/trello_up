@@ -64,8 +64,6 @@ export default {
       fb.auth()
         .signOut()
         .then(function() {
-          this.$store.dispatch("singOut");
-          // this.$router.push("/");
           eventEmitter.$emit("showMessage", "Надеюсь ты скоро вернешься :(");
         })
         .catch(function(error) {
@@ -74,6 +72,8 @@ export default {
             "Чтото пошло не так :( " + error.message
           );
         });
+      this.$store.dispatch("singOut");
+      this.$router.push("/");
     }
   }
 };

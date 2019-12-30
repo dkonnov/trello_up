@@ -42,6 +42,7 @@ export default new Vuex.Store({
     },
     setSingOut(state) {
       state.currentUser = {};
+      state.cards = {};
     },
     setLists(state, payload) {
       state.lists = payload;

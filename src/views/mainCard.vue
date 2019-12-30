@@ -82,14 +82,6 @@
 </template>
 
 <script>
-// v-show="showCustomField(card.customFieldItems[0])"
-import axios from "axios";
-
-const key = "2a754a93fa902b29d2694a2f71af3f83";
-const token =
-  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
-const board = "fsA5vKgk";
-
 export default {
   name: "mainCard",
   data() {
@@ -169,20 +161,6 @@ export default {
     }
   },
   mounted() {
-    // получим costom fields
-    axios
-      .get(
-        "https://api.trello.com/1/boards/" +
-          board +
-          "/customFields?key=" +
-          key +
-          "&token=" +
-          token
-      )
-      .then(response => {
-        this.users = response.data[0].options;
-      });
-
     // установим фоновое изображение
     document.getElementById("backgroundDiv").style.backgroundImage =
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";

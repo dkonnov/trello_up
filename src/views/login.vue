@@ -122,8 +122,6 @@ export default {
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
         });
-
-      // this.$router.push("/tasks");
     }
   },
   beforeMount() {
