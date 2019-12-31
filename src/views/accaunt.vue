@@ -4,10 +4,10 @@
       <h4 class="info-title">Ваши данные</h4>
 
       <form @submit.prevent="accaunt">
-        <!-- <div class="fields">
+        <div class="fields">
           <div
             class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.email.$error }"
+            :class="{ 'has-danger': $v.name.$error }"
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
@@ -15,91 +15,107 @@
               </span>
             </div>
             <input
-              v-model="email"
-              @input="$v.email.$touch"
-              type="email"
+              v-model="name"
+              @input="$v.name.$touch"
+              type="text"
               class="form-control"
-              placeholder="Электронная почта ..."
+              placeholder="Ваше имя ..."
             />
-            <button v-if="$v.email.$error" class="form-control-feedback">
+            <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
             <small
-              v-if="$v.email.$error"
+              v-if="$v.name.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, которого нет в
-              системе.</small
+              >Необходимо ввести ваше имя, чтобы специалист знал как к вам
+              обратиться.</small
             >
           </div>
 
           <div
             class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.password.$error }"
+            :class="{ 'has-danger': $v.tel.$error }"
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="material-icons">lock_outline</i>
+                <i class="material-icons">mail</i>
               </span>
             </div>
             <input
-              v-model="password"
-              type="password"
-              @input="$v.password.$touch"
+              v-model="name"
+              @input="$v.tel.$touch"
+              type="text"
               class="form-control"
-              placeholder="Пароль ..."
+              placeholder="Ваше имя ..."
             />
-            <button v-if="$v.password.$error" class="form-control-feedback">
+            <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
+            <small
+              v-if="$v.tel.$error"
+              class="form-text text-muteds small-alert"
+              >Необходимо ввести ваше имя, чтобы специалист знал как с вами
+              связаться по телефону.</small
+            >
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
 
-          <div
-            class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.password2.$error }"
+          <br />
+
+          <button
+            :disabled="$v.$invalid"
+            type="submit"
+            class="btn btn-primary btn-round"
           >
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="material-icons">lock_outline</i>
-              </span>
-            </div>
-            <input
-              v-model="password2"
-              type="password"
-              @input="$v.password2.$touch"
-              class="form-control"
-              placeholder="Пароль еще раз ..."
-            />
-            <button v-if="$v.password2.$error" class="form-control-feedback">
-              <i class="material-icons">clear</i>
-            </button>
-          </div>
-          <small
-            v-if="$v.password2.$error"
-            class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+            Сохранить
+          </button>
+          <br />
         </div>
-        <br />
-
-        <button
-          :disabled="$v.$invalid"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >
-          Зарегистрироваться
-        </button>
-        <br /> -->
       </form>
-      <router-link to="/">
-        <button type="button" class="btn btn-secondary btn-round">
-          Назад
-        </button>
-      </router-link>
     </center>
   </div>
 </template>
+<script>
+import { required } from "vuelidate/lib/validators/";
+export default {
+  data() {
+    return {
+      name: "",
+      tel: ""
+    };
+  },
+  validations: {
+    name: {
+      required
+    },
+    tel: {
+      required
+    }
+  },
+  methods: {
+    accaunt() {
+      alert(23);
+    }
+  },
+  mounted() {
+    // своебразная защита роута
+    if (!this.$store.state.currentUser) {
+      this.$router.push("/");
+    }
+  }
+};
+</script>
+
+<style lang="sass" scoped>
+.input-group-text
+  color: #999
+.fields
+  margin-left: -50px
+.accaunt
+  padding-left: 100px
+  padding-right: 100px
+.form-control-feedback
+    margin-top: -28px
+.small-alert
+  padding-left: 55px
+  text-align: left
+</style>
