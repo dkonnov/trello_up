@@ -20,7 +20,9 @@ export default new Vuex.Store({
   },
   getters: {
     currentUserName(state) {
-      return state.currentUser.email;
+      return state.currentUser.displayName
+        ? state.currentUser.displayName
+        : state.currentUser.email;
     },
     currentCostomFieldUserId(state) {
       let res;
@@ -39,6 +41,10 @@ export default new Vuex.Store({
     },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
+    },
+    updateCurrentUser(state, name) {
+      state.currentUser.displayName = name;
+      alert(name);
     },
     setSingOut(state) {
       state.currentUser = {};

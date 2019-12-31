@@ -42,7 +42,7 @@
               </span>
             </div>
             <input
-              v-model="name"
+              v-model="tel"
               @input="$v.tel.$touch"
               type="text"
               class="form-control"
@@ -76,6 +76,9 @@
 </template>
 <script>
 import { required } from "vuelidate/lib/validators/";
+import * as fb from "firebase";
+import { eventEmitter } from "./../main";
+
 export default {
   data() {
     return {
@@ -93,7 +96,19 @@ export default {
   },
   methods: {
     accaunt() {
-      alert(23);
+      fb.auth()
+        .currentUser.updateProfile({
+          displayName: this.name,
+          phoneNumber: this.tel
+        })
+        .then(() => {
+          //this.$store.commit("updateCurrentUser", this.name);
+          this.$router.push("/tasks");
+          eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
+        })
+        .catch(error => {
+          eventEmitter.$emit("showMessage", error.message);
+        });
     }
   },
   mounted() {
@@ -101,6 +116,8 @@ export default {
     if (!this.$store.state.currentUser) {
       this.$router.push("/");
     }
+    this.name = this.$store.state.currentUser.displayName;
+    this.tel = this.$store.state.currentUser.phoneNumber;
   }
 };
 </script>

@@ -184,6 +184,7 @@ export default {
   opacity: 0;
 }
 .row {
+  min-height: 100%;
   height: 100%;
 }
 .mainCard {
