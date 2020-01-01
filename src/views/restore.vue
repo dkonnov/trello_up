@@ -6,6 +6,10 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">Восстановление доступа</h4>
+        <p>
+          Введите адрес электронной почты, который вы указывали при регистрации,
+          и мы отправим вам на него ссылку для смены пароля.
+        </p>
       </div>
       <form @submit.prevent="send">
         <div class="fields">
@@ -58,8 +62,8 @@
 <script>
 //import axios from "axios";
 import { required, email } from "vuelidate/lib/validators/";
-//import { eventEmitter } from "./../main";
-//import * as fb from "firebase";
+import { eventEmitter } from "./../main";
+import * as fb from "firebase";
 
 export default {
   data() {
@@ -68,7 +72,20 @@ export default {
     };
   },
   methods: {
-    send() {}
+    send() {
+      fb.auth()
+        .sendPasswordResetEmail(this.email)
+        .then(() => {
+          eventEmitter.$emit(
+            "showMessage",
+            "Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам»."
+          );
+          this.$router.push("/");
+        })
+        .catch(error => {
+          eventEmitter.$emit("showMessage", error.message);
+        });
+    }
   },
   validations: {
     email: {
