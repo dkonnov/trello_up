@@ -77,8 +77,8 @@
           Регистрация
         </button>
       </router-link>
-      <router-link to="/registration">
-        <button type="button" class="btn btn-secondary btn-round" disabled>
+      <router-link to="/restore">
+        <button type="button" class="btn btn-secondary btn-round">
           Забыл пароль
         </button>
       </router-link>

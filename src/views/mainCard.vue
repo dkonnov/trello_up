@@ -184,8 +184,7 @@ export default {
   opacity: 0;
 }
 .row {
-  min-height: 100%;
-  height: 100%;
+  min-height: 650px;
 }
 .mainCard {
   margin-top: -25px;
