@@ -152,7 +152,6 @@ export default {
                 "showMessage",
                 "Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации."
               );
-              //
             })
             .catch(function(error) {
               eventEmitter.$emit("showMessage", error.message);
