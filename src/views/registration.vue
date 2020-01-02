@@ -132,6 +132,7 @@ export default {
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          // добавим в trello соответствующий costom field
           axios.post(
             "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options" +
               "?key=" +
@@ -143,10 +144,19 @@ export default {
               pos: "bottom"
             }
           );
-          eventEmitter.$emit(
-            "showMessage",
-            "Спасибо за регистрацию. Теперь можно войти в систему."
-          );
+          // Отправим письмо о подтверждении почты
+          fb.auth()
+            .currentUser.sendEmailVerification()
+            .then(function() {
+              eventEmitter.$emit(
+                "showMessage",
+                "Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации."
+              );
+              //
+            })
+            .catch(function(error) {
+              eventEmitter.$emit("showMessage", error.message);
+            });
           this.$router.push("/");
         })
         .catch(error => {
