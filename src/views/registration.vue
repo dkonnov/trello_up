@@ -104,6 +104,7 @@
           Назад
         </button>
       </router-link>
+      {{ uid }}
     </center>
   </div>
 </template>
@@ -124,27 +125,47 @@ export default {
     return {
       email: "",
       password: "",
-      password2: ""
+      password2: "",
+      uid: ""
     };
   },
   methods: {
     registration() {
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
+        .then(response => {
+          this.uid = response.user.uid;
           // добавим в trello соответствующий costom field
-          axios.post(
-            "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options" +
-              "?key=" +
-              key +
-              "&token=" +
-              token,
-            {
-              value: { text: this.email },
-              pos: "bottom"
-            }
-          );
-          // Отправим письмо о подтверждении почты
+          axios
+            .post(
+              "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options" +
+                "?key=" +
+                key +
+                "&token=" +
+                token,
+              {
+                value: { text: this.email },
+                pos: "bottom"
+              }
+            )
+            .then(() => {
+              alert("cf");
+              //запомним полученный id
+              fb.database()
+                .ref("cf_link/" + this.uid)
+                .set({
+                  cf: response.data.id
+                })
+                .then(function() {
+                  alert(123);
+                  eventEmitter.$emit("showMessage", "123");
+                })
+                .catch(function(error) {
+                  alert(error.message);
+                  eventEmitter.$emit("showMessage", error.message);
+                });
+            });
+          //Отправим письмо о подтверждении почты
           fb.auth()
             .currentUser.sendEmailVerification()
             .then(function() {
