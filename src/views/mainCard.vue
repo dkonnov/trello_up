@@ -37,43 +37,77 @@
               задачу в левой колонке.
             </p>
           </div>
+          <div v-else-if="cardsCount">
+            <h4 class="title" style="color: #3c4858">
+              Ваши текущие задачи
+            </h4>
 
-          <h4 v-else-if="cardsCount" class="title" style="color: #3c4858">
-            Ваши текущие задачи
-          </h4>
-
-          <div
-            class="card wow fadeInUp"
-            style="width: 100%;"
-            v-for="(card, index) of cards"
-            :key="card"
-            data-wow-duration="2s"
-          >
-            <div class="stageLine" :class="stageColor(index)"></div>
-            <div class="card-body">
-              <h4 class="card-title">{{ card.name }}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{ stage(index) }}</h6>
-              <p class="card-text">{{ card.desc }}</p>
-              <div align="right">
-                <div
-                  v-for="idMember of card.idMembers"
-                  :key="idMember"
-                  style="display: block;float: right; margin: 2px;"
-                >
-                  <a
-                    href="#"
-                    data-toggle="tooltip"
-                    :title="getmemberTooltip(idMember)"
+            <div
+              class="card wow fadeInUp"
+              style="width: 100%;"
+              v-for="(card, index) of itemsOnPageArray"
+              :key="card"
+              data-wow-duration="2s"
+            >
+              <div class="stageLine" :class="stageColor(index)"></div>
+              <div class="card-body">
+                <h4 class="card-title">{{ card.name }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  {{ stage(index) }}
+                </h6>
+                <p class="card-text">{{ card.desc }}</p>
+                <div align="right">
+                  <div
+                    v-for="idMember of card.idMembers"
+                    :key="idMember"
+                    style="display: block;float: right; margin: 2px;"
                   >
-                    <img
-                      :src="getAvatarURL(idMember)"
-                      width="30px"
-                      class="img-raised rounded-circle img-fluid"
-                    />
-                  </a>
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      :title="getmemberTooltip(idMember)"
+                    >
+                      <img
+                        :src="getAvatarURL(idMember)"
+                        width="30px"
+                        class="img-raised rounded-circle img-fluid"
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <center>
+              <div
+                width="100%"
+                style="display: flex;align-items: center; justify-content: center;"
+              >
+                <ul
+                  class="pagination nav nav-pills nav-pills-primary"
+                  role="tablist"
+                >
+                  <template v-for="index in totalTabs">
+                    <li
+                      class="page-item"
+                      :class="{ active: currentTab == index }"
+                      :key="index"
+                      @click="currentTab = index"
+                    >
+                      <a
+                        class="page-link"
+                        data-toggle="tab"
+                        :href="'#tab' + index"
+                        role="tablist"
+                        aria-expanded="true"
+                        >{{ index }}</a
+                      >
+                    </li>
+                  </template>
+                </ul>
+              </div>
+              <br />
+            </center>
           </div>
         </div>
       </div>
@@ -82,11 +116,15 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   name: "mainCard",
   data() {
     return {
-      users: []
+      users: [],
+      currentTab: 1,
+      itemsOnPage: 5
     };
   },
   methods: {
@@ -158,6 +196,16 @@ export default {
     },
     cardsCount: function() {
       return this.$store.state.cards.length;
+    },
+    totalTabs: function() {
+      return Math.trunc(this.cards.length / this.itemsOnPage) + 1;
+    },
+    itemsOnPageArray: function() {
+      return _.slice(
+        this.$store.state.cards,
+        this.itemsOnPage * this.currentTab - this.itemsOnPage,
+        this.itemsOnPage * this.currentTab
+      );
     }
   },
   mounted() {
