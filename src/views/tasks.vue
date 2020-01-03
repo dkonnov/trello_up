@@ -50,8 +50,12 @@
           class="btn btn-primary btn-link"
           @click="crearForm"
         >
-          Очистить</button
-        ><br />
+          Очистить
+        </button>
+        <button type="button" class="btn btn-primary btn-link" @click="add">
+          add
+        </button>
+        <br />
       </center>
     </form>
   </div>
@@ -61,6 +65,7 @@
 import axios from "axios";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators";
+import * as fb from "firebase";
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
 const token =
@@ -73,7 +78,8 @@ export default {
     return {
       name: "",
       desc: "",
-      selectedUser: ""
+      selectedUser: "",
+      userId: "123"
     };
   },
   validations: {
@@ -88,6 +94,20 @@ export default {
     }
   },
   methods: {
+    add() {
+      fb.database()
+        .ref("cf_link")
+        .push({
+          username: "123",
+          email: "123"
+        })
+        .then(() => {
+          alert(123);
+        })
+        .catch(error => {
+          eventEmitter.$emit("showMessage", error.message);
+        });
+    },
     crearForm() {
       this.name = "";
       this.desc = "";

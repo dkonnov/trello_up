@@ -148,17 +148,13 @@ export default {
                 pos: "bottom"
               }
             )
-            .then(() => {
-              alert("cf");
+            .then(response => {
               //запомним полученный id
               fb.database()
-                .ref("cf_link/" + this.uid)
-                .set({
+                .ref("cf_link")
+                .push({
+                  uid: this.uid,
                   cf: response.data.id
-                })
-                .then(function() {
-                  alert(123);
-                  eventEmitter.$emit("showMessage", "123");
                 })
                 .catch(function(error) {
                   alert(error.message);
