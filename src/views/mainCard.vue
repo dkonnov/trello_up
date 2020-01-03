@@ -78,7 +78,7 @@
               </div>
             </div>
 
-            <center>
+            <center v-if="totalTabs > 1">
               <div
                 width="100%"
                 style="display: flex;align-items: center; justify-content: center;"
@@ -198,7 +198,7 @@ export default {
       return this.$store.state.cards.length;
     },
     totalTabs: function() {
-      return Math.trunc(this.cards.length / this.itemsOnPage) + 1;
+      return Math.ceil(this.cards.length / this.itemsOnPage);
     },
     itemsOnPageArray: function() {
       return _.slice(
