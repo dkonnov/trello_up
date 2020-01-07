@@ -1,5 +1,17 @@
 <template>
   <div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+      Пожалуйста, заполните ваши данные в разделе Профиль
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <center>
       <h2 class="title" style="color: #3c4858">Новая задача</h2>
     </center>
@@ -52,9 +64,6 @@
         >
           Очистить
         </button>
-        <button type="button" class="btn btn-primary btn-link" @click="add">
-          add
-        </button>
         <br />
       </center>
     </form>
@@ -65,7 +74,6 @@
 import axios from "axios";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators";
-import * as fb from "firebase";
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
 const token =
@@ -78,8 +86,7 @@ export default {
     return {
       name: "",
       desc: "",
-      selectedUser: "",
-      userId: "123"
+      selectedUser: ""
     };
   },
   validations: {
@@ -94,20 +101,6 @@ export default {
     }
   },
   methods: {
-    add() {
-      fb.database()
-        .ref("cf_link")
-        .push({
-          username: "123",
-          email: "123"
-        })
-        .then(() => {
-          alert(123);
-        })
-        .catch(error => {
-          eventEmitter.$emit("showMessage", error.message);
-        });
-    },
     crearForm() {
       this.name = "";
       this.desc = "";
