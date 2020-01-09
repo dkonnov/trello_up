@@ -56,6 +56,27 @@
                   {{ stage(index) }}
                 </h6>
                 <p class="card-text">{{ card.desc }}</p>
+                <!-- комментарии -->
+                <template v-for="comment of commentsOnCard(card.id)">
+                  <div :key="comment">
+                    <div style="display: block;float: left; margin: 2px;">
+                      <a
+                        href="#"
+                        data-toggle="tooltip"
+                        :title="getmemberTooltip(comment.idMemberCreator)"
+                      >
+                        <img
+                          :src="getAvatarURL(comment.idMemberCreator)"
+                          width="30px"
+                          class="img-raised rounded-circle img-fluid"
+                        />
+                      </a>
+                    </div>
+
+                    {{ comment.data.text }}
+                  </div>
+                </template>
+
                 <div align="right">
                   <!-- Аватарки участников -->
                   <div
@@ -147,6 +168,14 @@ export default {
     };
   },
   methods: {
+    commentsOnCard(value) {
+      var newArr = this.$store.state.comments.filter(function(arr) {
+        if (arr.data.card.id == value) {
+          return arr;
+        }
+      });
+      return newArr;
+    },
     getmemberTooltip(value) {
       var tooltip;
       this.members.forEach(function(item) {
@@ -204,6 +233,9 @@ export default {
     }
   },
   computed: {
+    comments() {
+      return this.$store.state.actions;
+    },
     cards() {
       return this.$store.state.cards;
     },

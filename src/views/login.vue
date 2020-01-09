@@ -118,7 +118,7 @@ export default {
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
           this.$store.dispatch("getCards");
-          this.$store.dispatch("getActions");
+          this.$store.dispatch("getComments");
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
