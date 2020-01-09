@@ -1,15 +1,14 @@
 <template>
   <div>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-      Пожалуйста, заполните ваши данные в разделе Профиль
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div
+      v-if="showAlert"
+      class="alert alert-info alert-dismissible fade show"
+      role="alert"
+    >
+      Пожалуйста, заполните ваши данные в разделе
+      <router-link to="/accaunt">
+        <u>Профиль</u>
+      </router-link>
     </div>
 
     <center>
@@ -100,6 +99,17 @@ export default {
       this.$router.push("/");
     }
   },
+  computed: {
+    showAlert() {
+      let res;
+      if (!this.$store.state.currentUser.displayName) {
+        res = true;
+      } else {
+        res = false;
+      }
+      return res;
+    }
+  },
   methods: {
     crearForm() {
       this.name = "";
@@ -168,3 +178,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+.alert.alert-info
+  border-radius: 6px
+</style>

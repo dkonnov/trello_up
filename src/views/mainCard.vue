@@ -185,22 +185,22 @@ export default {
     }
   },
   computed: {
-    cards: function() {
+    cards() {
       return this.$store.state.cards;
     },
-    lists: function() {
+    lists() {
       return this.$store.state.lists;
     },
-    members: function() {
+    members() {
       return this.$store.state.members;
     },
-    cardsCount: function() {
+    cardsCount() {
       return this.$store.state.cards.length;
     },
-    totalTabs: function() {
+    totalTabs() {
       return Math.ceil(this.cards.length / this.itemsOnPage);
     },
-    itemsOnPageArray: function() {
+    itemsOnPageArray() {
       return _.slice(
         this.$store.state.cards,
         this.itemsOnPage * this.currentTab - this.itemsOnPage,

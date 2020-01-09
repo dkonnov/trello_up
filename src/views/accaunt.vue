@@ -69,6 +69,11 @@
             Сохранить
           </button>
           <br />
+          <router-link to="/tasks">
+            <button type="button" class="btn btn-secondary btn-round">
+              Назад
+            </button>
+          </router-link>
         </div>
       </form>
     </center>
