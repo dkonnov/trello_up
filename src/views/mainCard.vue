@@ -57,6 +57,7 @@
                 </h6>
                 <p class="card-text">{{ card.desc }}</p>
                 <div align="right">
+                  <!-- Аватарки участников -->
                   <div
                     v-for="idMember of card.idMembers"
                     :key="idMember"
@@ -73,6 +74,24 @@
                         class="img-raised rounded-circle img-fluid"
                       />
                     </a>
+                  </div>
+                  <!-- Меню -->
+                  <button
+                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="material-icons">more_horiz</i>
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a class="dropdown-item" href="#">Добавить файл</a>
+                    <a class="dropdown-item" href="#">Отменить</a>
                   </div>
                 </div>
               </div>
@@ -217,6 +236,9 @@ export default {
 </script>
 
 <style scoped>
+.material-icons {
+  color: #999;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition-property: opacity;

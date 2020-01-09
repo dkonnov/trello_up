@@ -15,6 +15,7 @@ export default new Vuex.Store({
     lists: {},
     members: {},
     cards: {},
+    actions: {},
     currentUser: "",
     costomFieldsId: ""
   },
@@ -58,6 +59,9 @@ export default new Vuex.Store({
     },
     setCards(state, payload) {
       state.cards = payload;
+    },
+    setActions(state, payload) {
+      state.actions = payload;
     }
   },
   actions: {
@@ -125,6 +129,18 @@ export default new Vuex.Store({
           });
 
           commit("setCards", newArr);
+        });
+    },
+    getActions({ commit }) {
+      axios
+        .get(
+          "https://api.trello.com/1/boards/fsA5vKgk/actions/?limit=1000&filter=commentCard&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          commit("setActions", response.data);
         });
     }
   }
