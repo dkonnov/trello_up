@@ -58,8 +58,8 @@
                 <p class="card-text">{{ card.desc }}</p>
                 <!-- комментарии -->
                 <template v-for="comment of commentsOnCard(card.id)">
-                  <div :key="comment">
-                    <div style="display: block;float: left; margin: 2px;">
+                  <div :key="comment" class="comment">
+                    <div style="display: block;float: left; margin: 0px;">
                       <a
                         href="#"
                         data-toggle="tooltip"
@@ -67,13 +67,15 @@
                       >
                         <img
                           :src="getAvatarURL(comment.idMemberCreator)"
-                          width="30px"
+                          width="24px"
                           class="img-raised rounded-circle img-fluid"
+                          style="margin-right: 10px"
                         />
                       </a>
                     </div>
-
-                    {{ comment.data.text }}
+                    <div class="comment_text">
+                      {{ comment.data.text }}
+                    </div>
                   </div>
                 </template>
 
@@ -268,6 +270,13 @@ export default {
 </script>
 
 <style scoped>
+.comment {
+  background-color: #fafafa;
+  border-radius: 12px;
+  font-size: 75%;
+  margin-top: 0.25rem;
+}
+
 .material-icons {
   color: #999;
 }
