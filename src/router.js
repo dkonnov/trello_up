@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import login from "./views/login";
-import tasks from "./views/tasks";
+import add from "./views/add";
 import registration from "./views/registration";
 import accaunt from "./views/accaunt";
 import restore from "./views/restore";
@@ -19,8 +19,8 @@ export default new Router({
       redirect: "/"
     },
     {
-      path: "/tasks",
-      component: tasks
+      path: "/add",
+      component: add
     },
     {
       path: "/registration",

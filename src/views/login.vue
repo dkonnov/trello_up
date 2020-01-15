@@ -114,7 +114,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           this.$store.commit("setCurrentUser", user.user);
-          this.$router.push("/tasks");
+          this.$router.push("/add");
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
           this.$store.dispatch("getCards");
