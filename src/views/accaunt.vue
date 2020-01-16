@@ -1,7 +1,12 @@
 <template>
   <div class="accaunt">
     <center>
-      <h4 class="info-title">Ваши данные</h4>
+      <div class="info">
+        <div class="icon icon-primary">
+          <i class="material-icons">assignment_ind</i>
+        </div>
+        <h4 class="info-title">Данные аккаунта</h4>
+      </div>
 
       <form @submit.prevent="accaunt">
         <div class="fields">
@@ -11,7 +16,7 @@
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="material-icons">mail</i>
+                <i class="material-icons">face</i>
               </span>
             </div>
             <input
@@ -38,7 +43,7 @@
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="material-icons">mail</i>
+                <i class="material-icons">call</i>
               </span>
             </div>
             <input
@@ -46,7 +51,7 @@
               @input="$v.tel.$touch"
               type="text"
               class="form-control"
-              placeholder="Ваше имя ..."
+              placeholder="Номер телефона ..."
             />
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -54,8 +59,35 @@
             <small
               v-if="$v.tel.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести ваше имя, чтобы специалист знал как с вами
-              связаться по телефону.</small
+              >Для того чтобы с вами могли связаться, укажите свой номер
+              телефона.</small
+            >
+          </div>
+
+          <div
+            class="input-group form-group label-floating"
+            :class="{ 'has-danger': $v.tel.$error }"
+          >
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">apartment</i>
+              </span>
+            </div>
+            <input
+              v-model="tel"
+              @input="$v.tel.$touch"
+              type="text"
+              class="form-control"
+              placeholder="Место нахождения  ..."
+            />
+            <button v-if="$v.tel.$error" class="form-control-feedback">
+              <i class="material-icons">clear</i>
+            </button>
+            <small
+              v-if="$v.tel.$error"
+              class="form-text text-muteds small-alert"
+              >Для того чтобы с вами могли связаться, укажите свой номер
+              телефона.</small
             >
           </div>
 
@@ -69,7 +101,7 @@
             Сохранить
           </button>
           <br />
-          <router-link to="/tasks">
+          <router-link to="/add">
             <button type="button" class="btn btn-secondary btn-round">
               Назад
             </button>
