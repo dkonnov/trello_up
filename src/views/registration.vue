@@ -91,7 +91,7 @@
         <br />
 
         <button
-          :disabled="$v.$invalid"
+          :disabled="$v.$invalid || loading"
           type="submit"
           class="btn btn-primary btn-round"
         >
@@ -126,11 +126,13 @@ export default {
       email: "",
       password: "",
       password2: "",
-      uid: ""
+      uid: "",
+      loading: false
     };
   },
   methods: {
     registration() {
+      this.loading = true;
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(response => {
@@ -174,9 +176,11 @@ export default {
               eventEmitter.$emit("showMessage", error.message);
             });
           this.$router.push("/");
+          this.loading = false;
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
+          this.loading = false;
         });
     }
   },

@@ -108,7 +108,7 @@ export default {
         })
         .then(() => {
           //this.$store.commit("updateCurrentUser", this.name);
-          this.$router.push("/tasks");
+          this.$router.push("/add");
           eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
         })
         .catch(error => {

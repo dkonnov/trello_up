@@ -65,7 +65,7 @@
         </div>
         <button
           class="btn btn-primary btn-round"
-          :disabled="$v.$invalid"
+          :disabled="$v.$invalid || loading"
           type="submit"
         >
           Вход
@@ -96,7 +96,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      loading: false
     };
   },
   validations: {
@@ -110,6 +111,7 @@ export default {
   },
   methods: {
     login() {
+      this.loading = true;
       fb.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
@@ -121,6 +123,7 @@ export default {
           this.$store.dispatch("getComments");
         })
         .catch(error => {
+          this.loading = false;
           eventEmitter.$emit("showMessage", error.message);
         });
     }
