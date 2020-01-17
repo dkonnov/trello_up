@@ -151,11 +151,10 @@ export default {
               }
             )
             .then(response => {
-              //запомним полученный id
+              // запишем данные о пользователе
               fb.database()
-                .ref("cf_link")
-                .push({
-                  uid: this.uid,
+                .ref("users/" + this.uid)
+                .set({
                   cf: response.data.id
                 })
                 .catch(function(error) {

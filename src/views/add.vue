@@ -59,7 +59,7 @@
         <button
           type="button"
           class="btn btn-primary btn-link"
-          @click="crearForm"
+          @click="clearForm"
         >
           Очистить
         </button>
@@ -73,6 +73,7 @@
 import axios from "axios";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators";
+import * as fb from "firebase";
 
 const key = "2a754a93fa902b29d2694a2f71af3f83";
 const token =
@@ -111,7 +112,17 @@ export default {
     }
   },
   methods: {
-    crearForm() {
+    readFB() {
+      fb.ref("users/123")
+        .set({
+          cf: "1111"
+        })
+        .catch(function(error) {
+          alert(error.message);
+          eventEmitter.$emit("showMessage", error.message);
+        });
+    },
+    clearForm() {
       this.name = "";
       this.desc = "";
     },

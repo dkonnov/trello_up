@@ -66,7 +66,7 @@
 
           <div
             class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.tel.$error }"
+            :class="{ 'has-danger': $v.place.$error }"
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
@@ -74,17 +74,17 @@
               </span>
             </div>
             <input
-              v-model="tel"
-              @input="$v.tel.$touch"
+              v-model="place"
+              @input="$v.place.$touch"
               type="text"
               class="form-control"
               placeholder="Место нахождения  ..."
             />
-            <button v-if="$v.tel.$error" class="form-control-feedback">
+            <button v-if="$v.place.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
             <small
-              v-if="$v.tel.$error"
+              v-if="$v.place.$error"
               class="form-text text-muteds small-alert"
               >Для того чтобы с вами могли связаться, укажите свой номер
               телефона.</small
@@ -120,7 +120,8 @@ export default {
   data() {
     return {
       name: "",
-      tel: ""
+      tel: "",
+      place: ""
     };
   },
   validations: {
@@ -129,19 +130,38 @@ export default {
     },
     tel: {
       required
+    },
+    place: {
+      required
+    }
+  },
+  computed: {
+    uid() {
+      return this.$store.state.currentUser.uid;
     }
   },
   methods: {
     accaunt() {
       fb.auth()
         .currentUser.updateProfile({
-          displayName: this.name,
-          phoneNumber: this.tel
+          displayName: this.name
         })
         .then(() => {
           //this.$store.commit("updateCurrentUser", this.name);
-          this.$router.push("/add");
-          eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
+          // запишем данные о пользователе
+          fb.database()
+            .ref("users/" + this.uid)
+            .set({
+              tel: this.tel,
+              place: this.place
+            })
+            .then(() => {
+              this.$router.push("/add");
+              eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
+            })
+            .catch(function(error) {
+              eventEmitter.$emit("showMessage", error.message);
+            });
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
