@@ -174,7 +174,8 @@ export default {
       this.$router.push("/");
     }
     this.name = this.$store.state.currentUser.displayName;
-    this.tel = this.$store.state.currentUser.phoneNumber;
+    this.tel = this.$store.state.currentUserData.tel;
+    this.place = this.$store.state.currentUserData.place;
   }
 };
 </script>

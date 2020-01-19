@@ -16,8 +16,9 @@ export default new Vuex.Store({
     members: {},
     cards: {},
     comments: {},
-    currentUser: "",
-    costomFieldsId: ""
+    currentUser: {},
+    currentUserData: {}
+    // costomFieldsId: ""
   },
   getters: {
     currentUserName(state) {
@@ -36,12 +37,15 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setUsers(state, payload) {
-      state.users = payload.options;
-      state.costomFieldsId = payload.id;
-    },
+    // setUsers(state, payload) {
+    //   state.users = payload.options;
+    //   state.costomFieldsId = payload.id;
+    // },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
+    },
+    setCurrentUserData(state, payload) {
+      state.currentUserData = payload;
     },
     updateCurrentUser(state, name) {
       state.currentUser.displayName = name;
@@ -68,20 +72,20 @@ export default new Vuex.Store({
     singOut(context) {
       context.commit("setSingOut");
     },
-    getUsers(context) {
-      axios
-        .get(
-          "https://api.trello.com/1/boards/" +
-            board +
-            "/customFields?key=" +
-            key +
-            "&token=" +
-            token
-        )
-        .then(response => {
-          context.commit("setUsers", response.data[0]);
-        });
-    },
+    // getUsers(context) {
+    //   axios
+    //     .get(
+    //       "https://api.trello.com/1/boards/" +
+    //         board +
+    //         "/customFields?key=" +
+    //         key +
+    //         "&token=" +
+    //         token
+    //     )
+    //     .then(response => {
+    //       context.commit("setUsers", response.data[0]);
+    //     });
+    // },
     getLists(context) {
       axios
         .get(
