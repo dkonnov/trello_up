@@ -142,26 +142,29 @@ export default {
   },
   methods: {
     accaunt() {
+      this.$store.commit("updateCurrentUserData", {
+        tel: this.tel,
+        place: this.place
+      });
       fb.auth()
         .currentUser.updateProfile({
           displayName: this.name
         })
         .then(() => {
-          //this.$store.commit("updateCurrentUser", this.name);
           // запишем данные о пользователе
-          fb.database()
-            .ref("users/" + this.uid)
-            .set({
-              tel: this.tel,
-              place: this.place
-            })
-            .then(() => {
-              this.$router.push("/add");
-              eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
-            })
-            .catch(function(error) {
-              eventEmitter.$emit("showMessage", error.message);
-            });
+          // fb.database()
+          //   .ref("users/" + this.uid)
+          //   .set({
+          //     tel: this.tel,
+          //     place: this.place
+          //   })
+          //   .then(() => {
+          //     this.$router.push("/add");
+          //     eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
+          //   })
+          //   .catch(function(error) {
+          //     eventEmitter.$emit("showMessage", error.message);
+          //   });
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
@@ -170,7 +173,7 @@ export default {
   },
   mounted() {
     // своебразная защита роута
-    if (!this.$store.state.currentUser) {
+    if (!this.$store.state.currentUser.uid) {
       this.$router.push("/");
     }
     this.name = this.$store.state.currentUser.displayName;

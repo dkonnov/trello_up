@@ -118,10 +118,12 @@ export default {
           // запишем данные о пользователе
           this.$store.commit("setCurrentUser", user.user);
           // получим дополнительные данные
-          let snap;
+          alert("uid" + user.user.uid);
+          var snap;
           fb.database()
             .ref("users/" + user.user.uid)
             .on("value", function(snapshot) {
+              alert(snapshot.val());
               snap = snapshot.val();
             });
           alert(user.user.uid);

@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import _ from "lodash";
+import * as fb from "firebase";
 
 Vue.use(Vuex);
 
@@ -30,19 +32,19 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    // setUsers(state, payload) {
-    //   state.users = payload.options;
-    //   state.costomFieldsId = payload.id;
-    // },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
     },
     setCurrentUserData(state, payload) {
       state.currentUserData = payload;
     },
-    updateCurrentUser(state, name) {
-      state.currentUser.displayName = name;
-      alert(name);
+    updateCurrentUserData(state, payload) {
+      // добавим сведения в state
+      _.assign(state.currentUserData, payload);
+      // запишем данные о пользователе в Firebase
+      fb.database()
+        .ref("users/" + state.currentUser.uid)
+        .set(state.currentUserData);
     },
     setSingOut(state) {
       state.currentUser = {};
