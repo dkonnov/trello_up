@@ -26,9 +26,6 @@ export default new Vuex.Store({
       return state.currentUser.displayName
         ? state.currentUser.displayName
         : state.currentUser.email;
-    },
-    currentCostomFieldUserId() {
-      return this.$store.state.currentUserData.cf;
     }
   },
   mutations: {
@@ -95,7 +92,7 @@ export default new Vuex.Store({
           context.commit("setMembers", response.data.members);
         });
     },
-    getCards({ commit, getters }) {
+    getCards({ commit }) {
       axios
         .get(
           "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
@@ -108,7 +105,7 @@ export default new Vuex.Store({
             if (card.customFieldItems.length > 0) {
               return (
                 card.customFieldItems[0].idValue ==
-                getters.currentCostomFieldUserId
+                this.$store.state.currentUserData.cf
               );
             }
           });

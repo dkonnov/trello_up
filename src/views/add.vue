@@ -96,7 +96,7 @@ export default {
   },
   mounted() {
     // своебразная защита роута
-    if (!this.$store.state.currentUser) {
+    if (!this.$store.state.currentUser.uid) {
       this.$router.push("/");
     }
   },

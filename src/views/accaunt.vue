@@ -151,20 +151,7 @@ export default {
           displayName: this.name
         })
         .then(() => {
-          // запишем данные о пользователе
-          // fb.database()
-          //   .ref("users/" + this.uid)
-          //   .set({
-          //     tel: this.tel,
-          //     place: this.place
-          //   })
-          //   .then(() => {
-          //     this.$router.push("/add");
-          //     eventEmitter.$emit("showMessage", "Ваши данные сохранены!");
-          //   })
-          //   .catch(function(error) {
-          //     eventEmitter.$emit("showMessage", error.message);
-          //   });
+          //
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
