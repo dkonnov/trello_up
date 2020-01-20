@@ -137,7 +137,7 @@ export default {
   },
   computed: {
     uid() {
-      return this.$store.state.currentUser.uid;
+      return this.$store.state.user.uid;
     }
   },
   methods: {
@@ -160,12 +160,12 @@ export default {
   },
   mounted() {
     // своебразная защита роута
-    if (!this.$store.state.currentUser.uid) {
+    if (!this.$store.state.user.uid) {
       this.$router.push("/");
     }
-    this.name = this.$store.state.currentUser.displayName;
-    this.tel = this.$store.state.currentUserData.tel;
-    this.place = this.$store.state.currentUserData.place;
+    this.name = this.$store.state.user.displayName;
+    this.tel = this.$store.state.userData.tel;
+    this.place = this.$store.state.userData.place;
   }
 };
 </script>

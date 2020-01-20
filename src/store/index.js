@@ -13,38 +13,35 @@ const board = "fsA5vKgk";
 
 export default new Vuex.Store({
   state: {
-    users: {},
     lists: {},
     members: {},
     cards: {},
     comments: {},
-    currentUser: {},
-    currentUserData: {}
+    user: {},
+    userData: {}
   },
   getters: {
-    currentUserName(state) {
-      return state.currentUser.displayName
-        ? state.currentUser.displayName
-        : state.currentUser.email;
+    userName(state) {
+      return state.user.displayName ? state.user.displayName : state.user.email;
     }
   },
   mutations: {
-    setCurrentUser(state, payload) {
-      state.currentUser = payload;
+    setUser(state, payload) {
+      state.user = payload;
     },
-    setCurrentUserData(state, payload) {
-      state.currentUserData = payload;
+    setUserData(state, payload) {
+      state.userData = payload;
     },
-    updateCurrentUserData(state, payload) {
+    updateUserData(state, payload) {
       // добавим сведения в state
-      _.assign(state.currentUserData, payload);
+      _.assign(state.userData, payload);
       // запишем данные о пользователе в Firebase
       fb.database()
-        .ref("users/" + state.currentUser.uid)
-        .set(state.currentUserData);
+        .ref("users/" + state.user.uid)
+        .set(state.userData);
     },
     setSingOut(state) {
-      state.currentUser = {};
+      state.user = {};
       state.cards = {};
     },
     setLists(state, payload) {
@@ -63,6 +60,15 @@ export default new Vuex.Store({
   actions: {
     singOut(context) {
       context.commit("setSingOut");
+    },
+    getUserData({ commit, state }) {
+      fb.database()
+        .ref("users/" + state.user.uid)
+        .once("value")
+        .then(function(snapshot) {
+          let res = snapshot.val();
+          commit("setUserData", res);
+        });
     },
     getLists(context) {
       axios
@@ -105,7 +111,7 @@ export default new Vuex.Store({
             if (card.customFieldItems.length > 0) {
               return (
                 card.customFieldItems[0].idValue ==
-                this.$store.state.currentUserData.cf
+                this.$store.state.userData.cf
               );
             }
           });

@@ -24,10 +24,7 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li
-            class="dropdown nav-item"
-            v-if="this.$store.state.currentUser.uid"
-          >
+          <li class="dropdown nav-item" v-if="this.$store.state.user.uid">
             <a
               class="dropdown-toggle nav-link"
               aria-expanded="false"

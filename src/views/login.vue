@@ -116,25 +116,15 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           // запишем данные о пользователе
-          this.$store.commit("setCurrentUser", user.user);
-          // получим дополнительные данные
-          alert("uid" + user.user.uid);
-          var snap;
-          fb.database()
-            .ref("users/" + user.user.uid)
-            .on("value", function(snapshot) {
-              alert(snapshot.val());
-              snap = snapshot.val();
-            });
-          alert(user.user.uid);
-          alert(snap);
-          this.$store.commit("setCurrentUserData", snap);
+          this.$store.commit("setUser", user.user);
+          // получим дополнительные данные о пользователе
+          this.$store.dispatch("getUserData");
           // получим данные из Trello
-          this.$router.push("/add");
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
           this.$store.dispatch("getCards");
           this.$store.dispatch("getComments");
+          this.$router.push("/add");
         })
         .catch(error => {
           this.loading = false;

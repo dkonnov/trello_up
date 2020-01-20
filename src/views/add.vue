@@ -96,14 +96,14 @@ export default {
   },
   mounted() {
     // своебразная защита роута
-    if (!this.$store.state.currentUser.uid) {
+    if (!this.$store.state.user.uid) {
       this.$router.push("/");
     }
   },
   computed: {
     showAlert() {
       let res;
-      if (!this.$store.state.currentUser.displayName) {
+      if (!this.$store.state.user.displayName) {
         res = true;
       } else {
         res = false;
@@ -151,17 +151,14 @@ export default {
                     "/customField/" +
                     this.$store.state.costomFieldsId +
                     "/item?idValue=" +
-                    this.$store.getters.currentCostomFieldUserId +
+                    this.$store.state.userData.cf +
                     "&key=" +
                     key +
                     "&token=" +
                     token
                 )
                 .then(() => {
-                  this.$store.dispatch(
-                    "getCards",
-                    this.$store.state.currentUser
-                  );
+                  this.$store.dispatch("getCards", this.$store.state.user);
                 });
 
               // напишем сообщение об успешной публикации карточки
@@ -169,7 +166,7 @@ export default {
                 "showMessage",
                 "Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте."
               );
-              this.$store.dispatch("getCards", this.$store.state.currentUser);
+              this.$store.dispatch("getCards", this.$store.state.user);
               this.name = "";
               this.desc = "";
               //setTimeout(this.loadCards(), 2000);
