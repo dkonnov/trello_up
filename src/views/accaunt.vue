@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     accaunt() {
-      this.$store.commit("updateCurrentUserData", {
+      this.$store.commit("updateUserData", {
         tel: this.tel,
         place: this.place
       });

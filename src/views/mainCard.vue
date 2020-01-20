@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-md-6 rightCard">
-          <div class="info" v-if="!this.$store.state.currentUser">
+          <div class="info" v-if="!this.$store.state.user.uid">
             <div class="icon icon-primary">
               <i class="material-icons">chat</i>
             </div>

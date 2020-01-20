@@ -32,7 +32,7 @@
               data-toggle="dropdown"
             >
               <i class="material-icons">face</i>
-              {{ this.$store.getters.currentUserName }}
+              {{ this.$store.getters.userName }}
               <div class="ripple-container"></div
             ></a>
             <div class="dropdown-menu dropdown-with-icons">

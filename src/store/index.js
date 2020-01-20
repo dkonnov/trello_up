@@ -18,7 +18,8 @@ export default new Vuex.Store({
     cards: {},
     comments: {},
     user: {},
-    userData: {}
+    userData: {},
+    customFieldsId: ""
   },
   getters: {
     userName(state) {
@@ -55,19 +56,39 @@ export default new Vuex.Store({
     },
     setComments(state, payload) {
       state.comments = payload;
+    },
+    setCustomField(state, payload) {
+      state.customFieldsId = payload;
     }
   },
   actions: {
     singOut(context) {
       context.commit("setSingOut");
     },
-    getUserData({ commit, state }) {
+    getUserData({ commit, state, dispatch }) {
       fb.database()
         .ref("users/" + state.user.uid)
         .once("value")
         .then(function(snapshot) {
           let res = snapshot.val();
+          // сохраним
           commit("setUserData", res);
+          // загрузим карточки
+          dispatch("getCards");
+        });
+    },
+    getCustomFields(context) {
+      axios
+        .get(
+          "https://api.trello.com/1/boards/" +
+            board +
+            "/customFields?key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          context.commit("setCustomField", response.data[0].id);
         });
     },
     getLists(context) {
@@ -98,7 +119,7 @@ export default new Vuex.Store({
           context.commit("setMembers", response.data.members);
         });
     },
-    getCards({ commit }) {
+    getCards({ commit, state }) {
       axios
         .get(
           "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
@@ -109,10 +130,7 @@ export default new Vuex.Store({
         .then(response => {
           var newArr = response.data.cards.filter(function(card) {
             if (card.customFieldItems.length > 0) {
-              return (
-                card.customFieldItems[0].idValue ==
-                this.$store.state.userData.cf
-              );
+              return card.customFieldItems[0].idValue == state.userData.cf;
             }
           });
 

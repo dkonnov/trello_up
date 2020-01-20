@@ -143,13 +143,14 @@ export default {
                 token
             )
             .then(response => {
+              alert(this.$store.state.customFieldsId);
               // добавим пользователя, создавшего задачу
               axios
                 .put(
                   "https://api.trello.com/1/card/" +
                     response.data.id +
                     "/customField/" +
-                    this.$store.state.costomFieldsId +
+                    this.$store.state.customFieldsId +
                     "/item?idValue=" +
                     this.$store.state.userData.cf +
                     "&key=" +

@@ -122,8 +122,8 @@ export default {
           // получим данные из Trello
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
-          this.$store.dispatch("getCards");
           this.$store.dispatch("getComments");
+          this.$store.dispatch("getCustomFields");
           this.$router.push("/add");
         })
         .catch(error => {
