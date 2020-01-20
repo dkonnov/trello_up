@@ -124,6 +124,7 @@ export default {
             .on("value", function(snapshot) {
               snap = snapshot.val();
             });
+          alert(user.user.uid);
           alert(snap);
           this.$store.commit("setCurrentUserData", snap);
           // получим данные из Trello
@@ -138,9 +139,6 @@ export default {
           eventEmitter.$emit("showMessage", error.message);
         });
     }
-  },
-  beforeMount() {
-    this.$store.dispatch("getUsers");
   }
 };
 </script>

@@ -18,7 +18,6 @@ export default new Vuex.Store({
     comments: {},
     currentUser: {},
     currentUserData: {}
-    // costomFieldsId: ""
   },
   getters: {
     currentUserName(state) {
@@ -26,14 +25,8 @@ export default new Vuex.Store({
         ? state.currentUser.displayName
         : state.currentUser.email;
     },
-    currentCostomFieldUserId(state) {
-      let res;
-      state.users.forEach(function(item) {
-        if (item.value.text == state.currentUser.email) {
-          res = item.id;
-        }
-      });
-      return res;
+    currentCostomFieldUserId() {
+      return this.$store.state.currentUserData.cf;
     }
   },
   mutations: {
@@ -72,20 +65,6 @@ export default new Vuex.Store({
     singOut(context) {
       context.commit("setSingOut");
     },
-    // getUsers(context) {
-    //   axios
-    //     .get(
-    //       "https://api.trello.com/1/boards/" +
-    //         board +
-    //         "/customFields?key=" +
-    //         key +
-    //         "&token=" +
-    //         token
-    //     )
-    //     .then(response => {
-    //       context.commit("setUsers", response.data[0]);
-    //     });
-    // },
     getLists(context) {
       axios
         .get(
