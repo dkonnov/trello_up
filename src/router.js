@@ -5,6 +5,7 @@ import add from "./views/add";
 import registration from "./views/registration";
 import accaunt from "./views/accaunt";
 import restore from "./views/restore";
+import changepassword from "./views/changepassword";
 
 Vue.use(Router);
 
@@ -33,6 +34,10 @@ export default new Router({
     {
       path: "/restore",
       component: restore
+    },
+    {
+      path: "/changepassword",
+      component: changepassword
     }
   ],
   mode: "history"

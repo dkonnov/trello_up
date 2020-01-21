@@ -5,7 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">Данные аккаунта</h4>
+        <h4 class="info-title">Ваш аккаунт</h4>
       </div>
 
       <form @submit.prevent="accaunt">
@@ -100,6 +100,12 @@
           >
             Сохранить
           </button>
+          <br />
+          <router-link to="/changepassword">
+            <button type="button" class="btn btn-secondary btn-round">
+              Сменить пароль
+            </button>
+          </router-link>
           <br />
           <router-link to="/add">
             <button type="button" class="btn btn-secondary btn-round">

@@ -37,7 +37,7 @@
             ></a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="showAccaunt" href="#">
-                <i class="material-icons">assignment_ind</i> Ваши данные
+                <i class="material-icons">assignment_ind</i> Аккаунт
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> Выход
