@@ -117,10 +117,16 @@
     </center>
   </div>
 </template>
+
 <script>
+import axios from "axios";
 import { required } from "vuelidate/lib/validators/";
 import * as fb from "firebase";
 import { eventEmitter } from "./../main";
+
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token =
+  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
 
 export default {
   data() {
@@ -157,7 +163,24 @@ export default {
           displayName: this.name
         })
         .then(() => {
-          //
+          // подготовим значение
+          let option = this.name + "(" + this.tel + ", " + this.place + ")";
+          // изменим значение CustomFieldsId
+          axios
+            .put(
+              "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options/" +
+                this.$store.state.userData.cf +
+                "/?key=" +
+                key +
+                "&token=" +
+                token,
+              {
+                value: { text: option }
+              }
+            )
+            .then(() => {
+              eventEmitter.$emit("showMessage", "Done!");
+            });
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);

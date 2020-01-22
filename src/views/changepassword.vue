@@ -82,15 +82,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import { minLength, sameAs } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
-
-const key = "2a754a93fa902b29d2694a2f71af3f83";
-const token =
-  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
-//const board = "fsA5vKgk";
 
 export default {
   data() {
@@ -101,15 +95,20 @@ export default {
       loading: false
     };
   },
+  mounted() {
+    // своебразная защита роута
+    if (!this.$store.state.user.uid) {
+      this.$router.push("/");
+    }
+  },
   methods: {
     change() {
       this.loading = true;
       fb.auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(response => {
-          this.uid = response.user.uid;
-
-          this.loading = false;
+        .currentUser.updatePassword(this.password)
+        .then(() => {
+          eventEmitter.$emit("showMessage", "Пароль изменен.");
+          this.$router.push("/add");
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
