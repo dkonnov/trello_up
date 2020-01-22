@@ -168,7 +168,9 @@ export default {
           // изменим значение CustomFieldsId
           axios
             .put(
-              "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options/" +
+              "https://api.trello.com/1/customField/" +
+                this.$store.state.customFieldsId +
+                "/options/" +
                 this.$store.state.userData.cf +
                 "/?key=" +
                 key +
@@ -179,7 +181,8 @@ export default {
               }
             )
             .then(() => {
-              eventEmitter.$emit("showMessage", "Done!");
+              this.$router.push("/add");
+              eventEmitter.$emit("showMessage", "Изменения сохранены!");
             });
         })
         .catch(error => {
