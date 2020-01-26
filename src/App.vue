@@ -16,12 +16,14 @@
       </div>
     </div>
     <modalWindow />
+    <background />
   </div>
 </template>
 
 <script>
 import modalWindow from "./components/modalWindow";
 import mainMenu from "./components/mainMenu";
+// import background from "./components/background";
 import mainCard from "./views/mainCard";
 
 export default {
@@ -30,6 +32,7 @@ export default {
     modalWindow,
     mainMenu,
     mainCard
+    // background
   }
 };
 </script>

@@ -39,6 +39,9 @@
               <a class="dropdown-item" @click="showAccaunt" href="#">
                 <i class="material-icons">assignment_ind</i> Аккаунт
               </a>
+              <a class="dropdown-item" @click="showAccaunt" href="#">
+                <i class="material-icons">photo_size_select_actual</i> Фон
+              </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> Выход
               </a>

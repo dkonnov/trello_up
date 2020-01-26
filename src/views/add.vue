@@ -143,7 +143,6 @@ export default {
                 token
             )
             .then(response => {
-              alert(this.$store.state.customFieldsId);
               // добавим пользователя, создавшего задачу
               axios
                 .put(
