@@ -103,7 +103,7 @@
 
 <script>
 import _ from "lodash";
-import { http } from "./../http";
+// import axios from "axios";
 import { eventEmitter } from "./../main";
 
 export default {
@@ -123,28 +123,26 @@ export default {
       );
     },
     currentBackground: function() {
-      return this.$store.state.currentUser.background;
+      // return this.$store.state.currentUser.background;
+      return 1;
     },
     totalTabs: function() {
+      // return (
       return (
         Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1
       );
     }
   },
   methods: {
-    changeBackground(value) {
-      this.$store.dispatch("updateCurrentUser", {
-        background: value
-      });
+    changeBackground() {
+      // this.$store.dispatch("updateCurrentUser", {
+      //   background: value
+      // });
     }
   },
   created() {
     eventEmitter.$on("showBackgroundForm", () => {
-      http.get("totalTabs").then(response => {
-        this.totalTabs = response.data;
-      });
       $("#backgroundForm").modal("show");
-      this.changeTab(1);
     });
   }
 };

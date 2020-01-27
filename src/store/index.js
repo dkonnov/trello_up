@@ -19,7 +19,8 @@ export default new Vuex.Store({
     comments: {},
     user: {},
     userData: {},
-    customFieldsId: ""
+    customFieldsId: "",
+    backgrounds: {}
   },
   getters: {
     userName(state) {
@@ -59,9 +60,19 @@ export default new Vuex.Store({
     },
     setCustomField(state, payload) {
       state.customFieldsId = payload;
+    },
+    setBackgrounds(state, payload) {
+      state.backgrounds = payload;
     }
   },
   actions: {
+    getBackgrounds(context) {
+      axios.get("public/trelloup.php/getBackgrounds").then(response => {
+        if (response.data) {
+          context.commit("setBackgrounds", response.data);
+        }
+      });
+    },
     singOut(context) {
       context.commit("setSingOut");
     },

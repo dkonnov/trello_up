@@ -23,7 +23,7 @@
 <script>
 import modalWindow from "./components/modalWindow";
 import mainMenu from "./components/mainMenu";
-// import background from "./components/background";
+import background from "./components/background";
 import mainCard from "./views/mainCard";
 
 export default {
@@ -31,8 +31,8 @@ export default {
   components: {
     modalWindow,
     mainMenu,
-    mainCard
-    // background
+    mainCard,
+    background
   }
 };
 </script>
