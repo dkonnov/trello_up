@@ -125,6 +125,12 @@ export default {
           this.$store.dispatch("getComments");
           this.$store.dispatch("getBackgrounds");
           this.$store.dispatch("getCustomFields");
+          // сменим фон
+          const bg = this.$store.state.userData.background;
+          if (bg) {
+            document.getElementById("backgroundDiv").style.backgroundImage =
+              "url('img/backgrounds/" + bg + "')";
+          }
           this.$router.push("/add");
         })
         .catch(error => {

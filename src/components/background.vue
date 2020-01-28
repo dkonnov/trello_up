@@ -103,7 +103,6 @@
 
 <script>
 import _ from "lodash";
-// import axios from "axios";
 import { eventEmitter } from "./../main";
 
 export default {
@@ -123,8 +122,7 @@ export default {
       );
     },
     currentBackground: function() {
-      // return this.$store.state.currentUser.background;
-      return 1;
+      return this.$store.state.userData.background;
     },
     totalTabs: function() {
       // return (
@@ -134,10 +132,10 @@ export default {
     }
   },
   methods: {
-    changeBackground() {
-      // this.$store.dispatch("updateCurrentUser", {
-      //   background: value
-      // });
+    changeBackground(value) {
+      this.$store.commit("updateUserData", {
+        background: value
+      });
     }
   },
   created() {

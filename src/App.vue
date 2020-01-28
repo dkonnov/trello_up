@@ -33,6 +33,18 @@ export default {
     mainMenu,
     mainCard,
     background
+  },
+  computed: {
+    background() {
+      return this.$store.state.userData.background;
+    }
+  },
+  watch: {
+    background: value => {
+      // сменим фон, если он изменился в state
+      document.getElementById("backgroundDiv").style.backgroundImage =
+        "url('img/backgrounds/" + value + "')";
+    }
   }
 };
 </script>
