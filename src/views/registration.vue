@@ -154,7 +154,8 @@ export default {
               fb.database()
                 .ref("users/" + this.uid)
                 .set({
-                  cf: response.data.id
+                  cf: response.data.id,
+                  background: "patrick-tomasso-1272187-unsplash.jpg"
                 })
                 .catch(function(error) {
                   alert(error.message);

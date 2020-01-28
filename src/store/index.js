@@ -144,7 +144,6 @@ export default new Vuex.Store({
               return card.customFieldItems[0].idValue == state.userData.cf;
             }
           });
-
           commit("setCards", newArr);
         });
     },
