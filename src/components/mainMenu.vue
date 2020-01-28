@@ -39,7 +39,7 @@
               <a class="dropdown-item" @click="showAccaunt" href="#">
                 <i class="material-icons">assignment_ind</i> Аккаунт
               </a>
-              <a class="dropdown-item" @click="showAccaunt" href="#">
+              <a class="dropdown-item" @click="showBackgrounds" href="#">
                 <i class="material-icons">photo_size_select_actual</i> Фон
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
@@ -62,6 +62,9 @@ export default {
   methods: {
     showAccaunt() {
       this.$router.push("/accaunt");
+    },
+    showBackgrounds() {
+      eventEmitter.$emit("showBackgroundForm");
     },
     singOut() {
       fb.auth()

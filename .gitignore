@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+public/img/backgrounds
 
 # local env files
 .env.local

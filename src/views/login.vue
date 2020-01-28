@@ -123,6 +123,7 @@ export default {
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
           this.$store.dispatch("getComments");
+          this.$store.dispatch("getBackgrounds");
           this.$store.dispatch("getCustomFields");
           this.$router.push("/add");
         })

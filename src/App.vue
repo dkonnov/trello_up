@@ -23,7 +23,7 @@
 <script>
 import modalWindow from "./components/modalWindow";
 import mainMenu from "./components/mainMenu";
-// import background from "./components/background";
+import background from "./components/background";
 import mainCard from "./views/mainCard";
 
 export default {
@@ -31,8 +31,20 @@ export default {
   components: {
     modalWindow,
     mainMenu,
-    mainCard
-    // background
+    mainCard,
+    background
+  },
+  computed: {
+    background() {
+      return this.$store.state.userData.background;
+    }
+  },
+  watch: {
+    background: value => {
+      // сменим фон, если он изменился в state
+      document.getElementById("backgroundDiv").style.backgroundImage =
+        "url('img/backgrounds/" + value + "')";
+    }
   }
 };
 </script>
