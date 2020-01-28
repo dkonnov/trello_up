@@ -79,6 +79,8 @@ export default {
           );
         });
       this.$store.dispatch("singOut");
+      document.getElementById("backgroundDiv").style.backgroundImage =
+        "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push("/");
     }
   }
