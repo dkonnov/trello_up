@@ -41,80 +41,80 @@
             <h4 class="title" style="color: #3c4858">
               Ваши текущие задачи
             </h4>
+            <div v-for="(card, index) of itemsOnPageArray" :key="card">
+              <card :card="card" :index="index" />
+              <div
+                class="card wow fadeInUp"
+                style="width: 100%;"
+                data-wow-duration="2s"
+              >
+                <div class="stageLine" :class="stageColor(index)"></div>
+                <div class="card-body">
+                  <h4 class="card-title">{{ card.name }}</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    {{ stage(index) }}
+                  </h6>
+                  <p class="card-text">{{ card.desc }}</p>
+                  <!-- комментарии -->
+                  <template v-for="comment of commentsOnCard(card.id)">
+                    <div :key="comment" class="comment">
+                      <div style="display: block;float: left; margin: 0px;">
+                        <a
+                          href="#"
+                          data-toggle="tooltip"
+                          :title="getmemberTooltip(comment.idMemberCreator)"
+                        >
+                          <img
+                            :src="getAvatarURL(comment.idMemberCreator)"
+                            width="24px"
+                            class="img-raised rounded-circle img-fluid"
+                            style="margin-right: 10px"
+                          />
+                        </a>
+                      </div>
+                      <div class="comment_text">
+                        {{ comment.data.text }}
+                      </div>
+                    </div>
+                  </template>
 
-            <div
-              class="card wow fadeInUp"
-              style="width: 100%;"
-              v-for="(card, index) of itemsOnPageArray"
-              :key="card"
-              data-wow-duration="2s"
-            >
-              <div class="stageLine" :class="stageColor(index)"></div>
-              <div class="card-body">
-                <h4 class="card-title">{{ card.name }}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  {{ stage(index) }}
-                </h6>
-                <p class="card-text">{{ card.desc }}</p>
-                <!-- комментарии -->
-                <template v-for="comment of commentsOnCard(card.id)">
-                  <div :key="comment" class="comment">
-                    <div style="display: block;float: left; margin: 0px;">
+                  <div align="right">
+                    <!-- Аватарки участников -->
+                    <div
+                      v-for="idMember of card.idMembers"
+                      :key="idMember"
+                      style="display: block;float: right; margin: 2px;"
+                    >
                       <a
                         href="#"
                         data-toggle="tooltip"
-                        :title="getmemberTooltip(comment.idMemberCreator)"
+                        :title="getmemberTooltip(idMember)"
                       >
                         <img
-                          :src="getAvatarURL(comment.idMemberCreator)"
-                          width="24px"
+                          :src="getAvatarURL(idMember)"
+                          width="30px"
                           class="img-raised rounded-circle img-fluid"
-                          style="margin-right: 10px"
                         />
                       </a>
                     </div>
-                    <div class="comment_text">
-                      {{ comment.data.text }}
-                    </div>
-                  </div>
-                </template>
-
-                <div align="right">
-                  <!-- Аватарки участников -->
-                  <div
-                    v-for="idMember of card.idMembers"
-                    :key="idMember"
-                    style="display: block;float: right; margin: 2px;"
-                  >
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      :title="getmemberTooltip(idMember)"
+                    <!-- Меню -->
+                    <button
+                      class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
                     >
-                      <img
-                        :src="getAvatarURL(idMember)"
-                        width="30px"
-                        class="img-raised rounded-circle img-fluid"
-                      />
-                    </a>
-                  </div>
-                  <!-- Меню -->
-                  <button
-                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i class="material-icons">more_horiz</i>
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a class="dropdown-item" href="#">Добавить файл</a>
-                    <a class="dropdown-item" href="#">Отменить</a>
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a class="dropdown-item" href="#">Добавить файл</a>
+                      <a class="dropdown-item" href="#">Отменить</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -159,9 +159,13 @@
 
 <script>
 import _ from "lodash";
+import card from "../components/card";
 
 export default {
   name: "mainCard",
+  components: {
+    card
+  },
   data() {
     return {
       users: [],
