@@ -1,6 +1,66 @@
 <template>
-  <div>
-    123
+  <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
+    <div class="stageLine" :class="stageColor(index)"></div>
+    <div class="card-body">
+      <h4 class="card-title">{{ card.name }}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ stage(index) }}
+      </h6>
+      <p class="card-text">{{ card.desc }}</p>
+      <!-- комментарии -->
+      <template v-for="comment of commentsOnCard(card.id)">
+        <div :key="comment" class="comment">
+          <div style="display: block;float: left; margin: 0px;">
+            <a
+              href="#"
+              data-toggle="tooltip"
+              :title="getmemberTooltip(comment.idMemberCreator)"
+            >
+              <img
+                :src="getAvatarURL(comment.idMemberCreator)"
+                width="24px"
+                class="img-raised rounded-circle img-fluid"
+                style="margin-right: 10px"
+              />
+            </a>
+          </div>
+          <div class="comment_text">
+            {{ comment.data.text }}
+          </div>
+        </div>
+      </template>
+      <div align="right">
+        <!-- Аватарки участников -->
+        <div
+          v-for="idMember of card.idMembers"
+          :key="idMember"
+          style="display: block;float: right; margin: 2px;"
+        >
+          <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+            <img
+              :src="getAvatarURL(idMember)"
+              width="30px"
+              class="img-raised rounded-circle img-fluid"
+            />
+          </a>
+        </div>
+        <!-- Меню -->
+        <button
+          class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="material-icons">more_horiz</i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Добавить файл</a>
+          <a class="dropdown-item" href="#">Отменить</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,6 +71,28 @@ export default {
     index: Number
   },
   methods: {
+    getAvatarURL(value) {
+      var url;
+      this.members.forEach(function(item) {
+        if (value == item.id) {
+          if (item.avatarUrl) {
+            url = item.avatarUrl + "/30.png";
+          } else {
+            url = "img/placeholder.jpg";
+          }
+        }
+      });
+      return url;
+    },
+    getmemberTooltip(value) {
+      var tooltip;
+      this.members.forEach(function(item) {
+        if (value == item.id) {
+          tooltip = item.fullName;
+        }
+      });
+      return tooltip;
+    },
     commentsOnCard(value) {
       var newArr = this.$store.state.comments.filter(function(arr) {
         if (arr.data.card.id == value) {
@@ -48,12 +130,22 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
+    },
+    members() {
+      return this.$store.state.members;
     }
   }
 };
 </script>
 
 <style>
+.comment {
+  background-color: #fafafa;
+  border-radius: 12px;
+  font-size: 75%;
+  margin-top: 0.25rem;
+}
+
 .stageLine {
   width: 3px;
   height: 100%;

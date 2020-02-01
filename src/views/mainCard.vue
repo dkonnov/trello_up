@@ -43,81 +43,6 @@
             </h4>
             <div v-for="(card, index) of itemsOnPageArray" :key="card">
               <card :card="card" :index="index" />
-              <div
-                class="card wow fadeInUp"
-                style="width: 100%;"
-                data-wow-duration="2s"
-              >
-                <div class="stageLine" :class="stageColor(index)"></div>
-                <div class="card-body">
-                  <h4 class="card-title">{{ card.name }}</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                    {{ stage(index) }}
-                  </h6>
-                  <p class="card-text">{{ card.desc }}</p>
-                  <!-- комментарии -->
-                  <template v-for="comment of commentsOnCard(card.id)">
-                    <div :key="comment" class="comment">
-                      <div style="display: block;float: left; margin: 0px;">
-                        <a
-                          href="#"
-                          data-toggle="tooltip"
-                          :title="getmemberTooltip(comment.idMemberCreator)"
-                        >
-                          <img
-                            :src="getAvatarURL(comment.idMemberCreator)"
-                            width="24px"
-                            class="img-raised rounded-circle img-fluid"
-                            style="margin-right: 10px"
-                          />
-                        </a>
-                      </div>
-                      <div class="comment_text">
-                        {{ comment.data.text }}
-                      </div>
-                    </div>
-                  </template>
-
-                  <div align="right">
-                    <!-- Аватарки участников -->
-                    <div
-                      v-for="idMember of card.idMembers"
-                      :key="idMember"
-                      style="display: block;float: right; margin: 2px;"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        :title="getmemberTooltip(idMember)"
-                      >
-                        <img
-                          :src="getAvatarURL(idMember)"
-                          width="30px"
-                          class="img-raised rounded-circle img-fluid"
-                        />
-                      </a>
-                    </div>
-                    <!-- Меню -->
-                    <button
-                      class="btn btn-secondary btn-fab btn-fab-mini btn-round"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i class="material-icons">more_horiz</i>
-                    </button>
-                    <div
-                      class="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a class="dropdown-item" href="#">Добавить файл</a>
-                      <a class="dropdown-item" href="#">Отменить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <center v-if="totalTabs > 1">
@@ -174,36 +99,6 @@ export default {
     };
   },
   methods: {
-    commentsOnCard(value) {
-      var newArr = this.$store.state.comments.filter(function(arr) {
-        if (arr.data.card.id == value) {
-          return arr;
-        }
-      });
-      return newArr;
-    },
-    getmemberTooltip(value) {
-      var tooltip;
-      this.members.forEach(function(item) {
-        if (value == item.id) {
-          tooltip = item.fullName;
-        }
-      });
-      return tooltip;
-    },
-    getAvatarURL(value) {
-      var url;
-      this.members.forEach(function(item) {
-        if (value == item.id) {
-          if (item.avatarUrl) {
-            url = item.avatarUrl + "/30.png";
-          } else {
-            url = "img/placeholder.jpg";
-          }
-        }
-      });
-      return url;
-    },
     showCustomField(value) {
       if (value) {
         if (value.idValue == this.selectedUser) {
@@ -214,42 +109,11 @@ export default {
       } else {
         return false;
       }
-    },
-    stageColor(value) {
-      if (this.cards[value].closed == true) {
-        return "stageArchiv";
-      } else {
-        for (var i = 0; i < this.lists.length; ++i) {
-          if (this.lists[i].id == this.cards[value].idList) {
-            return "stage" + i;
-          }
-        }
-      }
-    },
-    stage(value) {
-      if (this.cards[value].closed == true) {
-        return "В архиве";
-      } else {
-        for (var i = 0; i < this.lists.length; ++i) {
-          if (this.lists[i].id == this.cards[value].idList) {
-            return this.lists[i].name;
-          }
-        }
-      }
     }
   },
   computed: {
-    comments() {
-      return this.$store.state.actions;
-    },
     cards() {
       return this.$store.state.cards;
-    },
-    lists() {
-      return this.$store.state.lists;
-    },
-    members() {
-      return this.$store.state.members;
     },
     cardsCount() {
       return this.$store.state.cards.length;
@@ -274,13 +138,6 @@ export default {
 </script>
 
 <style scoped>
-.comment {
-  background-color: #fafafa;
-  border-radius: 12px;
-  font-size: 75%;
-  margin-top: 0.25rem;
-}
-
 .material-icons {
   color: #999;
 }
@@ -314,30 +171,5 @@ export default {
   padding-left: 30px;
   padding-right: 30px;
   margin-right: 0px;
-}
-.stageLine {
-  width: 3px;
-  height: 100%;
-  background-color: #701c7e;
-  position: absolute;
-  border-radius: 3px 0 0 3px;
-}
-.stageArchiv {
-  background-color: gray;
-}
-.stage0 {
-  background-color: #39843c;
-}
-.stage1 {
-  background-color: #701c7e;
-}
-.stage2 {
-  background-color: #c27400;
-}
-.stage3 {
-  background-color: #008697;
-}
-.stage4 {
-  background-color: #e11b0c;
 }
 </style>
