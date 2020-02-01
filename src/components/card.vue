@@ -1,0 +1,210 @@
+<template>
+  <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
+    <div class="stageLine" :class="stageColor(index)"></div>
+    <div class="card-body">
+      <h4 class="card-title">{{ card.name }}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ stage(index) }}
+      </h6>
+      <p class="card-text">{{ card.desc }}</p>
+      <!-- комментарии -->
+      <template v-for="comment of commentsOnCard(card.id)">
+        <div :key="comment" class="comment">
+          <div style="display: block;float: left; margin: 0px;">
+            <a
+              href="#"
+              data-toggle="tooltip"
+              :title="getmemberTooltip(comment.idMemberCreator)"
+            >
+              <img
+                :src="getAvatarURL(comment.idMemberCreator)"
+                width="24px"
+                class="img-raised rounded-circle img-fluid"
+                style="margin-right: 10px"
+              />
+            </a>
+          </div>
+          <div class="comment_text">
+            {{ comment.data.text }}
+          </div>
+        </div>
+      </template>
+      <div align="right">
+        <form @submit.prevent="sendComment(card.id)">
+          <div class="form-group">
+            <input
+              type="text"
+              v-model="comment"
+              id="name"
+              class="form-control"
+            />
+          </div>
+        </form>
+        <!-- Аватарки участников -->
+        <div
+          v-for="idMember of card.idMembers"
+          :key="idMember"
+          style="display: block;float: right; margin: 2px;"
+        >
+          <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
+            <img
+              :src="getAvatarURL(idMember)"
+              width="30px"
+              class="img-raised rounded-circle img-fluid"
+            />
+          </a>
+        </div>
+        <!-- Меню -->
+        <button
+          class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="material-icons">more_horiz</i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Добавить файл</a>
+          <a class="dropdown-item" href="#">Отменить задачу</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token =
+  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+export default {
+  props: {
+    card: Object,
+    index: Number
+  },
+  data() {
+    return {
+      comment: ""
+    };
+  },
+  methods: {
+    sendComment(cardId) {
+      axios
+        .post(
+          "https://api.trello.com/1/cards/" +
+            cardId +
+            "/actions/comments?text=" +
+            this.comment +
+            "&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(() => {
+          this.$store.dispatch("getComments");
+          this.comment = "";
+        });
+    },
+    getAvatarURL(value) {
+      var url;
+      this.members.forEach(function(item) {
+        if (value == item.id) {
+          if (item.avatarUrl) {
+            url = item.avatarUrl + "/30.png";
+          } else {
+            url = "img/placeholder.jpg";
+          }
+        }
+      });
+      return url;
+    },
+    getmemberTooltip(value) {
+      var tooltip;
+      this.members.forEach(function(item) {
+        if (value == item.id) {
+          tooltip = item.fullName;
+        }
+      });
+      return tooltip;
+    },
+    commentsOnCard(value) {
+      var newArr = this.$store.state.comments.filter(function(arr) {
+        if (arr.data.card.id == value) {
+          return arr;
+        }
+      });
+      return newArr;
+    },
+    stageColor(value) {
+      if (this.cards[value].closed == true) {
+        return "stageArchiv";
+      } else {
+        for (var i = 0; i < this.lists.length; ++i) {
+          if (this.lists[i].id == this.cards[value].idList) {
+            return "stage" + i;
+          }
+        }
+      }
+    },
+    stage(value) {
+      if (this.cards[value].closed == true) {
+        return "В архиве";
+      } else {
+        for (var i = 0; i < this.lists.length; ++i) {
+          if (this.lists[i].id == this.cards[value].idList) {
+            return this.lists[i].name;
+          }
+        }
+      }
+    }
+  },
+  computed: {
+    cards() {
+      return this.$store.state.cards;
+    },
+    lists() {
+      return this.$store.state.lists;
+    },
+    members() {
+      return this.$store.state.members;
+    }
+  }
+};
+</script>
+
+<style>
+.comment {
+  background-color: #fafafa;
+  border-radius: 12px;
+  font-size: 75%;
+  margin-top: 0.25rem;
+}
+
+.stageLine {
+  width: 3px;
+  height: 100%;
+  background-color: #701c7e;
+  position: absolute;
+  border-radius: 3px 0 0 3px;
+}
+.stageArchiv {
+  background-color: gray;
+}
+.stage0 {
+  background-color: #39843c;
+}
+.stage1 {
+  background-color: #701c7e;
+}
+.stage2 {
+  background-color: #c27400;
+}
+.stage3 {
+  background-color: #008697;
+}
+.stage4 {
+  background-color: #e11b0c;
+}
+</style>

@@ -42,6 +42,9 @@
               <a class="dropdown-item" @click="showBackgrounds" href="#">
                 <i class="material-icons">photo_size_select_actual</i> Фон
               </a>
+              <a class="dropdown-item" @click="showBoards" href="#">
+                <i class="material-icons">chrome_reader_mode</i> Доски
+              </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> Выход
               </a>
@@ -66,6 +69,9 @@ export default {
     showBackgrounds() {
       eventEmitter.$emit("showBackgroundForm");
     },
+    showBoards() {
+      this.$router.push("/boards");
+    },
     singOut() {
       fb.auth()
         .signOut()
@@ -79,6 +85,8 @@ export default {
           );
         });
       this.$store.dispatch("singOut");
+      document.getElementById("backgroundDiv").style.backgroundImage =
+        "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push("/");
     }
   }
