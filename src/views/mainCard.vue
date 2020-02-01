@@ -75,6 +75,8 @@
               </div>
               <br />
             </center>
+
+            <button @click="reload">Reload comments</button>
           </div>
         </div>
       </div>
@@ -99,6 +101,10 @@ export default {
     };
   },
   methods: {
+    reload() {
+      alert(212);
+      this.$store.dispatch("getComments");
+    },
     showCustomField(value) {
       if (value) {
         if (value.idValue == this.selectedUser) {

@@ -30,6 +30,16 @@
         </div>
       </template>
       <div align="right">
+        <form @submit.prevent="sendComment(card.id)">
+          <div class="form-group">
+            <input
+              type="text"
+              v-model="comment"
+              id="name"
+              class="form-control"
+            />
+          </div>
+        </form>
         <!-- Аватарки участников -->
         <div
           v-for="idMember of card.idMembers"
@@ -57,7 +67,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Добавить файл</a>
-          <a class="dropdown-item" href="#">Отменить</a>
+          <a class="dropdown-item" href="#">Отменить задачу</a>
         </div>
       </div>
     </div>
@@ -65,12 +75,38 @@
 </template>
 
 <script>
+import axios from "axios";
+const key = "2a754a93fa902b29d2694a2f71af3f83";
+const token =
+  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
 export default {
   props: {
     card: Object,
     index: Number
   },
+  data() {
+    return {
+      comment: ""
+    };
+  },
   methods: {
+    sendComment(cardId) {
+      axios
+        .post(
+          "https://api.trello.com/1/cards/" +
+            cardId +
+            "/actions/comments?text=" +
+            this.comment +
+            "&key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(() => {
+          this.$store.dispatch("getComments");
+          this.comment = "";
+        });
+    },
     getAvatarURL(value) {
       var url;
       this.members.forEach(function(item) {
