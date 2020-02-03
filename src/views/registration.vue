@@ -114,7 +114,7 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
 
-const key = "2a754a93fa902b29d2694a2f71af3f83";
+const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 //const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
