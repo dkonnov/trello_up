@@ -144,9 +144,6 @@ export default {
 </script>
 
 <style scoped>
-.material-icons {
-  color: #999;
-}
 .fade-enter-active,
 .fade-leave-active {
   transition-property: opacity;
