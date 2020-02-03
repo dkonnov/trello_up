@@ -135,11 +135,11 @@ export default {
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   beforeMount() {
-    //setInterval(() => {
-    //   if (this.$store.state.user.uid) {
-    //     this.$store.dispatch("getComments");
-    //   }
-    // }, 10000);
+    setInterval(() => {
+      if (this.$store.state.user.uid) {
+        this.$store.dispatch("getComments");
+      }
+    }, 10000);
   }
 };
 </script>
