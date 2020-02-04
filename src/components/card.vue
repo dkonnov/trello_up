@@ -8,27 +8,56 @@
       </h6>
       <p class="card-text">{{ card.desc }}</p>
       <!-- комментарии -->
-      <template v-for="comment of commentsOnCard(card.id)">
-        <div :key="comment" class="comment">
-          <div style="display: block;float: left; margin: 0px;">
-            <a
-              href="#"
-              data-toggle="tooltip"
-              :title="getmemberTooltip(comment.idMemberCreator)"
-            >
-              <img
-                :src="getAvatarURL(comment.idMemberCreator)"
-                width="24px"
-                class="img-raised rounded-circle img-fluid"
-                style="margin-right: 10px"
-              />
-            </a>
+      <div class="commentBlock">
+        <template v-for="comment of commentsOnCard(card.id)">
+          <div
+            :key="comment"
+            class="comment"
+            v-if="getmemberBollean(comment.idMemberCreator)"
+          >
+            <div style="display: inline-block;float: left; margin: 0px;">
+              <a
+                href="#"
+                data-toggle="tooltip"
+                :title="getmemberTooltip(comment.idMemberCreator)"
+              >
+                <img
+                  :src="getAvatarURL(comment.idMemberCreator)"
+                  width="24px"
+                  class="img-raised rounded-circle img-fluid"
+                  style="margin-right: 10px"
+                />
+              </a>
+            </div>
+            <div>
+              {{ comment.data.text }}
+            </div>
           </div>
-          <div class="comment_text">
-            {{ comment.data.text }}
+          <div
+            :key="comment"
+            class="comment"
+            v-if="!getmemberBollean(comment.idMemberCreator)"
+          >
+            <div style="display: block;float: right; margin: 0 -10px 0 10px;">
+              <a
+                href="#"
+                data-toggle="tooltip"
+                :title="getmemberTooltip(comment.idMemberCreator)"
+              >
+                <img
+                  :src="getAvatarURL(comment.idMemberCreator)"
+                  width="24px"
+                  class="img-raised rounded-circle img-fluid"
+                  style="margin-right: 10px"
+                />
+              </a>
+            </div>
+            <div style="text-align: right">
+              {{ comment.data.text }}
+            </div>
           </div>
-        </div>
-      </template>
+        </template>
+      </div>
       <div align="right">
         <form @submit.prevent="sendComment(card.id)">
           <div class="form-group">
@@ -41,18 +70,20 @@
           </div>
         </form>
         <!-- Аватарки участников -->
-        <div
-          v-for="idMember of card.idMembers"
-          :key="idMember"
-          style="display: block;float: right; margin: 2px;"
-        >
-          <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
-            <img
-              :src="getAvatarURL(idMember)"
-              width="30px"
-              class="img-raised rounded-circle img-fluid"
-            />
-          </a>
+        <div v-for="idMember of card.idMembers" :key="idMember">
+          <div style="display: block;float: right; margin: 2px;">
+            <a
+              href="#"
+              data-toggle="tooltip"
+              :title="getmemberTooltip(idMember)"
+            >
+              <img
+                :src="getAvatarURL(idMember)"
+                width="30px"
+                class="img-raised rounded-circle img-fluid"
+              />
+            </a>
+          </div>
         </div>
         <!-- Меню -->
         <button
@@ -76,9 +107,9 @@
 
 <script>
 import axios from "axios";
-const key = "2a754a93fa902b29d2694a2f71af3f83";
+const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
-  "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
+  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 export default {
   props: {
     card: Object,
@@ -120,11 +151,28 @@ export default {
       });
       return url;
     },
+    getmemberBollean(value) {
+      var tooltip;
+      this.members.forEach(function(item) {
+        if (value == item.id) {
+          if (item.fullName == "Trello Up User") {
+            tooltip = false;
+          } else {
+            tooltip = true;
+          }
+        }
+      });
+      return tooltip;
+    },
     getmemberTooltip(value) {
       var tooltip;
       this.members.forEach(function(item) {
         if (value == item.id) {
-          tooltip = item.fullName;
+          if (item.fullName == "Trello Up User") {
+            tooltip = "Я";
+          } else {
+            tooltip = item.fullName;
+          }
         }
       });
       return tooltip;
@@ -135,6 +183,7 @@ export default {
           return arr;
         }
       });
+      newArr.sort((a, b) => (a.date > b.date ? 1 : -1)); // отсортируем
       return newArr;
     },
     stageColor(value) {
@@ -174,7 +223,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.material-icons {
+  color: #999;
+}
+.commentBlock {
+  background-color: white;
+}
 .comment {
   background-color: #fafafa;
   border-radius: 12px;

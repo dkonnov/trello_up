@@ -75,8 +75,6 @@
               </div>
               <br />
             </center>
-
-            <button @click="reload">Reload comments</button>
           </div>
         </div>
       </div>
@@ -101,10 +99,6 @@ export default {
     };
   },
   methods: {
-    reload() {
-      alert(212);
-      this.$store.dispatch("getComments");
-    },
     showCustomField(value) {
       if (value) {
         if (value.idValue == this.selectedUser) {
@@ -139,14 +133,18 @@ export default {
     // установим фоновое изображение
     document.getElementById("backgroundDiv").style.backgroundImage =
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
+  },
+  beforeMount() {
+    setInterval(() => {
+      if (this.$store.state.user.uid) {
+        this.$store.dispatch("getComments");
+      }
+    }, 10000);
   }
 };
 </script>
 
 <style scoped>
-.material-icons {
-  color: #999;
-}
 .fade-enter-active,
 .fade-leave-active {
   transition-property: opacity;
