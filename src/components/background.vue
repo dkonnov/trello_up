@@ -125,7 +125,6 @@ export default {
       return this.$store.state.userData.background;
     },
     totalTabs() {
-      // return (
       return (
         Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1
       );
