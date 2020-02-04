@@ -82,7 +82,7 @@ export default new Vuex.Store({
       fb.database()
         .ref("users/" + state.user.uid)
         .once("value")
-        .then(function(snapshot) {
+        .then(snapshot => {
           let res = snapshot.val();
           // сохраним
           commit("setUserData", res);
@@ -141,7 +141,7 @@ export default new Vuex.Store({
             token
         )
         .then(response => {
-          var newArr = response.data.cards.filter(function(card) {
+          var newArr = response.data.cards.filter(card => {
             if (card.customFieldItems.length > 0) {
               return card.customFieldItems[0].idValue == state.userData.cf;
             }

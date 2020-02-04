@@ -114,17 +114,17 @@ export default {
     };
   },
   computed: {
-    itemsOnPageArray: function() {
+    itemsOnPageArray() {
       return _.slice(
         this.$store.state.backgrounds,
         this.itemsOnPage * this.currentTab - this.itemsOnPage,
         this.itemsOnPage * this.currentTab
       );
     },
-    currentBackground: function() {
+    currentBackground() {
       return this.$store.state.userData.background;
     },
-    totalTabs: function() {
+    totalTabs() {
       // return (
       return (
         Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1

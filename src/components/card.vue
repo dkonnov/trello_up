@@ -140,7 +140,7 @@ export default {
     },
     getAvatarURL(value) {
       var url;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.avatarUrl) {
             url = item.avatarUrl + "/30.png";
@@ -153,7 +153,7 @@ export default {
     },
     getmemberBollean(value) {
       var tooltip;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.fullName == "Trello Up User") {
             tooltip = false;
@@ -166,7 +166,7 @@ export default {
     },
     getmemberTooltip(value) {
       var tooltip;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.fullName == "Trello Up User") {
             tooltip = "Я";
@@ -178,7 +178,7 @@ export default {
       return tooltip;
     },
     commentsOnCard(value) {
-      var newArr = this.$store.state.comments.filter(function(arr) {
+      var newArr = this.$store.state.comments.filter(arr => {
         if (arr.data.card.id == value) {
           return arr;
         }
