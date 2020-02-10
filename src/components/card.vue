@@ -2,9 +2,14 @@
   <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
     <div class="stageLine" :class="stageColor(index)"></div>
     <div class="card-body">
-      <h4 class="card-title">{{ card.name }}</h4>
+      <h4 class="card-title">
+        {{ card.name }}
+      </h4>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage(index) }}
+        <span class="badge badge-pill badge-info" v-if="card.due"
+          >Срок: {{ dueDate(index) }}</span
+        >
       </h6>
       <p class="card-text">{{ card.desc }}</p>
       <!-- комментарии -->
@@ -207,6 +212,11 @@ export default {
           }
         }
       }
+    },
+    dueDate(value) {
+      let date = this.cards[value].due;
+      let formatted_date = date.getHours();
+      return formatted_date;
     }
   },
   computed: {

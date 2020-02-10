@@ -130,7 +130,7 @@ export default {
       loading: false
     };
   },
-  methods: {
+  methods: { 
     registration() {
       this.loading = true;
       fb.auth()
