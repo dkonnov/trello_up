@@ -7,9 +7,9 @@
       </h4>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage(index) }}
-        <span class="badge badge-pill badge-info" v-if="card.due"
-          >Срок: {{ dueDate(index) }}</span
-        >
+        <span class="badge badge-pill" :class="dueColor(index)" v-if="card.due"
+          >Срок: {{ dueDate(index) }}
+        </span>
       </h6>
       <p class="card-text">{{ card.desc }}</p>
       <!-- комментарии -->
@@ -214,9 +214,23 @@ export default {
       }
     },
     dueDate(value) {
-      let date = this.cards[value].due;
-      let formatted_date = date.getHours();
+      let date = new Date(Date.parse(this.cards[value].due));
+      let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+      let month =
+        date.getMonth() + 1 > 9
+          ? date.getMonth() + 1
+          : "0" + (date.getMonth() + 1);
+      let formatted_date = day + "." + month + "." + date.getFullYear();
       return formatted_date;
+    },
+    dueColor(value) {
+      let res;
+      if (Date.now() > Date.parse(this.cards[value].due)) {
+        res = "badge-danger";
+      } else {
+        res = "badge-info";
+      }
+      return res;
     }
   },
   computed: {
