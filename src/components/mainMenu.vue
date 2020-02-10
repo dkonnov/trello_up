@@ -75,10 +75,10 @@ export default {
     singOut() {
       fb.auth()
         .signOut()
-        .then(function() {
+        .then(() => {
           eventEmitter.$emit("showMessage", "Надеюсь ты скоро вернешься :(");
         })
-        .catch(function(error) {
+        .catch(error => {
           eventEmitter.$emit(
             "showMessage",
             "Чтото пошло не так :( " + error.message

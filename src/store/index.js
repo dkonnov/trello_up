@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import _ from "lodash";
+//import _ from "lodash";
 import * as fb from "firebase";
 
 Vue.use(Vuex);
@@ -38,7 +38,7 @@ export default new Vuex.Store({
     },
     updateUserData(state, payload) {
       // добавим сведения в state
-      _.assign(state.userData, payload);
+      Object.assign(state.userData, payload);
       // запишем данные о пользователе в Firebase
       fb.database()
         .ref("users/" + state.user.uid)
@@ -82,7 +82,7 @@ export default new Vuex.Store({
       fb.database()
         .ref("users/" + state.user.uid)
         .once("value")
-        .then(function(snapshot) {
+        .then(snapshot => {
           let res = snapshot.val();
           // сохраним
           commit("setUserData", res);
@@ -141,7 +141,7 @@ export default new Vuex.Store({
             token
         )
         .then(response => {
-          var newArr = response.data.cards.filter(function(card) {
+          var newArr = response.data.cards.filter(card => {
             if (card.customFieldItems.length > 0) {
               return card.customFieldItems[0].idValue == state.userData.cf;
             }

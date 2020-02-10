@@ -130,7 +130,7 @@ export default {
       loading: false
     };
   },
-  methods: {
+  methods: { 
     registration() {
       this.loading = true;
       fb.auth()
@@ -158,7 +158,7 @@ export default {
                   cf: response.data.id,
                   background: "patrick-tomasso-1272187-unsplash.jpg"
                 })
-                .catch(function(error) {
+                .catch(error => {
                   alert(error.message);
                   eventEmitter.$emit("showMessage", error.message);
                 });
@@ -166,13 +166,13 @@ export default {
           //Отправим письмо о подтверждении почты
           fb.auth()
             .currentUser.sendEmailVerification()
-            .then(function() {
+            .then(() => {
               eventEmitter.$emit(
                 "showMessage",
                 "Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации."
               );
             })
-            .catch(function(error) {
+            .catch(error => {
               eventEmitter.$emit("showMessage", error.message);
             });
           this.$router.push("/");

@@ -2,9 +2,14 @@
   <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
     <div class="stageLine" :class="stageColor(index)"></div>
     <div class="card-body">
-      <h4 class="card-title">{{ card.name }}</h4>
+      <h4 class="card-title">
+        {{ card.name }}
+      </h4>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage(index) }}
+        <span class="badge badge-pill" :class="dueColor(index)" v-if="card.due"
+          >Срок: {{ dueDate(index) }}
+        </span>
       </h6>
       <p class="card-text">{{ card.desc }}</p>
       <!-- комментарии -->
@@ -140,7 +145,7 @@ export default {
     },
     getAvatarURL(value) {
       var url;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.avatarUrl) {
             url = item.avatarUrl + "/30.png";
@@ -153,7 +158,7 @@ export default {
     },
     getmemberBollean(value) {
       var tooltip;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.fullName == "Trello Up User") {
             tooltip = false;
@@ -166,7 +171,7 @@ export default {
     },
     getmemberTooltip(value) {
       var tooltip;
-      this.members.forEach(function(item) {
+      this.members.forEach(item => {
         if (value == item.id) {
           if (item.fullName == "Trello Up User") {
             tooltip = "Я";
@@ -178,7 +183,7 @@ export default {
       return tooltip;
     },
     commentsOnCard(value) {
-      var newArr = this.$store.state.comments.filter(function(arr) {
+      var newArr = this.$store.state.comments.filter(arr => {
         if (arr.data.card.id == value) {
           return arr;
         }
@@ -207,6 +212,25 @@ export default {
           }
         }
       }
+    },
+    dueDate(value) {
+      let date = new Date(Date.parse(this.cards[value].due));
+      let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+      let month =
+        date.getMonth() + 1 > 9
+          ? date.getMonth() + 1
+          : "0" + (date.getMonth() + 1);
+      let formatted_date = day + "." + month + "." + date.getFullYear();
+      return formatted_date;
+    },
+    dueColor(value) {
+      let res;
+      if (Date.now() > Date.parse(this.cards[value].due)) {
+        res = "badge-danger";
+      } else {
+        res = "badge-info";
+      }
+      return res;
     }
   },
   computed: {
