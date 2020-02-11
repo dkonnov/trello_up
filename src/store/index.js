@@ -135,7 +135,9 @@ export default new Vuex.Store({
     getCards({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/fsA5vKgk/?cards=open&fields=all&card_customFieldItems=true&key=" +
+          "https://api.trello.com/1/boards/" +
+            board +
+            "/?cards=open&fields=all&card_customFieldItems=true&key=" +
             key +
             "&token=" +
             token
