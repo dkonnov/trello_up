@@ -100,6 +100,10 @@ export default {
           .set({
             'user_id': this.$store.state.user.uid
             });
+            eventEmitter.$emit(
+            "showMessage",
+            "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
+          );
         }) 
         .catch(() => {
           eventEmitter.$emit(
