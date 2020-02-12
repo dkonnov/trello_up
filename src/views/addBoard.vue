@@ -64,7 +64,7 @@
 <script>
 import axios from "axios";
 import { required } from "vuelidate/lib/validators/";
-//import * as fb from "firebase";
+import * as fb from "firebase";
 import { eventEmitter } from "./../main";
 
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
@@ -95,8 +95,12 @@ export default {
             token
         )
         .then(() => {
-          alert("ok");
-        })
+          fb.database()
+          .ref("boards/" + this.board)
+          .set({
+            'user_id': this.$store.state.user.uid
+            });
+        }) 
         .catch(() => {
           eventEmitter.$emit(
             "showMessage",
