@@ -90,20 +90,46 @@
             </a>
           </div>
         </div>
+        <!-- Файлы -->
+        <div style="display: block;float: right; margin: 2px;">
+          <button
+            class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+            type="button"
+            id="dropdownFiles"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-if="card.badges.attachments > 0"
+            @click="getAttach(card.id)"
+          >
+            <i class="material-icons">attach_file</i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownFiles">
+            <div v-for="file of files" :key="file">
+              <a class="dropdown-item" :href="file.url" target="new">{{
+                file.name
+              }}</a>
+            </div>
+          </div>
+        </div>
         <!-- Меню -->
-        <button
-          class="btn btn-secondary btn-fab btn-fab-mini btn-round"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i class="material-icons">more_horiz</i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Добавить файл</a>
-          <a class="dropdown-item" href="#">Отменить задачу</a>
+        <div style="display: block;float: right; margin: 2px;">
+          <button
+            class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="material-icons">more_horiz</i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Добавить файл</a>
+            <a class="dropdown-item" href="#" @click="getAttach"
+              >Отменить задачу</a
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -122,7 +148,8 @@ export default {
   },
   data() {
     return {
-      comment: ""
+      comment: "",
+      files: []
     };
   },
   methods: {
@@ -214,23 +241,47 @@ export default {
       }
     },
     dueDate(value) {
-      let date = new Date(Date.parse(this.cards[value].due));
-      let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-      let month =
-        date.getMonth() + 1 > 9
-          ? date.getMonth() + 1
-          : "0" + (date.getMonth() + 1);
-      let formatted_date = day + "." + month + "." + date.getFullYear();
-      return formatted_date;
+      if (this.cards[value].due) {
+        let date = new Date(Date.parse(this.cards[value].due));
+        let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+        let month =
+          date.getMonth() + 1 > 9
+            ? date.getMonth() + 1
+            : "0" + (date.getMonth() + 1);
+        let formatted_date = day + "." + month + "." + date.getFullYear();
+        return formatted_date;
+      }
     },
     dueColor(value) {
-      let res;
-      if (Date.now() > Date.parse(this.cards[value].due)) {
-        res = "badge-danger";
-      } else {
-        res = "badge-info";
+      // окрашиает бейдж в красный, если просроченно, или в синий если нет
+      if (this.cards[value].due) {
+        let res;
+        if (Date.now() > Date.parse(this.cards[value].due)) {
+          res = "badge-danger";
+        } else {
+          res = "badge-info";
+        }
+        return res;
       }
-      return res;
+    },
+    getAttach(value) {
+      // выводит список файлов прикрепленных к карточке
+      const key = "d02290573e1e3121c00a8bcb3bd08a1f";
+      const token =
+        "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
+      axios
+        .get(
+          "https://api.trello.com/1/cards/" +
+            value +
+            "/attachments" +
+            "/?key=" +
+            key +
+            "&token=" +
+            token
+        )
+        .then(response => {
+          this.files = response.data;
+        });
     }
   },
   computed: {
