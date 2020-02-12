@@ -6,88 +6,37 @@
           <i class="material-icons">chrome_reader_mode</i>
         </div>
         <h4 class="info-title">Подключение доски</h4>
+        Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску
+        пользователя <b>@userup3</b>, а также компонент <b>CustomFields</b> и
+        создать ее первый элемент.
       </div>
 
-      <form @submit.prevent="accaunt">
+      <form @submit.prevent="add">
         <div class="fields">
           <div
             class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.name.$error }"
+            :class="{ 'has-danger': $v.board.$error }"
           >
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="material-icons">face</i>
+                <i class="material-icons">link</i>
               </span>
             </div>
             <input
-              v-model="name"
-              @input="$v.name.$touch"
+              v-model="board"
+              @input="$v.board.$touch"
               type="text"
               class="form-control"
-              placeholder="Ваше имя ..."
+              placeholder="ID достки в Trello ..."
             />
-            <button v-if="$v.name.$error" class="form-control-feedback">
+            <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
             <small
-              v-if="$v.name.$error"
+              v-if="$v.board.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести ваше имя, чтобы специалист знал как к вам
-              обратиться.</small
-            >
-          </div>
-
-          <div
-            class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.tel.$error }"
-          >
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="material-icons">call</i>
-              </span>
-            </div>
-            <input
-              v-model="tel"
-              @input="$v.tel.$touch"
-              type="text"
-              class="form-control"
-              placeholder="Номер телефона ..."
-            />
-            <button v-if="$v.tel.$error" class="form-control-feedback">
-              <i class="material-icons">clear</i>
-            </button>
-            <small
-              v-if="$v.tel.$error"
-              class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small
-            >
-          </div>
-
-          <div
-            class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.place.$error }"
-          >
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="material-icons">apartment</i>
-              </span>
-            </div>
-            <input
-              v-model="place"
-              @input="$v.place.$touch"
-              type="text"
-              class="form-control"
-              placeholder="Место нахождения  ..."
-            />
-            <button v-if="$v.place.$error" class="form-control-feedback">
-              <i class="material-icons">clear</i>
-            </button>
-            <small
-              v-if="$v.place.$error"
-              class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small
+              >Укажите ID доски в Trello в которой вы планируете принимать
+              задачи</small
             >
           </div>
 
@@ -98,14 +47,8 @@
             type="submit"
             class="btn btn-primary btn-round"
           >
-            Сохранить
+            Проверить и подключить
           </button>
-          <br />
-          <router-link to="/changepassword">
-            <button type="button" class="btn btn-secondary btn-round">
-              Сменить пароль
-            </button>
-          </router-link>
           <br />
           <router-link to="/add">
             <button type="button" class="btn btn-secondary btn-round">
@@ -121,73 +64,44 @@
 <script>
 import axios from "axios";
 import { required } from "vuelidate/lib/validators/";
-import * as fb from "firebase";
+//import * as fb from "firebase";
 import { eventEmitter } from "./../main";
 
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
-//const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
 
 export default {
   data() {
     return {
-      name: "",
-      tel: "",
-      place: ""
+      board: ""
     };
   },
   validations: {
-    name: {
+    board: {
       required
-    },
-    tel: {
-      required
-    },
-    place: {
-      required
-    }
-  },
-  computed: {
-    uid() {
-      return this.$store.state.user.uid;
     }
   },
   methods: {
-    accaunt() {
-      this.$store.commit("updateUserData", {
-        tel: this.tel,
-        place: this.place
-      });
-      fb.auth()
-        .currentUser.updateProfile({
-          displayName: this.name
-        })
+    add() {
+      // проверим доступность достки
+      axios
+        .get(
+          "https://api.trello.com/1/boards/" +
+            this.board +
+            "/?cards=open&fields=all&card_customFieldItems=true&key=" +
+            key +
+            "&token=" +
+            token
+        )
         .then(() => {
-          // подготовим значение
-          let option = this.name + "(" + this.tel + ", " + this.place + ")";
-          // изменим значение CustomFieldsId
-          axios
-            .put(
-              "https://api.trello.com/1/customField/" +
-                this.$store.state.customFieldsId +
-                "/options/" +
-                this.$store.state.userData.cf +
-                "/?key=" +
-                key +
-                "&token=" +
-                token,
-              {
-                value: { text: option }
-              }
-            )
-            .then(() => {
-              this.$router.push("/add");
-              eventEmitter.$emit("showMessage", "Изменения сохранены!");
-            });
+          alert("ok");
         })
-        .catch(error => {
-          eventEmitter.$emit("showMessage", error.message);
+        .catch(() => {
+          eventEmitter.$emit(
+            "showMessage",
+            "Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3."
+          );
         });
     }
   },
@@ -196,9 +110,6 @@ export default {
     if (!this.$store.state.user.uid) {
       this.$router.push("/");
     }
-    this.name = this.$store.state.user.displayName;
-    this.tel = this.$store.state.userData.tel;
-    this.place = this.$store.state.userData.place;
   }
 };
 </script>
