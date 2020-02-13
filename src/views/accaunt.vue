@@ -92,27 +92,26 @@
           </div>
 
           <br />
-
-          <button
-            :disabled="$v.$invalid"
-            type="submit"
-            class="btn btn-primary btn-round"
-          >
-            Сохранить
-          </button>
-          <br />
-          <router-link to="/changepassword">
-            <button type="button" class="btn btn-secondary btn-round">
-              Сменить пароль
-            </button>
-          </router-link>
-          <br />
-          <router-link to="/add">
-            <button type="button" class="btn btn-secondary btn-round">
-              Назад
-            </button>
-          </router-link>
         </div>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >
+          Сохранить
+        </button>
+        <br />
+        <router-link to="/changepassword">
+          <button type="button" class="btn btn-secondary btn-round">
+            Сменить пароль
+          </button>
+        </router-link>
+        <br />
+        <router-link to="/add">
+          <button type="button" class="btn btn-secondary btn-round">
+            Назад
+          </button>
+        </router-link>
       </form>
     </center>
   </div>

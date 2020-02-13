@@ -39,21 +39,20 @@
               отправлена ссылка.</small
             >
           </div>
-
-          <button
-            :disabled="$v.$invalid"
-            type="submit"
-            class="btn btn-primary btn-round"
-          >
-            Отправить ссылку
-          </button>
-          <br />
-          <router-link to="/">
-            <button type="button" class="btn btn-secondary btn-round">
-              Назад
-            </button>
-          </router-link>
         </div>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >
+          Отправить ссылку
+        </button>
+        <br />
+        <router-link to="/">
+          <button type="button" class="btn btn-secondary btn-round">
+            Назад
+          </button>
+        </router-link>
       </form>
     </center>
   </div>

@@ -2,14 +2,14 @@
   <div class="card mainCard">
     <div class="card-body" style="padding-bottom: 0px;margin-bottom: -15px;">
       <div class="row">
-        <div
+        <!-- <div
           class="col-md-6"
           style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
-        >
-          <transition name="fade" mode="out-in">
-            <router-view></router-view>
-          </transition>
-        </div>
+        > -->
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+        <!-- </div>
 
         <div class="col-md-6 rightCard">
           <div class="info" v-if="!this.$store.state.user.uid">
@@ -76,7 +76,7 @@
               <br />
             </center>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -84,12 +84,12 @@
 
 <script>
 import _ from "lodash";
-import card from "../components/card";
+// import card from "../components/card";
 
 export default {
   name: "mainCard",
   components: {
-    card
+    //card
   },
   data() {
     return {
@@ -129,11 +129,7 @@ export default {
       );
     }
   },
-  mounted() {
-    // установим фоновое изображение
-    document.getElementById("backgroundDiv").style.backgroundImage =
-      "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
-  },
+
   beforeMount() {
     setInterval(() => {
       if (this.$store.state.user.uid) {

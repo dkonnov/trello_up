@@ -41,21 +41,20 @@
           </div>
 
           <br />
-
-          <button
-            :disabled="$v.$invalid"
-            type="submit"
-            class="btn btn-primary btn-round"
-          >
-            Проверить и подключить
-          </button>
-          <br />
-          <router-link to="/add">
-            <button type="button" class="btn btn-secondary btn-round">
-              Назад
-            </button>
-          </router-link>
         </div>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >
+          Проверить и подключить
+        </button>
+        <br />
+        <router-link to="/add">
+          <button type="button" class="btn btn-secondary btn-round">
+            Назад
+          </button>
+        </router-link>
       </form>
     </center>
   </div>
@@ -96,15 +95,15 @@ export default {
         )
         .then(() => {
           fb.database()
-          .ref("boards/" + this.board)
-          .set({
-            'user_id': this.$store.state.user.uid
+            .ref("boards/" + this.board)
+            .set({
+              user_id: this.$store.state.user.uid
             });
-            eventEmitter.$emit(
+          eventEmitter.$emit(
             "showMessage",
             "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
           );
-        }) 
+        })
         .catch(() => {
           eventEmitter.$emit(
             "showMessage",
