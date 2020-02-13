@@ -107,7 +107,7 @@
           </button>
         </router-link>
         <br />
-        <router-link to="/add">
+        <router-link to="/tasks">
           <button type="button" class="btn btn-secondary btn-round">
             Назад
           </button>

@@ -24,6 +24,37 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="!this.$store.state.user.uid"
+          >
+            <a
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+              href="#"
+            >
+              Регистрация
+            </a>
+          </li>
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="!this.$store.state.user.uid"
+          >
+            <router-link to="/login">
+              <a
+                class="btn btn-success btn-block btn-round"
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+                href="#"
+              >
+                <i class="material-icons">meeting_room</i>
+                Вход
+              </a>
+            </router-link>
+          </li>
           <li class="dropdown nav-item" v-if="this.$store.state.user.uid">
             <a
               class="dropdown-toggle nav-link"

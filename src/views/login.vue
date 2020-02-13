@@ -5,7 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">account_circle</i>
         </div>
-        <h4 class="info-title">Авторизация</h4>
+        <h4 class="info-title">Вход</h4>
       </div>
 
       <form @submit.prevent="login">
@@ -125,7 +125,7 @@ export default {
           this.$store.dispatch("getComments");
           this.$store.dispatch("getBackgrounds");
           this.$store.dispatch("getCustomFields");
-          this.$router.push("/add");
+          this.$router.push("/tasks");
         })
         .catch(error => {
           this.loading = false;

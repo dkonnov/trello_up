@@ -12,15 +12,11 @@
         data-wow-duration="2s"
         style="display: flex;  align-items: center; flex-direction: column;"
       >
-        <!-- <mainCard /> -->
-
         <div class="card mainCard" style="width: unset">
           <div class="card-body" style="margin-bottom: 0px;">
-            <div class="row">
-              <transition name="fade" mode="out-in">
-                <router-view></router-view>
-              </transition>
-            </div>
+            <transition name="fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
           </div>
         </div>
       </div>
