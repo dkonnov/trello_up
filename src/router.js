@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import login from "./views/login";
 import tasks from "./views/tasks";
-import addBoard from "./views/addBoard";
+import boards from "./views/boards";
 import registration from "./views/registration";
 import accaunt from "./views/accaunt";
 import restore from "./views/restore";
@@ -26,7 +26,7 @@ export default new Router({
     },
     {
       path: "/boards",
-      component: addBoard
+      component: boards
     },
     {
       path: "/registration",
