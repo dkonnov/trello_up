@@ -207,8 +207,9 @@ export default {
 .fields
   margin-left: -50px
 .accaunt
-  padding-left: 100px
-  padding-right: 100px
+  padding-left: 75px
+  padding-right: 75px
+  min-width: 350px
 .form-control-feedback
     margin-top: -28px
 .small-alert

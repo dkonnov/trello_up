@@ -77,6 +77,7 @@
           Регистрация
         </button>
       </router-link>
+      <br />
       <router-link to="/restore">
         <button type="button" class="btn btn-secondary btn-round">
           Забыл пароль
@@ -147,8 +148,9 @@ export default {
 .form-control-feedback
     margin-top: -28px
 .login
-    padding-left: 100px
-    padding-right: 100px
+    padding-left: 75px
+    padding-right: 75px
+    min-width: 350px
 .bootstrap-select.btn-group .dropdown-toggle .filter-option
   text-align: center
 </style>
