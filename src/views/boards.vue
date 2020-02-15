@@ -21,6 +21,13 @@
           <br />
           Ссылку вы можете отправлять клиентам и сотрудникам по электронной
           почте, либо разместить на внутреннем ресурсе или сайте.
+          <button
+            type="button"
+            @click="getData"
+            class="btn btn-secondary btn-round"
+          >
+            Назад
+          </button>
         </p>
       </div>
     </div>
@@ -29,11 +36,26 @@
 
 <script>
 import addBoard from "../views/addBoard";
+import * as fb from "firebase";
 
 export default {
   name: "boards",
   components: {
     addBoard
+  },
+  methods: {
+    getData() {
+      fb.database()
+        .ref("boards")
+        .once("value")
+        .then(snapshot => {
+          let res = snapshot.val();
+          alert(res);
+        })
+        .catch(value => {
+          alert(value);
+        });
+    }
   }
 };
 </script>

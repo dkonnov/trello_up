@@ -29,13 +29,13 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.email.$error"
-              class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, который вы
-              использовали при регистрации.</small
-            >
           </div>
+          <small
+            v-if="$v.email.$error"
+            class="form-text text-muteds small-alert"
+            >Необходимо ввести адрес электронной почты, который вы использовали
+            при регистрации.</small
+          >
 
           <div
             class="input-group form-group label-floating"
@@ -150,7 +150,7 @@ export default {
 .login
     padding-left: 75px
     padding-right: 75px
-    min-width: 350px
+    max-width: 350px
 .bootstrap-select.btn-group .dropdown-toggle .filter-option
   text-align: center
 </style>

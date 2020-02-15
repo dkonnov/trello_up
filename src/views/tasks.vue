@@ -37,7 +37,7 @@
         <h4 class="title" style="color: #3c4858">
           Ваши текущие задачи
         </h4>
-        <div v-for="(card, index) of itemsOnPageArray" :key="card">
+        <div v-for="(card, index) of itemsOnPageArray" :key="index">
           <card :card="card" :index="index" />
         </div>
 
@@ -50,20 +50,20 @@
               class="pagination nav nav-pills nav-pills-primary"
               role="tablist"
             >
-              <template v-for="index in totalTabs">
+              <template v-for="(tab, index) in totalTabs">
                 <li
                   class="page-item"
-                  :class="{ active: currentTab == index }"
+                  :class="{ active: currentTab == tab }"
                   :key="index"
-                  @click="currentTab = index"
+                  @click="currentTab = tab"
                 >
                   <a
                     class="page-link"
                     data-toggle="tab"
-                    :href="'#tab' + index"
+                    :href="'#tab' + tab"
                     role="tablist"
                     aria-expanded="true"
-                    >{{ index }}</a
+                    >{{ tab }}</a
                   >
                 </li>
               </template>
