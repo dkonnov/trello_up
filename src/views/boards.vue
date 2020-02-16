@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-6 rightCard">
-      <div class="info">
+      <div class="info" v-if="!boards">
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
@@ -21,14 +21,21 @@
           <br />
           Ссылку вы можете отправлять клиентам и сотрудникам по электронной
           почте, либо разместить на внутреннем ресурсе или сайте.
-          <button
-            type="button"
-            @click="getData"
-            class="btn btn-secondary btn-round"
-          >
-            Назад
-          </button>
         </p>
+      </div>
+      <div v-if="boards">
+        <template v-for="(board, index) in boards">
+          <div
+            class="card wow fadeInUp"
+            style="width: 100%;"
+            data-wow-duration="2s"
+            :key="index"
+          >
+            <div class="card-body">
+              {{ board }}
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -36,25 +43,15 @@
 
 <script>
 import addBoard from "../views/addBoard";
-import * as fb from "firebase";
 
 export default {
   name: "boards",
   components: {
     addBoard
   },
-  methods: {
-    getData() {
-      fb.database()
-        .ref("boards")
-        .once("value")
-        .then(snapshot => {
-          let res = snapshot.val();
-          alert(res);
-        })
-        .catch(value => {
-          alert(value);
-        });
+  computed: {
+    boards() {
+      return this.$store.state.boards.boards;
     }
   }
 };

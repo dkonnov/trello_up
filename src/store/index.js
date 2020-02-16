@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-//import _ from "lodash";
 import * as fb from "firebase";
+import boards from "./boards";
 
 Vue.use(Vuex);
 
@@ -12,6 +12,9 @@ const token =
 const board = "fsA5vKgk";
 
 export default new Vuex.Store({
+  modules: {
+    boards
+  },
   state: {
     lists: {},
     members: {},

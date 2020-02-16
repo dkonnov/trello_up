@@ -120,6 +120,7 @@ export default {
           this.$store.commit("setUser", user.user);
           // получим дополнительные данные о пользователе
           this.$store.dispatch("getUserData");
+          this.$store.dispatch("getBoards");
           // получим данные из Trello
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
