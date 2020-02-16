@@ -43,7 +43,7 @@
           <br />
         </div>
         <button
-          :disabled="$v.$invalid"
+          :disabled="$v.$invalid || loading"
           type="submit"
           class="btn btn-primary btn-round"
         >
@@ -73,7 +73,8 @@ const token =
 export default {
   data() {
     return {
-      board: ""
+      board: "",
+      loading: false
     };
   },
   validations: {
@@ -83,6 +84,7 @@ export default {
   },
   methods: {
     add() {
+      this.loading = true;
       // проверим доступность достки
       axios
         .get(
@@ -95,16 +97,22 @@ export default {
         )
         .then(() => {
           fb.database()
-            .ref("boards/" + this.board)
-            .set({
-              user_id: this.$store.state.user.uid
+            .ref("boards/")
+            .push({
+              user_id: this.$store.state.user.uid,
+              board: this.board
+            })
+            .then(() => {
+              this.loading = false;
+              this.$store.dispatch("getBoards");
+              eventEmitter.$emit(
+                "showMessage",
+                "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
+              );
             });
-          eventEmitter.$emit(
-            "showMessage",
-            "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
-          );
         })
         .catch(() => {
+          this.loading = false;
           eventEmitter.$emit(
             "showMessage",
             "Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3."
