@@ -1,13 +1,13 @@
 <template>
   <nav
-    class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg"
+    class="navbar navbar-color-on-scroll navbar-transparent fixed-top  navbar-expand-lg "
     color-on-scroll="100"
     id="sectionsNav"
   >
     <div class="container">
-      <div class="navbar-translate" style=" position: relative;">
+      <div class="navbar-translate">
         <a class="navbar-brand" href="#">
-          <h4 class="card-title" style="color:white">Trello Up</h4>
+          <h4 class="card-title" style="color:unset">Trello Up</h4>
         </a>
         <button
           class="navbar-toggler"

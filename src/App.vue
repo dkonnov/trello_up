@@ -10,9 +10,9 @@
       <div
         class="container wow fadeIn"
         data-wow-duration="2s"
-        style="display: flex;  align-items: center; flex-direction: column;"
+        style="display: flex;  align-items: center; flex-direction: column; padding-top: 15vh"
       >
-        <div class="card mainCard" style="width: unset">
+        <div class="card" style="width: unset">
           <div class="card-body" style="margin-bottom: 0px;">
             <transition name="fade" mode="out-in">
               <router-view></router-view>
@@ -30,14 +30,12 @@
 import modalWindow from "./components/modalWindow";
 import mainMenu from "./components/mainMenu";
 import background from "./components/background";
-// import mainCard from "./views/mainCard";
 
 export default {
   name: "app",
   components: {
     modalWindow,
     mainMenu,
-    // mainCard,
     background
   },
   computed: {
@@ -74,10 +72,6 @@ export default {
 .fade-leave-active
   opacity: 0
 
-.login-page
-  .page-header
-    .container
-      padding-top: 15vh
 .form-control-feedback
 	position: absolute
 	right: 0
