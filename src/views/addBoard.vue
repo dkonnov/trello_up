@@ -47,7 +47,7 @@
               </span>
             </div>
             <input
-              v-model="board"
+              v-model="name"
               type="text"
               class="form-control"
               placeholder="Название доски"
@@ -63,6 +63,7 @@
             <textarea
               class="form-control"
               rows="4"
+              v-model="desc"
               placeholder="Приветственное описание"
             ></textarea>
           </div>
@@ -101,6 +102,8 @@ export default {
   data() {
     return {
       board: "",
+      name: "",
+      desc: "",
       loading: false
     };
   },
@@ -127,7 +130,9 @@ export default {
             .ref("boards/")
             .push({
               user_id: this.$store.state.user.uid,
-              board: this.board
+              board: this.board,
+              name: this.name,
+              desc: this.desc
             })
             .then(() => {
               this.loading = false;

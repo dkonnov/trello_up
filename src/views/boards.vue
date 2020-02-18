@@ -24,6 +24,9 @@
         </p>
       </div>
       <div v-if="boards">
+        <h4 class="title" style="color: #3c4858">
+          Доски Trello подключенные вами
+        </h4>
         <template v-for="(board, index) in boards">
           <div
             class="card wow fadeInUp"
@@ -32,10 +35,13 @@
             :key="index"
           >
             <div class="card-body">
+              <h4 class="card-title">
+                {{ board.name }}
+              </h4>
               <h6 class="card-subtitle mb-2 text-muted">
                 ID {{ board.board }}
               </h6>
-              {{ board }}
+              {{ board.desc }}
               <div align="right">
                 <div style="display: block;float: right; margin: 2px;">
                   <button
