@@ -10,9 +10,15 @@
       <div
         class="container wow fadeIn"
         data-wow-duration="2s"
-        style="display: flex;  align-items: center; flex-direction: column;"
+        style="display: flex;  align-items: center; flex-direction: column; padding-top: 15vh"
       >
-        <mainCard />
+        <div class="card" style="width: unset">
+          <div class="card-body" style="margin-bottom: 0px;">
+            <transition name="fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
+          </div>
+        </div>
       </div>
     </div>
     <modalWindow />
@@ -24,20 +30,23 @@
 import modalWindow from "./components/modalWindow";
 import mainMenu from "./components/mainMenu";
 import background from "./components/background";
-import mainCard from "./views/mainCard";
 
 export default {
   name: "app",
   components: {
     modalWindow,
     mainMenu,
-    mainCard,
     background
   },
   computed: {
     background() {
       return this.$store.state.userData.background;
     }
+  },
+  mounted() {
+    // установим фоновое изображение
+    document.getElementById("backgroundDiv").style.backgroundImage =
+      "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   watch: {
     background: value => {
@@ -50,24 +59,19 @@ export default {
 </script>
 
 <style lang="sass">
-.login-page
-  .page-header
-    .container
-      padding-top: 15vh
-.fa-instagram
-  color: #125688
-.fa-facebook-square
-  color: #3b5998
-.fa-whatsapp
-  color: #128c7e
-.fa-vk
-  color: #0099e5
-.fa-phone-square
-  color: #68217a
-.fa-envelope
-  color: #239ab9
-.wa-white
-	color: white
+.fade-enter-active
+  transition-property: opacity
+  transition-duration: 0.25s
+.fade-leave-active
+  transition-property: opacity
+  transition-duration: 0.25s
+.fade-enter-active
+  transition-delay: 0.25s
+
+.fade-enter,
+.fade-leave-active
+  opacity: 0
+
 .form-control-feedback
 	position: absolute
 	right: 0

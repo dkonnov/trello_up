@@ -14,9 +14,9 @@
       <p class="card-text">{{ card.desc }}</p>
       <!-- комментарии -->
       <div class="commentBlock">
-        <template v-for="comment of commentsOnCard(card.id)">
+        <template v-for="(comment, commentIndex) in commentsOnCard(card.id)">
           <div
-            :key="comment"
+            :key="commentIndex"
             class="comment"
             v-if="getmemberBollean(comment.idMemberCreator)"
           >
@@ -75,7 +75,10 @@
           </div>
         </form>
         <!-- Аватарки участников -->
-        <div v-for="idMember of card.idMembers" :key="idMember">
+        <div
+          v-for="(idMember, memberIndex) in card.idMembers"
+          :key="memberIndex"
+        >
           <div style="display: block;float: right; margin: 2px;">
             <a
               href="#"
@@ -105,7 +108,7 @@
             <i class="material-icons">attach_file</i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownFiles">
-            <div v-for="file of files" :key="file">
+            <div v-for="(file, fileindex) in files" :key="fileindex">
               <a class="dropdown-item" :href="file.url" target="new">{{
                 file.name
               }}</a>

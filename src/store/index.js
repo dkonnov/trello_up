@@ -1,19 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-//import _ from "lodash";
 import * as fb from "firebase";
+import boards from "./boards";
 
 Vue.use(Vuex);
 
-//const key = "2a754a93fa902b29d2694a2f71af3f83";
-//const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 const board = "fsA5vKgk";
 
 export default new Vuex.Store({
+  modules: {
+    boards
+  },
   state: {
     lists: {},
     members: {},

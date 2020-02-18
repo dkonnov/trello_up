@@ -1,13 +1,13 @@
 <template>
   <nav
-    class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg"
+    class="navbar navbar-color-on-scroll navbar-transparent fixed-top  navbar-expand-lg "
     color-on-scroll="100"
     id="sectionsNav"
   >
     <div class="container">
-      <div class="navbar-translate" style=" position: relative;">
+      <div class="navbar-translate">
         <a class="navbar-brand" href="#">
-          <h4 class="card-title" style="color:white">Trello Up</h4>
+          <h4 class="card-title" style="color:unset">Trello Up</h4>
         </a>
         <button
           class="navbar-toggler"
@@ -24,6 +24,37 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="!this.$store.state.user.uid"
+          >
+            <a
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+              href="#"
+            >
+              Регистрация
+            </a>
+          </li>
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="!this.$store.state.user.uid"
+          >
+            <router-link to="/login">
+              <a
+                class="btn btn-success btn-block btn-round"
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+                href="#"
+              >
+                <i class="material-icons">meeting_room</i>
+                Вход
+              </a>
+            </router-link>
+          </li>
           <li class="dropdown nav-item" v-if="this.$store.state.user.uid">
             <a
               class="dropdown-toggle nav-link"

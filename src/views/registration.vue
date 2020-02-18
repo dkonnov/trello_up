@@ -7,6 +7,7 @@
         </div>
         <h4 class="info-title">Регистрация</h4>
       </div>
+
       <form @submit.prevent="registration">
         <div class="fields">
           <div
@@ -130,7 +131,7 @@ export default {
       loading: false
     };
   },
-  methods: { 
+  methods: {
     registration() {
       this.loading = true;
       fb.auth()
@@ -205,8 +206,9 @@ export default {
 .fields
   margin-left: -50px
 .registration
-  padding-left: 100px
-  padding-right: 100px
+  padding-left: 75px
+  padding-right: 75px
+  min-width: 350px
 .form-control-feedback
     margin-top: -28px
 .small-alert

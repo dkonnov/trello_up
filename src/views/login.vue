@@ -5,7 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">account_circle</i>
         </div>
-        <h4 class="info-title">Авторизация</h4>
+        <h4 class="info-title">Вход</h4>
       </div>
 
       <form @submit.prevent="login">
@@ -29,13 +29,13 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.email.$error"
-              class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, которого нет в
-              системе.</small
-            >
           </div>
+          <small
+            v-if="$v.email.$error"
+            class="form-text text-muteds small-alert"
+            >Необходимо ввести адрес электронной почты, который вы использовали
+            при регистрации.</small
+          >
 
           <div
             class="input-group form-group label-floating"
@@ -77,6 +77,7 @@
           Регистрация
         </button>
       </router-link>
+      <br />
       <router-link to="/restore">
         <button type="button" class="btn btn-secondary btn-round">
           Забыл пароль
@@ -119,13 +120,14 @@ export default {
           this.$store.commit("setUser", user.user);
           // получим дополнительные данные о пользователе
           this.$store.dispatch("getUserData");
+          this.$store.dispatch("getBoards");
           // получим данные из Trello
           this.$store.dispatch("getLists");
           this.$store.dispatch("getMembers");
           this.$store.dispatch("getComments");
           this.$store.dispatch("getBackgrounds");
           this.$store.dispatch("getCustomFields");
-          this.$router.push("/add");
+          this.$router.push("/tasks");
         })
         .catch(error => {
           this.loading = false;
@@ -147,8 +149,9 @@ export default {
 .form-control-feedback
     margin-top: -28px
 .login
-    padding-left: 100px
-    padding-right: 100px
+    padding-left: 75px
+    padding-right: 75px
+    max-width: 350px
 .bootstrap-select.btn-group .dropdown-toggle .filter-option
   text-align: center
 </style>

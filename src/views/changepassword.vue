@@ -72,7 +72,7 @@
         </button>
         <br />
       </form>
-      <router-link to="/add">
+      <router-link to="/tasks">
         <button type="button" class="btn btn-secondary btn-round">
           Назад
         </button>
@@ -133,8 +133,9 @@ export default {
 .fields
   margin-left: -50px
 .changepassword
-  padding-left: 100px
-  padding-right: 100px
+  padding-left: 75px
+  padding-right: 75px
+  min-width: 350px
 .form-control-feedback
     margin-top: -28px
 .small-alert

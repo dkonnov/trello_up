@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import login from "./views/login";
-import add from "./views/add";
-import addBoard from "./views/addBoard";
+import tasks from "./views/tasks";
+import boards from "./views/boards";
 import registration from "./views/registration";
 import accaunt from "./views/accaunt";
 import restore from "./views/restore";
@@ -21,12 +21,12 @@ export default new Router({
       redirect: "/"
     },
     {
-      path: "/add",
-      component: add
+      path: "/tasks",
+      component: tasks
     },
     {
       path: "/boards",
-      component: addBoard
+      component: boards
     },
     {
       path: "/registration",

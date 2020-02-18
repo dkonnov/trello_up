@@ -92,27 +92,26 @@
           </div>
 
           <br />
-
-          <button
-            :disabled="$v.$invalid"
-            type="submit"
-            class="btn btn-primary btn-round"
-          >
-            Сохранить
-          </button>
-          <br />
-          <router-link to="/changepassword">
-            <button type="button" class="btn btn-secondary btn-round">
-              Сменить пароль
-            </button>
-          </router-link>
-          <br />
-          <router-link to="/add">
-            <button type="button" class="btn btn-secondary btn-round">
-              Назад
-            </button>
-          </router-link>
         </div>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >
+          Сохранить
+        </button>
+        <br />
+        <router-link to="/changepassword">
+          <button type="button" class="btn btn-secondary btn-round">
+            Сменить пароль
+          </button>
+        </router-link>
+        <br />
+        <router-link to="/tasks">
+          <button type="button" class="btn btn-secondary btn-round">
+            Назад
+          </button>
+        </router-link>
       </form>
     </center>
   </div>
@@ -125,7 +124,6 @@ import * as fb from "firebase";
 import { eventEmitter } from "./../main";
 
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-//const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 
@@ -209,8 +207,9 @@ export default {
 .fields
   margin-left: -50px
 .accaunt
-  padding-left: 100px
-  padding-right: 100px
+  padding-left: 75px
+  padding-right: 75px
+  min-width: 350px
 .form-control-feedback
     margin-top: -28px
 .small-alert

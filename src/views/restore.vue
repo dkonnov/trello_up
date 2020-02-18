@@ -39,21 +39,20 @@
               отправлена ссылка.</small
             >
           </div>
-
-          <button
-            :disabled="$v.$invalid"
-            type="submit"
-            class="btn btn-primary btn-round"
-          >
-            Отправить ссылку
-          </button>
-          <br />
-          <router-link to="/">
-            <button type="button" class="btn btn-secondary btn-round">
-              Назад
-            </button>
-          </router-link>
         </div>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >
+          Отправить ссылку
+        </button>
+        <br />
+        <router-link to="/">
+          <button type="button" class="btn btn-secondary btn-round">
+            Назад
+          </button>
+        </router-link>
       </form>
     </center>
   </div>
@@ -102,8 +101,9 @@ export default {
 .fields
   margin-left: -50px
 .restore
-  padding-left: 100px
-  padding-right: 100px
+  padding-left: 75px
+  padding-right: 75px
+  width: 350px
 .form-control-feedback
     margin-top: -28px
 .small-alert
