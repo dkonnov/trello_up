@@ -15,7 +15,18 @@ export default {
         .ref("boards")
         .once("value")
         .then(snapshot => {
-          commit("setBoards", snapshot.val());
+          const res = snapshot.val();
+          const newArr = [];
+          Object.keys(res).forEach(key => {
+            newArr.push({
+              id: key,
+              user_id: res[key].user_id,
+              board: res[key].board,
+              name: res[key].name,
+              desc: res[key].desc
+            });
+          });
+          commit("setBoards", newArr);
         })
         .catch(value => {
           alert(value);
