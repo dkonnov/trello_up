@@ -32,7 +32,30 @@
             :key="index"
           >
             <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">
+                ID {{ board.board }}
+              </h6>
               {{ board }}
+              <div align="right">
+                <div style="display: block;float: right; margin: 2px;">
+                  <button
+                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                    type="button"
+                    title="Перейти"
+                  >
+                    <i class="material-icons">keyboard_arrow_right</i>
+                  </button>
+                </div>
+                <div style="display: block;float: right; margin: 2px;">
+                  <button
+                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                    type="button"
+                    title="Удалить связь с доской"
+                  >
+                    <i class="material-icons">link_off</i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </template>
@@ -60,6 +83,9 @@ export default {
 <style scoped>
 .row {
   min-height: 650px;
+}
+.material-icons {
+  color: #999;
 }
 .mainCard {
   margin-top: -25px;

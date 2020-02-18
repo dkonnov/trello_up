@@ -40,6 +40,33 @@
             >
           </div>
 
+          <div class="input-group form-group label-floating">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">insert_comment</i>
+              </span>
+            </div>
+            <input
+              v-model="board"
+              type="text"
+              class="form-control"
+              placeholder="Название доски"
+            />
+          </div>
+
+          <div class="input-group form-group label-floating">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">notes</i>
+              </span>
+            </div>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Приветственное описание"
+            ></textarea>
+          </div>
+
           <br />
         </div>
         <button
