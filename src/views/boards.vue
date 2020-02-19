@@ -56,6 +56,7 @@
                   <button
                     class="btn btn-secondary btn-fab btn-fab-mini btn-round"
                     type="button"
+                    @click="deleteBoard(board.id)"
                     title="Удалить связь с доской"
                   >
                     <i class="material-icons">link_off</i>
@@ -72,11 +73,23 @@
 
 <script>
 import addBoard from "../views/addBoard";
+import * as fb from "firebase";
 
 export default {
   name: "boards",
   components: {
     addBoard
+  },
+  methods: {
+    deleteBoard(id) {
+      fb.database()
+        .ref("boards/")
+        .child(id)
+        .remove()
+        .then(() => {
+          this.$store.dispatch("getBoards");
+        });
+    }
   },
   computed: {
     boards() {
