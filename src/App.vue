@@ -21,20 +21,20 @@
         </div>
       </div>
     </div>
-    <modalWindow />
+    <modal />
     <background />
   </div>
 </template>
 
 <script>
-import modalWindow from "./components/modalWindow";
+import modal from "./components/modal";
 import mainMenu from "./components/mainMenu";
 import background from "./components/background";
 
 export default {
   name: "app",
   components: {
-    modalWindow,
+    modal,
     mainMenu,
     background
   },

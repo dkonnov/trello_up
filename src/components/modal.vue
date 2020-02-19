@@ -48,7 +48,7 @@
 import { eventEmitter } from "./../main";
 
 export default {
-  name: "modalWindow",
+  name: "modal",
   data() {
     return {
       messageText: ""
