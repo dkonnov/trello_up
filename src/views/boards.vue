@@ -73,6 +73,7 @@
 
 <script>
 import addBoard from "../views/addBoard";
+import { eventEmitter } from "./../main";
 import * as fb from "firebase";
 
 export default {
@@ -82,13 +83,19 @@ export default {
   },
   methods: {
     deleteBoard(id) {
-      fb.database()
-        .ref("boards/")
-        .child(id)
-        .remove()
-        .then(() => {
-          this.$store.dispatch("getBoards");
-        });
+      eventEmitter.$emit(
+        "showMessage",
+        "Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.",
+        function() {
+          fb.database()
+            .ref("boards/")
+            .child(id)
+            .remove()
+            .then(() => {
+              this.$store.dispatch("getBoards");
+            });
+        }
+      );
     }
   },
   computed: {
