@@ -44,13 +44,15 @@
               {{ board.desc }}
               <div align="right">
                 <div style="display: block;float: right; margin: 2px;">
-                  <button
-                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
-                    type="button"
-                    title="Перейти"
-                  >
-                    <i class="material-icons">keyboard_arrow_right</i>
-                  </button>
+                  <router-link :to="board.board">
+                    <button
+                      class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                      type="button"
+                      title="Перейти"
+                    >
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </button>
+                  </router-link>
                 </div>
                 <div style="display: block;float: right; margin: 2px;">
                   <button
@@ -101,6 +103,9 @@ export default {
   computed: {
     boards() {
       return this.$store.state.boards.boards;
+    },
+    boardLink() {
+      return "b/123";
     }
   }
 };

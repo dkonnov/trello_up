@@ -108,6 +108,9 @@ export default {
     }
   },
   computed: {
+    bboard() {
+      return this.$router.currentRoute.params["board"];
+    },
     cards() {
       return this.$store.state.cards;
     },
