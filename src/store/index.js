@@ -9,7 +9,6 @@ Vue.use(Vuex);
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
-const board = "fsA5vKgk";
 
 export default new Vuex.Store({
   modules: {
@@ -79,65 +78,62 @@ export default new Vuex.Store({
     singOut(context) {
       context.commit("setSingOut");
     },
-    getUserData({ commit, state, dispatch }) {
+    getUserData({ commit, state }) {
       fb.database()
         .ref("users/" + state.user.uid)
         .once("value")
         .then(snapshot => {
           let res = snapshot.val();
-          // сохраним
           commit("setUserData", res);
-          // загрузим карточки
-          dispatch("getCards");
         });
     },
-    getCustomFields(context) {
+    getCustomFields({ commit, state }) {
       axios
         .get(
           "https://api.trello.com/1/boards/" +
-            board +
+            state.boards.currentBoard.board +
             "/customFields?key=" +
             key +
             "&token=" +
             token
         )
         .then(response => {
-          context.commit("setCustomField", response.data[0].id);
+          commit("setCustomField", response.data[0].id);
         });
     },
-    getLists(context) {
+    getLists({ commit, state }) {
       axios
         .get(
           "https://api.trello.com/1/boards/" +
-            board +
+            state.boards.currentBoard.board +
             "/?lists=all&key=" +
             key +
             "&token=" +
             token
         )
         .then(response => {
-          context.commit("setLists", response.data.lists);
+          commit("setLists", response.data.lists);
         });
     },
-    getMembers(context) {
+    getMembers({ commit, state }) {
       axios
         .get(
           "https://api.trello.com/1/boards/" +
-            board +
+            state.boards.currentBoard.board +
             "/?members=all&key=" +
             key +
             "&token=" +
             token
         )
         .then(response => {
-          context.commit("setMembers", response.data.members);
+          commit("setMembers", response.data.members);
         });
     },
     getCards({ commit, state }) {
       axios
         .get(
           "https://api.trello.com/1/boards/" +
-            board +
+            state.boards.currentBoard.board +
             "/?cards=open&fields=all&card_customFieldItems=true&key=" +
             key +
             "&token=" +
@@ -153,10 +149,12 @@ export default new Vuex.Store({
         });
     },
     // читаем комментарии
-    getComments({ commit }) {
+    getComments({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/fsA5vKgk/actions/?limit=1000&filter=commentCard&key=" +
+          "https://api.trello.com/1/boards/" +
+            state.boards.currentBoard.board +
+            "/actions/?limit=1000&filter=commentCard&key=" +
             key +
             "&token=" +
             token
