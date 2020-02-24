@@ -17,10 +17,6 @@ export default new Router({
       component: login
     },
     {
-      path: "*",
-      redirect: "/"
-    },
-    {
       path: "/tasks",
       component: tasks
     },
@@ -43,6 +39,10 @@ export default new Router({
     {
       path: "/changepassword",
       component: changepassword
+    },
+    {
+      path: "/:board",
+      component: tasks
     }
   ],
   mode: "history"

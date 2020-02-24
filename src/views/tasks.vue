@@ -27,10 +27,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
-        <h4 class="info-title">Ваши задачи</h4>
+        <h4 class="info-title">{{ boardName }}</h4>
         <p>
-          Задачи, созданные вами, будут отображаться тут. Создайте первую задачу
-          в левой колонке.
+          {{ boardDesc }}
         </p>
       </div>
       <div v-else-if="cardsCount">
@@ -123,13 +122,23 @@ export default {
         this.itemsOnPage * this.currentTab - this.itemsOnPage,
         this.itemsOnPage * this.currentTab
       );
+    },
+    boardName() {
+      return this.$store.state.boards.currentBoard.name;
+    },
+    boardDesc() {
+      return this.$store.state.boards.currentBoard.desc;
     }
   },
-
   beforeMount() {
+    // получим информацию о текущей доске
+    this.$store.dispatch(
+      "getCurrentBoard",
+      this.$router.currentRoute.params["board"]
+    );
     setInterval(() => {
       if (this.$store.state.user.uid) {
-        this.$store.dispatch("getComments");
+        //this.$store.dispatch("getComments");
       }
     }, 30000);
   }

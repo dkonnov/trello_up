@@ -120,16 +120,12 @@ export default {
           this.$store.commit("setUser", user.user);
           // получим дополнительные данные о пользователе
           this.$store.dispatch("getUserData");
-          this.$store.dispatch("getBoards");
-          // получим данные из Trello
-          this.$store.dispatch("getLists");
-          this.$store.dispatch("getMembers");
-          this.$store.dispatch("getComments");
           this.$store.dispatch("getBackgrounds");
-          this.$store.dispatch("getCustomFields");
-          this.$router.push("/tasks");
+          this.$store.dispatch("getBoards");
+          this.$router.push("/boards");
         })
         .catch(error => {
+          // отобразим ошибку логина
           this.loading = false;
           eventEmitter.$emit("showMessage", error.message);
         });

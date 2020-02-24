@@ -44,18 +44,21 @@
               {{ board.desc }}
               <div align="right">
                 <div style="display: block;float: right; margin: 2px;">
-                  <button
-                    class="btn btn-secondary btn-fab btn-fab-mini btn-round"
-                    type="button"
-                    title="Перейти"
-                  >
-                    <i class="material-icons">keyboard_arrow_right</i>
-                  </button>
+                  <router-link :to="board.board">
+                    <button
+                      class="btn btn-secondary btn-fab btn-fab-mini btn-round"
+                      type="button"
+                      title="Перейти"
+                    >
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </button>
+                  </router-link>
                 </div>
                 <div style="display: block;float: right; margin: 2px;">
                   <button
                     class="btn btn-secondary btn-fab btn-fab-mini btn-round"
                     type="button"
+                    @click="deleteBoard(board.id)"
                     title="Удалить связь с доской"
                   >
                     <i class="material-icons">link_off</i>
@@ -72,15 +75,37 @@
 
 <script>
 import addBoard from "../views/addBoard";
+import { eventEmitter } from "./../main";
+import * as fb from "firebase";
 
 export default {
   name: "boards",
   components: {
     addBoard
   },
+  methods: {
+    deleteBoard(id) {
+      eventEmitter.$emit(
+        "showMessage",
+        "Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.",
+        function() {
+          fb.database()
+            .ref("boards/")
+            .child(id)
+            .remove()
+            .then(() => {
+              this.$store.dispatch("getBoards");
+            });
+        }
+      );
+    }
+  },
   computed: {
     boards() {
       return this.$store.state.boards.boards;
+    },
+    boardLink() {
+      return "b/123";
     }
   }
 };
