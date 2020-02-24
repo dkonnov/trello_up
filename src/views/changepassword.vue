@@ -97,9 +97,11 @@ export default {
   },
   mounted() {
     // своебразная защита роута
-    if (!this.$store.state.user.uid) {
-      this.$router.push("/");
-    }
+    fb.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.$router.push("/");
+      }
+    });
   },
   methods: {
     change() {

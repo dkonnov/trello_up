@@ -95,12 +95,6 @@ export default {
       required
     }
   },
-  mounted() {
-    // своебразная защита роута
-    if (!this.$store.state.user.uid) {
-      this.$router.push("/");
-    }
-  },
   computed: {
     showAlert() {
       let res;

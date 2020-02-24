@@ -191,6 +191,11 @@ export default {
   },
   mounted() {
     // своебразная защита роута
+    fb.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.$router.push("/");
+      }
+    });
     if (!this.$store.state.user.uid) {
       this.$router.push("/");
     }
