@@ -59,7 +59,6 @@
 </template>
 
 <script>
-//import axios from "axios";
 import { required, email } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
