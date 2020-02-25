@@ -107,11 +107,11 @@
           </button>
         </router-link>
         <br />
-        <router-link to="/tasks">
+        <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
             Назад
           </button>
-        </router-link>
+        </a>
       </form>
     </center>
   </div>
@@ -196,9 +196,6 @@ export default {
         this.$router.push("/");
       }
     });
-    if (!this.$store.state.user.uid) {
-      this.$router.push("/");
-    }
     this.name = this.$store.state.user.displayName;
     this.tel = this.$store.state.userData.tel;
     this.place = this.$store.state.userData.place;

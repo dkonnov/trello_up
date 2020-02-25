@@ -72,11 +72,11 @@
         </button>
         <br />
       </form>
-      <router-link to="/tasks">
+      <a @click="$router.go(-1)">
         <button type="button" class="btn btn-secondary btn-round">
           Назад
         </button>
-      </router-link>
+      </a>
     </center>
   </div>
 </template>
