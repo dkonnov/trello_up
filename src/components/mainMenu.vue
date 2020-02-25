@@ -6,9 +6,9 @@
   >
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="#">
+        <router-link to="/" class="navbar-brand">
           <h4 class="card-title" style="color:unset">Trello Up</h4>
-        </a>
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
