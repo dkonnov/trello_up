@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import hollow from "./views/hollow";
 import login from "./views/login";
 import tasks from "./views/tasks";
 import boards from "./views/boards";
@@ -14,7 +15,7 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: login
+      component: hollow
     },
     {
       path: "/login",
