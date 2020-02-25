@@ -131,7 +131,7 @@ export default {
         });
     }
   },
-  mounted() {
+  beforeMount() {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (user) {

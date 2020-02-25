@@ -95,11 +95,11 @@ export default {
       loading: false
     };
   },
-  mounted() {
+  beforeMount() {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/");
+        this.$router.push("/login");
       }
     });
   },

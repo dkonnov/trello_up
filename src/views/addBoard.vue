@@ -78,11 +78,11 @@
           Проверить и подключить
         </button>
         <br />
-        <router-link to="/tasks">
+        <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
             Назад
           </button>
-        </router-link>
+        </a>
       </form>
     </center>
   </div>
@@ -150,12 +150,6 @@ export default {
             "Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3."
           );
         });
-    }
-  },
-  mounted() {
-    // своебразная защита роута
-    if (!this.$store.state.user.uid) {
-      this.$router.push("/");
     }
   }
 };

@@ -135,7 +135,7 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/");
+        this.$router.push("/login");
       }
     });
     // получим информацию о текущей доске
