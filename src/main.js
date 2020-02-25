@@ -33,5 +33,16 @@ new Vue({
     // Initialize Firebase
     fb.initializeApp(firebaseConfig);
     fb.analytics();
+    // поддержим сессию
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        // запишем данные о пользователе
+        this.$store.commit("setUser", user);
+        // получим дополнительные данные о пользователе
+        this.$store.dispatch("getUserData");
+        this.$store.dispatch("getBackgrounds");
+        this.$store.dispatch("getBoards");
+      }
+    });
   }
 }).$mount("#app");

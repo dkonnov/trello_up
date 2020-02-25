@@ -103,10 +103,15 @@ export default {
   computed: {
     boards() {
       return this.$store.state.boards.boards;
-    },
-    boardLink() {
-      return "b/123";
     }
+  },
+  beforeMount() {
+    // своебразная защита роута
+    fb.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.$router.push("/login");
+      }
+    });
   }
 };
 </script>

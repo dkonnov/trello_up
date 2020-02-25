@@ -72,11 +72,11 @@
         </button>
         <br />
       </form>
-      <router-link to="/tasks">
+      <a @click="$router.go(-1)">
         <button type="button" class="btn btn-secondary btn-round">
           Назад
         </button>
-      </router-link>
+      </a>
     </center>
   </div>
 </template>
@@ -95,11 +95,13 @@ export default {
       loading: false
     };
   },
-  mounted() {
+  beforeMount() {
     // своебразная защита роута
-    if (!this.$store.state.user.uid) {
-      this.$router.push("/");
-    }
+    fb.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.$router.push("/login");
+      }
+    });
   },
   methods: {
     change() {

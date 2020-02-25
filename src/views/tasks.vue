@@ -79,6 +79,7 @@
 import _ from "lodash";
 import add from "../views/add";
 import card from "../components/card";
+import * as fb from "firebase";
 
 export default {
   name: "tasks",
@@ -131,6 +132,12 @@ export default {
     }
   },
   beforeMount() {
+    // своебразная защита роута
+    fb.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.$router.push("/login");
+      }
+    });
     // получим информацию о текущей доске
     this.$store.dispatch(
       "getCurrentBoard",
@@ -138,7 +145,7 @@ export default {
     );
     setInterval(() => {
       if (this.$store.state.user.uid) {
-        //this.$store.dispatch("getComments");
+        this.$store.dispatch("getComments");
       }
     }, 30000);
   }

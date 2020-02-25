@@ -130,6 +130,14 @@ export default {
           eventEmitter.$emit("showMessage", error.message);
         });
     }
+  },
+  beforeMount() {
+    // своебразная защита роута
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$router.push("/boards");
+      }
+    });
   }
 };
 </script>
