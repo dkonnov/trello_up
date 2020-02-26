@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-6 rightCard">
-      <div class="info" v-if="!boards">
+      <div class="info" v-if="boards.length == 0">
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
@@ -23,7 +23,7 @@
           почте, либо разместить на внутреннем ресурсе или сайте.
         </p>
       </div>
-      <div v-if="boards">
+      <div v-if="boards.length > 0">
         <h4 class="title" style="color: #3c4858">
           Доски Trello подключенные вами
         </h4>

@@ -19,7 +19,7 @@ export default {
         .ref("boards")
         .orderByChild("board")
         .equalTo(value)
-        .on("child_added", function(snapshot) {
+        .on("child_added", snapshot => {
           commit("setCurrentBoard", snapshot.val());
           // получим данные из Trello
           dispatch("getMembers");
@@ -29,11 +29,12 @@ export default {
           dispatch("getCustomFields");
         });
     },
-    getBoards({ commit }) {
+    getBoards({ commit, rootState }) {
       fb.database()
         .ref("boards")
-        .once("value")
-        .then(snapshot => {
+        .orderByChild("user_id")
+        .equalTo(rootState.user.uid)
+        .on("value", snapshot => {
           const res = snapshot.val();
           const newArr = [];
           Object.keys(res).forEach(key => {
@@ -46,9 +47,6 @@ export default {
             });
           });
           commit("setBoards", newArr);
-        })
-        .catch(value => {
-          alert(value);
         });
     }
   }
