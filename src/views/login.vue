@@ -121,7 +121,7 @@ export default {
           // получим дополнительные данные о пользователе
           this.$store.dispatch("getUserData");
           this.$store.dispatch("getBackgrounds");
-          this.$store.dispatch("getBoards");
+
           this.$router.push("/boards");
         })
         .catch(error => {

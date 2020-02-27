@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row hollow">
     <div class="col-md-6">
       <div class="info info-horizontal" stype="padding: 0px 0 30px;">
         <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="1s">
@@ -24,7 +24,7 @@
             <h4 class="info-title">Различные сценарии</h4>
             <p class="description">
               Вы можете использовать сервис для приема заявок на техническую
-              поддержку, запрос материальных запасов, заказ оказания услуг. Вы
+              поддержку, запрос на обслуживание, заказ канцелярии и т.д. Вы
               можете принимать заявки в различные доски Trello.
             </p>
           </div>
@@ -143,6 +143,6 @@
 </template>
 
 <style lang="sass">
-.row
+.hollow
   min-width: 1024px
 </style>

@@ -34,7 +34,9 @@
   },
   "eslintConfig": {
     "root": true,
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "env": {
       "node": true,
       "jquery": true
