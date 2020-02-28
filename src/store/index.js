@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import * as fb from "firebase";
 import boards from "./boards";
+import { eventEmitter } from "./../main";
 
 Vue.use(Vuex);
 
@@ -99,6 +100,13 @@ export default new Vuex.Store({
         )
         .then(response => {
           commit("setCustomField", response.data[0].id);
+        })
+        .catch(() => {
+          commit("setCustomField", "");
+          eventEmitter.$emit(
+            "showMessage",
+            "К сожалению на этой доске больше нет Custom Field. Для нормально работы необходим хотябы один раскрывающийся список Custom Field. Пожалуйста, создайте его в Trello."
+          );
         });
     },
     getLists({ commit, state }) {
