@@ -122,6 +122,7 @@ import axios from "axios";
 import { required } from "vuelidate/lib/validators/";
 import * as fb from "firebase";
 import { eventEmitter } from "./../main";
+import { mapState } from "vuex";
 
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
@@ -147,6 +148,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(["userData", "user", "boards"]),
     uid() {
       return this.$store.state.user.uid;
     }
@@ -163,26 +165,37 @@ export default {
         })
         .then(() => {
           // подготовим значение
-          let option = this.name + "(" + this.tel + ", " + this.place + ")";
-          // изменим значение CustomFieldsId
-          axios
-            .put(
-              "https://api.trello.com/1/customField/" +
-                this.$store.state.customFieldsId +
-                "/options/" +
-                this.$store.state.userData.cf +
-                "/?key=" +
-                key +
-                "&token=" +
-                token,
-              {
-                value: { text: option }
-              }
-            )
-            .then(() => {
-              this.$router.push("/add");
-              eventEmitter.$emit("showMessage", "Изменения сохранены!");
+          let option =
+            this.name +
+            "(" +
+            this.tel +
+            ", " +
+            this.place +
+            ", " +
+            this.user.email +
+            ")";
+          // изменим значения CustomFields
+          if (this.userData.cf) {
+            let cf = this.userData.cf;
+            cf.forEach(value => {
+              axios.put(
+                "https://api.trello.com/1/customField/" +
+                  value.board_cf +
+                  "/options/" +
+                  value.id +
+                  "/?key=" +
+                  key +
+                  "&token=" +
+                  token,
+                {
+                  value: { text: option }
+                }
+              );
             });
+          }
+
+          this.$router.push("/add");
+          eventEmitter.$emit("showMessage", "Изменения сохранены!");
         })
         .catch(error => {
           eventEmitter.$emit("showMessage", error.message);
@@ -197,8 +210,8 @@ export default {
       }
     });
     this.name = this.$store.state.user.displayName;
-    this.tel = this.$store.state.userData.tel;
-    this.place = this.$store.state.userData.place;
+    this.tel = this.userData.tel;
+    this.place = this.userData.place;
   }
 };
 </script>

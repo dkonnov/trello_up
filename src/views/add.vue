@@ -160,6 +160,7 @@ export default {
           .then(response => {
             cf.push({
               board: this.currentBoard,
+              board_cf: this.$store.state.customFieldsId,
               id: response.data.id
             });
             this.$store.commit("updateUserData", {

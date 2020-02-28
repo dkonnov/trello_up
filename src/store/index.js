@@ -138,6 +138,7 @@ export default new Vuex.Store({
         });
     },
     getCards({ commit, state }) {
+      commit("setCards", []);
       axios
         .get(
           "https://api.trello.com/1/boards/" +
