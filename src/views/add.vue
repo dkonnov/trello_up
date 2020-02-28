@@ -115,7 +115,7 @@ export default {
     },
     sendTicket() {
       // проверим наличие элемента Custom Filed для пользователя на текущей доске
-      let cf, res;
+      let cf, cf_id, res;
       if (!this.userData.cf) {
         cf = [];
       } else {
@@ -165,9 +165,10 @@ export default {
             this.$store.commit("updateUserData", {
               cf: cf
             });
+            cf_id = response.data.id;
           });
       } else {
-        alert(res[0].id);
+        cf_id = res[0].id;
       }
 
       // получим ID первого листа
@@ -204,7 +205,7 @@ export default {
                     "/customField/" +
                     this.$store.state.customFieldsId +
                     "/item?idValue=" +
-                    this.$store.state.userData.cf +
+                    cf_id +
                     "&key=" +
                     key +
                     "&token=" +
