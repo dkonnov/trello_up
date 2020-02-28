@@ -110,14 +110,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
-
-const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-const token =
-  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 
 export default {
   data() {
