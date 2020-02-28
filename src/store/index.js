@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import * as fb from "firebase";
 import boards from "./boards";
+import { eventEmitter } from "./../main";
 
 Vue.use(Vuex);
 
@@ -99,6 +100,13 @@ export default new Vuex.Store({
         )
         .then(response => {
           commit("setCustomField", response.data[0].id);
+        })
+        .catch(() => {
+          commit("setCustomField", "");
+          eventEmitter.$emit(
+            "showMessage",
+            "К сожалению на этой доске больше нет Custom Field. Для нормально работы необходим хотябы один раскрывающийся список Custom Field. Пожалуйста, создайте его в Trello."
+          );
         });
     },
     getLists({ commit, state }) {
@@ -130,6 +138,7 @@ export default new Vuex.Store({
         });
     },
     getCards({ commit, state }) {
+      commit("setCards", []);
       axios
         .get(
           "https://api.trello.com/1/boards/" +
@@ -140,9 +149,20 @@ export default new Vuex.Store({
             token
         )
         .then(response => {
+          // определим CF
+          let cf, res;
+          if (!state.userData.cf) {
+            cf = [];
+          } else {
+            cf = state.userData.cf;
+          }
+          res = cf.filter(function(b) {
+            return b.board == state.boards.currentBoard.board;
+          });
+          // отфильтруем карточки
           var newArr = response.data.cards.filter(card => {
             if (card.customFieldItems.length > 0) {
-              return card.customFieldItems[0].idValue == state.userData.cf;
+              return card.customFieldItems[0].idValue == res[0].id;
             }
           });
           commit("setCards", newArr);

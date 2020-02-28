@@ -110,14 +110,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
 import { eventEmitter } from "./../main";
 import * as fb from "firebase";
-
-const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-const token =
-  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
 
 export default {
   data() {
@@ -136,32 +131,17 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(response => {
           this.uid = response.user.uid;
-          // добавим в trello соответствующий costom field
-          axios
-            .post(
-              "https://api.trello.com/1/customField/5d649fc5e32c3a061f6ece6e/options" +
-                "?key=" +
-                key +
-                "&token=" +
-                token,
-              {
-                value: { text: this.email },
-                pos: "bottom"
-              }
-            )
-            .then(response => {
-              // запишем данные о пользователе
-              fb.database()
-                .ref("users/" + this.uid)
-                .set({
-                  cf: response.data.id,
-                  background: "patrick-tomasso-1272187-unsplash.jpg"
-                })
-                .catch(error => {
-                  alert(error.message);
-                  eventEmitter.$emit("showMessage", error.message);
-                });
+
+          // запишем данные о пользователе
+          fb.database()
+            .ref("users/" + this.uid)
+            .set({
+              background: "patrick-tomasso-1272187-unsplash.jpg"
+            })
+            .catch(error => {
+              eventEmitter.$emit("showMessage", error.message);
             });
+
           //Отправим письмо о подтверждении почты
           fb.auth()
             .currentUser.sendEmailVerification()

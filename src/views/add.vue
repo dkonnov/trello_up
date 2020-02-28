@@ -73,13 +73,11 @@
 import axios from "axios";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators";
-// import * as fb from "firebase";
+import { mapState } from "vuex";
 
 const key = "d02290573e1e3121c00a8bcb3bd08a1f";
 const token =
   "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
-//const token = "b5123e80de5b5de7d21f46a754d8f97e6013facb5d0d6b5d2fcc2484b5530519";
-//const board = "fsA5vKgk";
 
 export default {
   name: "mainCard",
@@ -96,6 +94,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(["userData", "user"]),
     showAlert() {
       let res;
       if (!this.$store.state.user.displayName) {
@@ -104,6 +103,9 @@ export default {
         res = false;
       }
       return res;
+    },
+    currentBoard() {
+      return this.$store.state.boards.currentBoard.board;
     }
   },
   methods: {
@@ -112,6 +114,64 @@ export default {
       this.desc = "";
     },
     sendTicket() {
+      // проверим наличие элемента Custom Filed для пользователя на текущей доске
+      let cf, cf_id, res;
+      if (!this.userData.cf) {
+        cf = [];
+      } else {
+        cf = this.userData.cf;
+      }
+      let cb = this.currentBoard;
+      res = cf.filter(function(b) {
+        return b.board == cb;
+      });
+
+      if (res.length == 0) {
+        // подготовим значение
+        let option;
+        if (this.user.displayName) {
+          option =
+            this.user.displayName +
+            " (" +
+            this.userData.tel +
+            ", " +
+            this.userData.place +
+            ", " +
+            this.user.email +
+            ")";
+        } else {
+          option = this.user.email;
+        }
+        // добавим в trello соответствующий costom field
+        axios
+          .post(
+            "https://api.trello.com/1/customField/" +
+              this.$store.state.customFieldsId +
+              "/options" +
+              "?key=" +
+              key +
+              "&token=" +
+              token,
+            {
+              value: { text: option },
+              pos: "bottom"
+            }
+          )
+          .then(response => {
+            cf.push({
+              board: this.currentBoard,
+              board_cf: this.$store.state.customFieldsId,
+              id: response.data.id
+            });
+            this.$store.commit("updateUserData", {
+              cf: cf
+            });
+            cf_id = response.data.id;
+          });
+      } else {
+        cf_id = res[0].id;
+      }
+
       // получим ID первого листа
       axios
         .get(
@@ -146,7 +206,7 @@ export default {
                     "/customField/" +
                     this.$store.state.customFieldsId +
                     "/item?idValue=" +
-                    this.$store.state.userData.cf +
+                    cf_id +
                     "&key=" +
                     key +
                     "&token=" +

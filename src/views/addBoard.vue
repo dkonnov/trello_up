@@ -126,20 +126,47 @@ export default {
             token
         )
         .then(() => {
-          fb.database()
-            .ref("boards/")
-            .push({
-              user_id: this.$store.state.user.uid,
-              board: this.board,
-              name: this.name,
-              desc: this.desc
+          // Проверим наличие Custom Field
+          axios
+            .get(
+              "https://api.trello.com/1/boards/" +
+                this.board +
+                "/customFields?key=" +
+                key +
+                "&token=" +
+                token
+            )
+            .then(response => {
+              if (response.data[0].id) {
+                fb.database()
+                  .ref("boards/")
+                  .push({
+                    user_id: this.$store.state.user.uid,
+                    board: this.board,
+                    name: this.name,
+                    desc: this.desc
+                  })
+                  .then(() => {
+                    this.loading = false;
+                    this.$store.dispatch("getBoards");
+                    eventEmitter.$emit(
+                      "showMessage",
+                      "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
+                    );
+                  });
+              } else {
+                this.loading = false;
+                eventEmitter.$emit(
+                  "showMessage",
+                  "К доске удалось подключиться, установлен компонент Custom Fields, но необходимо создать первый элемент Custom Fields. Добавьте его в Trello c типом 'Выпадающий список'."
+                );
+              }
             })
-            .then(() => {
+            .catch(() => {
               this.loading = false;
-              this.$store.dispatch("getBoards");
               eventEmitter.$emit(
                 "showMessage",
-                "Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!"
+                "К доске удалось подключиться, но для работы необходим компонент Custom Fields. Добавьте его в Trello и создайте первый элемент c типом 'Выпадающий список'."
               );
             });
         })
