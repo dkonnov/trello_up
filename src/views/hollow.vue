@@ -1,5 +1,5 @@
 <template>
-  <div class="row hollow">
+  <div class="row">
     <div class="col-md-6">
       <div class="info info-horizontal" stype="padding: 0px 0 30px;">
         <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="1s">
@@ -7,7 +7,7 @@
             <i class="material-icons">accessibility_new</i>
           </div>
           <div class="description">
-            <h4 class="info-title">Принимай заяки в Trello</h4>
+            <h4 class="info-title">Принимай заяки сразу в Trello</h4>
             <p class="description">
               Это личный кабинет для ваших пользователей, позволяющий принимать
               различные виды заявок сразу в Trello. При этом вашим пользователям
@@ -141,8 +141,3 @@
     </div>
   </div>
 </template>
-
-<style lang="sass">
-.hollow
-  min-width: 1024px
-</style>
