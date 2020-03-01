@@ -155,7 +155,6 @@ export default {
 .login
     padding-left: 75px
     padding-right: 75px
-    max-width: 350px
 .bootstrap-select.btn-group .dropdown-toggle .filter-option
   text-align: center
 </style>

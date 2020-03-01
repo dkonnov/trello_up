@@ -1,9 +1,6 @@
 <template>
-  <div class="row" style="width:100%">
-    <div
-      class="col-md-6"
-      style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
-    >
+  <div class="row">
+    <div class="col-md-6">
       <addBoard />
     </div>
 
