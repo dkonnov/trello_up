@@ -29,18 +29,19 @@
             style="margin-top: 22px;margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
-            <a
+            <router-link
+              to="/registration"
+              style="a.color:unset"
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
-              href="#"
             >
               Регистрация
-            </a>
+            </router-link>
           </li>
           <li
             class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="padding: 0 5px 0 15px;margin-top: 22px;margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
             <router-link to="/login">
@@ -123,3 +124,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+.navbar .navbar-brand
+    padding: 0
+</style>
