@@ -67,21 +67,21 @@
             <div class="carousel-item active" style="height:100%">
               <img
                 class="d-block w-100 h-100"
-                src="img/slides/slide1.jpg"
+                src="img/slides/slide2.jpg"
                 alt="Первый слайд"
               />
               <div class="carousel-caption d-none d-md-block">
                 <h4>
                   <i class="material-icons">contacts</i>
-                  Бесплатные онлайн-визитки, которые смотрятся красиво на любом
-                  устройстве
+                  Простой и функциональный личный кабинет с заявками для ваших
+                  клиентов.
                 </h4>
               </div>
             </div>
             <div class="carousel-item">
               <img
                 class="d-block w-100 h-100"
-                src="img/slides/slide2.jpg"
+                src="img/slides/slide3.jpg"
                 alt="Второй слайд"
               />
               <div class="carousel-caption d-none d-md-block">
@@ -94,7 +94,7 @@
             <div class="carousel-item">
               <img
                 class="d-block w-100 h-100"
-                src="img/slides/slide3.jpg"
+                src="img/slides/slide1.jpg"
                 alt="Третий слайд"
               />
               <div class="carousel-caption d-none d-md-block">
