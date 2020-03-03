@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <addBoard />
+      <br />
     </div>
 
     <div class="col-md-6 rightCard">
@@ -122,13 +123,14 @@ export default {
 }
 .mainCard {
   margin-top: -25px;
-  min-height: 600px; /* Минимальная высота */
+  /* min-height: 600px; Минимальная высота */
 }
 .rightCard {
   background-color: rgb(243, 241, 241);
+  /* min-height: 600px; */
   border-radius: 3px;
   top: -15px;
-  margin-bottom: 0px;
+  margin-bottom: -30px;
   bottom: 0px;
   padding-left: 30px;
   padding-right: 30px;
