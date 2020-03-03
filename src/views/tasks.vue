@@ -162,9 +162,10 @@ export default {
 }
 .rightCard {
   background-color: rgb(243, 241, 241);
+  /* min-height: 600px; */
   border-radius: 3px;
   top: -15px;
-  margin-bottom: 0px;
+  margin-bottom: -30px;
   bottom: 0px;
   padding-left: 30px;
   padding-right: 30px;
