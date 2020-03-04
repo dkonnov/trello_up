@@ -39,7 +39,7 @@
               Возможности
             </router-link>
           </li>
-          <li class="nav-item" style="margin-top: 22px;margin-right: 15px;">
+          <!-- <li class="nav-item" style="margin-top: 22px;margin-right: 15px;">
             <router-link
               to="/registration"
               style="a.color:unset"
@@ -49,7 +49,7 @@
             >
               Справка
             </router-link>
-          </li>
+          </li> -->
           <li
             class="nav-item"
             style="margin-top: 22px;margin-right: 15px;"
