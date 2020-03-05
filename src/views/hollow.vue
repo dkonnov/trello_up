@@ -51,6 +51,11 @@
                 Регистрация
               </button>
             </router-link>
+            <router-link to="/feature">
+              <button type="button" class="btn btn-secondary btn-round">
+                Посмотреть все возможности
+              </button>
+            </router-link>
           </center>
         </div>
       </div>

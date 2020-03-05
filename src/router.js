@@ -8,6 +8,7 @@ import registration from "./views/registration";
 import accaunt from "./views/accaunt";
 import restore from "./views/restore";
 import changepassword from "./views/changepassword";
+import feature from "./views/feature";
 
 Vue.use(Router);
 
@@ -16,6 +17,10 @@ export default new Router({
     {
       path: "/",
       component: hollow
+    },
+    {
+      path: "/feature",
+      component: feature
     },
     {
       path: "/login",

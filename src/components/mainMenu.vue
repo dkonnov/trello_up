@@ -30,6 +30,32 @@
             v-if="!this.$store.state.user.uid"
           >
             <router-link
+              to="/feature"
+              style="a.color:unset"
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
+              Возможности
+            </router-link>
+          </li>
+          <!-- <li class="nav-item" style="margin-top: 22px;margin-right: 15px;">
+            <router-link
+              to="/registration"
+              style="a.color:unset"
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
+              Справка
+            </router-link>
+          </li> -->
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="!this.$store.state.user.uid"
+          >
+            <router-link
               to="/registration"
               style="a.color:unset"
               class="nav-link"
@@ -37,6 +63,21 @@
               data-target=".navbar-collapse.show"
             >
               Регистрация
+            </router-link>
+          </li>
+          <li
+            class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="this.$store.state.user.uid"
+          >
+            <router-link
+              to="/hlQcFPTq"
+              style="a.color:unset"
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
+              Поддержка
             </router-link>
           </li>
           <li
@@ -56,7 +97,11 @@
               </a>
             </router-link>
           </li>
-          <li class="dropdown nav-item" v-if="this.$store.state.user.uid">
+          <li
+            class="dropdown nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="this.$store.state.user.uid"
+          >
             <a
               class="dropdown-toggle nav-link"
               aria-expanded="false"

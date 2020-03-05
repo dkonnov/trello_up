@@ -7,7 +7,11 @@
       </h4>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage(index) }}
-        <span class="badge badge-pill" :class="dueColor(index)" v-if="card.due"
+        <span
+          class="badge badge-pill"
+          style="margin-top:-1px"
+          :class="dueColor(index)"
+          v-if="card.due"
           >Срок: {{ dueDate(index) }}
         </span>
       </h6>
