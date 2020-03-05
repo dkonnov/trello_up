@@ -67,6 +67,21 @@
           </li>
           <li
             class="nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="this.$store.state.user.uid"
+          >
+            <router-link
+              to="/hlQcFPTq"
+              style="a.color:unset"
+              class="nav-link"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
+              Поддержка
+            </router-link>
+          </li>
+          <li
+            class="nav-item"
             style="padding: 0 5px 0 15px;margin-top: 22px;margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
@@ -82,7 +97,11 @@
               </a>
             </router-link>
           </li>
-          <li class="dropdown nav-item" v-if="this.$store.state.user.uid">
+          <li
+            class="dropdown nav-item"
+            style="margin-top: 22px;margin-right: 15px;"
+            v-if="this.$store.state.user.uid"
+          >
             <a
               class="dropdown-toggle nav-link"
               aria-expanded="false"
