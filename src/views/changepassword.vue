@@ -99,7 +99,7 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/login");
+        this.$router.push("/login/back");
       }
     });
   },

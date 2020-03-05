@@ -23,6 +23,10 @@ export default new Router({
       component: feature
     },
     {
+      path: "/login/:back",
+      component: login
+    },
+    {
       path: "/login",
       component: login
     },
