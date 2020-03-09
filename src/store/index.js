@@ -108,12 +108,7 @@ export default new Vuex.Store({
     getLists({ commit, state }) {
       axios
         .get(
-          `https://api.trello.com/1/boards/
-            ${state.boards.currentBoard.board}
-            /?lists=all&key=
-            ${key}
-            &token=
-            ${token}`
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?lists=all&key=${key}&token=${token}`
         )
         .then(response => {
           commit("setLists", response.data.lists);
