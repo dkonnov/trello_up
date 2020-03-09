@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import * as fb from "firebase";
 import boards from "./boards";
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from "./../main";
 
 Vue.use(Vuex);
@@ -91,12 +92,7 @@ export default new Vuex.Store({
     getCustomFields({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
-            state.boards.currentBoard.board +
-            "/customFields?key=" +
-            key +
-            "&token=" +
-            token
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/customFields?key=${key}&token=${token}`
         )
         .then(response => {
           commit("setCustomField", response.data[0].id);
@@ -112,12 +108,12 @@ export default new Vuex.Store({
     getLists({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
-            state.boards.currentBoard.board +
-            "/?lists=all&key=" +
-            key +
-            "&token=" +
-            token
+          `https://api.trello.com/1/boards/
+            ${state.boards.currentBoard.board}
+            /?lists=all&key=
+            ${key}
+            &token=
+            ${token}`
         )
         .then(response => {
           commit("setLists", response.data.lists);
@@ -126,12 +122,7 @@ export default new Vuex.Store({
     getMembers({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
-            state.boards.currentBoard.board +
-            "/?members=all&key=" +
-            key +
-            "&token=" +
-            token
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?members=all&key=${key}&token=${token}`
         )
         .then(response => {
           commit("setMembers", response.data.members);
@@ -141,12 +132,7 @@ export default new Vuex.Store({
       commit("setCards", []);
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
-            state.boards.currentBoard.board +
-            "/?cards=open&fields=all&card_customFieldItems=true&key=" +
-            key +
-            "&token=" +
-            token
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
         )
         .then(response => {
           // определим CF
@@ -157,12 +143,12 @@ export default new Vuex.Store({
             cf = state.userData.cf;
           }
           res = cf.filter(function(b) {
-            return b.board == state.boards.currentBoard.board;
+            return b.board === state.boards.currentBoard.board;
           });
           // отфильтруем карточки
           var newArr = response.data.cards.filter(card => {
             if (card.customFieldItems.length > 0) {
-              return card.customFieldItems[0].idValue == res[0].id;
+              return card.customFieldItems[0].idValue === res[0].id;
             }
           });
           commit("setCards", newArr);
@@ -172,12 +158,7 @@ export default new Vuex.Store({
     getComments({ commit, state }) {
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
-            state.boards.currentBoard.board +
-            "/actions/?limit=1000&filter=commentCard&key=" +
-            key +
-            "&token=" +
-            token
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/actions/?limit=1000&filter=commentCard&key=${key}&token=${token}`
         )
         .then(response => {
           commit("setComments", response.data);
