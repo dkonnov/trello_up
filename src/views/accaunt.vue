@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">Ваш аккаунт</h4>
+        <h4 class="info-title">
+          Ваш аккаунт
+        </h4>
       </div>
 
       <form @submit.prevent="accaunt">
@@ -25,16 +27,18 @@
               type="text"
               class="form-control"
               placeholder="Ваше имя ..."
-            />
-            <button v-if="$v.name.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.name.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.name.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести ваше имя, чтобы специалист знал как к вам
-              обратиться.</small
-            >
+            >Необходимо ввести ваше имя, чтобы специалист знал как к вам
+              обратиться.</small>
           </div>
 
           <div
@@ -52,16 +56,18 @@
               type="text"
               class="form-control"
               placeholder="Номер телефона ..."
-            />
-            <button v-if="$v.tel.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.tel.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.tel.$error"
               class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small
-            >
+            >Для того чтобы с вами могли связаться, укажите свой номер
+              телефона.</small>
           </div>
 
           <div
@@ -79,19 +85,21 @@
               type="text"
               class="form-control"
               placeholder="Место нахождения  ..."
-            />
-            <button v-if="$v.place.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.place.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.place.$error"
               class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small
-            >
+            >Для того чтобы с вами могли связаться, укажите свой номер
+              телефона.</small>
           </div>
 
-          <br />
+          <br>
         </div>
         <button
           :disabled="$v.$invalid"
@@ -100,15 +108,21 @@
         >
           Сохранить
         </button>
-        <br />
+        <br>
         <router-link to="/changepassword">
-          <button type="button" class="btn btn-secondary btn-round">
+          <button
+            type="button"
+            class="btn btn-secondary btn-round"
+          >
             Сменить пароль
           </button>
         </router-link>
-        <br />
+        <br>
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">
+          <button
+            type="button"
+            class="btn btn-secondary btn-round"
+          >
             Назад
           </button>
         </a>

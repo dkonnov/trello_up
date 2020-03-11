@@ -1,9 +1,6 @@
 <template>
   <div class="row">
-    <div
-      class="col-md-6"
-      style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
-    >
+    <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
       <add />
     </div>
 
@@ -12,14 +9,14 @@
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
-        <h4 class="info-title">Привет!</h4>
+        <h4 class="info-title">
+          Привет!
+        </h4>
         <p>
-          Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее
-          исполнения.
+          Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.
           <br />
-          <br />Для начала работы необходимо авторизоваться. Если вас нет в
-          списке пользователей, зарегистрируйтесь или обратитесь к
-          администратору по телефону.
+          <br />Для начала работы необходимо авторизоваться. Если вас нет в списке пользователей,
+          зарегистрируйтесь или обратитесь к администратору по телефону.
         </p>
       </div>
 
@@ -27,7 +24,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
-        <h4 class="info-title">{{ boardName }}</h4>
+        <h4 class="info-title">
+          {{ boardName }}
+        </h4>
         <p>
           {{ boardDesc }}
         </p>
@@ -41,14 +40,8 @@
         </div>
 
         <center v-if="totalTabs > 1">
-          <div
-            width="100%"
-            style="display: flex;align-items: center; justify-content: center;"
-          >
-            <ul
-              class="pagination nav nav-pills nav-pills-primary"
-              role="tablist"
-            >
+          <div width="100%" style="display: flex;align-items: center; justify-content: center;">
+            <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
               <template v-for="(tab, index) in totalTabs">
                 <li
                   class="page-item"
@@ -76,13 +69,13 @@
 </template>
 
 <script>
-import _ from "lodash";
-import add from "../views/add";
-import card from "../components/card";
-import * as fb from "firebase";
+import _ from 'lodash';
+import add from '../views/add';
+import card from '../components/card';
+import * as fb from 'firebase';
 
 export default {
-  name: "tasks",
+  name: 'Tasks',
   components: {
     card,
     add
@@ -135,17 +128,14 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/login/back");
+        this.$router.push('/login/back');
       }
     });
     // получим информацию о текущей доске
-    this.$store.dispatch(
-      "getCurrentBoard",
-      this.$router.currentRoute.params["board"]
-    );
+    this.$store.dispatch('getCurrentBoard', this.$router.currentRoute.params['board']);
     setInterval(() => {
       if (this.$store.state.user.uid) {
-        this.$store.dispatch("getComments");
+        this.$store.dispatch('getComments');
       }
     }, 30000);
   }

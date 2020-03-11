@@ -6,8 +6,16 @@
   >
     <div class="container">
       <div class="navbar-translate">
-        <router-link to="/" class="navbar-brand">
-          <h4 class="card-title" style="color:unset">Trello Up</h4>
+        <router-link
+          to="/"
+          class="navbar-brand"
+        >
+          <h4
+            class="card-title"
+            style="color:unset"
+          >
+            Trello Up
+          </h4>
         </router-link>
         <button
           class="navbar-toggler"
@@ -17,9 +25,9 @@
           aria-label="Toggle navigation"
         >
           <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon" />
+          <span class="navbar-toggler-icon" />
+          <span class="navbar-toggler-icon" />
         </button>
       </div>
       <div class="collapse navbar-collapse">
@@ -99,19 +107,34 @@
             >
               <i class="material-icons">face</i>
               {{ this.$store.getters.userName }}
-              <div class="ripple-container"></div
-            ></a>
+              <div class="ripple-container" /></a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a class="dropdown-item" @click="showAccaunt" href="#">
+              <a
+                class="dropdown-item"
+                @click="showAccaunt"
+                href="#"
+              >
                 <i class="material-icons">assignment_ind</i> Аккаунт
               </a>
-              <a class="dropdown-item" @click="showBackgrounds" href="#">
+              <a
+                class="dropdown-item"
+                @click="showBackgrounds"
+                href="#"
+              >
                 <i class="material-icons">photo_size_select_actual</i> Фон
               </a>
-              <a class="dropdown-item" @click="showBoards" href="#">
+              <a
+                class="dropdown-item"
+                @click="showBoards"
+                href="#"
+              >
                 <i class="material-icons">chrome_reader_mode</i> Доски
               </a>
-              <a class="dropdown-item" @click="singOut" href="#">
+              <a
+                class="dropdown-item"
+                @click="singOut"
+                href="#"
+              >
                 <i class="material-icons">meeting_room</i> Выход
               </a>
             </div>
@@ -127,7 +150,7 @@ import { eventEmitter } from './../main';
 import * as fb from 'firebase';
 
 export default {
-  name: 'mainMenu',
+  name: 'MainMenu',
   methods: {
     showAccaunt() {
       this.$router.push('/accaunt');

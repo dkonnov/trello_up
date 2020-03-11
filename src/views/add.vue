@@ -12,11 +12,19 @@
     </div>
 
     <center>
-      <h2 class="title" style="color: #3c4858">Новая задача</h2>
+      <h2
+        class="title"
+        style="color: #3c4858"
+      >
+        Новая задача
+      </h2>
     </center>
 
     <form @submit.prevent="sendTicket">
-      <div class="form-group" :class="{ 'has-danger': $v.name.$error }">
+      <div
+        class="form-group"
+        :class="{ 'has-danger': $v.name.$error }"
+      >
         <label>Задача</label>
         <input
           type="text"
@@ -24,13 +32,12 @@
           id="name"
           @input="$v.name.$touch"
           class="form-control"
-        />
+        >
         <small
           id="emailHelp"
           class="form-text text-muted"
           v-if="!$v.name.required"
-          >Обязательное поле</small
-        >
+        >Обязательное поле</small>
       </div>
       <div class="form-group">
         <label>Описание задачи</label>
@@ -39,13 +46,13 @@
           v-model="desc"
           rows="4"
           placeholder
-        ></textarea>
-        <small id="emailHelp" class="form-text text-muted"
-          >Максимально подробно опишите вашу заявку. Заявка должна содержать
-          идентификационные номера, модели устройств или сущностей, текст
-          возникшей ошибки. В случае возникновения проблемы опишите
-          последовательность выполнения действий.</small
-        >
+        />
+        <small
+          id="emailHelp"
+          class="form-text text-muted"
+        >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные
+          номера, модели устройств или сущностей, текст возникшей ошибки. В случае возникновения
+          проблемы опишите последовательность выполнения действий.</small>
       </div>
 
       <center>
@@ -63,29 +70,28 @@
         >
           Очистить
         </button>
-        <br />
+        <br>
       </center>
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { eventEmitter } from "./../main";
-import { required } from "vuelidate/lib/validators";
-import { mapState } from "vuex";
+import axios from 'axios';
+import { eventEmitter } from './../main';
+import { required } from 'vuelidate/lib/validators';
+import { mapState } from 'vuex';
 
-const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-const token =
-  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
+const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
+const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
-  name: "mainCard",
+  name: 'MainCard',
   data() {
     return {
-      name: "",
-      desc: "",
-      selectedUser: ""
+      name: '',
+      desc: '',
+      selectedUser: ''
     };
   },
   validations: {
@@ -94,7 +100,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["userData", "user"]),
+    ...mapState(['userData', 'user']),
     showAlert() {
       let res;
       if (!this.$store.state.user.displayName) {
@@ -110,8 +116,8 @@ export default {
   },
   methods: {
     clearForm() {
-      this.name = "";
-      this.desc = "";
+      this.name = '';
+      this.desc = '';
     },
     sendTicket() {
       // проверим наличие элемента Custom Filed для пользователя на текущей доске
@@ -132,29 +138,29 @@ export default {
         if (this.user.displayName) {
           option =
             this.user.displayName +
-            " (" +
+            ' (' +
             this.userData.tel +
-            ", " +
+            ', ' +
             this.userData.place +
-            ", " +
+            ', ' +
             this.user.email +
-            ")";
+            ')';
         } else {
           option = this.user.email;
         }
         // добавим в trello соответствующий costom field
         axios
           .post(
-            "https://api.trello.com/1/customField/" +
+            'https://api.trello.com/1/customField/' +
               this.$store.state.customFieldsId +
-              "/options" +
-              "?key=" +
+              '/options' +
+              '?key=' +
               key +
-              "&token=" +
+              '&token=' +
               token,
             {
               value: { text: option },
-              pos: "bottom"
+              pos: 'bottom'
             }
           )
           .then(response => {
@@ -163,7 +169,7 @@ export default {
               board_cf: this.$store.state.customFieldsId,
               id: response.data.id
             });
-            this.$store.commit("updateUserData", {
+            this.$store.commit('updateUserData', {
               cf: cf
             });
             cf_id = response.data.id;
@@ -175,55 +181,55 @@ export default {
       // получим ID первого листа
       axios
         .get(
-          "https://api.trello.com/1/boards/" +
+          'https://api.trello.com/1/boards/' +
             this.$store.state.boards.currentBoard.board +
-            "/lists?cards=open&card_fields=all&filter=open&fields=all&key=" +
+            '/lists?cards=open&card_fields=all&filter=open&fields=all&key=' +
             key +
-            "&token=" +
+            '&token=' +
             token
         )
         .then(response => {
           // публикуем новую карточку
           axios
             .post(
-              "https://api.trello.com/1/cards?name=" +
+              'https://api.trello.com/1/cards?name=' +
                 this.name +
-                "&desc=" +
+                '&desc=' +
                 this.desc +
-                "&idList=" +
+                '&idList=' +
                 response.data[0].id +
-                "&keepFromSource=all&pos=top&key=" +
+                '&keepFromSource=all&pos=top&key=' +
                 key +
-                "&token=" +
+                '&token=' +
                 token
             )
             .then(response => {
               // добавим пользователя, создавшего задачу
               axios
                 .put(
-                  "https://api.trello.com/1/card/" +
+                  'https://api.trello.com/1/card/' +
                     response.data.id +
-                    "/customField/" +
+                    '/customField/' +
                     this.$store.state.customFieldsId +
-                    "/item?idValue=" +
+                    '/item?idValue=' +
                     cf_id +
-                    "&key=" +
+                    '&key=' +
                     key +
-                    "&token=" +
+                    '&token=' +
                     token
                 )
                 .then(() => {
-                  this.$store.dispatch("getCards", this.$store.state.user);
+                  this.$store.dispatch('getCards', this.$store.state.user);
                 });
 
               // напишем сообщение об успешной публикации карточки
               eventEmitter.$emit(
-                "showMessage",
-                "Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте."
+                'showMessage',
+                'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.'
               );
-              this.$store.dispatch("getCards", this.$store.state.user);
-              this.name = "";
-              this.desc = "";
+              this.$store.dispatch('getCards', this.$store.state.user);
+              this.name = '';
+              this.desc = '';
               //setTimeout(this.loadCards(), 2000);
             });
         });

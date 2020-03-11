@@ -40,7 +40,6 @@
   },
   "eslintConfig": {
     "root": true,
-    "parser": "babel-eslint",
     "extends": [
       "airbnb-base",
       "prettier"

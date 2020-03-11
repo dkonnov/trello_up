@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">account_circle</i>
         </div>
-        <h4 class="info-title">Вход</h4>
+        <h4 class="info-title">
+          Вход
+        </h4>
       </div>
       <form @submit.prevent="login">
         <div class="fields">
@@ -24,17 +26,19 @@
               type="email"
               class="form-control"
               placeholder="Электронная почта ..."
-            />
-            <button v-if="$v.email.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.email.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.email.$error"
             class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, который вы использовали
-            при регистрации.</small
-          >
+          >Необходимо ввести адрес электронной почты, который вы использовали
+            при регистрации.</small>
 
           <div
             class="input-group form-group label-floating"
@@ -51,16 +55,18 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            />
-            <button v-if="$v.password.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.password.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.password.$error"
             class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          >Минимум 6 символов.</small>
         </div>
         <button
           class="btn btn-primary btn-round"
@@ -70,15 +76,21 @@
           Вход
         </button>
       </form>
-      <br />
+      <br>
       <router-link to="/registration">
-        <button type="button" class="btn btn-secondary btn-round">
+        <button
+          type="button"
+          class="btn btn-secondary btn-round"
+        >
           Регистрация
         </button>
       </router-link>
-      <br />
+      <br>
       <router-link to="/restore">
-        <button type="button" class="btn btn-secondary btn-round">
+        <button
+          type="button"
+          class="btn btn-secondary btn-round"
+        >
           Забыл пароль
         </button>
       </router-link>
@@ -92,7 +104,7 @@ import * as fb from "firebase";
 import { required, email, minLength } from "vuelidate/lib/validators/";
 
 export default {
-  name: "login",
+  name: "Login",
   data() {
     return {
       email: "",

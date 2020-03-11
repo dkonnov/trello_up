@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">vpn_key</i>
         </div>
-        <h4 class="info-title">Смена пароля</h4>
+        <h4 class="info-title">
+          Смена пароля
+        </h4>
       </div>
       <form @submit.prevent="change">
         <div class="fields">
@@ -24,16 +26,18 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            />
-            <button v-if="$v.password.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.password.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.password.$error"
             class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          >Минимум 6 символов.</small>
 
           <div
             class="input-group form-group label-floating"
@@ -50,18 +54,20 @@
               @input="$v.password2.$touch"
               class="form-control"
               placeholder="Пароль еще раз ..."
-            />
-            <button v-if="$v.password2.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.password2.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.password2.$error"
             class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+          >Пароли не совпадают.</small>
         </div>
-        <br />
+        <br>
 
         <button
           :disabled="$v.$invalid || loading"
@@ -70,10 +76,13 @@
         >
           Сменить
         </button>
-        <br />
+        <br>
       </form>
       <a @click="$router.go(-1)">
-        <button type="button" class="btn btn-secondary btn-round">
+        <button
+          type="button"
+          class="btn btn-secondary btn-round"
+        >
           Назад
         </button>
       </a>

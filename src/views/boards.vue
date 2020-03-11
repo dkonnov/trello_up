@@ -10,15 +10,17 @@
         <div class="icon icon-primary">
           <i class="material-icons">chat</i>
         </div>
-        <h4 class="info-title">Подключенные доски</h4>
+        <h4 class="info-title">
+          Подключенные доски
+        </h4>
         <p>
           Тут вы можете подключить Ваши доски Trello.<br />
           <br />
-          Подключенными досками смогут пользоваться все зарегистрированные
-          пользователи, у которых будет ссылка.<br />
+          Подключенными досками смогут пользоваться все зарегистрированные пользователи, у которых
+          будет ссылка.<br />
           <br />
-          Ссылку вы можете отправлять клиентам и сотрудникам по электронной
-          почте, либо разместить на внутреннем ресурсе или сайте.
+          Ссылку вы можете отправлять клиентам и сотрудникам по электронной почте, либо разместить
+          на внутреннем ресурсе или сайте.
         </p>
       </div>
       <div v-if="boards.length > 0">
@@ -26,19 +28,12 @@
           Доски Trello подключенные вами
         </h4>
         <template v-for="(board, index) in boards">
-          <div
-            class="card wow fadeInUp"
-            style="width: 100%;"
-            data-wow-duration="2s"
-            :key="index"
-          >
+          <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s" :key="index">
             <div class="card-body">
               <h4 class="card-title">
                 {{ board.name }}
               </h4>
-              <h6 class="card-subtitle mb-2 text-muted">
-                ID {{ board.board }}
-              </h6>
+              <h6 class="card-subtitle mb-2 text-muted">ID {{ board.board }}</h6>
               {{ board.desc }}
               <div align="right">
                 <div style="display: block;float: right; margin: 2px;">
@@ -72,30 +67,18 @@
 </template>
 
 <script>
-import addBoard from "../views/addBoard";
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
+import addBoard from '../views/addBoard';
+import { eventEmitter } from './../main';
+import * as fb from 'firebase';
 
 export default {
-  name: "boards",
+  name: 'Boards',
   components: {
     addBoard
   },
   methods: {
     deleteBoard(id) {
-      eventEmitter.$emit(
-        "showMessage",
-        "Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.",
-        function() {
-          fb.database()
-            .ref("boards/")
-            .child(id)
-            .remove()
-            .then(() => {
-              this.$store.dispatch("getBoards");
-            });
-        }
-      );
+      this.$store.dispatch('deleteBoard', id);
     }
   },
   computed: {
@@ -107,7 +90,7 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/login/back");
+        this.$router.push('/login/back');
       }
     });
   }

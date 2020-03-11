@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">chrome_reader_mode</i>
         </div>
-        <h4 class="info-title">Подключение доски</h4>
+        <h4 class="info-title">
+          Подключение доски
+        </h4>
         Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску
         пользователя <b>@userup3</b>, а также компонент <b>CustomFields</b> и
         создать ее первый элемент.
@@ -28,16 +30,18 @@
               type="text"
               class="form-control"
               placeholder="ID достки в Trello ..."
-            />
-            <button v-if="$v.board.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.board.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.board.$error"
               class="form-text text-muteds small-alert"
-              >Укажите ID доски в Trello в которой вы планируете принимать
-              задачи</small
-            >
+            >Укажите ID доски в Trello в которой вы планируете принимать
+              задачи</small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -51,7 +55,7 @@
               type="text"
               class="form-control"
               placeholder="Название доски"
-            />
+            >
           </div>
 
           <div class="input-group form-group label-floating">
@@ -65,10 +69,10 @@
               rows="4"
               v-model="desc"
               placeholder="Приветственное описание"
-            ></textarea>
+            />
           </div>
 
-          <br />
+          <br>
         </div>
         <button
           :disabled="$v.$invalid || loading"
@@ -77,9 +81,12 @@
         >
           Проверить и подключить
         </button>
-        <br />
+        <br>
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">
+          <button
+            type="button"
+            class="btn btn-secondary btn-round"
+          >
             Назад
           </button>
         </a>

@@ -1,6 +1,13 @@
 <template>
-  <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
-    <div class="stageLine" :class="stageColor(index)"></div>
+  <div
+    class="card wow fadeInUp"
+    style="width: 100%;"
+    data-wow-duration="2s"
+  >
+    <div
+      class="stageLine"
+      :class="stageColor(index)"
+    />
     <div class="card-body">
       <h4 class="card-title">
         {{ card.name }}
@@ -12,10 +19,12 @@
           style="margin-top:-1px"
           :class="dueColor(index)"
           v-if="card.due"
-          >Срок: {{ dueDate(index) }}
+        >Срок: {{ dueDate(index) }}
         </span>
       </h6>
-      <p class="card-text">{{ card.desc }}</p>
+      <p class="card-text">
+        {{ card.desc }}
+      </p>
       <!-- комментарии -->
       <div class="commentBlock">
         <template v-for="(comment, commentIndex) in commentsOnCard(card.id)">
@@ -35,7 +44,7 @@
                   width="24px"
                   class="img-raised rounded-circle img-fluid"
                   style="margin-right: 10px"
-                />
+                >
               </a>
             </div>
             <div>
@@ -58,7 +67,7 @@
                   width="24px"
                   class="img-raised rounded-circle img-fluid"
                   style="margin-right: 10px"
-                />
+                >
               </a>
             </div>
             <div style="text-align: right">
@@ -75,7 +84,7 @@
               v-model="comment"
               id="name"
               class="form-control"
-            />
+            >
           </div>
         </form>
         <!-- Аватарки участников -->
@@ -93,7 +102,7 @@
                 :src="getAvatarURL(idMember)"
                 width="30px"
                 class="img-raised rounded-circle img-fluid"
-              />
+              >
             </a>
           </div>
         </div>
@@ -111,9 +120,19 @@
           >
             <i class="material-icons">attach_file</i>
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownFiles">
-            <div v-for="(file, fileindex) in files" :key="fileindex">
-              <a class="dropdown-item" :href="file.url" target="new">{{
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownFiles"
+          >
+            <div
+              v-for="(file, fileindex) in files"
+              :key="fileindex"
+            >
+              <a
+                class="dropdown-item"
+                :href="file.url"
+                target="new"
+              >{{
                 file.name
               }}</a>
             </div>
@@ -131,11 +150,19 @@
           >
             <i class="material-icons">more_horiz</i>
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Добавить файл</a>
-            <a class="dropdown-item" href="#" @click="getAttach"
-              >Отменить задачу</a
-            >
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <a
+              class="dropdown-item"
+              href="#"
+            >Добавить файл</a>
+            <a
+              class="dropdown-item"
+              href="#"
+              @click="getAttach"
+            >Отменить задачу</a>
           </div>
         </div>
       </div>

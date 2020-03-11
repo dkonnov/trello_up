@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">Восстановление доступа</h4>
+        <h4 class="info-title">
+          Восстановление доступа
+        </h4>
         <p>
           Введите адрес электронной почты, который вы указывали при регистрации,
           и мы отправим вам на него ссылку для смены пароля.
@@ -28,16 +30,18 @@
               type="email"
               class="form-control"
               placeholder="Электронная почта ..."
-            />
-            <button v-if="$v.email.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.email.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.email.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты на который будет
-              отправлена ссылка.</small
-            >
+            >Необходимо ввести адрес электронной почты на который будет
+              отправлена ссылка.</small>
           </div>
         </div>
         <button
@@ -47,9 +51,12 @@
         >
           Отправить ссылку
         </button>
-        <br />
+        <br>
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">
+          <button
+            type="button"
+            class="btn btn-secondary btn-round"
+          >
             Назад
           </button>
         </a>
