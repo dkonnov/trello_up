@@ -87,19 +87,6 @@ export default {
       itemsOnPage: 5
     };
   },
-  methods: {
-    showCustomField(value) {
-      if (value) {
-        if (value.idValue == this.selectedUser) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    }
-  },
   computed: {
     cards() {
       return this.$store.state.cards;
