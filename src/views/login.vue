@@ -7,7 +7,6 @@
         </div>
         <h4 class="info-title">Вход</h4>
       </div>
-
       <form @submit.prevent="login">
         <div class="fields">
           <div
@@ -121,8 +120,11 @@ export default {
           // получим дополнительные данные о пользователе
           this.$store.dispatch("getUserData");
           this.$store.dispatch("getBackgrounds");
-
-          this.$router.push("/boards");
+          if (this.$route.params.back) {
+            this.$router.go(-1);
+          } else {
+            this.$router.push("/boards");
+          }
         })
         .catch(error => {
           // отобразим ошибку логина
@@ -133,11 +135,13 @@ export default {
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$router.push("/boards");
-      }
-    });
+    if (!this.$route.params.back) {
+      fb.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.$router.push("/boards");
+        }
+      });
+    }
   }
 };
 </script>
