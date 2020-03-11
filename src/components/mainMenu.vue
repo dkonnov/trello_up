@@ -39,17 +39,6 @@
               Возможности
             </router-link>
           </li>
-          <!-- <li class="nav-item" style="margin-top: 22px;margin-right: 15px;">
-            <router-link
-              to="/registration"
-              style="a.color:unset"
-              class="nav-link"
-              data-toggle="collapse"
-              data-target=".navbar-collapse.show"
-            >
-              Справка
-            </router-link>
-          </li> -->
           <li
             class="nav-item"
             style="margin-top: 22px;margin-right: 15px;"
@@ -134,37 +123,34 @@
 </template>
 
 <script>
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
+import { eventEmitter } from './../main';
+import * as fb from 'firebase';
 
 export default {
-  name: "mainMenu",
+  name: 'mainMenu',
   methods: {
     showAccaunt() {
-      this.$router.push("/accaunt");
+      this.$router.push('/accaunt');
     },
     showBackgrounds() {
-      eventEmitter.$emit("showBackgroundForm");
+      eventEmitter.$emit('showBackgroundForm');
     },
     showBoards() {
-      this.$router.push("/boards");
+      this.$router.push('/boards');
     },
     singOut() {
       fb.auth()
         .signOut()
         .then(() => {
-          eventEmitter.$emit("showMessage", "Надеюсь ты скоро вернешься :(");
+          eventEmitter.$emit('showMessage', 'Надеюсь ты скоро вернешься :(');
         })
         .catch(error => {
-          eventEmitter.$emit(
-            "showMessage",
-            "Чтото пошло не так :( " + error.message
-          );
+          eventEmitter.$emit('showMessage', 'Чтото пошло не так :( ' + error.message);
         });
-      this.$store.dispatch("singOut");
-      document.getElementById("backgroundDiv").style.backgroundImage =
+      this.$store.dispatch('singOut');
+      document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
-      this.$router.push("/");
+      this.$router.push('/');
     }
   }
 };
