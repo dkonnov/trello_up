@@ -105,7 +105,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Добавить файл</a>
-            <a class="dropdown-item" href="#" @click="getAttach">Отменить задачу</a>
+            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Отменить задачу</a>
           </div>
         </div>
       </div>
@@ -115,6 +115,7 @@
 
 <script>
 import axios from 'axios';
+import { eventEmitter } from '../main';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
 const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
@@ -131,6 +132,20 @@ export default {
     };
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
+    toArchive(value) {
+      eventEmitter.$emit(
+        'showMessage',
+        'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+        function() {
+          axios
+            .put(`https://api.trello.com/1/cards/${value}?closed=true&key=${key}&token=${token}`)
+            .then(() => {
+              this.$store.dispatch('getCards');
+            });
+        }
+      );
+    },
     sendComment(cardId) {
       axios
         .post(

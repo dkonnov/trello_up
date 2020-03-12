@@ -26,19 +26,15 @@
               type="email"
               class="form-control"
               placeholder="Электронная почта ..."
-            >
-            <button
-              v-if="$v.email.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.email.$error"
-            class="form-text text-muteds small-alert"
-          >Необходимо ввести адрес электронной почты, который вы использовали
-            при регистрации.</small>
+          <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
+            >Необходимо ввести адрес электронной почты, который вы использовали при
+            регистрации.</small
+          >
 
           <div
             class="input-group form-group label-floating"
@@ -55,42 +51,28 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            >
-            <button
-              v-if="$v.password.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
-          >Минимум 6 символов.</small>
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
+            >Минимум 6 символов.</small
+          >
         </div>
-        <button
-          class="btn btn-primary btn-round"
-          :disabled="$v.$invalid || loading"
-          type="submit"
-        >
+        <button class="btn btn-primary btn-round" :disabled="$v.$invalid || loading" type="submit">
           Вход
         </button>
       </form>
-      <br>
+      <br />
       <router-link to="/registration">
-        <button
-          type="button"
-          class="btn btn-secondary btn-round"
-        >
+        <button type="button" class="btn btn-secondary btn-round">
           Регистрация
         </button>
       </router-link>
-      <br>
+      <br />
       <router-link to="/restore">
-        <button
-          type="button"
-          class="btn btn-secondary btn-round"
-        >
+        <button type="button" class="btn btn-secondary btn-round">
           Забыл пароль
         </button>
       </router-link>
@@ -99,16 +81,16 @@
 </template>
 
 <script>
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
-import { required, email, minLength } from "vuelidate/lib/validators/";
+import { required, email, minLength } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+import { eventEmitter } from '../main';
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       loading: false
     };
   },
@@ -128,20 +110,20 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           // запишем данные о пользователе
-          this.$store.commit("setUser", user.user);
+          this.$store.commit('setUser', user.user);
           // получим дополнительные данные о пользователе
-          this.$store.dispatch("getUserData");
-          this.$store.dispatch("getBackgrounds");
+          this.$store.dispatch('getUserData');
+          this.$store.dispatch('getBackgrounds');
           if (this.$route.params.back) {
             this.$router.go(-1);
           } else {
-            this.$router.push("/boards");
+            this.$router.push('/boards');
           }
         })
         .catch(error => {
           // отобразим ошибку логина
           this.loading = false;
-          eventEmitter.$emit("showMessage", error.message);
+          eventEmitter.$emit('showMessage', error.message);
         });
     }
   },
@@ -150,7 +132,7 @@ export default {
     if (!this.$route.params.back) {
       fb.auth().onAuthStateChanged(user => {
         if (user) {
-          this.$router.push("/boards");
+          this.$router.push('/boards');
         }
       });
     }
