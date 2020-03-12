@@ -83,7 +83,7 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
-import { eventEmitter } from '../main';
+import { eventEmitter } from '../main.js';
 
 export default {
   name: 'Login',

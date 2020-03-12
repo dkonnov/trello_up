@@ -70,9 +70,9 @@
 
 <script>
 import _ from 'lodash';
-import add from '../views/add';
-import card from '../components/card';
 import * as fb from 'firebase';
+import add from './add.vue';
+import card from '../components/card.vue';
 
 export default {
   name: 'Tasks',

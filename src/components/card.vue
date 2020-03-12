@@ -115,7 +115,7 @@
 
 <script>
 import axios from 'axios';
-import { eventEmitter } from '../main';
+import { eventEmitter } from '../main.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
 const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
