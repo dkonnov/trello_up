@@ -12,10 +12,19 @@
         data-wow-duration="2s"
         style="display: flex;  align-items: center; flex-direction: column; padding-top: 15vh"
       >
-        <div class="card" style="width: unset">
-          <div class="card-body" style="margin-bottom: 0px;">
-            <transition name="fade" mode="out-in">
-              <router-view></router-view>
+        <div
+          class="card"
+          style="width: unset"
+        >
+          <div
+            class="card-body"
+            style="margin-bottom: 0px;"
+          >
+            <transition
+              name="fade"
+              mode="out-in"
+            >
+              <router-view />
             </transition>
           </div>
         </div>
@@ -32,7 +41,7 @@ import mainMenu from "./components/mainMenu";
 import background from "./components/background";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     modal,
     mainMenu,

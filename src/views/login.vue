@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">account_circle</i>
         </div>
-        <h4 class="info-title">Вход</h4>
+        <h4 class="info-title">
+          Вход
+        </h4>
       </div>
       <form @submit.prevent="login">
         <div class="fields">
@@ -29,11 +31,9 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.email.$error"
-            class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, который вы использовали
-            при регистрации.</small
+          <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
+            >Необходимо ввести адрес электронной почты, который вы использовали при
+            регистрации.</small
           >
 
           <div
@@ -56,17 +56,11 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
             >Минимум 6 символов.</small
           >
         </div>
-        <button
-          class="btn btn-primary btn-round"
-          :disabled="$v.$invalid || loading"
-          type="submit"
-        >
+        <button class="btn btn-primary btn-round" :disabled="$v.$invalid || loading" type="submit">
           Вход
         </button>
       </form>
@@ -87,16 +81,16 @@
 </template>
 
 <script>
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
-import { required, email, minLength } from "vuelidate/lib/validators/";
+import { required, email, minLength } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+import { eventEmitter } from '../main';
 
 export default {
-  name: "login",
+  name: 'Login',
   data() {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       loading: false
     };
   },
@@ -116,20 +110,20 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           // запишем данные о пользователе
-          this.$store.commit("setUser", user.user);
+          this.$store.commit('setUser', user.user);
           // получим дополнительные данные о пользователе
-          this.$store.dispatch("getUserData");
-          this.$store.dispatch("getBackgrounds");
+          this.$store.dispatch('getUserData');
+          this.$store.dispatch('getBackgrounds');
           if (this.$route.params.back) {
             this.$router.go(-1);
           } else {
-            this.$router.push("/boards");
+            this.$router.push('/boards');
           }
         })
         .catch(error => {
           // отобразим ошибку логина
           this.loading = false;
-          eventEmitter.$emit("showMessage", error.message);
+          eventEmitter.$emit('showMessage', error.message);
         });
     }
   },
@@ -138,7 +132,7 @@ export default {
     if (!this.$route.params.back) {
       fb.auth().onAuthStateChanged(user => {
         if (user) {
-          this.$router.push("/boards");
+          this.$router.push('/boards');
         }
       });
     }

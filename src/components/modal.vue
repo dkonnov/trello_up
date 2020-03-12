@@ -7,10 +7,18 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="false"
   >
-    <div class="modal-dialog" role="document">
+    <div
+      class="modal-dialog"
+      role="document"
+    >
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Сообщение</h5>
+          <h5
+            class="modal-title"
+            id="exampleModalLabel"
+          >
+            Сообщение
+          </h5>
           <button
             type="button"
             class="close"
@@ -20,7 +28,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">{{ messageText }}</div>
+        <div class="modal-body">
+          {{ messageText }}
+        </div>
         <div class="modal-footer">
           <button
             v-if="this.callback"
@@ -48,7 +58,7 @@
 import { eventEmitter } from "./../main";
 
 export default {
-  name: "modal",
+  name: "Modal",
   data() {
     return {
       messageText: ""

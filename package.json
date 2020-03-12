@@ -40,19 +40,30 @@
   },
   "eslintConfig": {
     "root": true,
-    "parser": "babel-eslint",
     "extends": [
       "airbnb-base",
-      "prettier"
+      "eslint:recommended",
+      "prettier",
+      "plugin:vue/base"
     ],
     "plugins": [
-      "prettier"
+      "prettier",
+      "vue"
     ],
     "rules": {
       "no-console": "off",
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "import/extensions": [
+        "error",
+        "always",
+        {
+          "js": "never",
+          "vue": "never"
+        }
+      ]
     },
     "env": {
+      "es6": true,
       "node": true,
       "jquery": true
     },

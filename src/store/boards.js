@@ -1,4 +1,9 @@
-import * as fb from "firebase";
+/* eslint-disable import/no-useless-path-segments */
+/* eslint-disable import/no-cycle */
+/* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
+import * as fb from 'firebase';
+
+import { eventEmitter } from './../main';
 
 export default {
   state: {
@@ -14,27 +19,42 @@ export default {
     }
   },
   actions: {
+    deleteBoard({ dispatch }, value) {
+      eventEmitter.$emit(
+        'showMessage',
+        'Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
+        function() {
+          fb.database()
+            .ref('boards/')
+            .child(value)
+            .remove()
+            .then(() => {
+              dispatch('getBoards');
+            });
+        }
+      );
+    },
     getCurrentBoard({ commit, dispatch }, value) {
       fb.database()
-        .ref("boards")
-        .orderByChild("board")
+        .ref('boards')
+        .orderByChild('board')
         .equalTo(value)
-        .on("child_added", snapshot => {
-          commit("setCurrentBoard", snapshot.val());
+        .on('child_added', snapshot => {
+          commit('setCurrentBoard', snapshot.val());
           // получим данные из Trello
-          dispatch("getMembers");
-          dispatch("getLists");
-          dispatch("getCards");
-          dispatch("getComments");
-          dispatch("getCustomFields");
+          dispatch('getMembers');
+          dispatch('getLists');
+          dispatch('getCards');
+          dispatch('getComments');
+          dispatch('getCustomFields');
         });
     },
     getBoards({ commit, rootState }) {
       fb.database()
-        .ref("boards")
-        .orderByChild("user_id")
+        .ref('boards')
+        .orderByChild('user_id')
         .equalTo(rootState.user.uid)
-        .on("value", snapshot => {
+        .on('value', snapshot => {
           const res = snapshot.val();
           const newArr = [];
           Object.keys(res).forEach(key => {
@@ -46,7 +66,7 @@ export default {
               desc: res[key].desc
             });
           });
-          commit("setBoards", newArr);
+          commit('setBoards', newArr);
         });
     }
   }

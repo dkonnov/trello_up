@@ -5,7 +5,9 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">Регистрация</h4>
+        <h4 class="info-title">
+          Регистрация
+        </h4>
       </div>
 
       <form @submit.prevent="registration">
@@ -25,16 +27,18 @@
               type="email"
               class="form-control"
               placeholder="Электронная почта ..."
-            />
-            <button v-if="$v.email.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.email.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
             <small
               v-if="$v.email.$error"
               class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, которого нет в
-              системе.</small
-            >
+            >Необходимо ввести адрес электронной почты, которого нет в
+              системе.</small>
           </div>
 
           <div
@@ -52,16 +56,18 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            />
-            <button v-if="$v.password.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.password.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.password.$error"
             class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          >Минимум 6 символов.</small>
 
           <div
             class="input-group form-group label-floating"
@@ -78,18 +84,20 @@
               @input="$v.password2.$touch"
               class="form-control"
               placeholder="Пароль еще раз ..."
-            />
-            <button v-if="$v.password2.$error" class="form-control-feedback">
+            >
+            <button
+              v-if="$v.password2.$error"
+              class="form-control-feedback"
+            >
               <i class="material-icons">clear</i>
             </button>
           </div>
           <small
             v-if="$v.password2.$error"
             class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+          >Пароли не совпадают.</small>
         </div>
-        <br />
+        <br>
 
         <button
           :disabled="$v.$invalid || loading"
@@ -98,10 +106,13 @@
         >
           Зарегистрироваться
         </button>
-        <br />
+        <br>
       </form>
       <a @click="$router.go(-1)">
-        <button type="button" class="btn btn-secondary btn-round">
+        <button
+          type="button"
+          class="btn btn-secondary btn-round"
+        >
           Назад
         </button>
       </a>

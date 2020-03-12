@@ -7,7 +7,10 @@
     role="dialog"
     aria-hidden="false"
   >
-    <div class="modal-dialog" role="document">
+    <div
+      class="modal-dialog"
+      role="document"
+    >
       <div
         class="modal-content"
         style="background-color:transparent;box-shadow: none;"
@@ -17,7 +20,9 @@
             class="card card-signup"
             style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
           >
-            <h2 class="card-title text-center">Фон</h2>
+            <h2 class="card-title text-center">
+              Фон
+            </h2>
             <div class="card-body">
               <div class="row">
                 <template v-for="img in itemsOnPageArray">
@@ -28,12 +33,12 @@
                   >
                     <div class="card card-plain">
                       <div class="card-header card-header-image">
-                        <div class="card-header-image-bg"></div>
+                        <div class="card-header-image-bg" />
 
                         <div
                           v-if="img.src == currentBackground"
                           class="currentBackground"
-                        ></div>
+                        />
 
                         <div
                           v-if="img.src == currentBackground"
@@ -42,7 +47,7 @@
                           <i class="material-icons">done</i>
                         </div>
 
-                        <img :src="'img/backgrounds/' + img.src" />
+                        <img :src="'img/backgrounds/' + img.src">
                         <div
                           class="colored-shadow"
                           style="opacity: 1;"
@@ -51,7 +56,7 @@
                               img.src +
                               ')'
                           "
-                        ></div>
+                        />
                       </div>
                     </div>
                   </div>
@@ -81,8 +86,7 @@
                         :href="'#tab' + index"
                         role="tablist"
                         aria-expanded="true"
-                        >{{ index }}</a
-                      >
+                      >{{ index }}</a>
                     </li>
                   </template>
                 </ul>
@@ -91,8 +95,7 @@
                 href="#"
                 class="btn btn-primary btn-link btn-wd"
                 data-dismiss="modal"
-                >Закрыть</a
-              >
+              >Закрыть</a>
             </center>
           </div>
         </div>
@@ -106,7 +109,7 @@ import _ from "lodash";
 import { eventEmitter } from "./../main";
 
 export default {
-  name: "backgroundForm",
+  name: "BackgroundForm",
   data() {
     return {
       currentTab: 1,

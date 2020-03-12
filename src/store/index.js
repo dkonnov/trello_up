@@ -1,13 +1,10 @@
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
-/* eslint-disable import/no-useless-path-segments */
-/* eslint-disable prettier/prettier */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import * as fb from 'firebase';
-import boards from './boards';
 // eslint-disable-next-line import/no-cycle
-import { eventEmitter } from './../main';
+import boards from './boards';
 
 Vue.use(Vuex);
 
@@ -101,7 +98,7 @@ export default new Vuex.Store({
         })
         .catch(() => {
           commit('setCustomField', '');
-          eventEmitter.$emit(
+          this.$eventEmitter.$emit(
             'showMessage',
             'К сожалению на этой доске больше нет Custom Field. Для нормально работы необходим хотябы один раскрывающийся список Custom Field. Пожалуйста, создайте его в Trello.'
           );

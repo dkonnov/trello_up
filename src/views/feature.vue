@@ -1,31 +1,25 @@
 <template>
-  <div
-    class="row"
-    style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;"
-  >
+  <div class="row" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
     <div class="col-lg-5 col-md-8 ml-auto mr-auto">
       <br />
       <div class="icon icon-primary">
-        <i class="material-icons" style="font-size:3.85rem;"
-          >accessibility_new</i
-        >
+        <i class="material-icons" style="font-size:3.85rem;">accessibility_new</i>
       </div>
       <div class="section-description">
-        <h3 class="info-title">Проще и эффективней</h3>
+        <h3 class="info-title">
+          Проще и эффективней
+        </h3>
         <h5 class="description">
-          <i
-            >Наша система идеально подходит для небольших команд, отделов и
-            организаций. </i
+          <i>Наша система идеально подходит для небольших команд, отделов и организаций. </i
           ><br /><br />
-          Мы предлагаем вам не полностью новую систему приема заявок, а
-          интеграцию с самой популярной системой канбан Trello. Используя наше
-          решение вы сможете очень быстро внедрить подачу заявок в вашей
-          организации.<br />
-          По сути это личный кабинет для ваших клиентов интегрированный с
-          Trello. Клиенты подают заявки в своем личном кабинете, а ваши
-          специалисты работают с ними в Trello.<br />Создание учетных записей
-          для пользователей в самом Trello не трубуется.<br /><br />
+          Мы предлагаем вам не полностью новую систему приема заявок, а интеграцию с самой
+          популярной системой канбан Trello. Используя наше решение вы сможете очень быстро внедрить
+          подачу заявок в вашей организации.<br />
+          По сути это личный кабинет для ваших клиентов интегрированный с Trello. Клиенты подают
+          заявки в своем личном кабинете, а ваши специалисты работают с ними в Trello.<br />Создание
+          учетных записей для пользователей в самом Trello не трубуется.<br /><br />
         </h5>
+
         <br />
         <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="4s">
           <center>
@@ -45,66 +39,52 @@
     >
       <br />
       <center>
-        <h3 class="card-title">Все возможности</h3>
+        <h3 class="card-title">
+          Все возможности
+        </h3>
       </center>
       <div class="card-pricing">
         <ul>
           <li>
-            <i class="material-icons text-success">check</i> Личный кабинет
-            пользователя в котором отображаются поданные им заявки
+            <i class="material-icons text-success">check</i> Личный кабинет пользователя в котором
+            отображаются поданные им заявки
           </li>
           <li>
-            <i class="material-icons text-success">check</i> Интеграция поданных
-            заявок с Trello
+            <i class="material-icons text-success">check</i> Интеграция поданных заявок с Trello
           </li>
           <li>
-            <i class="material-icons text-danger">check</i> Подключение
-            нескольких досок Trello к сервису
+            <i class="material-icons text-danger">check</i> Подключение нескольких досок Trello к
+            сервису
           </li>
           <li>
-            <i class="material-icons text-danger">check</i> Подача заявок с
-            использованием коротких ссылок (по короткой ссылке отображаются
-            задачи поданные на конкретную доску Trello)
+            <i class="material-icons text-danger">check</i> Подача заявок с использованием коротких
+            ссылок (по короткой ссылке отображаются задачи поданные на конкретную доску Trello)
           </li>
           <li>
-            <i class="material-icons text-danger">check</i> Отображение текущей
-            стадии исполнения
+            <i class="material-icons text-danger">check</i> Отображение текущей стадии исполнения
+          </li>
+          <li><i class="material-icons text-danger">check</i> Отображение исполнителей</li>
+          <li><i class="material-icons text-danger">check</i> Отображение срока исполнения</li>
+          <li>
+            <i class="material-icons text-danger">check</i> Переписка по конкретной задаче
+            (комментирование)
+          </li>
+          <li><i class="material-icons text-danger">check</i> Отображение прикрепленных файлов</li>
+          <li>
+            <i class="material-icons text-danger">schedule</i> Прикрепленние файлов пользователем
+          </li>
+          <li><i class="material-icons text-danger">schedule</i> Отмена задач пользователем</li>
+          <li>
+            <i class="material-icons text-danger">schedule</i> Шаблонные ответы пользователю по
+            задачам
           </li>
           <li>
-            <i class="material-icons text-danger">check</i> Отображение
-            исполнителей
-          </li>
-          <li>
-            <i class="material-icons text-danger">check</i> Отображение срока
-            исполнения
-          </li>
-          <li>
-            <i class="material-icons text-danger">check</i> Переписка по
-            конкретной задаче (комментирование)
-          </li>
-          <li>
-            <i class="material-icons text-danger">check</i> Отображение
-            прикрепленных файлов
-          </li>
-          <li>
-            <i class="material-icons text-danger">schedule</i> Прикрепленние
-            файлов пользователем
-          </li>
-          <li>
-            <i class="material-icons text-danger">schedule</i> Отмена задач
-            пользователем
-          </li>
-          <li>
-            <i class="material-icons text-danger">schedule</i> Шаблонные ответы
-            пользователю по задачам
-          </li>
-          <li>
-            <i class="material-icons text-danger">schedule</i> Уведомление
-            пользователя об изменениях
+            <i class="material-icons text-danger">schedule</i> Уведомление пользователя об
+            изменениях
           </li>
         </ul>
       </div>
-      <div></div>
+      <div />
     </div>
   </div>
 </template>
