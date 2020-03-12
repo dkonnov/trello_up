@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="card wow fadeInUp"
-    style="width: 100%;"
-    data-wow-duration="2s"
-  >
-    <div
-      class="stageLine"
-      :class="stageColor(index)"
-    />
+  <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
+    <div class="stageLine" :class="stageColor(index)" />
     <div class="card-body">
       <h4 class="card-title">
         {{ card.name }}
@@ -19,7 +12,7 @@
           style="margin-top:-1px"
           :class="dueColor(index)"
           v-if="card.due"
-        >Срок: {{ dueDate(index) }}
+          >Срок: {{ dueDate(index) }}
         </span>
       </h6>
       <p class="card-text">
@@ -28,46 +21,30 @@
       <!-- комментарии -->
       <div class="commentBlock">
         <template v-for="(comment, commentIndex) in commentsOnCard(card.id)">
-          <div
-            :key="commentIndex"
-            class="comment"
-            v-if="getmemberBollean(comment.idMemberCreator)"
-          >
+          <div :key="commentIndex" class="comment" v-if="getmemberBollean(comment.idMemberCreator)">
             <div style="display: inline-block;float: left; margin: 0px;">
-              <a
-                href="#"
-                data-toggle="tooltip"
-                :title="getmemberTooltip(comment.idMemberCreator)"
-              >
+              <a href="#" data-toggle="tooltip" :title="getmemberTooltip(comment.idMemberCreator)">
                 <img
                   :src="getAvatarURL(comment.idMemberCreator)"
                   width="24px"
                   class="img-raised rounded-circle img-fluid"
                   style="margin-right: 10px"
-                >
+                />
               </a>
             </div>
             <div>
               {{ comment.data.text }}
             </div>
           </div>
-          <div
-            :key="comment"
-            class="comment"
-            v-if="!getmemberBollean(comment.idMemberCreator)"
-          >
+          <div :key="comment" class="comment" v-if="!getmemberBollean(comment.idMemberCreator)">
             <div style="display: block;float: right; margin: 0 -10px 0 10px;">
-              <a
-                href="#"
-                data-toggle="tooltip"
-                :title="getmemberTooltip(comment.idMemberCreator)"
-              >
+              <a href="#" data-toggle="tooltip" :title="getmemberTooltip(comment.idMemberCreator)">
                 <img
                   :src="getAvatarURL(comment.idMemberCreator)"
                   width="24px"
                   class="img-raised rounded-circle img-fluid"
                   style="margin-right: 10px"
-                >
+                />
               </a>
             </div>
             <div style="text-align: right">
@@ -79,30 +56,18 @@
       <div align="right">
         <form @submit.prevent="sendComment(card.id)">
           <div class="form-group">
-            <input
-              type="text"
-              v-model="comment"
-              id="name"
-              class="form-control"
-            >
+            <input type="text" v-model="comment" id="name" class="form-control" />
           </div>
         </form>
         <!-- Аватарки участников -->
-        <div
-          v-for="(idMember, memberIndex) in card.idMembers"
-          :key="memberIndex"
-        >
+        <div v-for="(idMember, memberIndex) in card.idMembers" :key="memberIndex">
           <div style="display: block;float: right; margin: 2px;">
-            <a
-              href="#"
-              data-toggle="tooltip"
-              :title="getmemberTooltip(idMember)"
-            >
+            <a href="#" data-toggle="tooltip" :title="getmemberTooltip(idMember)">
               <img
                 :src="getAvatarURL(idMember)"
                 width="30px"
                 class="img-raised rounded-circle img-fluid"
-              >
+              />
             </a>
           </div>
         </div>
@@ -120,21 +85,9 @@
           >
             <i class="material-icons">attach_file</i>
           </button>
-          <div
-            class="dropdown-menu"
-            aria-labelledby="dropdownFiles"
-          >
-            <div
-              v-for="(file, fileindex) in files"
-              :key="fileindex"
-            >
-              <a
-                class="dropdown-item"
-                :href="file.url"
-                target="new"
-              >{{
-                file.name
-              }}</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownFiles">
+            <div v-for="(file, fileindex) in files" :key="fileindex">
+              <a class="dropdown-item" :href="file.url" target="new">{{ file.name }}</a>
             </div>
           </div>
         </div>
@@ -150,19 +103,9 @@
           >
             <i class="material-icons">more_horiz</i>
           </button>
-          <div
-            class="dropdown-menu"
-            aria-labelledby="dropdownMenuButton"
-          >
-            <a
-              class="dropdown-item"
-              href="#"
-            >Добавить файл</a>
-            <a
-              class="dropdown-item"
-              href="#"
-              @click="getAttach"
-            >Отменить задачу</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Добавить файл</a>
+            <a class="dropdown-item" href="#" @click="getAttach">Отменить задачу</a>
           </div>
         </div>
       </div>
@@ -171,10 +114,10 @@
 </template>
 
 <script>
-import axios from "axios";
-const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-const token =
-  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
+import axios from 'axios';
+
+const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
+const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
   props: {
@@ -183,7 +126,7 @@ export default {
   },
   data() {
     return {
-      comment: "",
+      comment: '',
       files: []
     };
   },
@@ -191,18 +134,18 @@ export default {
     sendComment(cardId) {
       axios
         .post(
-          "https://api.trello.com/1/cards/" +
+          'https://api.trello.com/1/cards/' +
             cardId +
-            "/actions/comments?text=" +
+            '/actions/comments?text=' +
             this.comment +
-            "&key=" +
+            '&key=' +
             key +
-            "&token=" +
+            '&token=' +
             token
         )
         .then(() => {
-          this.$store.dispatch("getComments");
-          this.comment = "";
+          this.$store.dispatch('getComments');
+          this.comment = '';
         });
     },
     getAvatarURL(value) {
@@ -210,9 +153,9 @@ export default {
       this.members.forEach(item => {
         if (value == item.id) {
           if (item.avatarUrl) {
-            url = item.avatarUrl + "/30.png";
+            url = item.avatarUrl + '/30.png';
           } else {
-            url = "img/placeholder.jpg";
+            url = 'img/placeholder.jpg';
           }
         }
       });
@@ -222,7 +165,7 @@ export default {
       var tooltip;
       this.members.forEach(item => {
         if (value == item.id) {
-          if (item.fullName == "Trello Up User") {
+          if (item.fullName == 'Trello Up User') {
             tooltip = false;
           } else {
             tooltip = true;
@@ -235,8 +178,8 @@ export default {
       var tooltip;
       this.members.forEach(item => {
         if (value == item.id) {
-          if (item.fullName == "Trello Up User") {
-            tooltip = "Я";
+          if (item.fullName == 'Trello Up User') {
+            tooltip = 'Я';
           } else {
             tooltip = item.fullName;
           }
@@ -255,18 +198,18 @@ export default {
     },
     stageColor(value) {
       if (this.cards[value].closed == true) {
-        return "stageArchiv";
+        return 'stageArchiv';
       } else {
         for (var i = 0; i < this.lists.length; ++i) {
           if (this.lists[i].id == this.cards[value].idList) {
-            return "stage" + i;
+            return 'stage' + i;
           }
         }
       }
     },
     stage(value) {
       if (this.cards[value].closed == true) {
-        return "В архиве";
+        return 'В архиве';
       } else {
         for (var i = 0; i < this.lists.length; ++i) {
           if (this.lists[i].id == this.cards[value].idList) {
@@ -278,12 +221,9 @@ export default {
     dueDate(value) {
       if (this.cards[value].due) {
         let date = new Date(Date.parse(this.cards[value].due));
-        let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-        let month =
-          date.getMonth() + 1 > 9
-            ? date.getMonth() + 1
-            : "0" + (date.getMonth() + 1);
-        let formatted_date = day + "." + month + "." + date.getFullYear();
+        let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+        let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+        let formatted_date = day + '.' + month + '.' + date.getFullYear();
         return formatted_date;
       }
     },
@@ -292,26 +232,25 @@ export default {
       if (this.cards[value].due) {
         let res;
         if (Date.now() > Date.parse(this.cards[value].due)) {
-          res = "badge-danger";
+          res = 'badge-danger';
         } else {
-          res = "badge-info";
+          res = 'badge-info';
         }
         return res;
       }
     },
     getAttach(value) {
       // выводит список файлов прикрепленных к карточке
-      const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-      const token =
-        "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
+      const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
+      const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
       axios
         .get(
-          "https://api.trello.com/1/cards/" +
+          'https://api.trello.com/1/cards/' +
             value +
-            "/attachments" +
-            "/?key=" +
+            '/attachments' +
+            '/?key=' +
             key +
-            "&token=" +
+            '&token=' +
             token
         )
         .then(response => {
