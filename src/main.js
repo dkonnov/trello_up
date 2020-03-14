@@ -6,9 +6,9 @@ import App from './App.vue';
 import './css/material-kit.min.css';
 import './css/animate.min.css';
 
-import router from './router';
+import router from './router.js';
 // eslint-disable-next-line import/no-cycle
-import store from './store';
+import store from './store/index.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);

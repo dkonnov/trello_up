@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import * as fb from 'firebase';
 // eslint-disable-next-line import/no-cycle
-import boards from './boards';
+import boards from './boards.js';
 
 Vue.use(Vuex);
 
@@ -126,7 +126,7 @@ export default new Vuex.Store({
       commit('setCards', []);
       axios
         .get(
-          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
+          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?cards=all&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
         )
         .then(response => {
           // определим CF
@@ -145,7 +145,9 @@ export default new Vuex.Store({
               ? card.customFieldItems[0].idValue === res[0].id
               : false
           );
-          commit('setCards', newArr);
+          // отсортируем по статусу
+          const newArrSorted = newArr.sort((a, b) => (a.closed > b.closed ? 1 : -1));
+          commit('setCards', newArrSorted);
         });
     },
     // читаем комментарии

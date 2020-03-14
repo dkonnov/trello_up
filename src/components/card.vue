@@ -54,7 +54,7 @@
         </template>
       </div>
       <div align="right">
-        <form @submit.prevent="sendComment(card.id)">
+        <form @submit.prevent="sendComment(card.id)" v-if="!card.closed">
           <div class="form-group">
             <input type="text" v-model="comment" id="name" class="form-control" />
           </div>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <!-- Меню -->
-        <div style="display: block;float: right; margin: 2px;">
+        <div v-if="!card.closed" style="display: block;float: right; margin: 2px;">
           <button
             class="btn btn-secondary btn-fab btn-fab-mini btn-round"
             type="button"
