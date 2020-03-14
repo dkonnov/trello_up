@@ -104,8 +104,8 @@
             <i class="material-icons">more_horiz</i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Добавить файл</a>
-            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Отменить задачу</a>
+            <!-- <a class="dropdown-item" href="#">Добавить файл</a> -->
+            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Закрыть задачу</a>
           </div>
         </div>
       </div>
