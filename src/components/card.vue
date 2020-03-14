@@ -54,7 +54,7 @@
         </template>
       </div>
       <div align="right">
-        <form @submit.prevent="sendComment(card.id)">
+        <form @submit.prevent="sendComment(card.id)" v-if="!card.closed">
           <div class="form-group">
             <input type="text" v-model="comment" id="name" class="form-control" />
           </div>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <!-- Меню -->
-        <div style="display: block;float: right; margin: 2px;">
+        <div v-if="!card.closed" style="display: block;float: right; margin: 2px;">
           <button
             class="btn btn-secondary btn-fab btn-fab-mini btn-round"
             type="button"
@@ -104,8 +104,8 @@
             <i class="material-icons">more_horiz</i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Добавить файл</a>
-            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Отменить задачу</a>
+            <!-- <a class="dropdown-item" href="#">Добавить файл</a> -->
+            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Закрыть задачу</a>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
 
 <script>
 import axios from 'axios';
-import { eventEmitter } from '../main';
+import { eventEmitter } from '../main.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
 const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';

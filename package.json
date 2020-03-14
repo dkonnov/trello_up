@@ -55,10 +55,9 @@
       "prettier/prettier": "error",
       "import/extensions": [
         "error",
-        "always",
+        "ignorePackages",
         {
-          "js": "never",
-          "vue": "never"
+          "vue": "always"
         }
       ]
     },
