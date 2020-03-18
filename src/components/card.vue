@@ -1,5 +1,5 @@
 <template>
-  <div class="card wow fadeInUp" style="width: 100%;" data-wow-duration="2s">
+  <div class="card " style="width: 100%;" :class="stageClosed(index)" data-wow-duration="2s">
     <div class="stageLine" :class="stageColor(index)" />
     <div class="card-body">
       <h4 class="card-title">
@@ -211,6 +211,11 @@ export default {
       newArr.sort((a, b) => (a.date > b.date ? 1 : -1)); // отсортируем
       return newArr;
     },
+    stageClosed(value) {
+      if (this.cards[value].closed == true) {
+        return 'closedOpacity';
+      }
+    },
     stageColor(value) {
       if (this.cards[value].closed == true) {
         return 'stageArchiv';
@@ -300,7 +305,9 @@ export default {
   font-size: 75%;
   margin-top: 0.25rem;
 }
-
+.closedOpacity {
+  opacity: 0.6;
+}
 .stageLine {
   width: 3px;
   height: 100%;

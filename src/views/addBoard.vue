@@ -104,7 +104,7 @@ export default {
   methods: {
     add() {
       this.loading = true;
-      // проверим доступность достки
+      // проверим доступность доски
       axios
         .get(
           'https://api.trello.com/1/boards/' +
