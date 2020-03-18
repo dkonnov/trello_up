@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="showAlert"
-      class="alert alert-info alert-dismissible fade show"
-      role="alert"
-    >
+    <div v-if="showAlert" class="alert alert-info alert-dismissible fade show" role="alert">
       Пожалуйста, заполните ваши данные в разделе
       <router-link to="/accaunt">
         <u>Профиль</u>
@@ -12,65 +8,37 @@
     </div>
 
     <center>
-      <h2
-        class="title"
-        style="color: #3c4858"
-      >
+      <h2 class="title" style="color: #3c4858">
         Новая задача
       </h2>
     </center>
 
     <form @submit.prevent="sendTicket">
-      <div
-        class="form-group"
-        :class="{ 'has-danger': $v.name.$error }"
-      >
+      <div class="form-group" :class="{ 'has-danger': $v.name.$error }">
         <label>Задача</label>
-        <input
-          type="text"
-          v-model="name"
-          id="name"
-          @input="$v.name.$touch"
-          class="form-control"
+        <input type="text" v-model="name" id="name" @input="$v.name.$touch" class="form-control" />
+        <small id="emailHelp" class="form-text text-muted" v-if="!$v.name.required"
+          >Обязательное поле</small
         >
-        <small
-          id="emailHelp"
-          class="form-text text-muted"
-          v-if="!$v.name.required"
-        >Обязательное поле</small>
       </div>
       <div class="form-group">
         <label>Описание задачи</label>
-        <textarea
-          class="form-control"
-          v-model="desc"
-          rows="4"
-          placeholder
-        />
-        <small
-          id="emailHelp"
-          class="form-text text-muted"
-        >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные
+        <textarea class="form-control" v-model="desc" rows="4" placeholder />
+        <small id="emailHelp" class="form-text text-muted"
+          >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные
           номера, модели устройств или сущностей, текст возникшей ошибки. В случае возникновения
-          проблемы опишите последовательность выполнения действий.</small>
+          проблемы опишите последовательность выполнения действий.</small
+        >
       </div>
 
       <center>
-        <button
-          type="submit"
-          class="btn btn-primary btn-round"
-          :disabled="$v.$invalid"
-        >
+        <button type="submit" class="btn btn-primary btn-round" :disabled="$v.$invalid">
           Подать заявку
         </button>
-        <button
-          type="button"
-          class="btn btn-primary btn-link"
-          @click="clearForm"
-        >
+        <button type="button" class="btn btn-primary btn-link" @click="clearForm">
           Очистить
         </button>
-        <br>
+        <br />
       </center>
     </form>
   </div>
@@ -78,9 +46,9 @@
 
 <script>
 import axios from 'axios';
-import { eventEmitter } from './../main';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import { eventEmitter } from '../main.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
 const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';

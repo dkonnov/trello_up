@@ -73,7 +73,7 @@
           <li>
             <i class="material-icons text-danger">schedule</i> Прикрепленние файлов пользователем
           </li>
-          <li><i class="material-icons text-danger">schedule</i> Отмена задач пользователем</li>
+          <li><i class="material-icons text-danger">check</i> Отмена задач пользователем</li>
           <li>
             <i class="material-icons text-danger">schedule</i> Шаблонные ответы пользователю по
             задачам
