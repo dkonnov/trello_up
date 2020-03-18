@@ -3,7 +3,7 @@
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import * as fb from 'firebase';
 
-import { eventEmitter } from './../main';
+import { eventEmitter } from '../main.js';
 
 export default {
   state: {

@@ -1,10 +1,8 @@
 <template>
-  <div class="card " style="width: 100%;" :class="stageClosed(index)" data-wow-duration="2s">
+  <div class="card " style="width: 100%;" :class="stageClosed" data-wow-duration="2s">
     <div class="stageLine" :class="stageColor(index)" />
     <div class="card-body">
-      <h4 class="card-title">
-        {{ card.name }}
-      </h4>
+      <h4 class="card-title">{{ card.name }}, {{ card.closed }}</h4>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage(index) }}
         <span
@@ -149,14 +147,7 @@ export default {
     sendComment(cardId) {
       axios
         .post(
-          'https://api.trello.com/1/cards/' +
-            cardId +
-            '/actions/comments?text=' +
-            this.comment +
-            '&key=' +
-            key +
-            '&token=' +
-            token
+          `https://api.trello.com/1/cards/${cardId}/actions/comments?text=${this.comment}&key=${key}&token=${token}`
         )
         .then(() => {
           this.$store.dispatch('getComments');
@@ -211,11 +202,7 @@ export default {
       newArr.sort((a, b) => (a.date > b.date ? 1 : -1)); // отсортируем
       return newArr;
     },
-    stageClosed(value) {
-      if (this.cards[value].closed == true) {
-        return 'closedOpacity';
-      }
-    },
+
     stageColor(value) {
       if (this.cards[value].closed == true) {
         return 'stageArchiv';
@@ -264,21 +251,18 @@ export default {
       const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
       const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
       axios
-        .get(
-          'https://api.trello.com/1/cards/' +
-            value +
-            '/attachments' +
-            '/?key=' +
-            key +
-            '&token=' +
-            token
-        )
+        .get(`https://api.trello.com/1/cards/${value}/attachments/?key=${key}&token=${token}`)
         .then(response => {
           this.files = response.data;
         });
     }
   },
   computed: {
+    stageClosed() {
+      if (this.cards[this.index].closed == true) {
+        return 'closedOpacity';
+      }
+    },
     cards() {
       return this.$store.state.cards;
     },

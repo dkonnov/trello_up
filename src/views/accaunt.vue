@@ -160,14 +160,7 @@ export default {
             let cf = this.userData.cf;
             cf.forEach(value => {
               axios.put(
-                'https://api.trello.com/1/customField/' +
-                  value.board_cf +
-                  '/options/' +
-                  value.id +
-                  '/?key=' +
-                  key +
-                  '&token=' +
-                  token,
+                `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
                   value: { text: option }
                 }

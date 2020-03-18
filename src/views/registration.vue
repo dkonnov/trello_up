@@ -27,18 +27,13 @@
               type="email"
               class="form-control"
               placeholder="Электронная почта ..."
-            >
-            <button
-              v-if="$v.email.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.email.$error"
-              class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, которого нет в
-              системе.</small>
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
+              >Необходимо ввести адрес электронной почты, которого нет в системе.</small
+            >
           </div>
 
           <div
@@ -56,18 +51,14 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            >
-            <button
-              v-if="$v.password.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
-          >Минимум 6 символов.</small>
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
+            >Минимум 6 символов.</small
+          >
 
           <div
             class="input-group form-group label-floating"
@@ -84,35 +75,24 @@
               @input="$v.password2.$touch"
               class="form-control"
               placeholder="Пароль еще раз ..."
-            >
-            <button
-              v-if="$v.password2.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.password2.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password2.$error"
-            class="form-text text-muteds small-alert"
-          >Пароли не совпадают.</small>
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert"
+            >Пароли не совпадают.</small
+          >
         </div>
-        <br>
+        <br />
 
-        <button
-          :disabled="$v.$invalid || loading"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >
+        <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
           Зарегистрироваться
         </button>
-        <br>
+        <br />
       </form>
       <a @click="$router.go(-1)">
-        <button
-          type="button"
-          class="btn btn-secondary btn-round"
-        >
+        <button type="button" class="btn btn-secondary btn-round">
           Назад
         </button>
       </a>
@@ -121,17 +101,17 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+import { eventEmitter } from '../main.js';
 
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      password2: "",
-      uid: "",
+      email: '',
+      password: '',
+      password2: '',
+      uid: '',
       loading: false
     };
   },
@@ -145,12 +125,12 @@ export default {
 
           // запишем данные о пользователе
           fb.database()
-            .ref("users/" + this.uid)
+            .ref('users/' + this.uid)
             .set({
-              background: "patrick-tomasso-1272187-unsplash.jpg"
+              background: 'patrick-tomasso-1272187-unsplash.jpg'
             })
             .catch(error => {
-              eventEmitter.$emit("showMessage", error.message);
+              eventEmitter.$emit('showMessage', error.message);
             });
 
           //Отправим письмо о подтверждении почты
@@ -158,18 +138,18 @@ export default {
             .currentUser.sendEmailVerification()
             .then(() => {
               eventEmitter.$emit(
-                "showMessage",
-                "Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации."
+                'showMessage',
+                'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.'
               );
             })
             .catch(error => {
-              eventEmitter.$emit("showMessage", error.message);
+              eventEmitter.$emit('showMessage', error.message);
             });
-          this.$router.push("/");
+          this.$router.push('/');
           this.loading = false;
         })
         .catch(error => {
-          eventEmitter.$emit("showMessage", error.message);
+          eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
     }
@@ -183,7 +163,7 @@ export default {
       minLength: minLength(6)
     },
     password2: {
-      sameAs: sameAs("password")
+      sameAs: sameAs('password')
     }
   }
 };

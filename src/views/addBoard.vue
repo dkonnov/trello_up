@@ -107,23 +107,13 @@ export default {
       // проверим доступность доски
       axios
         .get(
-          'https://api.trello.com/1/boards/' +
-            this.board +
-            '/?cards=open&fields=all&card_customFieldItems=true&key=' +
-            key +
-            '&token=' +
-            token
+          `https://api.trello.com/1/boards/${this.board}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
         )
         .then(() => {
           // Проверим наличие Custom Field
           axios
             .get(
-              'https://api.trello.com/1/boards/' +
-                this.board +
-                '/customFields?key=' +
-                key +
-                '&token=' +
-                token
+              `https://api.trello.com/1/boards/${this.board}/customFields?key=${key}&token=${token}`
             )
             .then(response => {
               if (response.data[0].id) {
@@ -164,14 +154,21 @@ export default {
                 }
               } else {
                 this.loading = false;
-                eventEmitter.$emit(
-                  'showMessage',
-                  "К доске удалось подключиться, установлен компонент Custom Fields, но необходимо создать первый элемент Custom Fields. Добавьте его в Trello c типом 'Выпадающий список'."
-                );
+
+                //this.add();
+                // this.$eventEmitter.$emit(
+                //   'showMessage',
+                //   ("К доске удалось подключиться, установлен компонент Custom Fields, но необходимо создать первый элемент Custom Fields. Добавьте его в Trello c типом 'Выпадающий список'.",
+                //   function() {
+                //     alert(123);
+                //   })
+                // );
               }
             })
             .catch(() => {
               this.loading = false;
+              // SJEN5ZMP
+              //this.add();
               eventEmitter.$emit(
                 'showMessage',
                 "К доске удалось подключиться, но для работы необходимо улучшение Custom Fields. Добавьте его в Trello и создайте первый элемент c типом 'Выпадающий список'."
@@ -185,6 +182,10 @@ export default {
             'Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3.'
           );
         });
+    },
+    addCustomField() {
+      // Create a new Custom Field on a board
+      alert(123);
     }
   }
 };

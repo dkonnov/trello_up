@@ -119,13 +119,7 @@ export default {
         // добавим в trello соответствующий costom field
         axios
           .post(
-            'https://api.trello.com/1/customField/' +
-              this.$store.state.customFieldsId +
-              '/options' +
-              '?key=' +
-              key +
-              '&token=' +
-              token,
+            `https://api.trello.com/1/customField/${this.$store.state.customFieldsId}/options?key=${key}&token=${token}`,
             {
               value: { text: option },
               pos: 'bottom'
@@ -149,42 +143,19 @@ export default {
       // получим ID первого листа
       axios
         .get(
-          'https://api.trello.com/1/boards/' +
-            this.$store.state.boards.currentBoard.board +
-            '/lists?cards=open&card_fields=all&filter=open&fields=all&key=' +
-            key +
-            '&token=' +
-            token
+          `https://api.trello.com/1/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all&key=${key}&token=${token}`
         )
         .then(response => {
           // публикуем новую карточку
           axios
             .post(
-              'https://api.trello.com/1/cards?name=' +
-                this.name +
-                '&desc=' +
-                this.desc +
-                '&idList=' +
-                response.data[0].id +
-                '&keepFromSource=all&pos=top&key=' +
-                key +
-                '&token=' +
-                token
+              `https://api.trello.com/1/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&key=${key}&token=${token}`
             )
             .then(response => {
               // добавим пользователя, создавшего задачу
               axios
                 .put(
-                  'https://api.trello.com/1/card/' +
-                    response.data.id +
-                    '/customField/' +
-                    this.$store.state.customFieldsId +
-                    '/item?idValue=' +
-                    cf_id +
-                    '&key=' +
-                    key +
-                    '&token=' +
-                    token
+                  `https://api.trello.com/1/card/${response.data.id}/customField/${this.$store.state.customFieldsId}/item?idValue=${cf_id}&key=${key}&token=${token}`
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
