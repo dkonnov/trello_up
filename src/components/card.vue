@@ -1,16 +1,12 @@
 <template>
-  <div class="card " style="width: 100%;" :class="stageClosed" data-wow-duration="2s">
-    <div class="stageLine" :class="stageColor(index)" />
+  <div class="card " style="width: 100%;" :class="stageClosed">
+    <div class="stageLine" :class="stageColor" />
     <div class="card-body">
-      <h4 class="card-title">{{ card.name }}, {{ card.closed }}</h4>
+      <h4 class="card-title">{{ card.name }}</h4>
       <h6 class="card-subtitle mb-2 text-muted">
-        {{ stage(index) }}
-        <span
-          class="badge badge-pill"
-          style="margin-top:-1px"
-          :class="dueColor(index)"
-          v-if="card.due"
-          >Срок: {{ dueDate(index) }}
+        {{ stage }}
+        <span class="badge badge-pill" style="margin-top:-1px" :class="dueColor" v-if="card.due"
+          >Срок: {{ dueDate }}
         </span>
       </h6>
       <p class="card-text">
@@ -202,50 +198,6 @@ export default {
       newArr.sort((a, b) => (a.date > b.date ? 1 : -1)); // отсортируем
       return newArr;
     },
-
-    stageColor(value) {
-      if (this.cards[value].closed == true) {
-        return 'stageArchiv';
-      } else {
-        for (var i = 0; i < this.lists.length; ++i) {
-          if (this.lists[i].id == this.cards[value].idList) {
-            return 'stage' + i;
-          }
-        }
-      }
-    },
-    stage(value) {
-      if (this.cards[value].closed == true) {
-        return 'В архиве';
-      } else {
-        for (var i = 0; i < this.lists.length; ++i) {
-          if (this.lists[i].id == this.cards[value].idList) {
-            return this.lists[i].name;
-          }
-        }
-      }
-    },
-    dueDate(value) {
-      if (this.cards[value].due) {
-        let date = new Date(Date.parse(this.cards[value].due));
-        let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
-        let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-        let formatted_date = day + '.' + month + '.' + date.getFullYear();
-        return formatted_date;
-      }
-    },
-    dueColor(value) {
-      // окрашиает бейдж в красный, если просроченно, или в синий если нет
-      if (this.cards[value].due) {
-        let res;
-        if (Date.now() > Date.parse(this.cards[value].due)) {
-          res = 'badge-danger';
-        } else {
-          res = 'badge-info';
-        }
-        return res;
-      }
-    },
     getAttach(value) {
       // выводит список файлов прикрепленных к карточке
       const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
@@ -258,6 +210,49 @@ export default {
     }
   },
   computed: {
+    dueDate() {
+      if (this.cards[this.index].due) {
+        let date = new Date(Date.parse(this.cards[this.index].due));
+        let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+        let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+        let formatted_date = day + '.' + month + '.' + date.getFullYear();
+        return formatted_date;
+      }
+    },
+    dueColor() {
+      // окрашиает бейдж в красный, если просроченно, или в синий если нет
+      if (this.cards[this.index].due) {
+        let res;
+        if (Date.now() > Date.parse(this.cards[this.index].due)) {
+          res = 'badge-danger';
+        } else {
+          res = 'badge-info';
+        }
+        return res;
+      }
+    },
+    stage() {
+      if (this.cards[this.index].closed == true) {
+        return 'В архиве';
+      } else {
+        for (var i = 0; i < this.lists.length; ++i) {
+          if (this.lists[i].id == this.cards[this.index].idList) {
+            return this.lists[i].name;
+          }
+        }
+      }
+    },
+    stageColor() {
+      if (this.cards[this.index].closed == true) {
+        return 'stageArchiv';
+      } else {
+        for (var i = 0; i < this.lists.length; ++i) {
+          if (this.lists[i].id == this.cards[this.index].idList) {
+            return 'stage' + i;
+          }
+        }
+      }
+    },
     stageClosed() {
       if (this.cards[this.index].closed == true) {
         return 'closedOpacity';
