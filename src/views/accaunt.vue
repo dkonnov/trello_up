@@ -27,18 +27,13 @@
               type="text"
               class="form-control"
               placeholder="Ваше имя ..."
-            >
-            <button
-              v-if="$v.name.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.name.$error"
-              class="form-text text-muteds small-alert"
-            >Необходимо ввести ваше имя, чтобы специалист знал как к вам
-              обратиться.</small>
+            <small v-if="$v.name.$error" class="form-text text-muteds small-alert"
+              >Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.</small
+            >
           </div>
 
           <div
@@ -56,18 +51,13 @@
               type="text"
               class="form-control"
               placeholder="Номер телефона ..."
-            >
-            <button
-              v-if="$v.tel.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.tel.$error"
-              class="form-text text-muteds small-alert"
-            >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small>
+            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert"
+              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
+            >
           </div>
 
           <div
@@ -85,44 +75,29 @@
               type="text"
               class="form-control"
               placeholder="Место нахождения  ..."
-            >
-            <button
-              v-if="$v.place.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.place.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.place.$error"
-              class="form-text text-muteds small-alert"
-            >Для того чтобы с вами могли связаться, укажите свой номер
-              телефона.</small>
+            <small v-if="$v.place.$error" class="form-text text-muteds small-alert"
+              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
+            >
           </div>
 
-          <br>
+          <br />
         </div>
-        <button
-          :disabled="$v.$invalid"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >
+        <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
           Сохранить
         </button>
-        <br>
+        <br />
         <router-link to="/changepassword">
-          <button
-            type="button"
-            class="btn btn-secondary btn-round"
-          >
+          <button type="button" class="btn btn-secondary btn-round">
             Сменить пароль
           </button>
         </router-link>
-        <br>
+        <br />
         <a @click="$router.go(-1)">
-          <button
-            type="button"
-            class="btn btn-secondary btn-round"
-          >
+          <button type="button" class="btn btn-secondary btn-round">
             Назад
           </button>
         </a>
@@ -132,22 +107,21 @@
 </template>
 
 <script>
-import axios from "axios";
-import { required } from "vuelidate/lib/validators/";
-import * as fb from "firebase";
-import { eventEmitter } from "./../main";
-import { mapState } from "vuex";
+import axios from 'axios';
+import { required } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+import { mapState } from 'vuex';
+import { eventEmitter } from '../main.js';
 
-const key = "d02290573e1e3121c00a8bcb3bd08a1f";
-const token =
-  "57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349";
+const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
+const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
   data() {
     return {
-      name: "",
-      tel: "",
-      place: ""
+      name: '',
+      tel: '',
+      place: ''
     };
   },
   validations: {
@@ -162,14 +136,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(["userData", "user", "boards"]),
+    ...mapState(['userData', 'user', 'boards']),
     uid() {
       return this.$store.state.user.uid;
     }
   },
   methods: {
     accaunt() {
-      this.$store.commit("updateUserData", {
+      this.$store.commit('updateUserData', {
         tel: this.tel,
         place: this.place
       });
@@ -180,27 +154,13 @@ export default {
         .then(() => {
           // подготовим значение
           let option =
-            this.name +
-            "(" +
-            this.tel +
-            ", " +
-            this.place +
-            ", " +
-            this.user.email +
-            ")";
+            this.name + '(' + this.tel + ', ' + this.place + ', ' + this.user.email + ')';
           // изменим значения CustomFields
           if (this.userData.cf) {
             let cf = this.userData.cf;
             cf.forEach(value => {
               axios.put(
-                "https://api.trello.com/1/customField/" +
-                  value.board_cf +
-                  "/options/" +
-                  value.id +
-                  "/?key=" +
-                  key +
-                  "&token=" +
-                  token,
+                `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
                   value: { text: option }
                 }
@@ -208,11 +168,11 @@ export default {
             });
           }
 
-          this.$router.push("/add");
-          eventEmitter.$emit("showMessage", "Изменения сохранены!");
+          this.$router.push('/add');
+          eventEmitter.$emit('showMessage', 'Изменения сохранены!');
         })
         .catch(error => {
-          eventEmitter.$emit("showMessage", error.message);
+          eventEmitter.$emit('showMessage', error.message);
         });
     }
   },
@@ -220,7 +180,7 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/login/back");
+        this.$router.push('/login/back');
       }
     });
     this.name = this.$store.state.user.displayName;

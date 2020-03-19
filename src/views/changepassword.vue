@@ -26,18 +26,14 @@
               @input="$v.password.$touch"
               class="form-control"
               placeholder="Пароль ..."
-            >
-            <button
-              v-if="$v.password.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
-          >Минимум 6 символов.</small>
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
+            >Минимум 6 символов.</small
+          >
 
           <div
             class="input-group form-group label-floating"
@@ -54,35 +50,24 @@
               @input="$v.password2.$touch"
               class="form-control"
               placeholder="Пароль еще раз ..."
-            >
-            <button
-              v-if="$v.password2.$error"
-              class="form-control-feedback"
-            >
+            />
+            <button v-if="$v.password2.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password2.$error"
-            class="form-text text-muteds small-alert"
-          >Пароли не совпадают.</small>
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert"
+            >Пароли не совпадают.</small
+          >
         </div>
-        <br>
+        <br />
 
-        <button
-          :disabled="$v.$invalid || loading"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >
+        <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
           Сменить
         </button>
-        <br>
+        <br />
       </form>
       <a @click="$router.go(-1)">
-        <button
-          type="button"
-          class="btn btn-secondary btn-round"
-        >
+        <button type="button" class="btn btn-secondary btn-round">
           Назад
         </button>
       </a>
@@ -91,16 +76,16 @@
 </template>
 
 <script>
-import { minLength, sameAs } from "vuelidate/lib/validators/";
-import { eventEmitter } from "./../main";
-import * as fb from "firebase";
+import { minLength, sameAs } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+import { eventEmitter } from '../main.js';
 
 export default {
   data() {
     return {
-      password: "",
-      password2: "",
-      uid: "",
+      password: '',
+      password2: '',
+      uid: '',
       loading: false
     };
   },
@@ -108,7 +93,7 @@ export default {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.$router.push("/login/back");
+        this.$router.push('/login/back');
       }
     });
   },
@@ -118,11 +103,11 @@ export default {
       fb.auth()
         .currentUser.updatePassword(this.password)
         .then(() => {
-          eventEmitter.$emit("showMessage", "Пароль изменен.");
-          this.$router.push("/add");
+          eventEmitter.$emit('showMessage', 'Пароль изменен.');
+          this.$router.push('/add');
         })
         .catch(error => {
-          eventEmitter.$emit("showMessage", error.message);
+          eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
     }
@@ -132,7 +117,7 @@ export default {
       minLength: minLength(6)
     },
     password2: {
-      sameAs: sameAs("password")
+      sameAs: sameAs('password')
     }
   }
 };

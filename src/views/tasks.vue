@@ -35,8 +35,8 @@
         <h4 class="title" style="color: #3c4858">
           Ваши текущие задачи
         </h4>
-        <div v-for="(card, index) of itemsOnPageArray" :key="index">
-          <card :card="card" :index="index" />
+        <div v-for="(card, index) of itemsOnPageArray" :key="card">
+          <card :card="card" :index="index + indexPage" />
         </div>
 
         <center v-if="totalTabs > 1">
@@ -88,6 +88,10 @@ export default {
     };
   },
   computed: {
+    indexPage() {
+      // рассчитывает сколько нужно прибавить к индексу компонента card
+      return this.itemsOnPage * this.currentTab - this.itemsOnPage;
+    },
     cards() {
       return this.$store.state.cards;
     },

@@ -12,18 +12,9 @@
         data-wow-duration="2s"
         style="display: flex;  align-items: center; flex-direction: column; padding-top: 15vh"
       >
-        <div
-          class="card"
-          style="width: unset"
-        >
-          <div
-            class="card-body"
-            style="margin-bottom: 0px;"
-          >
-            <transition
-              name="fade"
-              mode="out-in"
-            >
+        <div class="card" style="width: unset">
+          <div class="card-body" style="margin-bottom: 0px;">
+            <transition name="fade" mode="out-in">
               <router-view />
             </transition>
           </div>
@@ -36,12 +27,12 @@
 </template>
 
 <script>
-import modal from "./components/modal";
-import mainMenu from "./components/mainMenu";
-import background from "./components/background";
+import modal from './components/modal.vue';
+import mainMenu from './components/mainMenu.vue';
+import background from './components/background.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     modal,
     mainMenu,
@@ -54,13 +45,13 @@ export default {
   },
   mounted() {
     // установим фоновое изображение
-    document.getElementById("backgroundDiv").style.backgroundImage =
+    document.getElementById('backgroundDiv').style.backgroundImage =
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   watch: {
     background: value => {
       // сменим фон, если он изменился в state
-      document.getElementById("backgroundDiv").style.backgroundImage =
+      document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/" + value + "')";
     }
   }

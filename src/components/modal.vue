@@ -7,24 +7,13 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="false"
   >
-    <div
-      class="modal-dialog"
-      role="document"
-    >
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5
-            class="modal-title"
-            id="exampleModalLabel"
-          >
+          <h5 class="modal-title" id="exampleModalLabel">
             Сообщение
           </h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -41,11 +30,7 @@
           >
             Ok
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary btn-sm"
-            data-dismiss="modal"
-          >
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
             Закрыть
           </button>
         </div>
@@ -55,23 +40,24 @@
 </template>
 
 <script>
-import { eventEmitter } from "./../main";
+import { eventEmitter } from '../main.js';
 
 export default {
-  name: "Modal",
+  name: 'Modal',
   data() {
     return {
-      messageText: ""
+      messageText: ''
     };
   },
   methods: {
     callback() {}
   },
   created() {
-    eventEmitter.$on("showMessage", (value, callback) => {
+    eventEmitter.$on('showMessage', (value, callback) => {
       this.messageText = value;
       this.callback = callback;
-      $("#modalWindow").modal("show");
+      alert(callback);
+      $('#modalWindow').modal('show');
     });
   }
 };
