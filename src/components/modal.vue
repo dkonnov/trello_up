@@ -56,7 +56,6 @@ export default {
     eventEmitter.$on('showMessage', (value, callback) => {
       this.messageText = value;
       this.callback = callback;
-      alert(callback);
       $('#modalWindow').modal('show');
     });
   }

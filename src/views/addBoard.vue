@@ -66,6 +66,7 @@
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
           Проверить и подключить
         </button>
+
         <br />
         <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
@@ -73,6 +74,10 @@
           </button>
         </a>
       </form>
+      <button @click="addCustomField('SJEN5ZMP')" class="btn btn-primary btn-round">
+        <i class="material-icons">favorite</i>
+        подключить customField
+      </button>
     </center>
   </div>
 </template>
@@ -92,8 +97,7 @@ export default {
       board: '',
       name: '',
       desc: '',
-      loading: false,
-      exist: ''
+      loading: false
     };
   },
   validations: {
@@ -102,6 +106,19 @@ export default {
     }
   },
   methods: {
+    async demo(value) {
+      console.log(1);
+      await fb
+        .database()
+        .ref('boards')
+        .orderByChild('board')
+        .equalTo(value)
+        .on('child_added', snapshot => {
+          console.log(2);
+          return snapshot.val().board;
+        });
+      console.log(3);
+    },
     add() {
       this.loading = true;
       // проверим доступность доски
@@ -117,41 +134,36 @@ export default {
             )
             .then(response => {
               if (response.data[0].id) {
-                // проверим наличие такой досками
-                fb.database()
-                  .ref('boards')
-                  .orderByChild('board')
-                  .equalTo(this.board)
-                  .on('child_added', snapshot => {
-                    this.exist = snapshot.val().board;
-                  });
+                // проверим наличие такой доски
+                // fsA5vKgk
 
-                console.log(this.exist);
-                if (this.exist.length > 0) {
-                  this.loading = false;
-                  eventEmitter.$emit(
-                    'showMessage',
-                    'Данная доска уже подключена к Trello Up. Возможно она подключена не вами, а другим пользователем сервиса.'
-                  );
-                } else {
-                  // добавляем доску
-                  fb.database()
-                    .ref('boards/')
-                    .push({
-                      user_id: this.$store.state.user.uid,
-                      board: this.board,
-                      name: this.name,
-                      desc: this.desc
-                    })
-                    .then(() => {
-                      this.loading = false;
-                      this.$store.dispatch('getBoards');
-                      eventEmitter.$emit(
-                        'showMessage',
-                        'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
-                      );
-                    });
-                }
+                this.demo(this.board).then(response => {
+                  if (response == 'catch') {
+                    this.loading = false;
+                    eventEmitter.$emit(
+                      'showMessage',
+                      'Данная доска уже подключена к Trello Up. Возможно она подключена не вами, а другим пользователем сервиса.'
+                    );
+                  } else {
+                    // добавляем доску
+                    fb.database()
+                      .ref('boards/')
+                      .push({
+                        user_id: this.$store.state.user.uid,
+                        board: this.board,
+                        name: this.name,
+                        desc: this.desc
+                      })
+                      .then(() => {
+                        this.loading = false;
+                        this.$store.dispatch('getBoards');
+                        eventEmitter.$emit(
+                          'showMessage',
+                          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+                        );
+                      });
+                  }
+                });
               } else {
                 this.loading = false;
 
@@ -183,9 +195,33 @@ export default {
           );
         });
     },
-    addCustomField() {
+    addCustomField(value) {
       // Create a new Custom Field on a board
-      alert(123);
+      axios
+        .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
+        .then(response => {
+          console.log(response.data);
+          axios
+            .post(`https://api.trello.com/1/customFields`, {
+              idModel: response.data.id,
+              modelType: 'board',
+              name: 'Trello Up User',
+              key,
+              token,
+              pos: 'bottom',
+              type: 'list',
+              display_cardFront: false
+            })
+            .then(() => {
+              console.log('woooow');
+            })
+            .catch(() => {
+              eventEmitter.$emit(
+                'showMessage',
+                'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
+              );
+            });
+        });
     }
   }
 };
