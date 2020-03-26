@@ -9,7 +9,7 @@
           Подключение доски
         </h4>
         Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску пользователя
-        <b>@userup3</b>, а также компонент <b>CustomFields</b> и создать ее первый элемент.
+        <b>@userup3</b>, а также улучшение <b>CustomFields</b>.
       </div>
 
       <form @submit.prevent="add">
@@ -28,14 +28,15 @@
               @input="$v.board.$touch"
               type="text"
               class="form-control"
-              placeholder="ID достки в Trello ..."
+              placeholder="Ссылка на доску в Trello ..."
             />
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
             <small v-if="$v.board.$error" class="form-text text-muteds small-alert"
-              >Укажите ID доски в Trello в которой вы планируете принимать задачи</small
-            >
+              >Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например,
+              https://trello.com/b/SJEN5ZMP/
+            </small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -75,16 +76,16 @@
         </a>
       </form>
       <button @click="addCustomField('SJEN5ZMP')" class="btn btn-primary btn-round">
-        <i class="material-icons">favorite</i>
         подключить customField
       </button>
+      {{ boardId }}
     </center>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { required } from 'vuelidate/lib/validators/';
+import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { eventEmitter } from '../main.js';
 
@@ -95,6 +96,7 @@ export default {
   data() {
     return {
       board: '',
+      boardId: '',
       name: '',
       desc: '',
       loading: false
@@ -102,7 +104,20 @@ export default {
   },
   validations: {
     board: {
-      required
+      required,
+      url,
+      minLength: minLength(28),
+      validID: function() {
+        let res;
+        let arr = this.board.split('/');
+        if (arr.length > 3) {
+          this.boardId = arr[4];
+          arr[4].length === 8 ? (res = true) : (res = false);
+        } else {
+          res = false;
+        }
+        return res;
+      }
     }
   },
   methods: {
