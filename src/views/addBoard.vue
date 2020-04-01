@@ -75,10 +75,6 @@
           </button>
         </a>
       </form>
-      <button @click="addCustomField('SJEN5ZMP')" class="btn btn-primary btn-round">
-        подключить customField
-      </button>
-      {{ boardId }}
     </center>
   </div>
 </template>
@@ -121,84 +117,30 @@ export default {
     }
   },
   methods: {
-    async demo(value) {
-      console.log(1);
-      await fb
-        .database()
-        .ref('boards')
-        .orderByChild('board')
-        .equalTo(value)
-        .on('child_added', snapshot => {
-          console.log(2);
-          return snapshot.val().board;
-        });
-      console.log(3);
-    },
     add() {
       this.loading = true;
       // проверим доступность доски
       axios
         .get(
-          `https://api.trello.com/1/boards/${this.board}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
+          `https://api.trello.com/1/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
         )
         .then(() => {
-          // Проверим наличие Custom Field
-          axios
-            .get(
-              `https://api.trello.com/1/boards/${this.board}/customFields?key=${key}&token=${token}`
-            )
-            .then(response => {
-              if (response.data[0].id) {
-                // проверим наличие такой доски
-                // fsA5vKgk
-
-                this.demo(this.board).then(response => {
-                  if (response == 'catch') {
-                    this.loading = false;
-                    eventEmitter.$emit(
-                      'showMessage',
-                      'Данная доска уже подключена к Trello Up. Возможно она подключена не вами, а другим пользователем сервиса.'
-                    );
-                  } else {
-                    // добавляем доску
-                    fb.database()
-                      .ref('boards/')
-                      .push({
-                        user_id: this.$store.state.user.uid,
-                        board: this.board,
-                        name: this.name,
-                        desc: this.desc
-                      })
-                      .then(() => {
-                        this.loading = false;
-                        this.$store.dispatch('getBoards');
-                        eventEmitter.$emit(
-                          'showMessage',
-                          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
-                        );
-                      });
-                  }
+          // Добавим CustomFields
+          this.addCustomField(this.boardId)
+            .then(result => {
+              console.log('Начинаем создавать запись в БД');
+              this.saveBoardToFB(result)
+                .then(() => {
+                  alert('ok');
+                })
+                .catch(err => {
+                  alert(err);
                 });
-              } else {
-                this.loading = false;
-
-                //this.add();
-                // this.$eventEmitter.$emit(
-                //   'showMessage',
-                //   ("К доске удалось подключиться, установлен компонент Custom Fields, но необходимо создать первый элемент Custom Fields. Добавьте его в Trello c типом 'Выпадающий список'.",
-                //   function() {
-                //     alert(123);
-                //   })
-                // );
-              }
             })
-            .catch(() => {
-              this.loading = false;
-              // SJEN5ZMP
-              //this.add();
+            .catch(error => {
               eventEmitter.$emit(
                 'showMessage',
-                "К доске удалось подключиться, но для работы необходимо улучшение Custom Fields. Добавьте его в Trello и создайте первый элемент c типом 'Выпадающий список'."
+                `Мы пытаемся создать на вашей доске Custom Field, но что-то поло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
               );
             });
         })
@@ -206,40 +148,136 @@ export default {
           this.loading = false;
           eventEmitter.$emit(
             'showMessage',
-            'Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3.'
+            'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
           );
         });
     },
+    uniqBoard(value) {
+      // проверим доску на уникальность
+      return new Promise((resolve, reject) => {
+        fb.database()
+          .ref('boards')
+          .orderByChild('board')
+          .equalTo(value)
+          .on('child_added', snapshot => {
+            const board = snapshot.val().board;
+            if (!board) {
+              resolve(true);
+            } else {
+              reject(false);
+            }
+          });
+      });
+    },
+    saveBoardToFB(customfield) {
+      // добавляем доску
+
+      return new Promise((resolve, reject) => {
+        console.log('Зашли в промис');
+        fb.database()
+          .ref('boards/')
+          .push({
+            user_id: this.$store.state.user.uid,
+            board: this.board,
+            name: this.name,
+            desc: this.desc,
+            customfield
+          })
+          .then(() => {
+            console.log('резолв');
+            resolve();
+            // this.loading = false;
+            // this.$store.dispatch('getBoards');
+            // eventEmitter.$emit(
+            //   'showMessage',
+            //   'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+            // );
+          })
+          .catch(err => {
+            console.log(`Ошибка ${err}`);
+            reject(err);
+          });
+      });
+    },
     addCustomField(value) {
       // Create a new Custom Field on a board
-      axios
-        .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
-        .then(response => {
-          console.log(response.data);
-          axios
-            .post(`https://api.trello.com/1/customFields`, {
-              idModel: response.data.id,
-              modelType: 'board',
-              name: 'Trello Up User',
-              key,
-              token,
-              pos: 'bottom',
-              type: 'list',
-              display_cardFront: false
-            })
-            .then(() => {
-              console.log('woooow');
-            })
-            .catch(() => {
-              eventEmitter.$emit(
-                'showMessage',
-                'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
-              );
-            });
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
+          .then(response => {
+            axios
+              .post(`https://api.trello.com/1/customFields`, {
+                idModel: response.data.id,
+                modelType: 'board',
+                name: 'Trello Up User',
+                key,
+                token,
+                pos: 'bottom',
+                type: 'list',
+                display_cardFront: false
+              })
+              .then(response => {
+                resolve(response.data.id);
+              })
+              .catch(err => {
+                eventEmitter.$emit(
+                  'showMessage',
+                  'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
+                );
+                reject(err);
+              });
+          });
+      });
     }
   }
 };
+
+// axios
+//   .get(
+//     `https://api.trello.com/1/boards/${this.board}/customFields?key=${key}&token=${token}`
+//   )
+//   .then(response => {
+// if (response.data[0].id) {
+// проверим наличие такой доски
+// fsA5vKgk
+// this.demo(this.board).then(response => {
+//   if (response == 'catch') {
+//     this.loading = false;
+//     eventEmitter.$emit(
+//       'showMessage',
+//       'Данная доска уже подключена к Trello Up. Возможно она подключена не вами, а другим пользователем сервиса.'
+//     );
+//   } else {
+//     // добавляем доску
+//     fb.database()
+//       .ref('boards/')
+//       .push({
+//         user_id: this.$store.state.user.uid,
+//         board: this.board,
+//         name: this.name,
+//         desc: this.desc
+//       })
+//       .then(() => {
+//         this.loading = false;
+//         this.$store.dispatch('getBoards');
+//         eventEmitter.$emit(
+//           'showMessage',
+//           'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+//         );
+//       });
+//   }
+// });
+//  }
+//  });
+// .catch(() => {
+//   this.loading = false;
+//   // SJEN5ZMP
+//   //this.add();
+//   eventEmitter.$emit(
+//     'showMessage',
+//     "К доске удалось подключиться, но для работы необходимо улучшение Custom Fields. Добавьте его в Trello и создайте первый элемент c типом 'Выпадающий список'."
+//   );
+// });
 </script>
 
 <style lang="sass" scoped>
