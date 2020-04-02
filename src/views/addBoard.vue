@@ -131,7 +131,12 @@ export default {
               console.log('Начинаем создавать запись в БД');
               this.saveBoardToFB(result)
                 .then(() => {
-                  alert('ok');
+                  this.loading = false;
+                  this.$store.dispatch('getBoards');
+                  eventEmitter.$emit(
+                    'showMessage',
+                    'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+                  );
                 })
                 .catch(err => {
                   alert(err);
@@ -178,20 +183,13 @@ export default {
           .ref('boards/')
           .push({
             user_id: this.$store.state.user.uid,
-            board: this.board,
+            board: this.boardId,
             name: this.name,
             desc: this.desc,
             customfield
           })
           .then(() => {
-            console.log('резолв');
             resolve();
-            // this.loading = false;
-            // this.$store.dispatch('getBoards');
-            // eventEmitter.$emit(
-            //   'showMessage',
-            //   'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
-            // );
           })
           .catch(err => {
             console.log(`Ошибка ${err}`);
@@ -214,7 +212,7 @@ export default {
                 token,
                 pos: 'bottom',
                 type: 'list',
-                display_cardFront: false
+                display_cardFront: true
               })
               .then(response => {
                 resolve(response.data.id);
