@@ -9,7 +9,7 @@
           Подключение доски
         </h4>
         Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску пользователя
-        <b>@userup3</b>, а также компонент <b>CustomFields</b> и создать ее первый элемент.
+        <b>@userup3</b>, а также улучшение <b>CustomFields</b>.
       </div>
 
       <form @submit.prevent="add">
@@ -28,14 +28,15 @@
               @input="$v.board.$touch"
               type="text"
               class="form-control"
-              placeholder="ID достки в Trello ..."
+              placeholder="Ссылка на доску в Trello ..."
             />
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
             <small v-if="$v.board.$error" class="form-text text-muteds small-alert"
-              >Укажите ID доски в Trello в которой вы планируете принимать задачи</small
-            >
+              >Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например,
+              https://trello.com/b/SJEN5ZMP/
+            </small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -65,6 +66,11 @@
         </div>
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
           Проверить и подключить
+          <div v-if="loading" class="loadingio-spinner-rolling-dqk4877kj7o">
+            <div class="ldio-2sjibqn51ln">
+              <div></div>
+            </div>
+          </div>
         </button>
         <br />
         <a @click="$router.go(-1)">
@@ -79,7 +85,7 @@
 
 <script>
 import axios from 'axios';
-import { required } from 'vuelidate/lib/validators/';
+import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { eventEmitter } from '../main.js';
 
@@ -90,59 +96,46 @@ export default {
   data() {
     return {
       board: '',
+      boardId: '',
       name: '',
       desc: '',
       loading: false,
-      exist: ''
+      stage: ''
     };
   },
   validations: {
     board: {
-      required
+      required,
+      url,
+      minLength: minLength(28),
+      validID: function() {
+        let res;
+        let arr = this.board.split('/');
+        if (arr.length > 3) {
+          this.boardId = arr[4];
+          arr[4].length === 8 ? (res = true) : (res = false);
+        } else {
+          res = false;
+        }
+        return res;
+      }
     }
   },
   methods: {
     add() {
       this.loading = true;
-      // проверим доступность доски
-      axios
-        .get(
-          `https://api.trello.com/1/boards/${this.board}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
-        )
+      this.uniqBoard(this.boardId)
         .then(() => {
-          // Проверим наличие Custom Field
+          // проверим доступность доски
           axios
             .get(
-              `https://api.trello.com/1/boards/${this.board}/customFields?key=${key}&token=${token}`
+              `https://api.trello.com/1/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
             )
-            .then(response => {
-              if (response.data[0].id) {
-                // проверим наличие такой досками
-                fb.database()
-                  .ref('boards')
-                  .orderByChild('board')
-                  .equalTo(this.board)
-                  .on('child_added', snapshot => {
-                    this.exist = snapshot.val().board;
-                  });
-
-                console.log(this.exist);
-                if (this.exist.length > 0) {
-                  this.loading = false;
-                  eventEmitter.$emit(
-                    'showMessage',
-                    'Данная доска уже подключена к Trello Up. Возможно она подключена не вами, а другим пользователем сервиса.'
-                  );
-                } else {
-                  // добавляем доску
-                  fb.database()
-                    .ref('boards/')
-                    .push({
-                      user_id: this.$store.state.user.uid,
-                      board: this.board,
-                      name: this.name,
-                      desc: this.desc
-                    })
+            .then(() => {
+              // Добавим CustomFields
+              this.addCustomField(this.boardId)
+                .then(result => {
+                  this.saveBoardToFB(result)
                     .then(() => {
                       this.loading = false;
                       this.$store.dispatch('getBoards');
@@ -150,58 +143,169 @@ export default {
                         'showMessage',
                         'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
                       );
+                    })
+                    .catch(err => {
+                      alert(err);
                     });
-                }
-              } else {
-                this.loading = false;
-
-                //this.add();
-                // this.$eventEmitter.$emit(
-                //   'showMessage',
-                //   ("К доске удалось подключиться, установлен компонент Custom Fields, но необходимо создать первый элемент Custom Fields. Добавьте его в Trello c типом 'Выпадающий список'.",
-                //   function() {
-                //     alert(123);
-                //   })
-                // );
-              }
+                })
+                .catch(error => {
+                  this.loading = false;
+                  eventEmitter.$emit(
+                    'showMessage',
+                    `Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
+                  );
+                });
             })
             .catch(() => {
               this.loading = false;
-              // SJEN5ZMP
-              //this.add();
               eventEmitter.$emit(
                 'showMessage',
-                "К доске удалось подключиться, но для работы необходимо улучшение Custom Fields. Добавьте его в Trello и создайте первый элемент c типом 'Выпадающий список'."
+                'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
               );
             });
         })
         .catch(() => {
           this.loading = false;
-          eventEmitter.$emit(
-            'showMessage',
-            'Данную доску невозможно добавить. Для добавления доски введите верный ID, а также пригласите на доску пользователя @userup3.'
-          );
+          eventEmitter.$emit('showMessage', 'Данная доска уже подключена.');
         });
     },
-    addCustomField() {
+    uniqBoard(value) {
+      // проверим доску на уникальность
+      return new Promise((resolve, reject) => {
+        fb.database()
+          .ref('boards')
+          .orderByChild('board')
+          .equalTo(value)
+          .once('value')
+          .then(snapshot => {
+            const val = snapshot.val();
+            if (val) {
+              reject(false);
+            } else {
+              resolve(true);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
+    },
+    saveBoardToFB(customfield) {
+      // добавляем доску
+      return new Promise((resolve, reject) => {
+        console.log('Зашли в промис');
+        fb.database()
+          .ref('boards/')
+          .push({
+            user_id: this.$store.state.user.uid,
+            board: this.boardId,
+            name: this.name,
+            desc: this.desc,
+            customfield
+          })
+          .then(() => {
+            resolve();
+          })
+          .catch(err => {
+            console.log(`Ошибка ${err}`);
+            reject(err);
+          });
+      });
+    },
+    addCustomField(value) {
       // Create a new Custom Field on a board
-      alert(123);
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
+          .then(response => {
+            axios
+              .post(`https://api.trello.com/1/customFields`, {
+                idModel: response.data.id,
+                modelType: 'board',
+                name: 'Trello Up User',
+                key,
+                token,
+                pos: 'bottom',
+                type: 'list',
+                display_cardFront: true
+              })
+              .then(response => {
+                resolve(response.data.id);
+              })
+              .catch(err => {
+                eventEmitter.$emit(
+                  'showMessage',
+                  'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
+                );
+                reject(err);
+              });
+          });
+      });
     }
   }
 };
 </script>
 
-<style lang="sass" scoped>
-.input-group-text
-  color: #999
-.fields
-  margin-left: -50px
-.accaunt
-  padding-left: 75px
-  padding-right: 75px
-.form-control-feedback
-    margin-top: -28px
-.small-alert
-  padding-left: 55px
-  text-align: left
+<style scoped>
+.input-group-text {
+  color: #999;
+}
+.fields {
+  margin-left: -50px;
+}
+.accaunt {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+.form-control-feedback {
+  margin-top: -28px;
+}
+.small-alert {
+  padding-left: 55px;
+  text-align: left;
+}
+
+@keyframes ldio-2sjibqn51ln {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.ldio-2sjibqn51ln div {
+  position: absolute;
+  width: 33px;
+  height: 33px;
+  border: 4px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.ldio-2sjibqn51ln div {
+  animation: ldio-2sjibqn51ln 1.4492753623188404s linear infinite;
+  top: 20px;
+  left: 20px;
+}
+.loadingio-spinner-rolling-dqk4877kj7o {
+  width: 50px;
+  height: 20px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+  position: fixed;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.ldio-2sjibqn51ln {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.44);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-2sjibqn51ln div {
+  box-sizing: content-box;
+}
+/* generated by https://loading.io/ */
 </style>

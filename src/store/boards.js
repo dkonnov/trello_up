@@ -46,7 +46,6 @@ export default {
           dispatch('getLists');
           dispatch('getCards');
           dispatch('getComments');
-          dispatch('getCustomFields');
         });
     },
     getBoards({ commit, rootState }) {

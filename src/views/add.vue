@@ -80,6 +80,9 @@ export default {
     },
     currentBoard() {
       return this.$store.state.boards.currentBoard.board;
+    },
+    customfield() {
+      return this.$store.state.boards.currentBoard.customfield;
     }
   },
   methods: {
@@ -96,30 +99,20 @@ export default {
         cf = this.userData.cf;
       }
       let cb = this.currentBoard;
-      res = cf.filter(function(b) {
-        return b.board == cb;
-      });
+      res = cf.filter(b => b.board == cb);
 
       if (res.length == 0) {
         // подготовим значение
         let option;
         if (this.user.displayName) {
-          option =
-            this.user.displayName +
-            ' (' +
-            this.userData.tel +
-            ', ' +
-            this.userData.place +
-            ', ' +
-            this.user.email +
-            ')';
+          option = `${this.user.displayName} (${this.userData.tel}, ${this.userData.place}, ${this.user.email})`;
         } else {
           option = this.user.email;
         }
         // добавим в trello соответствующий costom field
         axios
           .post(
-            `https://api.trello.com/1/customField/${this.$store.state.customFieldsId}/options?key=${key}&token=${token}`,
+            `https://api.trello.com/1/customField/${this.customfield}/options?key=${key}&token=${token}`,
             {
               value: { text: option },
               pos: 'bottom'
@@ -128,7 +121,7 @@ export default {
           .then(response => {
             cf.push({
               board: this.currentBoard,
-              board_cf: this.$store.state.customFieldsId,
+              board_cf: this.customfield,
               id: response.data.id
             });
             this.$store.commit('updateUserData', {
@@ -153,9 +146,10 @@ export default {
             )
             .then(response => {
               // добавим пользователя, создавшего задачу
+              console.log(this.$store.state.boards.currentBoard.customfieldId);
               axios
                 .put(
-                  `https://api.trello.com/1/card/${response.data.id}/customField/${this.$store.state.customFieldsId}/item?idValue=${cf_id}&key=${key}&token=${token}`
+                  `https://api.trello.com/1/card/${response.data.id}/customField/${this.customfield}/item?idValue=${cf_id}&key=${key}&token=${token}`
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
