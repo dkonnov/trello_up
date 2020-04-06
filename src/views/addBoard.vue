@@ -65,9 +65,8 @@
           <br />
         </div>
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Проверить и подключить
+          Проверить и подключить {{ stage }}
         </button>
-
         <br />
         <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
@@ -95,7 +94,8 @@ export default {
       boardId: '',
       name: '',
       desc: '',
-      loading: false
+      loading: false,
+      stage: ''
     };
   },
   validations: {
@@ -119,42 +119,54 @@ export default {
   methods: {
     add() {
       this.loading = true;
-      // проверим доступность доски
-      axios
-        .get(
-          `https://api.trello.com/1/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
-        )
+      this.stage = '- 1/5';
+      this.uniqBoard(this.boardId)
         .then(() => {
-          // Добавим CustomFields
-          this.addCustomField(this.boardId)
-            .then(result => {
-              console.log('Начинаем создавать запись в БД');
-              this.saveBoardToFB(result)
-                .then(() => {
-                  this.loading = false;
-                  this.$store.dispatch('getBoards');
+          this.stage = '- 2/5';
+          // проверим доступность доски
+          axios
+            .get(
+              `https://api.trello.com/1/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
+            )
+            .then(() => {
+              this.stage = '- 3/5';
+              // Добавим CustomFields
+              this.addCustomField(this.boardId)
+                .then(result => {
+                  this.stage = '- 4/5';
+                  console.log('Начинаем создавать запись в БД');
+                  this.saveBoardToFB(result)
+                    .then(() => {
+                      this.stage = '';
+                      this.loading = false;
+                      this.$store.dispatch('getBoards');
+                      eventEmitter.$emit(
+                        'showMessage',
+                        'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+                      );
+                    })
+                    .catch(err => {
+                      alert(err);
+                    });
+                })
+                .catch(error => {
                   eventEmitter.$emit(
                     'showMessage',
-                    'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
+                    `Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
                   );
-                })
-                .catch(err => {
-                  alert(err);
                 });
             })
-            .catch(error => {
+            .catch(() => {
+              this.loading = false;
               eventEmitter.$emit(
                 'showMessage',
-                `Мы пытаемся создать на вашей доске Custom Field, но что-то поло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
+                'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
               );
             });
         })
         .catch(() => {
           this.loading = false;
-          eventEmitter.$emit(
-            'showMessage',
-            'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
-          );
+          eventEmitter.$emit('showMessage', 'Данная доска уже подключена.');
         });
     },
     uniqBoard(value) {
@@ -164,19 +176,22 @@ export default {
           .ref('boards')
           .orderByChild('board')
           .equalTo(value)
-          .on('child_added', snapshot => {
-            const board = snapshot.val().board;
-            if (!board) {
-              resolve(true);
-            } else {
+          .once('value')
+          .then(snapshot => {
+            const val = snapshot.val();
+            if (val) {
               reject(false);
+            } else {
+              resolve(true);
             }
+          })
+          .catch(err => {
+            console.log(err);
           });
       });
     },
     saveBoardToFB(customfield) {
       // добавляем доску
-
       return new Promise((resolve, reject) => {
         console.log('Зашли в промис');
         fb.database()

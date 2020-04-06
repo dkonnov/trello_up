@@ -39,7 +39,6 @@
           Очистить
         </button>
         <br />
-        {{ customfield }}
       </center>
     </form>
   </div>
