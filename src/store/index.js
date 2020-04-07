@@ -22,7 +22,6 @@ export default new Vuex.Store({
     comments: {},
     user: {},
     userData: {},
-    //    customFieldsId: '',
     backgrounds: {}
   },
   getters: {
@@ -61,9 +60,6 @@ export default new Vuex.Store({
     setComments(state, payload) {
       state.comments = payload;
     },
-    // setCustomField(state, payload) {
-    //   state.customFieldsId = payload;
-    // },
     setBackgrounds(state, payload) {
       state.backgrounds = payload;
     }
@@ -88,22 +84,6 @@ export default new Vuex.Store({
           commit('setUserData', res);
         });
     },
-    // getCustomFields({ commit, state }) {
-    //   axios
-    //     .get(
-    //       `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/customFields?key=${key}&token=${token}`
-    //     )
-    //     .then(response => {
-    //       commit('setCustomField', response.data[0].id);
-    //     })
-    //     .catch(() => {
-    //       commit('setCustomField', '');
-    //       this.$eventEmitter.$emit(
-    //         'showMessage',
-    //         'К сожалению на этой доске больше нет Custom Field. Для нормально работы необходим хотябы один раскрывающийся список Custom Field. Пожалуйста, создайте его в Trello.'
-    //       );
-    //     });
-    // },
     getLists({ commit, state }) {
       axios
         .get(

@@ -50,7 +50,7 @@
 
           <div class="input-group form-group label-floating">
             <div class="input-group-prepend">
-              <span class="input-group-text">
+              <span class="input-group-text" style="align-items: flex-start;padding-top: 6px;">
                 <i class="material-icons">notes</i>
               </span>
             </div>
@@ -137,6 +137,9 @@ export default {
                 .then(result => {
                   this.saveBoardToFB(result)
                     .then(() => {
+                      this.board = '';
+                      this.name = '';
+                      this.desc = '';
                       this.loading = false;
                       this.$store.dispatch('getBoards');
                       eventEmitter.$emit(
@@ -193,7 +196,6 @@ export default {
     saveBoardToFB(customfield) {
       // добавляем доску
       return new Promise((resolve, reject) => {
-        console.log('Зашли в промис');
         fb.database()
           .ref('boards/')
           .push({
@@ -218,6 +220,14 @@ export default {
         axios
           .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
           .then(response => {
+            // тут обработаем  пустышки, конечно не самое лучшее место но всеже
+            console.log(response.data);
+            this.name = !this.name ? response.data.name : this.name;
+            this.desc = !this.desc
+              ? 'Тут вы можете подать вопрос и мы обязательно Вам ответим!'
+              : this.desc;
+            //
+            console.log(response.data);
             axios
               .post(`https://api.trello.com/1/customFields`, {
                 idModel: response.data.id,

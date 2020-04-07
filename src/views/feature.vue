@@ -1,6 +1,9 @@
 <template>
-  <div class="row" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
-    <div class="col-lg-5 col-md-8 ml-auto mr-auto">
+  <div class="row">
+    <div
+      class="col-lg-5 col-md-8 ml-auto mr-auto"
+      style="padding-left: 50px; padding-right: 30px;padding-bottom: 50px;"
+    >
       <br />
       <div class="icon icon-primary">
         <i class="material-icons" style="font-size:3.85rem;">accessibility_new</i>
