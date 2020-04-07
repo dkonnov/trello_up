@@ -67,9 +67,8 @@
 </template>
 
 <script>
-import addBoard from '../views/addBoard';
-import { eventEmitter } from './../main';
 import * as fb from 'firebase';
+import addBoard from './addBoard.vue';
 
 export default {
   name: 'Boards',

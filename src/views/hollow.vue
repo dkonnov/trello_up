@@ -8,7 +8,7 @@
           </div>
           <div class="description">
             <h4 class="info-title">
-              Принимай заяки сразу в Trello
+              Принимай заявки сразу в Trello
             </h4>
             <p class="description">
               Это личный кабинет для ваших пользователей, позволяющий принимать различные виды
