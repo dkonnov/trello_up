@@ -50,7 +50,7 @@
 
           <div class="input-group form-group label-floating">
             <div class="input-group-prepend">
-              <span class="input-group-text">
+              <span class="input-group-text" style="align-items: flex-start;padding-top: 6px;">
                 <i class="material-icons">notes</i>
               </span>
             </div>
