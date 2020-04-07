@@ -24,6 +24,7 @@ export default {
         'showMessage',
         'Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
         function() {
+          console.log('fb');
           fb.database()
             .ref('boards/')
             .child(value)
@@ -53,18 +54,21 @@ export default {
         .ref('boards')
         .orderByChild('user_id')
         .equalTo(rootState.user.uid)
-        .on('value', snapshot => {
+        .once('value')
+        .then(snapshot => {
           const res = snapshot.val();
           const newArr = [];
-          Object.keys(res).forEach(key => {
-            newArr.push({
-              id: key,
-              user_id: res[key].user_id,
-              board: res[key].board,
-              name: res[key].name,
-              desc: res[key].desc
+          if (res) {
+            Object.keys(res).forEach(key => {
+              newArr.push({
+                id: key,
+                user_id: res[key].user_id,
+                board: res[key].board,
+                name: res[key].name,
+                desc: res[key].desc
+              });
             });
-          });
+          }
           commit('setBoards', newArr);
         });
     }
