@@ -1,10 +1,12 @@
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import Vuelidate from 'vuelidate';
 import VueRouter from 'vue-router';
 import * as fb from 'firebase';
 import App from './App.vue';
 import './css/material-kit.min.css';
 import './css/animate.min.css';
+import messages from './locale/locale.js';
 
 import router from './router.js';
 // eslint-disable-next-line import/no-cycle
@@ -12,13 +14,20 @@ import store from './store/index.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
+Vue.use(VueI18n);
 
 Vue.config.productionTip = false;
 
 // eslint-disable-next-line import/prefer-default-export
 export const eventEmitter = new Vue();
 
+const i18n = new VueI18n({
+  locale: 'ru', // set locale
+  messages // set locale messages
+});
+
 new Vue({
+  i18n,
   router,
   store,
   created() {

@@ -75,7 +75,7 @@
         <br />
         <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
-            Назад
+            {{ $t('message.back') }}
           </button>
         </a>
       </form>

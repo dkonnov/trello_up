@@ -28,7 +28,7 @@
           <center>
             <router-link to="/registration">
               <button type="button" class="btn btn-info btn-round">
-                Регистрация
+                {{ $t('message.createAccaut') }}
               </button>
             </router-link>
           </center>

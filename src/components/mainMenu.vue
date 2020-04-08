@@ -53,7 +53,7 @@
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              Регистрация
+              {{ $t('message.createAccaut') }}
             </router-link>
           </li>
           <li
@@ -84,7 +84,7 @@
                 href="#"
               >
                 <i class="material-icons">meeting_room</i>
-                Вход
+                {{ $t('message.singIn') }}
               </a>
             </router-link>
           </li>
@@ -118,6 +118,27 @@
               </a>
             </div>
           </li>
+          <li class="dropdown nav-item" style="margin-top: 22px;margin-right: 15px;">
+            <a
+              class="dropdown-toggle nav-link"
+              aria-expanded="false"
+              href="#"
+              data-toggle="dropdown"
+            >
+              <i class="material-icons">language</i>
+              <div class="ripple-container"
+            /></a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a class="dropdown-item" @click="changeLang('ru')" href="#">
+                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
+                <i class="material-icons" v-show="this.$i18n.locale == 'ru'">check</i> Русский
+              </a>
+              <a class="dropdown-item" @click="changeLang('en')" href="#">
+                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
+                <i class="material-icons" v-show="this.$i18n.locale == 'en'">check</i> English
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -131,6 +152,9 @@ import { eventEmitter } from '../main.js';
 export default {
   name: 'MainMenu',
   methods: {
+    changeLang(value) {
+      this.$i18n.locale = value;
+    },
     showAccaunt() {
       this.$router.push('/accaunt');
     },
@@ -161,4 +185,6 @@ export default {
 <style lang="sass" scoped>
 .navbar .navbar-brand
     padding: 0
+.epmty-icon
+  width: 24px
 </style>

@@ -6,7 +6,7 @@
           <i class="material-icons">account_circle</i>
         </div>
         <h4 class="info-title">
-          Вход
+          {{ $t('message.singIn') }}
         </h4>
       </div>
       <form @submit.prevent="login">
@@ -61,13 +61,13 @@
           >
         </div>
         <button class="btn btn-primary btn-round" :disabled="$v.$invalid || loading" type="submit">
-          Вход
+          {{ $t('message.singIn') }}
         </button>
       </form>
       <br />
       <router-link to="/registration">
         <button type="button" class="btn btn-secondary btn-round">
-          Регистрация
+          {{ $t('message.createAccaut') }}
         </button>
       </router-link>
       <br />

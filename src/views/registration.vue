@@ -6,7 +6,7 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          Регистрация
+          {{ $t('message.createAccaut') }}
         </h4>
       </div>
 
@@ -87,13 +87,13 @@
         <br />
 
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Зарегистрироваться
+          {{ $t('message.createAccaut') }}
         </button>
         <br />
       </form>
       <a @click="$router.go(-1)">
         <button type="button" class="btn btn-secondary btn-round">
-          Назад
+          {{ $t('message.back') }}
         </button>
       </a>
     </center>
