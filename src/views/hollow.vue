@@ -8,12 +8,10 @@
           </div>
           <div class="description">
             <h4 class="info-title">
-              Принимай заявки сразу в Trello
+              {{ $t('message.hollowLabel11') }}
             </h4>
             <p class="description">
-              Это личный кабинет для ваших пользователей, позволяющий принимать различные виды
-              заявок сразу в Trello. При этом вашим пользователям не нужна учетная запись в самом
-              Trello.
+              {{ $t('message.hollowLabel12') }}
             </p>
           </div>
         </div>
@@ -24,7 +22,7 @@
           </div>
           <div class="description">
             <h4 class="info-title">
-              Различные сценарии
+              {{ $t('message.hollowLabel21') }}
             </h4>
             <p class="description">
               Вы можете использовать сервис для приема заявок на техническую поддержку, запрос на
@@ -40,7 +38,7 @@
           </div>
           <div class="description">
             <h4 class="info-title">
-              На всех устройствах
+              {{ $t('message.hollowLabel31') }}
             </h4>
             <p class="description">
               Мы постарались сделать так, чтобы наш сервис открывался одинаково хорошо на всех

@@ -73,7 +73,7 @@
       <br />
       <router-link to="/restore">
         <button type="button" class="btn btn-secondary btn-round">
-          Забыл пароль
+          {{ $t('message.forgotPassword') }}
         </button>
       </router-link>
     </center>

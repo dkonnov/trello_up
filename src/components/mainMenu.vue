@@ -38,7 +38,7 @@
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              Возможности
+              {{ $t('message.features') }}
             </router-link>
           </li>
           <li
@@ -68,7 +68,7 @@
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              Поддержка
+              {{ $t('message.support') }}
             </router-link>
           </li>
           <li
@@ -129,13 +129,13 @@
               <div class="ripple-container"
             /></a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a class="dropdown-item" @click="changeLang('ru')" href="#">
-                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
-                <i class="material-icons" v-show="this.$i18n.locale == 'ru'">check</i> Русский
-              </a>
               <a class="dropdown-item" @click="changeLang('en')" href="#">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
                 <i class="material-icons" v-show="this.$i18n.locale == 'en'">check</i> English
+              </a>
+              <a class="dropdown-item" @click="changeLang('ru')" href="#">
+                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
+                <i class="material-icons" v-show="this.$i18n.locale == 'ru'">check</i> Русский
               </a>
             </div>
           </li>

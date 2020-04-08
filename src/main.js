@@ -21,8 +21,11 @@ Vue.config.productionTip = false;
 // eslint-disable-next-line import/prefer-default-export
 export const eventEmitter = new Vue();
 
+// авто выбор языка в зависимости от языка браузера
+const lang = window.navigator.language == 'ru-RU' ? 'ru' : 'en';
+
 const i18n = new VueI18n({
-  locale: 'ru', // set locale
+  locale: lang, // set locale
   messages // set locale messages
 });
 
