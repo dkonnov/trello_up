@@ -9,6 +9,7 @@
           {{ $t('message.singIn') }}
         </h4>
       </div>
+
       <form @submit.prevent="login">
         <div class="fields">
           <div
@@ -30,11 +31,10 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert">{{
+              $t('message.emailLabel')
+            }}</small>
           </div>
-          <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, который вы использовали при
-            регистрации.</small
-          >
 
           <div
             class="input-group form-group label-floating"
@@ -56,10 +56,11 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          <small v-if="$v.email.$error" class="form-text text-muted small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
         </div>
+
         <button class="btn btn-primary btn-round" :disabled="$v.$invalid || loading" type="submit">
           {{ $t('message.singIn') }}
         </button>
@@ -94,15 +95,6 @@ export default {
       loading: false
     };
   },
-  validations: {
-    email: {
-      email,
-      required
-    },
-    password: {
-      minLength: minLength(6)
-    }
-  },
   methods: {
     login() {
       this.loading = true;
@@ -127,6 +119,15 @@ export default {
         });
     }
   },
+  validations: {
+    email: {
+      email,
+      required
+    },
+    password: {
+      minLength: minLength(6)
+    }
+  },
   beforeMount() {
     // своебразная защита роута
     if (!this.$route.params.back) {
@@ -145,6 +146,7 @@ export default {
   color: #999
 .fields
   margin-left: -50px
+  max-width: 225px
 .small-alert
   padding-left: 55px
   text-align: left

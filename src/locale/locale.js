@@ -8,6 +8,8 @@ const messages = {
       features: 'features',
       support: 'support',
       email: 'Email',
+      emailLabel: 'You must enter the email address you used when create accaunt.',
+      passwordLabel: 'Minimum 6 characters.',
       forgotPassword: 'Forgot password',
       hollowLabel11: 'Add tasks straight to Trello',
       hollowLabel12:
@@ -24,6 +26,9 @@ const messages = {
       features: 'Возможности',
       support: 'Поддержка',
       email: 'Электронная почта',
+      emailLabel:
+        'Необходимо ввести адрес электронной почты, который вы использовали при регистрации.',
+      passwordLabel: 'Минимум 6 символов.',
       forgotPassword: 'Забыл пароль',
       hollowLabel11: 'Принимай заявки сразу в Trello',
       hollowLabel12:

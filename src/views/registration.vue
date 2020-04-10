@@ -174,6 +174,7 @@ export default {
   color: #999
 .fields
   margin-left: -50px
+  max-width: 225px
 .registration
   padding-left: 75px
   padding-right: 75px
