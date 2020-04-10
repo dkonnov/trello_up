@@ -31,9 +31,9 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, которого нет в системе.</small
-            >
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert">{{
+              $t('message.emailLabelInRegistration')
+            }}</small>
           </div>
 
           <div
@@ -56,9 +56,9 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          <small v-if="$v.password.$error" class="form-text text-muted small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
 
           <div
             class="input-group form-group label-floating"
