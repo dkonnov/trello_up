@@ -111,6 +111,7 @@ import axios from 'axios';
 import { required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { mapState } from 'vuex';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
