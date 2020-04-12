@@ -50,7 +50,7 @@
               <i class="material-icons">dashboard</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Личный кабинет</h4>
+              <h4 class="info-title">Личный кабинет клиента за 2 минуты</h4>
               <p class="description">
                 В личном кабинете пользователь сможет видеть все поданные заявки и уже исполненные.
               </p>
@@ -138,7 +138,7 @@
           </div>
         </div>
       </div>
-      <hr />
+
       <div
         class="card card-background"
         style="background-image: url('./img/backgrounds/kara-eads-1506373-unsplash.jpg'); "
@@ -147,10 +147,9 @@
           <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
               <div class="text-center">
-                <h3 class="title">Подпишись на рассылку</h3>
+                <h3 class="title">Попробуйте без регистрации</h3>
                 <p class="description">
-                  Подпишитесь, чтобы получать информацию об обновления и интересные материалы об
-                  организации современной работы.
+                  Все еще есть сомнения? Попробуйте демо кабинет!
                 </p>
               </div>
               <div class="card card-raised card-form-horizontal">
@@ -174,7 +173,7 @@
                         ></span>
                       </div>
                       <div class="col-lg-4 col-md-6 ">
-                        <button type="button" class="btn btn-primary btn-block">Подписаться</button>
+                        <button type="button" class="btn btn-primary btn-block">Войти</button>
                       </div>
                     </div>
                   </form>
@@ -210,18 +209,69 @@
       </div> -->
 
       <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <div class="section-description">
+            <h3 class="info-title">
+              Что о нас пишут
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6 col-lg-4">
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
-              <div class="front" style="width: 350px;">
+              <div class="front">
                 <div class="card-body">
                   <h5 class="card-category card-category-social text-success">
-                    <i class="fa fa-newspaper-o"></i> Январское обновление
+                    <i class="fa fa-newspaper-o"></i> Отзыв
                   </h5>
                   <h4 class="card-title">
                     <a href="#pablo"
-                      >"This card is doing a full rotation, click on the rotate button"</a
+                      >"Организовать техническую подержку получилось в кратчайшие сроки."</a
                     >
+                  </h4>
+                  <p class="card-description">
+                    Don't be scared of the truth because we need to restart the human foundation in
+                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
+                    the back is...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
+            <div class="card card-rotate">
+              <div class="front">
+                <div class="card-body">
+                  <h5 class="card-category card-category-social text-success">
+                    <i class="fa fa-newspaper-o"></i> Отзыв
+                  </h5>
+                  <h4 class="card-title">
+                    <a href="#pablo">"Принимаем заявки на канцелярю."</a>
+                  </h4>
+                  <p class="card-description">
+                    Don't be scared of the truth because we need to restart the human foundation in
+                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
+                    the back is...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
+            <div class="card card-rotate">
+              <div class="front">
+                <div class="card-body">
+                  <h5 class="card-category card-category-social text-success">
+                    <i class="fa fa-newspaper-o"></i> Отзыв
+                  </h5>
+                  <h4 class="card-title">
+                    <a href="#pablo">"Возможностей даже больше чем нужно"</a>
                   </h4>
                   <p class="card-description">
                     Don't be scared of the truth because we need to restart the human foundation in
