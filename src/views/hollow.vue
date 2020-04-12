@@ -6,7 +6,7 @@
           <br /><br />
           <div class="section-description">
             <h3 class="info-title">
-              Принимайте заявки проще и эффективней
+              Принимайте заявки проще чем когда-либо!
             </h3>
             <h5 class="description">
               Trello Up это личный кабинет для ваших клиентов интегрированный с Trello.<br />Клиенты
@@ -39,7 +39,7 @@
                 <h3 class="card-title">Подача заявок</h3>
               </a>
               <p class="card-description">
-                Проще чем когда либо
+                Проще чем когда-либо
               </p>
             </div>
           </div>
@@ -147,10 +147,10 @@
           <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
               <div class="text-center">
-                <h3 class="title">Subscribe to our Newsletter</h3>
+                <h3 class="title">Подпишись на рассылку</h3>
                 <p class="description">
-                  Join our newsletter and get news in your inbox every week! We hate spam too, so no
-                  worries about this.
+                  Подпишитесь, чтобы получать информацию об обновления и интересные материалы об
+                  организации современной работы.
                 </p>
               </div>
               <div class="card card-raised card-form-horizontal">
@@ -174,7 +174,7 @@
                         ></span>
                       </div>
                       <div class="col-lg-4 col-md-6 ">
-                        <button type="button" class="btn btn-primary btn-block">Subscribe</button>
+                        <button type="button" class="btn btn-primary btn-block">Подписаться</button>
                       </div>
                     </div>
                   </form>
@@ -234,7 +234,7 @@
           </div>
         </div>
       </div>
-
+      <hr />
       <div />
     </div>
   </div>
