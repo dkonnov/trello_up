@@ -6,7 +6,7 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          Ваш аккаунт
+          {{ $t('message.accaut') }}
         </h4>
       </div>
 

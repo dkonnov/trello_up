@@ -32,21 +32,6 @@
             v-if="!this.$store.state.user.uid"
           >
             <router-link
-              to="/feature"
-              style="a.color:unset"
-              class="nav-link"
-              data-toggle="collapse"
-              data-target=".navbar-collapse.show"
-            >
-              {{ $t('message.features') }}
-            </router-link>
-          </li>
-          <li
-            class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
-            v-if="!this.$store.state.user.uid"
-          >
-            <router-link
               to="/registration"
               style="a.color:unset"
               class="nav-link"
@@ -105,7 +90,7 @@
             /></a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="showAccaunt" href="#">
-                <i class="material-icons">assignment_ind</i> Аккаунт
+                <i class="material-icons">assignment_ind</i> {{ $t('message.accaut') }}
               </a>
               <a class="dropdown-item" @click="showBackgrounds" href="#">
                 <i class="material-icons">photo_size_select_actual</i> Фон

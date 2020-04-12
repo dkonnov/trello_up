@@ -71,7 +71,7 @@
 
 <script>
 import _ from 'lodash';
-import { eventEmitter } from './../main.js';
+import { eventEmitter } from '../main.js';
 
 export default {
   name: 'BackgroundForm',

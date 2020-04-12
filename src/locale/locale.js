@@ -2,7 +2,8 @@
 const messages = {
   en: {
     message: {
-      createAccaut: 'Create accunt',
+      createAccaut: 'Create accaunt',
+      accaut: 'Accaunt',
       singIn: 'Sing In',
       back: 'Back',
       features: 'features',
@@ -26,6 +27,7 @@ const messages = {
   ru: {
     message: {
       createAccaut: 'Регистрация',
+      accaut: 'Аккаунт',
       singIn: 'Вход',
       back: 'Назад',
       features: 'Возможности',
