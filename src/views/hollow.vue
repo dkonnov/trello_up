@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto text-center">
           <br /><br />
-          <div class="section-description">
+          <div class="section-description wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <h3 class="info-title">
               Принимайте заявки проще чем когда-либо!
             </h3>
@@ -13,7 +13,7 @@
               подают заявки в своем личном кабинете, а ваши специалисты работают с ними в Trello.
               При этом создание учетных записей для пользователей в самом Trello не трубуется.<br /><br />
             </h5>
-            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="1s">
+            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">
               <center>
                 <router-link to="/registration">
                   <button type="button" class="btn btn-info btn-round">
@@ -30,7 +30,9 @@
       <div class="row">
         <div class="col-md-5 ml-auto">
           <div
-            class="card card-background"
+            class="card card-background wow fadeIn"
+            data-wow-duration="2s"
+            data-wow-delay="1s"
             style="background-image:url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg')"
           >
             <a href="#pablo"></a>
@@ -45,7 +47,7 @@
           </div>
         </div>
         <div class="col-md-5 mr-auto">
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <div class="icon icon-info">
               <i class="material-icons">dashboard</i>
             </div>
@@ -56,7 +58,7 @@
               </p>
             </div>
           </div>
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="2s">
             <div class="icon icon-success">
               <i class="material-icons">view_day</i>
             </div>
@@ -67,7 +69,7 @@
               </p>
             </div>
           </div>
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="3s">
             <div class="icon icon-primary">
               <i class="material-icons">code</i>
             </div>
@@ -84,7 +86,7 @@
       <hr />
       <div class="row">
         <div class="col-md-5 ml-auto">
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <div class="icon icon-rose">
               <i class="material-icons">timeline</i>
             </div>
@@ -96,7 +98,7 @@
             </div>
           </div>
 
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="2s">
             <div class="icon icon-info">
               <i class="material-icons">group</i>
             </div>
@@ -108,7 +110,7 @@
               </p>
             </div>
           </div>
-          <div class="info info-horizontal">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="3s">
             <div class="icon icon-primary">
               <i class="material-icons">phonelink</i>
             </div>
@@ -122,7 +124,9 @@
         </div>
         <div class="col-md-5 mr-auto">
           <div
-            class="card card-background"
+            class="card card-background wow fadeIn"
+            data-wow-duration="2s"
+            data-wow-delay="1s"
             style="background-image:url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg')"
           >
             <a href="#pablo"></a>
@@ -140,7 +144,9 @@
       </div>
 
       <div
-        class="card card-background"
+        class="card card-background wow fadeIn"
+        data-wow-duration="2s"
+        data-wow-delay="1s"
         style="background-image: url('./img/backgrounds/kara-eads-1506373-unsplash.jpg'); "
       >
         <div class="container" style="padding-top: 0vh;">
@@ -218,7 +224,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="1s">
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
               <div class="front">
@@ -241,7 +247,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
               <div class="front">
@@ -262,7 +268,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="4s">
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
               <div class="front">
