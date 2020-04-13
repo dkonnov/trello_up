@@ -6,13 +6,9 @@
           <br /><br />
           <div class="section-description wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <h3 class="info-title">
-              Принимайте заявки проще чем когда-либо!
+              {{ $t('message.hollowLabelBottom1') }}
             </h3>
-            <h5 class="description">
-              Trello Up это личный кабинет для ваших клиентов интегрированный с Trello.<br />Клиенты
-              подают заявки в своем личном кабинете, а ваши специалисты работают с ними в Trello.
-              При этом создание учетных записей для пользователей в самом Trello не трубуется.<br /><br />
-            </h5>
+            <h5 class="description">{{ $t('message.hollowLabelBottom2') }}<br /><br /></h5>
             <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">
               <center>
                 <router-link to="/registration">
@@ -30,7 +26,7 @@
       <div class="row">
         <div class="col-md-5 ml-auto">
           <div
-            class="card card-background wow fadeIn"
+            class="card card-background wow fadeInLeft"
             data-wow-duration="2s"
             data-wow-delay="1s"
             style="background-image:url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg')"
@@ -52,9 +48,9 @@
               <i class="material-icons">dashboard</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Личный кабинет клиента за 2 минуты</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel11') }}</h4>
               <p class="description">
-                В личном кабинете пользователь сможет видеть все поданные заявки и уже исполненные.
+                {{ $t('message.hollowLabel12') }}
               </p>
             </div>
           </div>
@@ -63,9 +59,9 @@
               <i class="material-icons">view_day</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Карточки задач</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel21') }}</h4>
               <p class="description">
-                На карточках задач отображается все необходимое: срок, стадия, исполнитель, файлы
+                {{ $t('message.hollowLabel22') }}
               </p>
             </div>
           </div>
@@ -74,10 +70,9 @@
               <i class="material-icons">code</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Короткие ссылки</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel31') }}</h4>
               <p class="description">
-                Просто отправье короткую ссылку на подключенную доску пользовотелю или разместите ее
-                у себя на сайте.
+                {{ $t('message.hollowLabel32') }}
               </p>
             </div>
           </div>
@@ -91,9 +86,9 @@
               <i class="material-icons">timeline</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Несколько досок Trello</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel41') }}</h4>
               <p class="description">
-                Создайте несколько досок в зависимости от направлений вашей работы и подключите их.
+                {{ $t('message.hollowLabel42') }}
               </p>
             </div>
           </div>
@@ -103,10 +98,9 @@
               <i class="material-icons">group</i>
             </div>
             <div class="description">
-              <h4 class="info-title">Переписка с исполнителями</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel51') }}</h4>
               <p class="description">
-                Обсуждайте задачу прям на карточке с задачей. Ваша переписка будет именно по этой
-                задаче и не будет смешан с другими диалогами.
+                {{ $t('message.hollowLabel52') }}
               </p>
             </div>
           </div>
@@ -115,16 +109,16 @@
               <i class="material-icons">phonelink</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel31') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollowLabel61') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel32') }}
+                {{ $t('message.hollowLabel62') }}
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-5 mr-auto">
           <div
-            class="card card-background wow fadeIn"
+            class="card card-background wow fadeInRight"
             data-wow-duration="2s"
             data-wow-delay="1s"
             style="background-image:url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg')"
@@ -154,12 +148,15 @@
             <div class="col-md-6 ml-auto mr-auto">
               <div class="text-center">
                 <h3 class="title">Попробуйте без регистрации</h3>
-                <p class="description">
+                <p class="card-description">
                   Все еще есть сомнения? Попробуйте демо кабинет!
                 </p>
               </div>
               <div class="card card-raised card-form-horizontal">
-                <div class="card-body" style="min-height: 0px;">
+                <div
+                  class="card-body"
+                  style="min-height: 0px; padding-top: 30px; padding-bottom: 30px;"
+                >
                   <form method="" action="">
                     <div class="row">
                       <div class="col-lg-8 col-md-6 ">
@@ -301,7 +298,9 @@
   padding: 0;
   text-align: left;
 }
-
+.card-description {
+  color: white !important;
+}
 .card-pricing ul li {
   color: #999;
   text-align: left;
