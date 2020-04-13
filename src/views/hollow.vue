@@ -9,7 +9,7 @@
               {{ $t('message.hollowLabelBottom1') }}
             </h3>
             <h5 class="description">{{ $t('message.hollowLabelBottom2') }}<br /><br /></h5>
-            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">
+            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="1s">
               <center>
                 <router-link to="/registration">
                   <button type="button" class="btn btn-info btn-round">
@@ -27,7 +27,7 @@
         <div class="col-md-5 ml-auto">
           <div
             class="card card-background wow fadeInLeft"
-            data-wow-duration="2s"
+            data-wow-duration="3s"
             data-wow-delay="1s"
             style="background-image:url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg')"
           >
@@ -119,7 +119,7 @@
         <div class="col-md-5 mr-auto">
           <div
             class="card card-background wow fadeInRight"
-            data-wow-duration="2s"
+            data-wow-duration="3s"
             data-wow-delay="1s"
             style="background-image:url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg')"
           >
