@@ -9,7 +9,7 @@
               {{ $t('message.hollowLabelBottom1') }}
             </h3>
             <h5 class="description">{{ $t('message.hollowLabelBottom2') }}<br /><br /></h5>
-            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="1s">
+            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
               <center>
                 <router-link to="/registration">
                   <button type="button" class="btn btn-info btn-round">
@@ -28,7 +28,7 @@
           <div
             class="card card-background wow fadeInLeft"
             data-wow-duration="3s"
-            data-wow-delay="1s"
+            data-wow-delay="2s"
             style="background-image:url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg')"
           >
             <a href="#pablo"></a>
@@ -185,7 +185,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </template>
       <!-- <hr />
 
       <div class="row">
@@ -289,7 +289,7 @@
       </div>
       <hr />
       <div />
-    </div>
+    </template>
   </div>
 </template>
 
