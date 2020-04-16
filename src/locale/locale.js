@@ -6,6 +6,9 @@ const messages = {
       accaut: 'Accaunt',
       singIn: 'Sing In',
       back: 'Back',
+      singOut: 'Sing Out',
+      boards: 'Boards',
+      background: 'Background',
       features: 'features',
       support: 'support',
       email: 'Email',
@@ -33,7 +36,10 @@ const messages = {
         'Discuss the task directly on the card with the task. Your discuss  will be precisely on this task and will not be mixed with other dialogs.',
       hollowLabel61: 'On all devices',
       hollowLabel62:
-        'We tried to make our service open equally well on all devices! Both on large monitors and on small smartphones.'
+        'We tried to make our service open equally well on all devices! Both on large monitors and on small smartphones.',
+      hollowTry1: 'Try without registration',
+      hollowTry2: 'Still in doubt? Try a demo!',
+      hollowReviewsTitle: 'What customers write about us'
     }
   },
   ru: {
@@ -42,6 +48,9 @@ const messages = {
       accaut: 'Аккаунт',
       singIn: 'Вход',
       back: 'Назад',
+      singOut: 'Выход',
+      boards: 'Доски',
+      background: 'Фон',
       features: 'Возможности',
       support: 'Поддержка',
       email: 'Электронная почта',
@@ -71,7 +80,10 @@ const messages = {
         'Обсуждайте задачу прям на карточке с задачей. Ваша переписка будет именно по этой задаче и не будет смешан с другими диалогами.',
       hollowLabel61: 'На всех устройствах',
       hollowLabel62:
-        'Мы постарались сделать так, чтобы наш сервис открывался одинаково хорошо на всех устройствах! Как на больших мониторах, так и на маленьких смартфонах.'
+        'Мы постарались сделать так, чтобы наш сервис открывался одинаково хорошо на всех устройствах! Как на больших мониторах, так и на маленьких смартфонах.',
+      hollowTry1: 'Попробуйте без регистрации',
+      hollowTry2: 'Все еще есть сомнения? Попробуйте демо кабинет!',
+      hollowReviewsTitle: 'Что клиенты пишут о нас'
     }
   }
 };

@@ -9,7 +9,7 @@
             style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
           >
             <h2 class="card-title text-center">
-              Фон
+              {{ $t('message.background') }}
             </h2>
             <div class="card-body">
               <div class="row">

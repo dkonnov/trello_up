@@ -45,7 +45,7 @@
         <div class="col-md-5 mr-auto">
           <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <div class="icon icon-info">
-              <i class="material-icons">dashboard</i>
+              <i class="material-icons">chrome_reader_mode</i>
             </div>
             <div class="description">
               <h4 class="info-title">{{ $t('message.hollowLabel11') }}</h4>
@@ -83,7 +83,7 @@
         <div class="col-md-5 ml-auto">
           <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <div class="icon icon-rose">
-              <i class="material-icons">timeline</i>
+              <i class="material-icons">dashboard</i>
             </div>
             <div class="description">
               <h4 class="info-title">{{ $t('message.hollowLabel41') }}</h4>
@@ -141,15 +141,15 @@
         class="card card-background wow fadeIn"
         data-wow-duration="2s"
         data-wow-delay="1s"
-        style="background-image: url('./img/backgrounds/kara-eads-1506373-unsplash.jpg'); "
+        style="background-image: url('./img/backgrounds/kara-eads-1506373-unsplash.jpg');"
       >
         <div class="container" style="padding-top: 0vh;">
           <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
               <div class="text-center">
-                <h3 class="title">Попробуйте без регистрации</h3>
+                <h3 class="title">{{ $t('message.hollowTry1') }}</h3>
                 <p class="card-description">
-                  Все еще есть сомнения? Попробуйте демо кабинет!
+                  {{ $t('message.hollowTry2') }}
                 </p>
               </div>
               <div class="card card-raised card-form-horizontal">
@@ -176,7 +176,9 @@
                         ></span>
                       </div>
                       <div class="col-lg-4 col-md-6 ">
-                        <button type="button" class="btn btn-primary btn-block">Войти</button>
+                        <button type="button" class="btn btn-primary btn-block">
+                          {{ $t('message.singIn') }}
+                        </button>
                       </div>
                     </div>
                   </form>
@@ -185,7 +187,7 @@
             </div>
           </div>
         </div>
-      </template>
+      </div>
       <!-- <hr />
 
       <div class="row">
@@ -215,36 +217,41 @@
         <div class="col-md-8 ml-auto mr-auto text-center">
           <div class="section-description">
             <h3 class="info-title">
-              Что о нас пишут
+              {{ $t('message.hollowReviewsTitle') }}
             </h3>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="1s">
-          <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
-            <div class="card card-rotate">
-              <div class="front">
-                <div class="card-body">
-                  <h5 class="card-category card-category-social text-success">
-                    <i class="fa fa-newspaper-o"></i> Отзыв
-                  </h5>
-                  <h4 class="card-title">
-                    <a href="#pablo"
-                      >"Организовать техническую подержку получилось в кратчайшие сроки."</a
-                    >
-                  </h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in
-                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
-                    the back is...
-                  </p>
-                </div>
+        <div
+          class="col-md-12 col-lg-4 wow fadeInLeft review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">Отзыв</h6>
+              <h4 class="card-title">
+                <a href="#pablo"
+                  >"Организовать техническую подержку получилось в кратчайшие сроки."</a
+                >
+              </h4>
+              <p class="card-description">
+                Don't be scared of the truth because we need to restart the human foundation in
+                truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the
+                back is...
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/christian.jpg" class="avatar img-raised rounded-circle" />
+                <span>Андрей Михайлов</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">
+        <!-- <img src="/img/faces/christian.jpg" class="avatar img-raised" /> -->
+        <div class="col-md-6 col-lg-4 wow fadeIn review" data-wow-duration="2s" data-wow-delay="2s">
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
               <div class="front">
@@ -265,7 +272,11 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="4s">
+        <div
+          class="col-md-6 col-lg-4 wow fadeInRight review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
           <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
             <div class="card card-rotate">
               <div class="front">
@@ -288,8 +299,7 @@
         </div>
       </div>
       <hr />
-      <div />
-    </template>
+    </div>
   </div>
 </template>
 
@@ -301,37 +311,22 @@
 .card-description {
   color: white !important;
 }
-.card-pricing ul li {
-  color: #999;
-  text-align: left;
-  padding: 6px 0px;
-  border-bottom: 1px solid hsla(0, 0%, 60%, 0);
+.review .card-description {
+  color: #999 !important;
 }
-.card-pricing ul {
-  list-style: none;
-  padding: 0;
-  max-width: 360px;
-  margin: 10px auto;
-}
-.avatarcenter {
-  justify-content: center;
-  display: flex;
+.autor {
+  margin-right: 10px;
 }
 .avatar {
-  width: 160px;
-  height: 160px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin-top: -80px;
+  margin-top: -5px;
+}
+.card .author .avatar {
+  margin-right: 10px;
 }
 .img-raised {
   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 .rounded-circle {
   border-radius: 50% !important;
-}
-.img-fluid {
-  max-width: 100%;
-  height: auto;
 }
 </style>

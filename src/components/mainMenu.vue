@@ -93,13 +93,14 @@
                 <i class="material-icons">assignment_ind</i> {{ $t('message.accaut') }}
               </a>
               <a class="dropdown-item" @click="showBackgrounds" href="#">
-                <i class="material-icons">photo_size_select_actual</i> Фон
+                <i class="material-icons">photo_size_select_actual</i>
+                {{ $t('message.background') }}
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
-                <i class="material-icons">chrome_reader_mode</i> Доски
+                <i class="material-icons">chrome_reader_mode</i> {{ $t('message.boards') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
-                <i class="material-icons">meeting_room</i> Выход
+                <i class="material-icons">meeting_room</i> {{ $t('message.singOut') }}
               </a>
             </div>
           </li>
