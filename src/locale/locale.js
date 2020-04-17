@@ -39,7 +39,20 @@ const messages = {
         'We tried to make our service open equally well on all devices! Both on large monitors and on small smartphones.',
       hollowTry1: 'Try without registration',
       hollowTry2: 'Still in doubt? Try a demo!',
-      hollowReviewsTitle: 'What customers write about us'
+      hollowReviewsTitle: 'What customers write about us',
+      hollowReview: 'Review',
+      hollowReview11: 'We managed to organize technical support as soon as possible',
+      hollowReview12:
+        'We are a small company, but we have enough clients for support. We implemented this solution quickly. The users didn’t even have any questions how to create ticket for support  and learn about their changes.',
+      hollowReview13: 'Andrey Mikhailov',
+      hollowReview21: 'We accept applications for stationery in our organization',
+      hollowReview22:
+        'Being distracted by every phone call or reviewing an application on paper is time consuming. It brings chaos to work! And then all the need is on one kanban board.',
+      hollowReview23: 'Lisa Andreeva',
+      hollowReview31: 'All you need and more!',
+      hollowReview32:
+        'This is not just a personal area for applications. Here is the whole power of the kanban from Trello. Users submit tasks and we can already set up the necessary automation on our board, schedule work on the calendar, etc. This is a really good combination.',
+      hollowRevisew33: 'Mark Elizarov'
     }
   },
   ru: {
@@ -83,7 +96,20 @@ const messages = {
         'Мы постарались сделать так, чтобы наш сервис открывался одинаково хорошо на всех устройствах! Как на больших мониторах, так и на маленьких смартфонах.',
       hollowTry1: 'Попробуйте без регистрации',
       hollowTry2: 'Все еще есть сомнения? Попробуйте демо кабинет!',
-      hollowReviewsTitle: 'Что клиенты пишут о нас'
+      hollowReviewsTitle: 'Что клиенты пишут о нас',
+      hollowReview: 'Отзыв',
+      hollowReview11: 'Нам удалось организовать техническую поддержку в кратчайшие сроки',
+      hollowReview12:
+        'Мы небольшая компания, но клиентов на поддержке у нас достаточно. Это решение мы внедрили быстро. У пользователей даже вопросов не возникло как оформлять заявки и узнавать об их изменении.',
+      hollowReview13: 'Андрей Михайлов',
+      hollowReview21: 'Принимаем заявки на канцтовары в нашей организации',
+      hollowReview22:
+        'Отвлекаться на каждый телефонный звонок или рассматривать заявку на бумаге отнимает много времени. Это приносит хаос в работу! А тут вся потребность на одной канбан доске.',
+      hollowReview23: 'Лиза Андреева',
+      hollowReview31: 'Все что нужно и даже больше!',
+      hollowReview32:
+        'Это не просто личный кабинет для заявок. Тут вся мощь канбана от Trello. Пользователи подают заявки, а мы уже можем настроить у себя на доске необходимую автоматизацию, запланировать работы в календаре и т.д. Это действительно удачное сочетание.',
+      hollowReview33: 'Марк Елизаров'
     }
   }
 };

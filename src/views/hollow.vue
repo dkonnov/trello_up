@@ -146,13 +146,17 @@
         <div class="container" style="padding-top: 0vh;">
           <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
-              <div class="text-center">
+              <div class="text-center wow fadeInUp" data-wow-duration="3s" data-wow-delay="1s">
                 <h3 class="title">{{ $t('message.hollowTry1') }}</h3>
                 <p class="card-description">
                   {{ $t('message.hollowTry2') }}
                 </p>
               </div>
-              <div class="card card-raised card-form-horizontal">
+              <div
+                class="card card-raised card-form-horizontal wow fadeIn"
+                data-wow-duration="3s"
+                data-wow-delay="3s"
+              >
                 <div
                   class="card-body"
                   style="min-height: 0px; padding-top: 30px; padding-bottom: 30px;"
@@ -188,34 +192,10 @@
           </div>
         </div>
       </div>
-      <!-- <hr />
-
-      <div class="row">
-        <div class="col-lg-4 col-md-10 ml-auto mr-auto text-left">
-          <h3 class="info-title">Следующие шаги</h3>
-          <h6 class="description">Мы работаем над этими функциями</h6>
-          <div class="card-pricing">
-            <ul>
-              <li>
-                <i class="material-icons text-danger">schedule</i> Прикрепленние файлов
-                пользователем
-              </li>
-              <li>
-                <i class="material-icons text-danger">schedule</i> Шаблонные ответы пользователю по
-                задачам
-              </li>
-              <li>
-                <i class="material-icons text-danger">schedule</i> Уведомление пользователя об
-                изменениях
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
 
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto text-center">
-          <div class="section-description">
+          <div class="section-description wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
             <h3 class="info-title">
               {{ $t('message.hollowReviewsTitle') }}
             </h3>
@@ -230,75 +210,75 @@
         >
           <div class="card">
             <div class="card-body">
-              <h6 class="card-category text-success">Отзыв</h6>
+              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
               <h4 class="card-title">
-                <a href="#pablo"
-                  >"Организовать техническую подержку получилось в кратчайшие сроки."</a
-                >
+                <a href="#pablo">"{{ $t('message.hollowReview11') }}"</a>
               </h4>
               <p class="card-description">
-                Don't be scared of the truth because we need to restart the human foundation in
-                truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the
-                back is...
+                {{ $t('message.hollowReview12') }}
               </p>
             </div>
             <div class="card-footer">
               <div class="author">
                 <img src="/img/faces/christian.jpg" class="avatar img-raised rounded-circle" />
-                <span>Андрей Михайлов</span>
+                <span>{{ $t('message.hollowReview13') }}</span>
               </div>
             </div>
           </div>
         </div>
-        <!-- <img src="/img/faces/christian.jpg" class="avatar img-raised" /> -->
-        <div class="col-md-6 col-lg-4 wow fadeIn review" data-wow-duration="2s" data-wow-delay="2s">
-          <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
-            <div class="card card-rotate">
-              <div class="front">
-                <div class="card-body">
-                  <h5 class="card-category card-category-social text-success">
-                    <i class="fa fa-newspaper-o"></i> Отзыв
-                  </h5>
-                  <h4 class="card-title">
-                    <a href="#pablo">"Принимаем заявки на канцелярю."</a>
-                  </h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in
-                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
-                    the back is...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div
-          class="col-md-6 col-lg-4 wow fadeInRight review"
+          class="col-md-12 col-lg-4 wow fadeIn review"
           data-wow-duration="2s"
           data-wow-delay="2s"
         >
-          <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
-            <div class="card card-rotate">
-              <div class="front">
-                <div class="card-body">
-                  <h5 class="card-category card-category-social text-success">
-                    <i class="fa fa-newspaper-o"></i> Отзыв
-                  </h5>
-                  <h4 class="card-title">
-                    <a href="#pablo">"Возможностей даже больше чем нужно"</a>
-                  </h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in
-                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
-                    the back is...
-                  </p>
-                </div>
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
+              <h4 class="card-title">
+                <a href="#pablo">"{{ $t('message.hollowReview21') }}"</a>
+              </h4>
+              <p class="card-description">
+                {{ $t('message.hollowReview22') }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/camp.jpg" class="avatar img-raised rounded-circle" />
+                <span>{{ $t('message.hollowReview23') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-md-12 col-lg-4 wow fadeInRight review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
+              <h4 class="card-title">
+                <a href="#pablo">"{{ $t('message.hollowReview31') }}"</a>
+              </h4>
+              <p class="card-description">
+                {{ $t('message.hollowReview32') }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/marc.jpg" class="avatar img-raised rounded-circle" />
+                <span>{{ $t('message.hollowReview33') }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <hr />
+      <h6 class="card-category text-info">
+        <a href="mailto:info@trello-up.ru">info@trello-up.ru</a>
+      </h6>
     </div>
   </div>
 </template>
