@@ -123,7 +123,7 @@ export default {
       }
     });
     // получим информацию о текущей доске
-    this.$store.dispatch('getCurrentBoard', this.$router.currentRoute.params['board']);
+    this.$store.dispatch('getCurrentBoard', this.$router.currentRoute.params.board);
     setInterval(() => {
       if (this.$store.state.user.uid) {
         this.$store.dispatch('getComments');
