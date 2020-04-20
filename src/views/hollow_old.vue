@@ -67,7 +67,7 @@
       <div class="card card-raised card-carousel">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active" style="height:100%">
+            <div class="carousel-item active" style="height: 100%;">
               <img class="d-block w-100 h-100" src="img/slides/slide2.jpg" alt="Первый слайд" />
               <div class="carousel-caption d-none d-md-block">
                 <h4>

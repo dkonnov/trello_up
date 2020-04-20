@@ -112,7 +112,7 @@ export default {
       password: '',
       password2: '',
       uid: '',
-      loading: false
+      loading: false,
     };
   },
   methods: {
@@ -120,16 +120,16 @@ export default {
       this.loading = true;
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(response => {
+        .then((response) => {
           this.uid = response.user.uid;
 
           // запишем данные о пользователе
           fb.database()
             .ref('users/' + this.uid)
             .set({
-              background: 'patrick-tomasso-1272187-unsplash.jpg'
+              background: 'patrick-tomasso-1272187-unsplash.jpg',
             })
-            .catch(error => {
+            .catch((error) => {
               eventEmitter.$emit('showMessage', error.message);
             });
 
@@ -142,30 +142,30 @@ export default {
                 'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.'
               );
             })
-            .catch(error => {
+            .catch((error) => {
               eventEmitter.$emit('showMessage', error.message);
             });
           this.$router.push('/');
           this.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
-    }
+    },
   },
   validations: {
     email: {
       email,
-      required
+      required,
     },
     password: {
-      minLength: minLength(6)
+      minLength: minLength(6),
     },
     password2: {
-      sameAs: sameAs('password')
-    }
-  }
+      sameAs: sameAs('password'),
+    },
+  },
 };
 </script>
 

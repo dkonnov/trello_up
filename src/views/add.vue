@@ -8,7 +8,7 @@
     </div>
 
     <center>
-      <h2 class="title" style="color: #3c4858">
+      <h2 class="title" style="color: #3c4858;">
         Новая задача
       </h2>
     </center>
@@ -59,13 +59,13 @@ export default {
     return {
       name: '',
       desc: '',
-      selectedUser: ''
+      selectedUser: '',
     };
   },
   validations: {
     name: {
-      required
-    }
+      required,
+    },
   },
   computed: {
     ...mapState(['userData', 'user']),
@@ -83,7 +83,7 @@ export default {
     },
     customfield() {
       return this.$store.state.boards.currentBoard.customfield;
-    }
+    },
   },
   methods: {
     clearForm() {
@@ -99,7 +99,7 @@ export default {
         cf = this.userData.cf;
       }
       let cb = this.currentBoard;
-      res = cf.filter(b => b.board == cb);
+      res = cf.filter((b) => b.board == cb);
 
       if (res.length == 0) {
         // подготовим значение
@@ -115,17 +115,17 @@ export default {
             `https://api.trello.com/1/customField/${this.customfield}/options?key=${key}&token=${token}`,
             {
               value: { text: option },
-              pos: 'bottom'
+              pos: 'bottom',
             }
           )
-          .then(response => {
+          .then((response) => {
             cf.push({
               board: this.currentBoard,
               board_cf: this.customfield,
-              id: response.data.id
+              id: response.data.id,
             });
             this.$store.commit('updateUserData', {
-              cf: cf
+              cf: cf,
             });
             cf_id = response.data.id;
           });
@@ -138,13 +138,13 @@ export default {
         .get(
           `https://api.trello.com/1/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           // публикуем новую карточку
           axios
             .post(
               `https://api.trello.com/1/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&key=${key}&token=${token}`
             )
-            .then(response => {
+            .then((response) => {
               // добавим пользователя, создавшего задачу
               console.log(this.$store.state.boards.currentBoard.customfieldId);
               axios
@@ -166,8 +166,8 @@ export default {
               //setTimeout(this.loadCards(), 2000);
             });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

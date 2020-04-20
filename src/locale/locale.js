@@ -52,8 +52,8 @@ const messages = {
       hollowReview31: 'All you need and more!',
       hollowReview32:
         'This is not just a personal area for applications. Here is the whole power of the kanban from Trello. Users submit tasks and we can already set up the necessary automation on our board, schedule work on the calendar, etc. This is a really good combination.',
-      hollowRevisew33: 'Mark Elizarov'
-    }
+      hollowRevisew33: 'Mark Elizarov',
+    },
   },
   ru: {
     message: {
@@ -109,9 +109,9 @@ const messages = {
       hollowReview31: 'Все что нужно и даже больше!',
       hollowReview32:
         'Это не просто личный кабинет для заявок. Тут вся мощь канбана от Trello. Пользователи подают заявки, а мы уже можем настроить у себя на доске необходимую автоматизацию, запланировать работы в календаре и т.д. Это действительно удачное сочетание.',
-      hollowReview33: 'Марк Елизаров'
-    }
-  }
+      hollowReview33: 'Марк Елизаров',
+    },
+  },
 };
 
 // экспортируем переводы

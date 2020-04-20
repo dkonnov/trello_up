@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-6" style="padding-left: 30px; padding-right: 30px;padding-bottom: 40px;">
+    <div class="col-md-6" style="padding-left: 30px; padding-right: 30px; padding-bottom: 40px;">
       <add />
     </div>
 
@@ -32,7 +32,7 @@
         </p>
       </div>
       <div v-else-if="cardsCount">
-        <h4 class="title" style="color: #3c4858">
+        <h4 class="title" style="color: #3c4858;">
           Ваши текущие задачи
         </h4>
         <div v-for="(card, index) of itemsOnPageArray" :key="card">
@@ -40,7 +40,7 @@
         </div>
 
         <center v-if="totalTabs > 1">
-          <div width="100%" style="display: flex;align-items: center; justify-content: center;">
+          <div width="100%" style="display: flex; align-items: center; justify-content: center;">
             <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
               <template v-for="(tab, index) in totalTabs">
                 <li
@@ -78,13 +78,13 @@ export default {
   name: 'Tasks',
   components: {
     card,
-    add
+    add,
   },
   data() {
     return {
       users: [],
       currentTab: 1,
-      itemsOnPage: 5
+      itemsOnPage: 5,
     };
   },
   computed: {
@@ -113,11 +113,11 @@ export default {
     },
     boardDesc() {
       return this.$store.state.boards.currentBoard.desc;
-    }
+    },
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
+    fb.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -129,7 +129,7 @@ export default {
         this.$store.dispatch('getComments');
       }
     }, 30000);
-  }
+  },
 };
 </script>
 

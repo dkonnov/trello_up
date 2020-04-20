@@ -15,44 +15,44 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: hollow
+      component: hollow,
     },
     {
       path: '/login/:back',
-      component: login
+      component: login,
     },
     {
       path: '/login',
-      component: login
+      component: login,
     },
     {
       path: '/tasks',
-      component: tasks
+      component: tasks,
     },
     {
       path: '/boards',
-      component: boards
+      component: boards,
     },
     {
       path: '/registration',
-      component: registration
+      component: registration,
     },
     {
       path: '/accaunt',
-      component: accaunt
+      component: accaunt,
     },
     {
       path: '/restore',
-      component: restore
+      component: restore,
     },
     {
       path: '/changepassword',
-      component: changepassword
+      component: changepassword,
     },
     {
       path: '/:board',
-      component: tasks
-    }
+      component: tasks,
+    },
   ],
-  mode: 'history'
+  mode: 'history',
 });

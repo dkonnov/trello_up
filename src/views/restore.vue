@@ -60,7 +60,7 @@ import * as fb from 'firebase';
 export default {
   data() {
     return {
-      email: ''
+      email: '',
     };
   },
   methods: {
@@ -74,17 +74,17 @@ export default {
           );
           this.$router.push('/');
         })
-        .catch(error => {
+        .catch((error) => {
           this.$eventEmitter.$emit('showMessage', error.message);
         });
-    }
+    },
   },
   validations: {
     email: {
       email,
-      required
-    }
-  }
+      required,
+    },
+  },
 };
 </script>
 

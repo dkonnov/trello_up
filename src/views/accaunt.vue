@@ -122,35 +122,35 @@ export default {
     return {
       name: '',
       tel: '',
-      place: ''
+      place: '',
     };
   },
   validations: {
     name: {
-      required
+      required,
     },
     tel: {
-      required
+      required,
     },
     place: {
-      required
-    }
+      required,
+    },
   },
   computed: {
     ...mapState(['userData', 'user', 'boards']),
     uid() {
       return this.$store.state.user.uid;
-    }
+    },
   },
   methods: {
     accaunt() {
       this.$store.commit('updateUserData', {
         tel: this.tel,
-        place: this.place
+        place: this.place,
       });
       fb.auth()
         .currentUser.updateProfile({
-          displayName: this.name
+          displayName: this.name,
         })
         .then(() => {
           // подготовим значение
@@ -159,11 +159,11 @@ export default {
           // изменим значения CustomFields
           if (this.userData.cf) {
             let cf = this.userData.cf;
-            cf.forEach(value => {
+            cf.forEach((value) => {
               axios.put(
                 `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
-                  value: { text: option }
+                  value: { text: option },
                 }
               );
             });
@@ -172,14 +172,14 @@ export default {
           this.$router.push('/add');
           eventEmitter.$emit('showMessage', 'Изменения сохранены!');
         })
-        .catch(error => {
+        .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
         });
-    }
+    },
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
+    fb.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -187,7 +187,7 @@ export default {
     this.name = this.$store.state.user.displayName;
     this.tel = this.userData.tel;
     this.place = this.userData.place;
-  }
+  },
 };
 </script>
 

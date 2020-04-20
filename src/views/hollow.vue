@@ -29,7 +29,9 @@
             class="card card-background wow fadeInLeft"
             data-wow-duration="3s"
             data-wow-delay="2s"
-            style="background-image:url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg')"
+            style="
+              background-image: url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg');
+            "
           >
             <a href="#pablo"></a>
             <div class="card-body">
@@ -121,7 +123,7 @@
             class="card card-background wow fadeInRight"
             data-wow-duration="3s"
             data-wow-delay="1s"
-            style="background-image:url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg')"
+            style="background-image: url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg');"
           >
             <a href="#pablo"></a>
             <div class="card-body">
@@ -163,7 +165,7 @@
                 >
                   <form method="" action="">
                     <div class="row">
-                      <div class="col-lg-8 col-md-6 ">
+                      <div class="col-lg-8 col-md-6">
                         <span class="bmd-form-group"
                           ><div class="input-group">
                             <div class="input-group-prepend">
@@ -179,7 +181,7 @@
                             /></div
                         ></span>
                       </div>
-                      <div class="col-lg-4 col-md-6 ">
+                      <div class="col-lg-4 col-md-6">
                         <button type="button" class="btn btn-primary btn-block">
                           {{ $t('message.singIn') }}
                         </button>

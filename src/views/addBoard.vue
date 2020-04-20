@@ -50,7 +50,7 @@
 
           <div class="input-group form-group label-floating">
             <div class="input-group-prepend">
-              <span class="input-group-text" style="align-items: flex-start;padding-top: 6px;">
+              <span class="input-group-text" style="align-items: flex-start; padding-top: 6px;">
                 <i class="material-icons">notes</i>
               </span>
             </div>
@@ -100,7 +100,7 @@ export default {
       name: '',
       desc: '',
       loading: false,
-      stage: ''
+      stage: '',
     };
   },
   validations: {
@@ -108,7 +108,7 @@ export default {
       required,
       url,
       minLength: minLength(28),
-      validID: function() {
+      validID: function () {
         let res;
         let arr = this.board.split('/');
         if (arr.length > 3) {
@@ -118,8 +118,8 @@ export default {
           res = false;
         }
         return res;
-      }
-    }
+      },
+    },
   },
   methods: {
     add() {
@@ -134,7 +134,7 @@ export default {
             .then(() => {
               // Добавим CustomFields
               this.addCustomField(this.boardId)
-                .then(result => {
+                .then((result) => {
                   this.saveBoardToFB(result)
                     .then(() => {
                       this.board = '';
@@ -147,11 +147,11 @@ export default {
                         'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
                       );
                     })
-                    .catch(err => {
+                    .catch((err) => {
                       alert(err);
                     });
                 })
-                .catch(error => {
+                .catch((error) => {
                   this.loading = false;
                   eventEmitter.$emit(
                     'showMessage',
@@ -180,7 +180,7 @@ export default {
           .orderByChild('board')
           .equalTo(value)
           .once('value')
-          .then(snapshot => {
+          .then((snapshot) => {
             const val = snapshot.val();
             if (val) {
               reject(false);
@@ -188,7 +188,7 @@ export default {
               resolve(true);
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       });
@@ -203,12 +203,12 @@ export default {
             board: this.boardId,
             name: this.name,
             desc: this.desc,
-            customfield
+            customfield,
           })
           .then(() => {
             resolve();
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(`Ошибка ${err}`);
             reject(err);
           });
@@ -219,7 +219,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
-          .then(response => {
+          .then((response) => {
             // тут обработаем  пустышки, конечно не самое лучшее место но всеже
             console.log(response.data);
             this.name = !this.name ? response.data.name : this.name;
@@ -237,12 +237,12 @@ export default {
                 token,
                 pos: 'bottom',
                 type: 'list',
-                display_cardFront: true
+                display_cardFront: true,
               })
-              .then(response => {
+              .then((response) => {
                 resolve(response.data.id);
               })
-              .catch(err => {
+              .catch((err) => {
                 eventEmitter.$emit(
                   'showMessage',
                   'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
@@ -251,8 +251,8 @@ export default {
               });
           });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

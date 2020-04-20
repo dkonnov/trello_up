@@ -92,7 +92,7 @@ export default {
     return {
       email: '',
       password: '',
-      loading: false
+      loading: false,
     };
   },
   methods: {
@@ -100,7 +100,7 @@ export default {
       this.loading = true;
       fb.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => {
+        .then((user) => {
           // запишем данные о пользователе
           this.$store.commit('setUser', user.user);
           // получим дополнительные данные о пользователе
@@ -112,32 +112,32 @@ export default {
             this.$router.push('/boards');
           }
         })
-        .catch(error => {
+        .catch((error) => {
           // отобразим ошибку логина
           this.loading = false;
           eventEmitter.$emit('showMessage', error.message);
         });
-    }
+    },
   },
   validations: {
     email: {
       email,
-      required
+      required,
     },
     password: {
-      minLength: minLength(6)
-    }
+      minLength: minLength(6),
+    },
   },
   beforeMount() {
     // своебразная защита роута
     if (!this.$route.params.back) {
-      fb.auth().onAuthStateChanged(user => {
+      fb.auth().onAuthStateChanged((user) => {
         if (user) {
           this.$router.push('/boards');
         }
       });
     }
-  }
+  },
 };
 </script>
 
