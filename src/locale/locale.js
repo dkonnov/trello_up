@@ -16,9 +16,9 @@ const messages = {
       emailLabelInRegistration: 'You must enter an email address that is not in the system.',
       passwordLabel: 'Minimum 6 characters.',
       forgotPassword: 'Forgot password',
-      hollowLabelBottom1: 'Accepting tasks is easier than ever!',
-      hollowLabelBottom2:
-        'Trello Up is a personal area for your customers integrated with Trello. Clients submit taks in their personal area, and your specialists work with them in Trello. At the same time, creating user accounts for Trello itself is not a hassle.',
+      hollowBottom1: 'Accepting tasks instant in Trello !',
+      hollowBottom2:
+        'Trello Up is a personal area for your customers integrated with Trello.<br>Clients submit taks in their personal area, and your specialists work with them in Trello. At the same time, creating user accounts for Trello itself is not a hassle.',
       hollowLabel11: 'Clients personal area in 2 minutes',
       hollowLabel12:
         'In the personal area, the user will be able to see all submitted tasks and already completed.',
@@ -41,6 +41,10 @@ const messages = {
       hollowTry2: 'Still in doubt? Try a demo!',
       hollowReviewsTitle: 'What customers write about us',
       hollowReview: 'Review',
+      hollowReviewBlock11: 'Easier than ever',
+      hollowReviewBlock12: 'Fast, easy and instant in Trello',
+      hollowReviewBlock21: 'Integration with Trello',
+      hollowReviewBlock22: 'Performer work at Trello using the Kanban concept. Efficiency on top!',
       hollowReview11: 'We managed to organize technical support as soon as possible',
       hollowReview12:
         'We are a small company, but we have enough clients for support. We implemented this solution quickly. The users didn’t even have any questions how to create ticket for support  and learn about their changes.',
@@ -73,9 +77,9 @@ const messages = {
         'Необходимо ввести адрес электронной почты, которого нет в системе.',
       passwordLabel: 'Минимум 6 символов.',
       forgotPassword: 'Забыл пароль',
-      hollowLabelBottom1: 'Принимайте заявки проще, чем когда-либо! ',
-      hollowLabelBottom2:
-        'Trello Up это личный кабинет для ваших клиентов интегрированный с Trello. Клиенты подают заявки в своем личном кабинете, а ваши специалисты работают с ними в Trello. При этом создание учетных записей для пользователей в самом Trello не трубуется.',
+      hollowBottom1: 'Принимайте заявки срузу в Trello!',
+      hollowBottom2:
+        'Trello Up это личный кабинет для ваших клиентов интегрированный с Trello.<br>Клиенты подают заявки в своем личном кабинете, а ваши специалисты работают с ними в Trello. При этом создание учетных записей для пользователей в самом Trello не трубуется.',
       hollowLabel11: 'Личный кабинет клиента за 2 минуты',
       hollowLabel12:
         'В личном кабинете пользователь сможет видеть все поданные заявки и уже исполненные.',
@@ -83,8 +87,10 @@ const messages = {
       hollowLabel22:
         'На карточках задач отображается все необходимое: срок, стадия, исполнитель, файлы.',
       hollowLabel31: 'Короткие ссылки',
+
       hollowLabel32:
         'Просто отправье короткую ссылку на подключенную доску пользовотелю или разместите ее у себя на сайте.',
+
       hollowLabel41: 'Несколько досок Trello',
       hollowLabel42:
         'Создайте несколько досок в зависимости от направлений работы в вашей организации и подключите их.',
@@ -98,6 +104,11 @@ const messages = {
       hollowTry2: 'Все еще есть сомнения? Попробуйте демо кабинет!',
       hollowReviewsTitle: 'Что клиенты пишут о нас',
       hollowReview: 'Отзыв',
+      hollowReviewBlock11: 'Проще чем когда-либо',
+      hollowReviewBlock12: 'Быстро, просто и сразу в Trello',
+      hollowReviewBlock21: 'Интеграция с Trello',
+      hollowReviewBlock22:
+        'Исполнители работают в Trello используя концепкию Kanban. Эффективность на выстоте!',
       hollowReview11: 'Нам удалось организовать техническую поддержку в кратчайшие сроки',
       hollowReview12:
         'Мы небольшая компания, но клиентов на поддержке у нас достаточно. Это решение мы внедрили быстро. У пользователей даже вопросов не возникло как оформлять заявки и узнавать об их изменении.',

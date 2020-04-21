@@ -6,9 +6,9 @@
           <br /><br />
           <div class="section-description wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <h3 class="info-title">
-              {{ $t('message.hollowLabelBottom1') }}
+              {{ $t('message.hollowBottom1') }}
             </h3>
-            <h5 class="description">{{ $t('message.hollowLabelBottom2') }}<br /><br /></h5>
+            <h5 class="description" v-html="$t('message.hollowBottom2')"><br /><br /></h5>
             <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
               <center>
                 <router-link to="/registration">
@@ -36,10 +36,10 @@
             <a href="#pablo"></a>
             <div class="card-body">
               <a href="#pablo">
-                <h3 class="card-title">Подача заявок</h3>
+                <h3 class="card-title">{{ $t('message.hollowReviewBlock11') }}</h3>
               </a>
               <p class="card-description">
-                Проще чем когда-либо
+                {{ $t('message.hollowReviewBlock12') }}
               </p>
             </div>
           </div>
@@ -123,16 +123,15 @@
             class="card card-background wow fadeInRight"
             data-wow-duration="3s"
             data-wow-delay="1s"
-            style="background-image: url('img/slides/irfan-simsar-wxWulfjN-G0-unsplash.jpg');"
+            style="background-image: url('img/slides/you-x-ventures-Oalh2MojUuk-unsplash.jpg');"
           >
             <a href="#pablo"></a>
             <div class="card-body">
               <a href="#pablo">
-                <h3 class="card-title">Интеграция с Trello</h3>
+                <h3 class="card-title">{{ $t('message.hollowReviewBlock21') }}</h3>
               </a>
               <p class="card-description">
-                Исполнители работают в Trello используя концепкию Kanban.<br />Эффективность на
-                выстоте!
+                {{ $t('message.hollowReviewBlock22') }}
               </p>
             </div>
           </div>

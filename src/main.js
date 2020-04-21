@@ -6,11 +6,12 @@ import * as fb from 'firebase';
 import App from './App.vue';
 import './css/material-kit.min.css';
 import './css/animate.min.css';
-import messages from './locale/locale.js';
 
 import router from './router.js';
 // eslint-disable-next-line import/no-cycle
 import store from './store/index.js';
+
+import messages from './locale/locale.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
@@ -22,7 +23,7 @@ Vue.config.productionTip = false;
 export const eventEmitter = new Vue();
 
 // авто выбор языка в зависимости от языка браузера
-const lang = window.navigator.language == 'ru-RU' ? 'ru' : 'en';
+const lang = window.navigator.language === 'ru-RU' ? 'ru' : 'en';
 
 const i18n = new VueI18n({
   locale: lang, // set locale
