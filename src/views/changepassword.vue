@@ -68,7 +68,7 @@
       </form>
       <a @click="$router.go(-1)">
         <button type="button" class="btn btn-secondary btn-round">
-          Назад
+          {{ $t('message.back') }}
         </button>
       </a>
     </center>
@@ -76,8 +76,9 @@
 </template>
 
 <script>
-import { minLength, sameAs } from 'vuelidate/lib/validators/';
+import { minLength, sameAs, required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 export default {
@@ -86,12 +87,12 @@ export default {
       password: '',
       password2: '',
       uid: '',
-      loading: false
+      loading: false,
     };
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
+    fb.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -106,20 +107,22 @@ export default {
           eventEmitter.$emit('showMessage', 'Пароль изменен.');
           this.$router.push('/add');
         })
-        .catch(error => {
+        .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
-    }
+    },
   },
   validations: {
     password: {
-      minLength: minLength(6)
+      minLength: minLength(6),
+      required,
     },
     password2: {
-      sameAs: sameAs('password')
-    }
-  }
+      sameAs: sameAs('password'),
+      required,
+    },
+  },
 };
 </script>
 

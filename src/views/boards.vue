@@ -24,7 +24,7 @@
         </p>
       </div>
       <div v-if="boards.length > 0">
-        <h4 class="title" style="color: #3c4858">
+        <h4 class="title" style="color: #3c4858;">
           Доски Trello подключенные вами
         </h4>
         <template v-for="(board, index) in boards">
@@ -36,7 +36,7 @@
               <h6 class="card-subtitle mb-2 text-muted">ID {{ board.board }}</h6>
               {{ board.desc }}
               <div align="right">
-                <div style="display: block;float: right; margin: 2px;">
+                <div style="display: block; float: right; margin: 2px;">
                   <router-link :to="board.board">
                     <button
                       class="btn btn-secondary btn-fab btn-fab-mini btn-round"
@@ -47,7 +47,7 @@
                     </button>
                   </router-link>
                 </div>
-                <div style="display: block;float: right; margin: 2px;">
+                <div style="display: block; float: right; margin: 2px;">
                   <button
                     class="btn btn-secondary btn-fab btn-fab-mini btn-round"
                     type="button"
@@ -67,33 +67,32 @@
 </template>
 
 <script>
-import addBoard from '../views/addBoard';
-import { eventEmitter } from './../main';
 import * as fb from 'firebase';
+import addBoard from './addBoard.vue';
 
 export default {
   name: 'Boards',
   components: {
-    addBoard
+    addBoard,
   },
   methods: {
     deleteBoard(id) {
       this.$store.dispatch('deleteBoard', id);
-    }
+    },
   },
   computed: {
     boards() {
       return this.$store.state.boards.boards;
-    }
+    },
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
+    fb.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$router.push('/login/back');
       }
     });
-  }
+  },
 };
 </script>
 

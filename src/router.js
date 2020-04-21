@@ -1,14 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import hollow from './views/hollow';
-import login from './views/login';
-import tasks from './views/tasks';
-import boards from './views/boards';
-import registration from './views/registration';
-import accaunt from './views/accaunt';
-import restore from './views/restore';
-import changepassword from './views/changepassword';
-import feature from './views/feature';
+import hollow from './views/hollow.vue';
+import login from './views/login.vue';
+import tasks from './views/tasks.vue';
+import boards from './views/boards.vue';
+import registration from './views/registration.vue';
+import accaunt from './views/accaunt.vue';
+import restore from './views/restore.vue';
+import changepassword from './views/changepassword.vue';
 
 Vue.use(Router);
 
@@ -16,48 +15,44 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: hollow
-    },
-    {
-      path: '/feature',
-      component: feature
+      component: hollow,
     },
     {
       path: '/login/:back',
-      component: login
+      component: login,
     },
     {
       path: '/login',
-      component: login
+      component: login,
     },
     {
       path: '/tasks',
-      component: tasks
+      component: tasks,
     },
     {
       path: '/boards',
-      component: boards
+      component: boards,
     },
     {
       path: '/registration',
-      component: registration
+      component: registration,
     },
     {
       path: '/accaunt',
-      component: accaunt
+      component: accaunt,
     },
     {
       path: '/restore',
-      component: restore
+      component: restore,
     },
     {
       path: '/changepassword',
-      component: changepassword
+      component: changepassword,
     },
     {
       path: '/:board',
-      component: tasks
-    }
+      component: tasks,
+    },
   ],
-  mode: 'history'
+  mode: 'history',
 });

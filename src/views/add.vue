@@ -8,7 +8,7 @@
     </div>
 
     <center>
-      <h2 class="title" style="color: #3c4858">
+      <h2 class="title" style="color: #3c4858;">
         Новая задача
       </h2>
     </center>
@@ -59,13 +59,13 @@ export default {
     return {
       name: '',
       desc: '',
-      selectedUser: ''
+      selectedUser: '',
     };
   },
   validations: {
     name: {
-      required
-    }
+      required,
+    },
   },
   computed: {
     ...mapState(['userData', 'user']),
@@ -83,7 +83,7 @@ export default {
     },
     customfield() {
       return this.$store.state.boards.currentBoard.customfield;
-    }
+    },
   },
   methods: {
     clearForm() {
@@ -92,16 +92,17 @@ export default {
     },
     sendTicket() {
       // проверим наличие элемента Custom Filed для пользователя на текущей доске
-      let cf, cf_id, res;
+      let cf;
+      let cfId;
       if (!this.userData.cf) {
         cf = [];
       } else {
         cf = this.userData.cf;
       }
-      let cb = this.currentBoard;
-      res = cf.filter(b => b.board == cb);
+      const cb = this.currentBoard;
+      const res = cf.filter((b) => b.board === cb);
 
-      if (res.length == 0) {
+      if (res.length === 0) {
         // подготовим значение
         let option;
         if (this.user.displayName) {
@@ -115,22 +116,22 @@ export default {
             `https://api.trello.com/1/customField/${this.customfield}/options?key=${key}&token=${token}`,
             {
               value: { text: option },
-              pos: 'bottom'
+              pos: 'bottom',
             }
           )
-          .then(response => {
+          .then((response) => {
             cf.push({
               board: this.currentBoard,
               board_cf: this.customfield,
-              id: response.data.id
+              id: response.data.id,
             });
             this.$store.commit('updateUserData', {
-              cf: cf
+              cf,
             });
-            cf_id = response.data.id;
+            cfId = response.data.id;
           });
       } else {
-        cf_id = res[0].id;
+        cfId = res[0].id;
       }
 
       // получим ID первого листа
@@ -138,18 +139,17 @@ export default {
         .get(
           `https://api.trello.com/1/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           // публикуем новую карточку
           axios
             .post(
               `https://api.trello.com/1/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&key=${key}&token=${token}`
             )
-            .then(response => {
+            .then((response2) => {
               // добавим пользователя, создавшего задачу
-              console.log(this.$store.state.boards.currentBoard.customfieldId);
               axios
                 .put(
-                  `https://api.trello.com/1/card/${response.data.id}/customField/${this.customfield}/item?idValue=${cf_id}&key=${key}&token=${token}`
+                  `https://api.trello.com/1/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}&key=${key}&token=${token}`
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
@@ -163,11 +163,10 @@ export default {
               this.$store.dispatch('getCards', this.$store.state.user);
               this.name = '';
               this.desc = '';
-              //setTimeout(this.loadCards(), 2000);
             });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

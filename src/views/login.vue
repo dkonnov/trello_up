@@ -6,9 +6,10 @@
           <i class="material-icons">account_circle</i>
         </div>
         <h4 class="info-title">
-          Вход
+          {{ $t('message.singIn') }}
         </h4>
       </div>
+
       <form @submit.prevent="login">
         <div class="fields">
           <div
@@ -30,11 +31,10 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert">{{
+              $t('message.emailLabel')
+            }}</small>
           </div>
-          <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
-            >Необходимо ввести адрес электронной почты, который вы использовали при
-            регистрации.</small
-          >
 
           <div
             class="input-group form-group label-floating"
@@ -56,24 +56,25 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          <small v-if="$v.email.$error" class="form-text text-muted small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
         </div>
+
         <button class="btn btn-primary btn-round" :disabled="$v.$invalid || loading" type="submit">
-          Вход
+          {{ $t('message.singIn') }}
         </button>
       </form>
       <br />
       <router-link to="/registration">
         <button type="button" class="btn btn-secondary btn-round">
-          Регистрация
+          {{ $t('message.createAccaut') }}
         </button>
       </router-link>
       <br />
       <router-link to="/restore">
         <button type="button" class="btn btn-secondary btn-round">
-          Забыл пароль
+          {{ $t('message.forgotPassword') }}
         </button>
       </router-link>
     </center>
@@ -91,24 +92,15 @@ export default {
     return {
       email: '',
       password: '',
-      loading: false
+      loading: false,
     };
-  },
-  validations: {
-    email: {
-      email,
-      required
-    },
-    password: {
-      minLength: minLength(6)
-    }
   },
   methods: {
     login() {
       this.loading = true;
       fb.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => {
+        .then((user) => {
           // запишем данные о пользователе
           this.$store.commit('setUser', user.user);
           // получим дополнительные данные о пользователе
@@ -120,23 +112,32 @@ export default {
             this.$router.push('/boards');
           }
         })
-        .catch(error => {
+        .catch((error) => {
           // отобразим ошибку логина
           this.loading = false;
           eventEmitter.$emit('showMessage', error.message);
         });
-    }
+    },
+  },
+  validations: {
+    email: {
+      email,
+      required,
+    },
+    password: {
+      minLength: minLength(6),
+    },
   },
   beforeMount() {
     // своебразная защита роута
     if (!this.$route.params.back) {
-      fb.auth().onAuthStateChanged(user => {
+      fb.auth().onAuthStateChanged((user) => {
         if (user) {
           this.$router.push('/boards');
         }
       });
     }
-  }
+  },
 };
 </script>
 
@@ -145,6 +146,7 @@ export default {
   color: #999
 .fields
   margin-left: -50px
+  max-width: 225px
 .small-alert
   padding-left: 55px
   text-align: left

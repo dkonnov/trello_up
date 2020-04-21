@@ -6,7 +6,7 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          Регистрация
+          {{ $t('message.createAccaut') }}
         </h4>
       </div>
 
@@ -31,9 +31,9 @@
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты, которого нет в системе.</small
-            >
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert">{{
+              $t('message.emailLabelInRegistration')
+            }}</small>
           </div>
 
           <div
@@ -56,9 +56,9 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          <small v-if="$v.password.$error" class="form-text text-muted small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
 
           <div
             class="input-group form-group label-floating"
@@ -87,13 +87,13 @@
         <br />
 
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Зарегистрироваться
+          {{ $t('message.createAccaut') }}
         </button>
         <br />
       </form>
       <a @click="$router.go(-1)">
         <button type="button" class="btn btn-secondary btn-round">
-          Назад
+          {{ $t('message.back') }}
         </button>
       </a>
     </center>
@@ -112,7 +112,7 @@ export default {
       password: '',
       password2: '',
       uid: '',
-      loading: false
+      loading: false,
     };
   },
   methods: {
@@ -120,16 +120,16 @@ export default {
       this.loading = true;
       fb.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(response => {
+        .then((response) => {
           this.uid = response.user.uid;
 
           // запишем данные о пользователе
           fb.database()
             .ref('users/' + this.uid)
             .set({
-              background: 'patrick-tomasso-1272187-unsplash.jpg'
+              background: 'patrick-tomasso-1272187-unsplash.jpg',
             })
-            .catch(error => {
+            .catch((error) => {
               eventEmitter.$emit('showMessage', error.message);
             });
 
@@ -142,30 +142,30 @@ export default {
                 'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.'
               );
             })
-            .catch(error => {
+            .catch((error) => {
               eventEmitter.$emit('showMessage', error.message);
             });
           this.$router.push('/');
           this.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
-    }
+    },
   },
   validations: {
     email: {
       email,
-      required
+      required,
     },
     password: {
-      minLength: minLength(6)
+      minLength: minLength(6),
     },
     password2: {
-      sameAs: sameAs('password')
-    }
-  }
+      sameAs: sameAs('password'),
+    },
+  },
 };
 </script>
 
@@ -174,6 +174,7 @@ export default {
   color: #999
 .fields
   margin-left: -50px
+  max-width: 225px
 .registration
   padding-left: 75px
   padding-right: 75px

@@ -13,7 +13,7 @@ const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349'
 
 export default new Vuex.Store({
   modules: {
-    boards
+    boards,
   },
   state: {
     lists: {},
@@ -22,12 +22,12 @@ export default new Vuex.Store({
     comments: {},
     user: {},
     userData: {},
-    backgrounds: {}
+    backgrounds: {},
   },
   getters: {
     userName(state) {
       return state.user.displayName ? state.user.displayName : state.user.email;
-    }
+    },
   },
   mutations: {
     setUser(state, payload) {
@@ -40,9 +40,7 @@ export default new Vuex.Store({
       // добавим сведения в state
       Object.assign(state.userData, payload);
       // запишем данные о пользователе в Firebase
-      fb.database()
-        .ref(`users/${state.user.uid}`)
-        .set(state.userData);
+      fb.database().ref(`users/${state.user.uid}`).set(state.userData);
     },
     setSingOut(state) {
       state.user = {};
@@ -62,11 +60,11 @@ export default new Vuex.Store({
     },
     setBackgrounds(state, payload) {
       state.backgrounds = payload;
-    }
+    },
   },
   actions: {
     getBackgrounds(context) {
-      axios.get('public/trelloup.php/getBackgrounds').then(response => {
+      axios.get('public/trelloup.php/getBackgrounds').then((response) => {
         if (response.data) {
           context.commit('setBackgrounds', response.data);
         }
@@ -79,7 +77,7 @@ export default new Vuex.Store({
       fb.database()
         .ref(`users/${state.user.uid}`)
         .once('value')
-        .then(snapshot => {
+        .then((snapshot) => {
           const res = snapshot.val();
           commit('setUserData', res);
         });
@@ -89,7 +87,7 @@ export default new Vuex.Store({
         .get(
           `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?lists=all&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           commit('setLists', response.data.lists);
         });
     },
@@ -98,7 +96,7 @@ export default new Vuex.Store({
         .get(
           `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?members=all&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           commit('setMembers', response.data.members);
         });
     },
@@ -108,7 +106,7 @@ export default new Vuex.Store({
         .get(
           `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?cards=all&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           // определим CF
           let cf;
           if (!state.userData.cf) {
@@ -116,9 +114,9 @@ export default new Vuex.Store({
           } else {
             cf = state.userData.cf;
           }
-          const res = cf.filter(b => b.board === state.boards.currentBoard.board);
+          const res = cf.filter((b) => b.board === state.boards.currentBoard.board);
           // отфильтруем карточки
-          const newArr = response.data.cards.filter(card =>
+          const newArr = response.data.cards.filter((card) =>
             card.customFieldItems.length > 0
               ? card.customFieldItems[0].idValue === res[0].id
               : false
@@ -134,9 +132,9 @@ export default new Vuex.Store({
         .get(
           `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/actions/?limit=1000&filter=commentCard&key=${key}&token=${token}`
         )
-        .then(response => {
+        .then((response) => {
           commit('setComments', response.data);
         });
-    }
-  }
+    },
+  },
 });

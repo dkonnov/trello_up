@@ -1,13 +1,13 @@
 <template>
   <nav
-    class="navbar navbar-color-on-scroll navbar-transparent fixed-top  navbar-expand-lg "
+    class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg"
     color-on-scroll="100"
     id="sectionsNav"
   >
     <div class="container">
       <div class="navbar-translate">
         <router-link to="/" class="navbar-brand">
-          <h4 class="card-title" style="color:unset">
+          <h4 class="card-title" style="color: unset;">
             Trello Up
           </h4>
         </router-link>
@@ -28,52 +28,37 @@
         <ul class="navbar-nav ml-auto">
           <li
             class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
-            v-if="!this.$store.state.user.uid"
-          >
-            <router-link
-              to="/feature"
-              style="a.color:unset"
-              class="nav-link"
-              data-toggle="collapse"
-              data-target=".navbar-collapse.show"
-            >
-              Возможности
-            </router-link>
-          </li>
-          <li
-            class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
             <router-link
               to="/registration"
-              style="a.color:unset"
+              style="a.color: unset;"
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              Регистрация
+              {{ $t('message.createAccaut') }}
             </router-link>
           </li>
           <li
             class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="this.$store.state.user.uid"
           >
             <router-link
               to="/hlQcFPTq"
-              style="a.color:unset"
+              style="a.color: unset;"
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              Поддержка
+              {{ $t('message.support') }}
             </router-link>
           </li>
           <li
             class="nav-item"
-            style="padding: 0 5px 0 15px;margin-top: 22px;margin-right: 15px;"
+            style="padding: 0 5px 0 15px; margin-top: 22px; margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
             <router-link to="/login">
@@ -84,13 +69,13 @@
                 href="#"
               >
                 <i class="material-icons">meeting_room</i>
-                Вход
+                {{ $t('message.singIn') }}
               </a>
             </router-link>
           </li>
           <li
             class="dropdown nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="this.$store.state.user.uid"
           >
             <a
@@ -105,16 +90,38 @@
             /></a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="showAccaunt" href="#">
-                <i class="material-icons">assignment_ind</i> Аккаунт
+                <i class="material-icons">assignment_ind</i> {{ $t('message.accaut.main') }}
               </a>
               <a class="dropdown-item" @click="showBackgrounds" href="#">
-                <i class="material-icons">photo_size_select_actual</i> Фон
+                <i class="material-icons">photo_size_select_actual</i>
+                {{ $t('message.background') }}
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
-                <i class="material-icons">chrome_reader_mode</i> Доски
+                <i class="material-icons">chrome_reader_mode</i> {{ $t('message.boards') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
-                <i class="material-icons">meeting_room</i> Выход
+                <i class="material-icons">meeting_room</i> {{ $t('message.singOut') }}
+              </a>
+            </div>
+          </li>
+          <li class="dropdown nav-item" style="margin-top: 22px; margin-right: 15px;">
+            <a
+              class="dropdown-toggle nav-link"
+              aria-expanded="false"
+              href="#"
+              data-toggle="dropdown"
+            >
+              <i class="material-icons">language</i>
+              <div class="ripple-container"
+            /></a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a class="dropdown-item" @click="changeLang('en')" href="#">
+                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
+                <i class="material-icons" v-show="this.$i18n.locale == 'en'">check</i> English
+              </a>
+              <a class="dropdown-item" @click="changeLang('ru')" href="#">
+                <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
+                <i class="material-icons" v-show="this.$i18n.locale == 'ru'">check</i> Русский
               </a>
             </div>
           </li>
@@ -131,6 +138,9 @@ import { eventEmitter } from '../main.js';
 export default {
   name: 'MainMenu',
   methods: {
+    changeLang(value) {
+      this.$i18n.locale = value;
+    },
     showAccaunt() {
       this.$router.push('/accaunt');
     },
@@ -146,19 +156,21 @@ export default {
         .then(() => {
           eventEmitter.$emit('showMessage', 'Надеюсь ты скоро вернешься :(');
         })
-        .catch(error => {
-          eventEmitter.$emit('showMessage', 'Чтото пошло не так :( ' + error.message);
+        .catch((error) => {
+          eventEmitter.$emit('showMessage', `Чтото пошло не так :( ${error.message}`);
         });
       this.$store.dispatch('singOut');
       document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push('/');
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="sass" scoped>
 .navbar .navbar-brand
     padding: 0
+.epmty-icon
+  width: 24px
 </style>

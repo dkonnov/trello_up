@@ -6,7 +6,7 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          Ваш аккаунт
+          {{ $t('message.accaut.main') }}
         </h4>
       </div>
 
@@ -31,9 +31,9 @@
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.name.$error" class="form-text text-muteds small-alert"
-              >Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.</small
-            >
+            <small v-if="$v.name.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label1')
+            }}</small>
           </div>
 
           <div
@@ -55,15 +55,12 @@
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
-            >
+            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label2')
+            }}</small>
           </div>
 
-          <div
-            class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.place.$error }"
-          >
+          <div class="input-group form-group label-floating">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="material-icons">apartment</i>
@@ -71,34 +68,30 @@
             </div>
             <input
               v-model="place"
-              @input="$v.place.$touch"
               type="text"
               class="form-control"
               placeholder="Место нахождения  ..."
             />
-            <button v-if="$v.place.$error" class="form-control-feedback">
+            <button class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.place.$error" class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
-            >
           </div>
 
           <br />
         </div>
         <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
-          Сохранить
+          {{ $t('message.save') }}
         </button>
         <br />
         <router-link to="/changepassword">
           <button type="button" class="btn btn-secondary btn-round">
-            Сменить пароль
+            {{ $t('message.changePassword') }}
           </button>
         </router-link>
         <br />
         <a @click="$router.go(-1)">
           <button type="button" class="btn btn-secondary btn-round">
-            Назад
+            {{ $t('message.back') }}
           </button>
         </a>
       </form>
@@ -111,6 +104,7 @@ import axios from 'axios';
 import { required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { mapState } from 'vuex';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
@@ -121,48 +115,44 @@ export default {
     return {
       name: '',
       tel: '',
-      place: ''
+      place: '',
     };
   },
   validations: {
     name: {
-      required
+      required,
     },
     tel: {
-      required
+      required,
     },
-    place: {
-      required
-    }
   },
   computed: {
     ...mapState(['userData', 'user', 'boards']),
     uid() {
       return this.$store.state.user.uid;
-    }
+    },
   },
   methods: {
     accaunt() {
       this.$store.commit('updateUserData', {
         tel: this.tel,
-        place: this.place
+        place: this.place,
       });
       fb.auth()
         .currentUser.updateProfile({
-          displayName: this.name
+          displayName: this.name,
         })
         .then(() => {
           // подготовим значение
-          let option =
-            this.name + '(' + this.tel + ', ' + this.place + ', ' + this.user.email + ')';
+          const option = `${this.name} (${this.tel}, ${this.place}, ${this.user.email})`;
           // изменим значения CustomFields
           if (this.userData.cf) {
-            let cf = this.userData.cf;
-            cf.forEach(value => {
+            const cf = this.userData;
+            cf.forEach((value) => {
               axios.put(
                 `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
-                  value: { text: option }
+                  value: { text: option },
                 }
               );
             });
@@ -171,14 +161,14 @@ export default {
           this.$router.push('/add');
           eventEmitter.$emit('showMessage', 'Изменения сохранены!');
         })
-        .catch(error => {
+        .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
         });
-    }
+    },
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged(user => {
+    fb.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -186,7 +176,7 @@ export default {
     this.name = this.$store.state.user.displayName;
     this.tel = this.userData.tel;
     this.place = this.userData.place;
-  }
+  },
 };
 </script>
 

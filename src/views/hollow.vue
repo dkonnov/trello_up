@@ -1,132 +1,313 @@
 <template>
   <div class="row">
-    <div class="col-md-6">
-      <div class="info info-horizontal" style="padding: 40px 0 30px;">
-        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="1s">
-          <div class="icon icon-primary">
-            <i class="material-icons">accessibility_new</i>
+    <div class="col-md-12 ml-auto mr-auto text-center">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <br /><br />
+          <div class="section-description wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
+            <h3 class="info-title">
+              {{ $t('message.hollow.bottom1') }}
+            </h3>
+            <h5 class="description" v-html="$t('message.hollow.bottom2')"><br /><br /></h5>
+            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
+              <center>
+                <router-link to="/registration">
+                  <button type="button" class="btn btn-info btn-round">
+                    {{ $t('message.createAccaut') }}
+                  </button>
+                </router-link>
+              </center>
+              <br /><br />
+            </div>
           </div>
-          <div class="description">
-            <h4 class="info-title">
-              Принимай заяки сразу в Trello
-            </h4>
-            <p class="description">
-              Это личный кабинет для ваших пользователей, позволяющий принимать различные виды
-              заявок сразу в Trello. При этом вашим пользователям не нужна учетная запись в самом
-              Trello.
-            </p>
-          </div>
-        </div>
-
-        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="2s">
-          <div class="icon icon-rose">
-            <i class="material-icons">gesture</i>
-          </div>
-          <div class="description">
-            <h4 class="info-title">
-              Различные сценарии
-            </h4>
-            <p class="description">
-              Вы можете использовать сервис для приема заявок на техническую поддержку, запрос на
-              обслуживание, заказ канцелярии и т.д. Вы можете принимать заявки в различные доски
-              Trello.
-            </p>
-          </div>
-        </div>
-
-        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="3s">
-          <div class="icon icon-rose">
-            <i class="material-icons">phonelink</i>
-          </div>
-          <div class="description">
-            <h4 class="info-title">
-              На всех устройствах
-            </h4>
-            <p class="description">
-              Мы постарались сделать так, чтобы наш сервис открывался одинаково хорошо на всех
-              устройствах! Как на больших мониторах, так и на маленьких смартфонах.
-            </p>
-          </div>
-        </div>
-        <br />
-        <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="4s">
-          <center>
-            <router-link to="/registration">
-              <button type="button" class="btn btn-info btn-round">
-                Регистрация
-              </button>
-            </router-link>
-            <router-link to="/feature">
-              <button type="button" class="btn btn-secondary btn-round">
-                Посмотреть все возможности
-              </button>
-            </router-link>
-          </center>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="card card-raised card-carousel">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active" style="height:100%">
-              <img class="d-block w-100 h-100" src="img/slides/slide2.jpg" alt="Первый слайд" />
-              <div class="carousel-caption d-none d-md-block">
-                <h4>
-                  <i class="material-icons">contacts</i>
-                  Простой и функциональный личный кабинет с заявками для ваших клиентов.
-                </h4>
-              </div>
+      <div class="row">
+        <div class="col-md-5 ml-auto">
+          <div
+            class="card card-background wow fadeInLeft"
+            data-wow-duration="3s"
+            data-wow-delay="2s"
+            style="
+              background-image: url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg');
+            "
+          >
+            <a href="#pablo"></a>
+            <div class="card-body">
+              <a href="#pablo">
+                <h3 class="card-title">{{ $t('message.hollow.reviewBlock11') }}</h3>
+              </a>
+              <p class="card-description">
+                {{ $t('message.hollow.reviewBlock12') }}
+              </p>
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 h-100" src="img/slides/slide3.jpg" alt="Второй слайд" />
-              <div class="carousel-caption d-none d-md-block">
-                <h4>
-                  <i class="material-icons">call</i>
-                  Все популярные способы связи
-                </h4>
-              </div>
+          </div>
+        </div>
+        <div class="col-md-5 mr-auto">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
+            <div class="icon icon-info">
+              <i class="material-icons">chrome_reader_mode</i>
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 h-100" src="img/slides/slide1.jpg" alt="Третий слайд" />
-              <div class="carousel-caption d-none d-md-block">
-                <h4>
-                  <i class="material-icons">panorama</i>
-                  Большой выбор красивых фонов
-                </h4>
-              </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label11') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label12') }}
+              </p>
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 h-100" src="img/slides/slide4.jpg" alt="Четвертый слайд" />
-              <div class="carousel-caption d-none d-md-block">
-                <h4>
-                  <i class="material-icons">phone_iphone</i>
-                  Свой короткий адрес и QR код
-                </h4>
+          </div>
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="2s">
+            <div class="icon icon-success">
+              <i class="material-icons">view_day</i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label21') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label22') }}
+              </p>
+            </div>
+          </div>
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="3s">
+            <div class="icon icon-primary">
+              <i class="material-icons">code</i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label31') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label32') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-5 ml-auto">
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
+            <div class="icon icon-rose">
+              <i class="material-icons">dashboard</i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label41') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label42') }}
+              </p>
+            </div>
+          </div>
+
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="2s">
+            <div class="icon icon-info">
+              <i class="material-icons">group</i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label51') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label52') }}
+              </p>
+            </div>
+          </div>
+          <div class="info info-horizontal wow fadeIn" data-wow-duration="2s" data-wow-delay="3s">
+            <div class="icon icon-primary">
+              <i class="material-icons">phonelink</i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">{{ $t('message.hollow.label61') }}</h4>
+              <p class="description">
+                {{ $t('message.hollow.label62') }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 mr-auto">
+          <div
+            class="card card-background wow fadeInRight"
+            data-wow-duration="3s"
+            data-wow-delay="1s"
+            style="background-image: url('img/slides/you-x-ventures-Oalh2MojUuk-unsplash.jpg');"
+          >
+            <a href="#pablo"></a>
+            <div class="card-body">
+              <a href="#pablo">
+                <h3 class="card-title">{{ $t('message.hollow.reviewBlock21') }}</h3>
+              </a>
+              <p class="card-description">
+                {{ $t('message.hollow.reviewBlock22') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="card card-background wow fadeIn"
+        data-wow-duration="2s"
+        data-wow-delay="1s"
+        style="background-image: url('./img/backgrounds/kara-eads-1506373-unsplash.jpg');"
+      >
+        <div class="container" style="padding-top: 0vh;">
+          <div class="row">
+            <div class="col-md-6 ml-auto mr-auto">
+              <div class="text-center wow fadeInUp" data-wow-duration="3s" data-wow-delay="1s">
+                <h3 class="title">{{ $t('message.hollow.try1') }}</h3>
+                <p class="card-description">
+                  {{ $t('message.hollow.try2') }}
+                </p>
+              </div>
+              <div
+                class="card card-raised card-form-horizontal wow fadeIn"
+                data-wow-duration="3s"
+                data-wow-delay="3s"
+              >
+                <div
+                  class="card-body"
+                  style="min-height: 0px; padding-top: 30px; padding-bottom: 30px;"
+                >
+                  <form method="" action="">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-6">
+                        <span class="bmd-form-group"
+                          ><div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">mail</i>
+                              </span>
+                            </div>
+                            <input
+                              type="email"
+                              value=""
+                              placeholder="Your Email..."
+                              class="form-control"
+                            /></div
+                        ></span>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <button type="button" class="btn btn-primary btn-block">
+                          {{ $t('message.singIn') }}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true" />
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true" />
-            <span class="sr-only">Next</span>
-          </a>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <div class="section-description wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
+            <h3 class="info-title">
+              {{ $t('message.hollow.reviewsTitle') }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-md-12 col-lg-4 wow fadeInLeft review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
+              <h4 class="card-title">
+                <a href="#pablo">"{{ $t('message.hollow.review11') }}"</a>
+              </h4>
+              <p class="card-description">
+                {{ $t('message.hollow.review12') }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/christian.jpg" class="avatar img-raised rounded-circle" />
+                <span>{{ $t('message.hollow.review13') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-md-12 col-lg-4 wow fadeIn review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
+              <h4 class="card-title">
+                <a href="#pablo">"{{ $t('message.hollow.review21') }}"</a>
+              </h4>
+              <p class="card-description">
+                {{ $t('message.hollow.review22') }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/camp.jpg" class="avatar img-raised rounded-circle" />
+                <span>{{ $t('message.hollow.review23') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-md-12 col-lg-4 wow fadeInRight review"
+          data-wow-duration="2s"
+          data-wow-delay="2s"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
+              <h4 class="card-title">
+                <a href="#pablo">"{{ $t('message.hollow.review31') }}"</a>
+              </h4>
+              <p class="card-description">
+                {{ $t('message.hollow.review32') }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="author">
+                <img src="/img/faces/marc.jpg" class="avatar img-raised rounded-circle" />
+                <span>{{ $t('message.hollow.review33') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h6 class="card-category text-info">
+        <a href="mailto:info@trello-up.ru">info@trello-up.ru</a>
+      </h6>
     </div>
   </div>
 </template>
+
+<style scoped>
+.info {
+  padding: 0;
+  text-align: left;
+}
+.card-description {
+  color: white !important;
+}
+.review .card-description {
+  color: #999 !important;
+}
+.autor {
+  margin-right: 10px;
+}
+.avatar {
+  margin-top: -5px;
+}
+.card .author .avatar {
+  margin-right: 10px;
+}
+.img-raised {
+  box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+</style>
