@@ -103,6 +103,7 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 export default {
@@ -125,7 +126,7 @@ export default {
 
           // запишем данные о пользователе
           fb.database()
-            .ref('users/' + this.uid)
+            .ref(`users/${this.uid}`)
             .set({
               background: 'patrick-tomasso-1272187-unsplash.jpg',
             })
@@ -133,7 +134,7 @@ export default {
               eventEmitter.$emit('showMessage', error.message);
             });
 
-          //Отправим письмо о подтверждении почты
+          // Отправим письмо о подтверждении почты
           fb.auth()
             .currentUser.sendEmailVerification()
             .then(() => {

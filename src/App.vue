@@ -10,9 +10,9 @@
       <div
         class="container wow fadeIn"
         data-wow-duration="2s"
-        style="display: flex;  align-items: center; flex-direction: column; padding-top: 15vh"
+        style="display: flex; align-items: center; flex-direction: column; padding-top: 15vh;"
       >
-        <div class="card" style="width: unset">
+        <div class="card" style="width: unset;">
           <div class="card-body" style="margin-bottom: 0px;">
             <transition name="fade" mode="out-in">
               <router-view />
@@ -36,12 +36,12 @@ export default {
   components: {
     modal,
     mainMenu,
-    background
+    background,
   },
   computed: {
     background() {
       return this.$store.state.userData.background;
-    }
+    },
   },
   mounted() {
     // установим фоновое изображение
@@ -49,12 +49,13 @@ export default {
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   watch: {
-    background: value => {
+    background: (value) => {
       // сменим фон, если он изменился в state
-      document.getElementById('backgroundDiv').style.backgroundImage =
-        "url('img/backgrounds/" + value + "')";
-    }
-  }
+      document.getElementById(
+        'backgroundDiv'
+      ).style.backgroundImage = `url('img/backgrounds/${value}')`;
+    },
+  },
 };
 </script>
 

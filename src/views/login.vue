@@ -84,6 +84,7 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 export default {

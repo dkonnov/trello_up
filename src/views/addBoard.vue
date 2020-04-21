@@ -108,9 +108,9 @@ export default {
       required,
       url,
       minLength: minLength(28),
-      validID: function () {
+      validID() {
         let res;
-        let arr = this.board.split('/');
+        const arr = this.board.split('/');
         if (arr.length > 3) {
           this.boardId = arr[4];
           arr[4].length === 8 ? (res = true) : (res = false);
@@ -148,7 +148,7 @@ export default {
                       );
                     })
                     .catch((err) => {
-                      alert(err);
+                      // alert(err);
                     });
                 })
                 .catch((error) => {

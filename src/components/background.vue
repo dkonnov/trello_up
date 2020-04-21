@@ -2,11 +2,16 @@
   <!-- Background Modal -->
   <div class="modal fade" id="backgroundForm" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div class="modal-content" style="background-color: transparent; box-shadow: none;">
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div
             class="card card-signup"
-            style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
+            style="
+              padding-left: 15px;
+              padding-right: 15px;
+              padding-top: 15px;
+              padding-bottom: 15px;
+            "
           >
             <h2 class="card-title text-center">
               {{ $t('message.background') }}
@@ -39,7 +44,10 @@
             </div>
 
             <center>
-              <div width="100%" style="display: flex;align-items: center; justify-content: center;">
+              <div
+                width="100%"
+                style="display: flex; align-items: center; justify-content: center;"
+              >
                 <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
                   <template v-for="index in totalTabs">
                     <li
@@ -78,7 +86,7 @@ export default {
   data() {
     return {
       currentTab: 1,
-      itemsOnPage: 6
+      itemsOnPage: 6,
     };
   },
   computed: {
@@ -94,20 +102,20 @@ export default {
     },
     totalTabs() {
       return Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1;
-    }
+    },
   },
   methods: {
     changeBackground(value) {
       this.$store.commit('updateUserData', {
-        background: value
+        background: value,
       });
-    }
+    },
   },
   created() {
     eventEmitter.$on('showBackgroundForm', () => {
       $('#backgroundForm').modal('show');
     });
-  }
+  },
 };
 </script>
 
