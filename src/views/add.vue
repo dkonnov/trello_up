@@ -92,16 +92,17 @@ export default {
     },
     sendTicket() {
       // проверим наличие элемента Custom Filed для пользователя на текущей доске
-      let cf, cf_id, res;
+      let cf;
+      let cfId;
       if (!this.userData.cf) {
         cf = [];
       } else {
         cf = this.userData.cf;
       }
-      let cb = this.currentBoard;
-      res = cf.filter((b) => b.board == cb);
+      const cb = this.currentBoard;
+      const res = cf.filter((b) => b.board === cb);
 
-      if (res.length == 0) {
+      if (res.length === 0) {
         // подготовим значение
         let option;
         if (this.user.displayName) {
@@ -125,12 +126,12 @@ export default {
               id: response.data.id,
             });
             this.$store.commit('updateUserData', {
-              cf: cf,
+              cf,
             });
-            cf_id = response.data.id;
+            cfId = response.data.id;
           });
       } else {
-        cf_id = res[0].id;
+        cfId = res[0].id;
       }
 
       // получим ID первого листа
@@ -144,12 +145,11 @@ export default {
             .post(
               `https://api.trello.com/1/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&key=${key}&token=${token}`
             )
-            .then((response) => {
+            .then((response2) => {
               // добавим пользователя, создавшего задачу
-              console.log(this.$store.state.boards.currentBoard.customfieldId);
               axios
                 .put(
-                  `https://api.trello.com/1/card/${response.data.id}/customField/${this.customfield}/item?idValue=${cf_id}&key=${key}&token=${token}`
+                  `https://api.trello.com/1/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}&key=${key}&token=${token}`
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
@@ -163,7 +163,6 @@ export default {
               this.$store.dispatch('getCards', this.$store.state.user);
               this.name = '';
               this.desc = '';
-              //setTimeout(this.loadCards(), 2000);
             });
         });
     },

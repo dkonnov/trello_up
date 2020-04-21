@@ -6,7 +6,7 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          {{ $t('message.accaut') }}
+          {{ $t('message.accaut.main') }}
         </h4>
       </div>
 
@@ -31,9 +31,9 @@
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.name.$error" class="form-text text-muteds small-alert"
-              >Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.</small
-            >
+            <small v-if="$v.name.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label1')
+            }}</small>
           </div>
 
           <div
@@ -55,15 +55,12 @@
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
-            >
+            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label2')
+            }}</small>
           </div>
 
-          <div
-            class="input-group form-group label-floating"
-            :class="{ 'has-danger': $v.place.$error }"
-          >
+          <div class="input-group form-group label-floating">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="material-icons">apartment</i>
@@ -71,28 +68,24 @@
             </div>
             <input
               v-model="place"
-              @input="$v.place.$touch"
               type="text"
               class="form-control"
               placeholder="Место нахождения  ..."
             />
-            <button v-if="$v.place.$error" class="form-control-feedback">
+            <button class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.place.$error" class="form-text text-muteds small-alert"
-              >Для того чтобы с вами могли связаться, укажите свой номер телефона.</small
-            >
           </div>
 
           <br />
         </div>
         <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
-          Сохранить
+          {{ $t('message.save') }}
         </button>
         <br />
         <router-link to="/changepassword">
           <button type="button" class="btn btn-secondary btn-round">
-            Сменить пароль
+            {{ $t('message.changePassword') }}
           </button>
         </router-link>
         <br />
@@ -132,9 +125,6 @@ export default {
     tel: {
       required,
     },
-    place: {
-      required,
-    },
   },
   computed: {
     ...mapState(['userData', 'user', 'boards']),
@@ -154,11 +144,10 @@ export default {
         })
         .then(() => {
           // подготовим значение
-          let option =
-            this.name + '(' + this.tel + ', ' + this.place + ', ' + this.user.email + ')';
+          const option = `${this.name} (${this.tel}, ${this.place}, ${this.user.email})`;
           // изменим значения CustomFields
           if (this.userData.cf) {
-            let cf = this.userData.cf;
+            const cf = this.userData;
             cf.forEach((value) => {
               axios.put(
                 `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,

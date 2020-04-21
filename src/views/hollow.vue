@@ -6,9 +6,9 @@
           <br /><br />
           <div class="section-description wow fadeIn" data-wow-duration="2s" data-wow-delay="1s">
             <h3 class="info-title">
-              {{ $t('message.hollowBottom1') }}
+              {{ $t('message.hollow.bottom1') }}
             </h3>
-            <h5 class="description" v-html="$t('message.hollowBottom2')"><br /><br /></h5>
+            <h5 class="description" v-html="$t('message.hollow.bottom2')"><br /><br /></h5>
             <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
               <center>
                 <router-link to="/registration">
@@ -36,10 +36,10 @@
             <a href="#pablo"></a>
             <div class="card-body">
               <a href="#pablo">
-                <h3 class="card-title">{{ $t('message.hollowReviewBlock11') }}</h3>
+                <h3 class="card-title">{{ $t('message.hollow.reviewBlock11') }}</h3>
               </a>
               <p class="card-description">
-                {{ $t('message.hollowReviewBlock12') }}
+                {{ $t('message.hollow.reviewBlock12') }}
               </p>
             </div>
           </div>
@@ -50,9 +50,9 @@
               <i class="material-icons">chrome_reader_mode</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel11') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label11') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel12') }}
+                {{ $t('message.hollow.label12') }}
               </p>
             </div>
           </div>
@@ -61,9 +61,9 @@
               <i class="material-icons">view_day</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel21') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label21') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel22') }}
+                {{ $t('message.hollow.label22') }}
               </p>
             </div>
           </div>
@@ -72,9 +72,9 @@
               <i class="material-icons">code</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel31') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label31') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel32') }}
+                {{ $t('message.hollow.label32') }}
               </p>
             </div>
           </div>
@@ -88,9 +88,9 @@
               <i class="material-icons">dashboard</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel41') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label41') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel42') }}
+                {{ $t('message.hollow.label42') }}
               </p>
             </div>
           </div>
@@ -100,9 +100,9 @@
               <i class="material-icons">group</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel51') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label51') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel52') }}
+                {{ $t('message.hollow.label52') }}
               </p>
             </div>
           </div>
@@ -111,9 +111,9 @@
               <i class="material-icons">phonelink</i>
             </div>
             <div class="description">
-              <h4 class="info-title">{{ $t('message.hollowLabel61') }}</h4>
+              <h4 class="info-title">{{ $t('message.hollow.label61') }}</h4>
               <p class="description">
-                {{ $t('message.hollowLabel62') }}
+                {{ $t('message.hollow.label62') }}
               </p>
             </div>
           </div>
@@ -128,10 +128,10 @@
             <a href="#pablo"></a>
             <div class="card-body">
               <a href="#pablo">
-                <h3 class="card-title">{{ $t('message.hollowReviewBlock21') }}</h3>
+                <h3 class="card-title">{{ $t('message.hollow.reviewBlock21') }}</h3>
               </a>
               <p class="card-description">
-                {{ $t('message.hollowReviewBlock22') }}
+                {{ $t('message.hollow.reviewBlock22') }}
               </p>
             </div>
           </div>
@@ -148,9 +148,9 @@
           <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
               <div class="text-center wow fadeInUp" data-wow-duration="3s" data-wow-delay="1s">
-                <h3 class="title">{{ $t('message.hollowTry1') }}</h3>
+                <h3 class="title">{{ $t('message.hollow.try1') }}</h3>
                 <p class="card-description">
-                  {{ $t('message.hollowTry2') }}
+                  {{ $t('message.hollow.try2') }}
                 </p>
               </div>
               <div
@@ -198,7 +198,7 @@
         <div class="col-md-8 ml-auto mr-auto text-center">
           <div class="section-description wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
             <h3 class="info-title">
-              {{ $t('message.hollowReviewsTitle') }}
+              {{ $t('message.hollow.reviewsTitle') }}
             </h3>
           </div>
         </div>
@@ -211,18 +211,18 @@
         >
           <div class="card">
             <div class="card-body">
-              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
               <h4 class="card-title">
-                <a href="#pablo">"{{ $t('message.hollowReview11') }}"</a>
+                <a href="#pablo">"{{ $t('message.hollow.review11') }}"</a>
               </h4>
               <p class="card-description">
-                {{ $t('message.hollowReview12') }}
+                {{ $t('message.hollow.review12') }}
               </p>
             </div>
             <div class="card-footer">
               <div class="author">
                 <img src="/img/faces/christian.jpg" class="avatar img-raised rounded-circle" />
-                <span>{{ $t('message.hollowReview13') }}</span>
+                <span>{{ $t('message.hollow.review13') }}</span>
               </div>
             </div>
           </div>
@@ -235,18 +235,18 @@
         >
           <div class="card">
             <div class="card-body">
-              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
               <h4 class="card-title">
-                <a href="#pablo">"{{ $t('message.hollowReview21') }}"</a>
+                <a href="#pablo">"{{ $t('message.hollow.review21') }}"</a>
               </h4>
               <p class="card-description">
-                {{ $t('message.hollowReview22') }}
+                {{ $t('message.hollow.review22') }}
               </p>
             </div>
             <div class="card-footer">
               <div class="author">
                 <img src="/img/faces/camp.jpg" class="avatar img-raised rounded-circle" />
-                <span>{{ $t('message.hollowReview23') }}</span>
+                <span>{{ $t('message.hollow.review23') }}</span>
               </div>
             </div>
           </div>
@@ -259,18 +259,18 @@
         >
           <div class="card">
             <div class="card-body">
-              <h6 class="card-category text-success">{{ $t('message.hollowReview') }}</h6>
+              <h6 class="card-category text-success">{{ $t('message.hollow.review') }}</h6>
               <h4 class="card-title">
-                <a href="#pablo">"{{ $t('message.hollowReview31') }}"</a>
+                <a href="#pablo">"{{ $t('message.hollow.review31') }}"</a>
               </h4>
               <p class="card-description">
-                {{ $t('message.hollowReview32') }}
+                {{ $t('message.hollow.review32') }}
               </p>
             </div>
             <div class="card-footer">
               <div class="author">
                 <img src="/img/faces/marc.jpg" class="avatar img-raised rounded-circle" />
-                <span>{{ $t('message.hollowReview33') }}</span>
+                <span>{{ $t('message.hollow.review33') }}</span>
               </div>
             </div>
           </div>

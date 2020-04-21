@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { minLength, sameAs } from 'vuelidate/lib/validators/';
+import { minLength, sameAs, required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 // eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
@@ -116,9 +116,11 @@ export default {
   validations: {
     password: {
       minLength: minLength(6),
+      required,
     },
     password2: {
       sameAs: sameAs('password'),
+      required,
     },
   },
 };

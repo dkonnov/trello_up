@@ -1,13 +1,13 @@
 <template>
   <nav
-    class="navbar navbar-color-on-scroll navbar-transparent fixed-top  navbar-expand-lg "
+    class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg"
     color-on-scroll="100"
     id="sectionsNav"
   >
     <div class="container">
       <div class="navbar-translate">
         <router-link to="/" class="navbar-brand">
-          <h4 class="card-title" style="color:unset">
+          <h4 class="card-title" style="color: unset;">
             Trello Up
           </h4>
         </router-link>
@@ -28,12 +28,12 @@
         <ul class="navbar-nav ml-auto">
           <li
             class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
             <router-link
               to="/registration"
-              style="a.color:unset"
+              style="a.color: unset;"
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
@@ -43,12 +43,12 @@
           </li>
           <li
             class="nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="this.$store.state.user.uid"
           >
             <router-link
               to="/hlQcFPTq"
-              style="a.color:unset"
+              style="a.color: unset;"
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
@@ -58,7 +58,7 @@
           </li>
           <li
             class="nav-item"
-            style="padding: 0 5px 0 15px;margin-top: 22px;margin-right: 15px;"
+            style="padding: 0 5px 0 15px; margin-top: 22px; margin-right: 15px;"
             v-if="!this.$store.state.user.uid"
           >
             <router-link to="/login">
@@ -75,7 +75,7 @@
           </li>
           <li
             class="dropdown nav-item"
-            style="margin-top: 22px;margin-right: 15px;"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="this.$store.state.user.uid"
           >
             <a
@@ -90,7 +90,7 @@
             /></a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="showAccaunt" href="#">
-                <i class="material-icons">assignment_ind</i> {{ $t('message.accaut') }}
+                <i class="material-icons">assignment_ind</i> {{ $t('message.accaut.main') }}
               </a>
               <a class="dropdown-item" @click="showBackgrounds" href="#">
                 <i class="material-icons">photo_size_select_actual</i>
@@ -104,7 +104,7 @@
               </a>
             </div>
           </li>
-          <li class="dropdown nav-item" style="margin-top: 22px;margin-right: 15px;">
+          <li class="dropdown nav-item" style="margin-top: 22px; margin-right: 15px;">
             <a
               class="dropdown-toggle nav-link"
               aria-expanded="false"
@@ -156,15 +156,15 @@ export default {
         .then(() => {
           eventEmitter.$emit('showMessage', 'Надеюсь ты скоро вернешься :(');
         })
-        .catch(error => {
-          eventEmitter.$emit('showMessage', 'Чтото пошло не так :( ' + error.message);
+        .catch((error) => {
+          eventEmitter.$emit('showMessage', `Чтото пошло не так :( ${error.message}`);
         });
       this.$store.dispatch('singOut');
       document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push('/');
-    }
-  }
+    },
+  },
 };
 </script>
 
