@@ -9,6 +9,12 @@ const messages = {
         label2: 'In order to be able to contact you, enter your phone number.',
         label3: '',
       },
+      tasks: {
+        title1: 'Hello!',
+        title2:
+          'Here you can create a task on your problem, observe the progress of its execution.',
+        title3: 'Your current tasks',
+      },
       add: {
         alertAddInfo: 'Please fill in your details in the ',
         newTask: 'New task',
@@ -86,6 +92,11 @@ const messages = {
         main: 'Аккаунт',
         label1: 'Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.',
         label2: 'Для того чтобы с вами могли связаться, укажите свой номер телефона.',
+      },
+      tasks: {
+        title1: 'Привет!',
+        title2: 'Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.',
+        title3: 'Ваши текущие задачи',
       },
       add: {
         alertAddInfo: 'Пожалуйста, заполните ваши данные в разделе',
