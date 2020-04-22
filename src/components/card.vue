@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 <template>
   <div class="card" style="width: 100%;" :class="stageClosed">
     <div class="stageLine" :class="stageColor" />
@@ -131,6 +132,7 @@ export default {
       eventEmitter.$emit(
         'showMessage',
         'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+        // eslint-disable-next-line func-names
         function () {
           axios
             .put(`https://api.trello.com/1/cards/${value}?closed=true&key=${key}&token=${token}`)
@@ -191,9 +193,11 @@ export default {
     },
     commentsOnCard(value) {
       const newArr = this.$store.state.comments.filter((arr) => {
+        let res;
         if (arr.data.card.id === value) {
-          return arr;
+          res = arr;
         }
+        return res;
       });
       newArr.sort((a, b) => (a.date > b.date ? 1 : -1)); // отсортируем
       return newArr;
@@ -209,52 +213,62 @@ export default {
   },
   computed: {
     dueDate() {
+      let res;
       if (this.cards[this.index].due) {
         const date = new Date(Date.parse(this.cards[this.index].due));
         const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
         const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
         const formattedDate = `${day}.${month}.${date.getFullYear()}`;
-        return formattedDate;
+        res = formattedDate;
       }
+      return res;
     },
     dueColor() {
       // окрашиает бейдж в красный, если просроченно, или в синий если нет
+      let res;
       if (this.cards[this.index].due) {
-        let res;
         if (Date.now() > Date.parse(this.cards[this.index].due)) {
           res = 'badge-danger';
         } else {
           res = 'badge-info';
         }
-        return res;
       }
+      return res;
     },
     stage() {
+      let res;
       if (this.cards[this.index].closed === true) {
-        return 'В архиве';
+        res = 'В архиве';
       } else {
-        for (var i = 0; i < this.lists.length; ++i) {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < this.lists.length; i++) {
           if (this.lists[i].id === this.cards[this.index].idList) {
-            return this.lists[i].name;
+            res = this.lists[i].name;
           }
         }
       }
+      return res;
     },
     stageColor() {
+      let res;
       if (this.cards[this.index].closed === true) {
-        return 'stageArchiv';
+        res = 'stageArchiv';
       } else {
-        for (var i = 0; i < this.lists.length; ++i) {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < this.lists.length; i++) {
           if (this.lists[i].id === this.cards[this.index].idList) {
-            return 'stage' + i;
+            res = `stage${i}`;
           }
         }
       }
+      return res;
     },
     stageClosed() {
+      let res;
       if (this.cards[this.index].closed === true) {
-        return 'closedOpacity';
+        res = 'closedOpacity';
       }
+      return res;
     },
     cards() {
       return this.$store.state.cards;

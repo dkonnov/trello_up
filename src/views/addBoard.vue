@@ -112,8 +112,10 @@ export default {
         let res;
         const arr = this.board.split('/');
         if (arr.length > 3) {
+          // eslint-disable-next-line prefer-destructuring
           this.boardId = arr[4];
-          arr[4].length === 8 ? (res = true) : (res = false);
+          // eslint-disable-next-line no-unused-expressions
+          this.boardId.length === 8 ? (res = true) : (res = false);
         } else {
           res = false;
         }
@@ -147,8 +149,8 @@ export default {
                         'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
                       );
                     })
-                    .catch((err) => {
-                      // alert(err);
+                    .catch((e) => {
+                      console.log(e);
                     });
                 })
                 .catch((error) => {
@@ -183,9 +185,9 @@ export default {
           .then((snapshot) => {
             const val = snapshot.val();
             if (val) {
-              reject(false);
+              reject();
             } else {
-              resolve(true);
+              resolve();
             }
           })
           .catch((err) => {
@@ -239,8 +241,8 @@ export default {
                 type: 'list',
                 display_cardFront: true,
               })
-              .then((response) => {
-                resolve(response.data.id);
+              .then((response2) => {
+                resolve(response2.data.id);
               })
               .catch((err) => {
                 eventEmitter.$emit(
