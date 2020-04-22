@@ -115,11 +115,11 @@
               <div class="ripple-container"
             /></a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a class="dropdown-item" @click="changeLang('en')" href="#">
+              <a class="dropdown-item" @click="changeLang('en')">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
                 <i class="material-icons" v-show="this.$i18n.locale == 'en'">check</i> English
               </a>
-              <a class="dropdown-item" @click="changeLang('ru')" href="#">
+              <a class="dropdown-item" @click="changeLang('ru')">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
                 <i class="material-icons" v-show="this.$i18n.locale == 'ru'">check</i> Русский
               </a>
