@@ -1,42 +1,40 @@
 <template>
   <div>
     <div v-if="showAlert" class="alert alert-info alert-dismissible fade show" role="alert">
-      Пожалуйста, заполните ваши данные в разделе
+      {{ $t('message.add.alertAddInfo') }}
       <router-link to="/accaunt">
-        <u>Профиль</u>
+        <u>{{ $t('message.accaut.main') }}</u>
       </router-link>
     </div>
 
     <center>
       <h2 class="title" style="color: #3c4858;">
-        Новая задача
+        {{ $t('message.add.newTask') }}
       </h2>
     </center>
 
     <form @submit.prevent="sendTicket">
       <div class="form-group" :class="{ 'has-danger': $v.name.$error }">
-        <label>Задача</label>
+        <label> {{ $t('message.add.topic') }}</label>
         <input type="text" v-model="name" id="name" @input="$v.name.$touch" class="form-control" />
-        <small id="emailHelp" class="form-text text-muted" v-if="!$v.name.required"
-          >Обязательное поле</small
-        >
+        <small id="emailHelp" class="form-text text-muted" v-if="!$v.name.required">{{
+          $t('message.requered')
+        }}</small>
       </div>
       <div class="form-group">
-        <label>Описание задачи</label>
+        <label> {{ $t('message.add.desc') }}</label>
         <textarea class="form-control" v-model="desc" rows="4" placeholder />
         <small id="emailHelp" class="form-text text-muted"
-          >Максимально подробно опишите вашу заявку. Заявка должна содержать идентификационные
-          номера, модели устройств или сущностей, текст возникшей ошибки. В случае возникновения
-          проблемы опишите последовательность выполнения действий.</small
-        >
+          >{{ $t('message.add.desolation') }}
+        </small>
       </div>
 
       <center>
         <button type="submit" class="btn btn-primary btn-round" :disabled="$v.$invalid">
-          Подать заявку
+          {{ $t('message.add.send') }}
         </button>
         <button type="button" class="btn btn-primary btn-link" @click="clearForm">
-          Очистить
+          {{ $t('message.clear') }}
         </button>
         <br />
       </center>
@@ -60,6 +58,7 @@ export default {
       name: '',
       desc: '',
       selectedUser: '',
+      showAlert: false,
     };
   },
   validations: {
