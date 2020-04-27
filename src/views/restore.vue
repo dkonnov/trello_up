@@ -6,11 +6,10 @@
           <i class="material-icons">assignment_ind</i>
         </div>
         <h4 class="info-title">
-          Восстановление доступа
+          {{ $t('message.reg.restore') }}
         </h4>
         <p>
-          Введите адрес электронной почты, который вы указывали при регистрации, и мы отправим вам
-          на него ссылку для смены пароля.
+          {{ $t('message.reg.restoreLabel') }}
         </p>
       </div>
       <form @submit.prevent="send">
@@ -29,18 +28,18 @@
               @input="$v.email.$touch"
               type="email"
               class="form-control"
-              placeholder="Электронная почта ..."
+              :placeholder="$t('message.reg.email')"
             />
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.email.$error" class="form-text text-muteds small-alert"
-              >Необходимо ввести адрес электронной почты на который будет отправлена ссылка.</small
-            >
+            <small v-if="$v.email.$error" class="form-text text-muteds small-alert">{{
+              $t('message.reg.restoreAlert')
+            }}</small>
           </div>
         </div>
         <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
-          Отправить ссылку
+          {{ $t('message.reg.sendLink') }}
         </button>
         <br />
         <a @click="$router.go(-1)">

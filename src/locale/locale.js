@@ -31,6 +31,11 @@ const messages = {
         password: 'Password ...',
         password2: 'Password again ...',
         notEqual: 'Password mismatch.',
+        restore: 'Restore password',
+        restoreLabel:
+          'Enter the email address that you specified when creating the account, and we will send you a link to change the password to it.',
+        sendLink: 'Send link',
+        restoreAlert: 'You must enter the email address to which the link will be sent.',
       },
       singIn: 'Sing In',
       back: 'Back',
@@ -124,6 +129,12 @@ const messages = {
         password: 'Пароль ...',
         password2: 'Пароль еще раз ...',
         notEqual: 'Пароли не совпадают.',
+        restore: 'Восстановление доступа',
+        restoreLabel:
+          'Введите адрес электронной почты, который вы указывали при регистрации, и мы отправим вам на него ссылку для смены пароля.',
+        sendLink: 'Отправить ссылку',
+        restoreAlert:
+          'Необходимо ввести адрес электронной почты на который будет отправлена ссылка.',
       },
       singIn: 'Вход',
       back: 'Назад',
