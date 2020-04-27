@@ -25,15 +25,15 @@
               type="password"
               @input="$v.password.$touch"
               class="form-control"
-              placeholder="Пароль ..."
+              :placeholder="$t('message.reg.password')"
             />
             <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert"
-            >Минимум 6 символов.</small
-          >
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
 
           <div
             class="input-group form-group label-floating"
@@ -49,15 +49,15 @@
               type="password"
               @input="$v.password2.$touch"
               class="form-control"
-              placeholder="Пароль еще раз ..."
+              :placeholder="$t('message.reg.password2')"
             />
             <button v-if="$v.password2.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert">{{
+            $t('message.reg.notEqual')
+          }}</small>
         </div>
         <br />
 
