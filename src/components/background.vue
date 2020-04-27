@@ -68,7 +68,9 @@
                   </template>
                 </ul>
               </div>
-              <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
+              <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">{{
+                $t('message.close')
+              }}</a>
             </center>
           </div>
         </div>
