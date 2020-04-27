@@ -26,7 +26,7 @@
               @input="$v.name.$touch"
               type="text"
               class="form-control"
-              placeholder="Ваше имя ..."
+              :placeholder="$t('message.accaut.yourName')"
             />
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -50,7 +50,7 @@
               @input="$v.tel.$touch"
               type="text"
               class="form-control"
-              placeholder="Номер телефона ..."
+              :placeholder="$t('message.accaut.phoneNumber')"
             />
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -70,7 +70,7 @@
               v-model="place"
               type="text"
               class="form-control"
-              placeholder="Место нахождения  ..."
+              :placeholder="$t('message.accaut.location')"
             />
             <button class="form-control-feedback">
               <i class="material-icons">clear</i>

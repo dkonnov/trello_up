@@ -7,7 +7,9 @@ const messages = {
         main: 'Accaunt',
         label1: 'You must enter your name so that the specialist knows how to contact you.',
         label2: 'In order to be able to contact you, enter your phone number.',
-        label3: '',
+        yourName: 'Your name ...',
+        phoneNumber: 'Phone Number ...',
+        location: 'Your location  ...',
       },
       tasks: {
         title1: 'Hello!',
@@ -95,6 +97,9 @@ const messages = {
         main: 'Аккаунт',
         label1: 'Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.',
         label2: 'Для того чтобы с вами могли связаться, укажите свой номер телефона.',
+        yourName: 'Ваше имя ...',
+        phoneNumber: 'Номер телефона ...',
+        location: 'Место нахождения  ...',
       },
       tasks: {
         title1: 'Привет!',
