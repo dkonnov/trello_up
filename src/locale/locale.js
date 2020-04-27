@@ -24,6 +24,9 @@ const messages = {
         desolation:
           'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
       },
+      reg: {
+        notEqual: 'Пароли не совпадают.',
+      },
       singIn: 'Sing In',
       back: 'Back',
       save: 'Save',
@@ -106,6 +109,9 @@ const messages = {
         desc: 'Описание задачи',
         desolation:
           'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
+      },
+      reg: {
+        notEqual: 'Пароли не совпадают.',
       },
       singIn: 'Вход',
       back: 'Назад',

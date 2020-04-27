@@ -80,9 +80,9 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert">{{
+            $t('message.reg.notEqual')
+          }}</small>
         </div>
         <br />
 
