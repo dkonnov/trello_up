@@ -27,7 +27,10 @@ const messages = {
           'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
       },
       reg: {
-        notEqual: 'Пароли не совпадают.',
+        email: 'Your email ...',
+        password: 'Password ...',
+        password2: 'Password again ...',
+        notEqual: 'Password mismatch.',
       },
       singIn: 'Sing In',
       back: 'Back',
@@ -117,6 +120,9 @@ const messages = {
           'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
       },
       reg: {
+        email: 'Электронная почта ...',
+        password: 'Пароль ...',
+        password2: 'Пароль еще раз ...',
         notEqual: 'Пароли не совпадают.',
       },
       singIn: 'Вход',
