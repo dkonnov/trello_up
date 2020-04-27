@@ -7,7 +7,7 @@
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage }}
         <span class="badge badge-pill" style="margin-top: -1px;" :class="dueColor" v-if="card.due"
-          >Срок: {{ dueDate }}
+          >{{ $t('message.deadline') }}: {{ deadline }}
         </span>
       </h6>
       <p class="card-text">
@@ -100,7 +100,9 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <!-- <a class="dropdown-item" href="#">Добавить файл</a> -->
-            <a class="dropdown-item" href="#" @click="toArchive(card.id)">Закрыть задачу</a>
+            <a class="dropdown-item" href="#" @click="toArchive(card.id)">{{
+              $t('message.closeTask')
+            }}</a>
           </div>
         </div>
       </div>
@@ -212,7 +214,7 @@ export default {
     },
   },
   computed: {
-    dueDate() {
+    deadline() {
       let res;
       if (this.cards[this.index].due) {
         const date = new Date(Date.parse(this.cards[this.index].due));
