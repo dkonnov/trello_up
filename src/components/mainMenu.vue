@@ -97,7 +97,7 @@
                 {{ $t('message.background') }}
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
-                <i class="material-icons">chrome_reader_mode</i> {{ $t('message.boards') }}
+                <i class="material-icons">chrome_reader_mode</i> {{ $t('message.boardsMenu') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i> {{ $t('message.singOut') }}

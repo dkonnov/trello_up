@@ -40,6 +40,19 @@ const messages = {
       card: {
         deadline: 'Deadline',
         closeTask: 'Close task',
+        messageArchiv:
+          'Are you sure you want to move this task to the archive? Performers will not see her again.',
+      },
+      boards: {
+        name: 'Connect Trello board',
+        desc:
+          'To connect the Trello board you must enter a link to it, add to Trello board user <b>@userup3</b> and improvement <b>CustomFields</b>.',
+        placeholder1: 'Link to the Trello board ...',
+        small1:
+          'Copy the link to the Trello board into which you plan to take tasks. For instance, https://trello.com/b/SJEN5ZMP/',
+        placeholder2: 'Board name',
+        placeholder3: 'Welcome description',
+        button: 'Check and connect',
       },
       singIn: 'Sing In',
       back: 'Back',
@@ -49,7 +62,7 @@ const messages = {
       message: 'Message',
       requered: 'Requered field',
       singOut: 'Sing Out',
-      boards: 'Boards',
+      boardsMenu: 'Boards',
       background: 'Background',
       features: 'features',
       support: 'support',
@@ -144,6 +157,19 @@ const messages = {
       card: {
         deadline: 'Срок',
         closeTask: 'Закрыть задачу',
+        messageArchiv:
+          'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+      },
+      boards: {
+        name: 'Подключение доски Trello',
+        desc:
+          'Для подключения доски Trello необходимо ввести ссылку на нее, добавить на доску пользователя <b>@userup3</b>, а также улучшение <b>CustomFields</b>.',
+        placeholder1: 'Ссылка на доску Trello ...',
+        small1:
+          'Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например, https://trello.com/b/SJEN5ZMP/',
+        placeholder2: 'Название доски',
+        placeholder3: 'Приветственное описание',
+        button: 'Проверить и подключить',
       },
       singIn: 'Вход',
       back: 'Назад',
@@ -153,7 +179,7 @@ const messages = {
       message: 'Cообщение',
       requered: 'Обязательное поле',
       singOut: 'Выход',
-      boards: 'Доски',
+      boardsMenu: 'Доски',
       background: 'Фон',
       features: 'Возможности',
       support: 'Поддержка',
