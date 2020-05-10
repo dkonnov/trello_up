@@ -6,10 +6,9 @@
           <i class="material-icons">chrome_reader_mode</i>
         </div>
         <h4 class="info-title">
-          Подключение доски
+          {{ $t('message.addBoard.h') }}
         </h4>
-        Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску пользователя
-        <b>@userup3</b>, а также улучшение <b>CustomFields</b>.
+        {{ $t('message.addBoard.title') }}
       </div>
 
       <form @submit.prevent="add">
@@ -28,7 +27,7 @@
               @input="$v.board.$touch"
               type="text"
               class="form-control"
-              placeholder="Ссылка на доску в Trello ..."
+              :placeholder="$t('message.addBoard.placeholder1')"
             />
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -45,7 +44,12 @@
                 <i class="material-icons">insert_comment</i>
               </span>
             </div>
-            <input v-model="name" type="text" class="form-control" placeholder="Название доски" />
+            <input
+              v-model="name"
+              type="text"
+              class="form-control"
+              :placeholder="$t('message.addBoard.placeholder2')"
+            />
           </div>
 
           <div class="input-group form-group label-floating">
@@ -58,14 +62,14 @@
               class="form-control"
               rows="4"
               v-model="desc"
-              placeholder="Приветственное описание"
+              :placeholder="$t('message.addBoard.placeholder3')"
             />
           </div>
 
           <br />
         </div>
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Проверить и подключить
+          {{ $t('message.addBoard.button') }}
           <div v-if="loading" class="loadingio-spinner-rolling-dqk4877kj7o">
             <div class="ldio-2sjibqn51ln">
               <div></div>

@@ -26,6 +26,15 @@ const messages = {
         desolation:
           'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
       },
+      addBoard: {
+        h: 'Board connection',
+        title:
+          'To connect the board, you must enter a link to it, add @userup3 to the users board, as well as an improvement to CustomFields.',
+        placeholder1: 'Link to the board in Trello ...',
+        placeholder2: 'Board Name ...',
+        placeholder3: 'Welcome description ...',
+        button: 'Check and connect',
+      },
       reg: {
         email: 'Your email ...',
         password: 'Password ...',
@@ -128,6 +137,15 @@ const messages = {
         desc: 'Описание задачи',
         desolation:
           'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
+      },
+      addBoard: {
+        h: 'Подключение доски',
+        title:
+          'Для подключения доски необходимо ввести ссылку на нее, добавить на доску пользователя @userup3, а также улучшение CustomFields.',
+        placeholder1: 'Ссылка на доску в Trello ...',
+        placeholder2: 'Название доски ...',
+        placeholder3: 'Приветственное описание ...',
+        button: 'Проверить и подключить',
       },
       reg: {
         email: 'Электронная почта ...',
