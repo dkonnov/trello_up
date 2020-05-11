@@ -5,9 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">chrome_reader_mode</i>
         </div>
-        <h4 class="info-title">
-          {{ $t('message.addBoard.h') }}
-        </h4>
+        <h4 class="info-title">{{ $t('message.addBoard.h') }}</h4>
         {{ $t('message.addBoard.title') }}
       </div>
 
@@ -32,10 +30,10 @@
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.board.$error" class="form-text text-muteds small-alert"
-              >Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например,
-              https://trello.com/b/SJEN5ZMP/
-            </small>
+            <small
+              v-if="$v.board.$error"
+              class="form-text text-muteds small-alert"
+            >{{$t('message.addBoard.small')}}</small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -78,9 +76,7 @@
         </button>
         <br />
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">
-            {{ $t('message.back') }}
-          </button>
+          <button type="button" class="btn btn-secondary btn-round">{{ $t('message.back') }}</button>
         </a>
       </form>
     </center>

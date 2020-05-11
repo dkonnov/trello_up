@@ -30,6 +30,8 @@ const messages = {
         h: 'Board connection',
         title:
           'To connect the board, you must enter a link to it, add @userup3 to the users board, as well as an improvement to CustomFields.',
+        small:
+          'Copy the link to the Trello board where you plan to take tasks. For example, https://trello.com/b/SJEN5ZMP/',
         placeholder1: 'Link to the board in Trello ...',
         placeholder2: 'Board Name ...',
         placeholder3: 'Welcome description ...',
@@ -142,6 +144,8 @@ const messages = {
         h: 'Подключение доски',
         title:
           'Для подключения доски необходимо ввести ссылку на нее, добавить на доску пользователя @userup3, а также улучшение CustomFields.',
+        small:
+          'Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например, https://trello.com/b/SJEN5ZMP/',
         placeholder1: 'Ссылка на доску в Trello ...',
         placeholder2: 'Название доски ...',
         placeholder3: 'Приветственное описание ...',
