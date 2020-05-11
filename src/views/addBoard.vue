@@ -33,7 +33,7 @@
             <small
               v-if="$v.board.$error"
               class="form-text text-muteds small-alert"
-            >{{$t('message.addBoard.small')}}</small>
+            >{{ $t('message.addBoard.small') }}</small>
           </div>
 
           <div class="input-group form-group label-floating">

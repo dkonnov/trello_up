@@ -36,6 +36,11 @@ const messages = {
         placeholder2: 'Board Name ...',
         placeholder3: 'Welcome description ...',
         button: 'Check and connect',
+        conBoards: 'Connected boards',
+        desc:
+          'Here you can connect your Trello boards. Connected boards can be used by all registered users who have a link. You can send the link to clients and employees by e-mail, or post it on an internal resource or website.',
+        title1: 'Go to',
+        title2: 'Unlink board',
       },
       reg: {
         email: 'Your email ...',
@@ -150,6 +155,11 @@ const messages = {
         placeholder2: 'Название доски ...',
         placeholder3: 'Приветственное описание ...',
         button: 'Проверить и подключить',
+        conBoards: 'Подключенные доски',
+        desc:
+          'Тут вы можете подключить Ваши доски Trello. Подключенными досками смогут пользоваться все зарегистрированные пользователи, у которых будет ссылка. Ссылку вы можете отправлять клиентам и сотрудникам по электронной почте, либо разместить на внутреннем ресурсе или сайте.',
+        title1: 'Перейти',
+        title2: 'Удалить связь с доской',
       },
       reg: {
         email: 'Электронная почта ...',
