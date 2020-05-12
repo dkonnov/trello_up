@@ -42,15 +42,14 @@ const messages = {
           'Here you can connect your Trello boards. Connected boards can be used by all registered users who have a link. You can send the link to clients and employees by e-mail, or post it on an internal resource or website.',
         title1: 'Go to',
         title2: 'Unlink board',
-        modal1:
-          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!',
+        modal1: 'Everything done! Now you can use the board and add tasks through Trello Up!',
         modal2:
-          'Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ',
+          'We are trying to create Custom Field on your board, but something went wrong. Possible reasons: the Custom Field element already exists and needs to be removed, or the Custom Field add-on is not connected to the board. Error: ',
         modal3:
-          'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.',
-        modal4: 'Данная доска уже подключена.',
-        modal5: 'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.',
-        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!',
+          'This board cannot be added. To add a board, enter a link to the board, and invite @userup3 to the board.',
+        modal4: 'This board is already connected.',
+        modal5: 'Please connect Custom Fields improvement to the board and try again.',
+        customDesc: 'Here you can submit a question and we will answer you!',
       },
       reg: {
         email: 'Your email ...',
@@ -70,6 +69,7 @@ const messages = {
           'Are you sure you want to move this task to the archive? Performers will not see her again.',
       },
       boards: {
+        menu: 'Boards',
         name: 'Connect Trello board',
         desc:
           'To connect the Trello board you must enter a link to it, add to Trello board user <b>@userup3</b> and improvement <b>CustomFields</b>.',
@@ -186,6 +186,15 @@ const messages = {
           'Тут вы можете подключить Ваши доски Trello. Подключенными досками смогут пользоваться все зарегистрированные пользователи, у которых будет ссылка. Ссылку вы можете отправлять клиентам и сотрудникам по электронной почте, либо разместить на внутреннем ресурсе или сайте.',
         title1: 'Перейти',
         title2: 'Удалить связь с доской',
+        modal1:
+          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!',
+        modal2:
+          'Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ',
+        modal3:
+          'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.',
+        modal4: 'Данная доска уже подключена.',
+        modal5: 'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.',
+        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!',
       },
       reg: {
         email: 'Электронная почта ...',
@@ -206,6 +215,7 @@ const messages = {
           'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
       },
       boards: {
+        menu: 'Доски',
         name: 'Подключение доски Trello',
         desc:
           'Для подключения доски Trello необходимо ввести ссылку на нее, добавить на доску пользователя <b>@userup3</b>, а также улучшение <b>CustomFields</b>.',

@@ -95,7 +95,7 @@
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
                 <i class="material-icons">chrome_reader_mode</i>
-                {{ $t('message.boards') }}
+                {{ $t('message.boards.menu') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i>
