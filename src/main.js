@@ -11,7 +11,7 @@ import router from './router.js';
 // eslint-disable-next-line import/no-cycle
 import store from './store/index.js';
 
-import messages from './locale/locale.js';
+import messages from './locale/en.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);

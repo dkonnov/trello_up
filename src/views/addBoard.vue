@@ -146,34 +146,25 @@ export default {
                       this.desc = '';
                       this.loading = false;
                       this.$store.dispatch('getBoards');
-                      eventEmitter.$emit(
-                        'showMessage',
-                        'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
-                      );
+                      eventEmitter.$emit('showMessage', this.$('message.addBoard.modal1'));
                     })
                     .catch((e) => {
                       console.log(e);
                     });
                 })
-                .catch((error) => {
+                .catch(() => {
                   this.loading = false;
-                  eventEmitter.$emit(
-                    'showMessage',
-                    `Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
-                  );
+                  eventEmitter.$emit('showMessage', this.$('message.addBoard.modal2'));
                 });
             })
             .catch(() => {
               this.loading = false;
-              eventEmitter.$emit(
-                'showMessage',
-                'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
-              );
+              eventEmitter.$emit('showMessage', this.$('message.addBoard.modal3'));
             });
         })
         .catch(() => {
           this.loading = false;
-          eventEmitter.$emit('showMessage', 'Данная доска уже подключена.');
+          eventEmitter.$emit('showMessage', this.$('message.addBoard.modal4'));
         });
     },
     uniqBoard(value) {
@@ -213,7 +204,6 @@ export default {
             resolve();
           })
           .catch((err) => {
-            console.log(`Ошибка ${err}`);
             reject(err);
           });
       });
@@ -227,9 +217,7 @@ export default {
             // тут обработаем  пустышки, конечно не самое лучшее место но всеже
             console.log(response.data);
             this.name = !this.name ? response.data.name : this.name;
-            this.desc = !this.desc
-              ? 'Тут вы можете подать вопрос и мы обязательно Вам ответим!'
-              : this.desc;
+            this.desc = !this.desc ? this.$('message.addBoard.customDesc') : this.desc;
             //
             console.log(response.data);
             axios
@@ -247,10 +235,7 @@ export default {
                 resolve(response2.data.id);
               })
               .catch((err) => {
-                eventEmitter.$emit(
-                  'showMessage',
-                  'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
-                );
+                eventEmitter.$emit('showMessage', this.$('message.addBoard.modal5'));
                 reject(err);
               });
           });

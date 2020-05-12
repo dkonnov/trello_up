@@ -43,6 +43,7 @@
 </template>
 
 <script>
+/* eslint-disable comma-dangle */
 import axios from 'axios';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
@@ -155,10 +156,7 @@ export default {
                 });
 
               // напишем сообщение об успешной публикации карточки
-              eventEmitter.$emit(
-                'showMessage',
-                'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.'
-              );
+              eventEmitter.$emit('showMessage', this.$t('message.tasks.add'));
               this.$store.dispatch('getCards', this.$store.state.user);
               this.name = '';
               this.desc = '';

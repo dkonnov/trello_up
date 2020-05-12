@@ -16,7 +16,7 @@ const messages = {
         title2:
           'Here you can create a task on your problem, observe the progress of its execution.',
         title3: 'Your current tasks',
-        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.',
+        add: 'Task added! In the near future it will be distributed by specialist. Expect.',
       },
       add: {
         alertAddInfo: 'Please fill in your details in the ',
@@ -42,6 +42,15 @@ const messages = {
           'Here you can connect your Trello boards. Connected boards can be used by all registered users who have a link. You can send the link to clients and employees by e-mail, or post it on an internal resource or website.',
         title1: 'Go to',
         title2: 'Unlink board',
+        modal1:
+          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!',
+        modal2:
+          'Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ',
+        modal3:
+          'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.',
+        modal4: 'Данная доска уже подключена.',
+        modal5: 'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.',
+        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!',
       },
       reg: {
         email: 'Your email ...',

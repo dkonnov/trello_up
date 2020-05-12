@@ -29,10 +29,9 @@
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.name.$error"
-              class="form-text text-muteds small-alert"
-            >{{ $t('message.accaut.label1') }}</small>
+            <small v-if="$v.name.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label1')
+            }}</small>
           </div>
 
           <div
@@ -54,10 +53,9 @@
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.tel.$error"
-              class="form-text text-muteds small-alert"
-            >{{ $t('message.accaut.label2') }}</small>
+            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert">{{
+              $t('message.accaut.label2')
+            }}</small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -79,21 +77,20 @@
 
           <br />
         </div>
-        <button
-          :disabled="$v.$invalid"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >{{ $t('message.save') }}</button>
+        <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
+          {{ $t('message.save') }}
+        </button>
         <br />
         <router-link to="/changepassword">
-          <button
-            type="button"
-            class="btn btn-secondary btn-round"
-          >{{ $t('message.changePassword') }}</button>
+          <button type="button" class="btn btn-secondary btn-round">
+            {{ $t('message.changePassword') }}
+          </button>
         </router-link>
         <br />
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">{{ $t('message.back') }}</button>
+          <button type="button" class="btn btn-secondary btn-round">
+            {{ $t('message.back') }}
+          </button>
         </a>
       </form>
     </center>
