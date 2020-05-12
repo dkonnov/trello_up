@@ -5,9 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">vpn_key</i>
         </div>
-        <h4 class="info-title">
-          Смена пароля
-        </h4>
+        <h4 class="info-title">{{ $t('message.changePassword') }}</h4>
       </div>
       <form @submit.prevent="change">
         <div class="fields">
@@ -31,9 +29,10 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password.$error" class="form-text text-muteds small-alert">{{
-            $t('message.passwordLabel')
-          }}</small>
+          <small
+            v-if="$v.password.$error"
+            class="form-text text-muteds small-alert"
+          >{{ $t('message.passwordLabel') }}</small>
 
           <div
             class="input-group form-group label-floating"
@@ -55,21 +54,22 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert">{{
-            $t('message.reg.notEqual')
-          }}</small>
+          <small
+            v-if="$v.password2.$error"
+            class="form-text text-muteds small-alert"
+          >{{ $t('message.reg.notEqual') }}</small>
         </div>
         <br />
 
-        <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Сменить
-        </button>
+        <button
+          :disabled="$v.$invalid || loading"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >>{{ $t('message.save') }}</button>
         <br />
       </form>
       <a @click="$router.go(-1)">
-        <button type="button" class="btn btn-secondary btn-round">
-          {{ $t('message.back') }}
-        </button>
+        <button type="button" class="btn btn-secondary btn-round">{{ $t('message.back') }}</button>
       </a>
     </center>
   </div>
@@ -136,7 +136,7 @@ export default {
   padding-right: 75px
   min-width: 350px
 .form-control-feedback
-    margin-top: -28px
+  margin-top: -28px
 .small-alert
   padding-left: 55px
   text-align: left

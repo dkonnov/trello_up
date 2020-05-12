@@ -30,10 +30,9 @@
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small
-              v-if="$v.board.$error"
-              class="form-text text-muteds small-alert"
-            >{{ $t('message.addBoard.small') }}</small>
+            <small v-if="$v.board.$error" class="form-text text-muteds small-alert">
+              {{ $t('message.addBoard.small') }}
+            </small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -76,7 +75,9 @@
         </button>
         <br />
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">{{ $t('message.back') }}</button>
+          <button type="button" class="btn btn-secondary btn-round">
+            {{ $t('message.back') }}
+          </button>
         </a>
       </form>
     </center>
