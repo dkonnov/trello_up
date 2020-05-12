@@ -5,8 +5,8 @@
         <div class="icon icon-primary">
           <i class="material-icons">chrome_reader_mode</i>
         </div>
-        <h4 class="info-title">{{ $t('message.boards.name') }}</h4>
-        <div v-html="$t('message.boards.desc')"></div>
+        <h4 class="info-title">{{ $t('message.addBoard.h') }}</h4>
+        {{ $t('message.addBoard.title') }}
       </div>
 
       <form @submit.prevent="add">
@@ -30,9 +30,9 @@
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.board.$error" class="form-text text-muteds small-alert">{{
-              $t('message.boards.small1')
-            }}</small>
+            <small v-if="$v.board.$error" class="form-text text-muteds small-alert">
+              {{ $t('message.addBoard.small') }}
+            </small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -45,7 +45,7 @@
               v-model="name"
               type="text"
               class="form-control"
-              :placeholder="$t('message.boards.placeholder2')"
+              :placeholder="$t('message.addBoard.placeholder2')"
             />
           </div>
 
@@ -59,14 +59,14 @@
               class="form-control"
               rows="4"
               v-model="desc"
-              :placeholder="$t('message.boards.placeholder3')"
+              :placeholder="$t('message.addBoard.placeholder3')"
             />
           </div>
 
           <br />
         </div>
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          {{ $t('message.boards.button') }}
+          {{ $t('message.addBoard.button') }}
           <div v-if="loading" class="loadingio-spinner-rolling-dqk4877kj7o">
             <div class="ldio-2sjibqn51ln">
               <div></div>
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+/* eslint-disable comma-dangle */
 import axios from 'axios';
 import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
@@ -232,7 +233,7 @@ export default {
             //
             console.log(response.data);
             axios
-              .post(`https://api.trello.com/1/customFields`, {
+              .post('https://api.trello.com/1/customFields', {
                 idModel: response.data.id,
                 modelType: 'board',
                 name: 'Trello Up User',

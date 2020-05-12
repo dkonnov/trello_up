@@ -1,4 +1,3 @@
-// переводы
 const messages = {
   en: {
     message: {
@@ -10,12 +9,14 @@ const messages = {
         yourName: 'Your name ...',
         phoneNumber: 'Phone Number ...',
         location: 'Your location  ...',
+        saveModal: 'Изменения сохранены',
       },
       tasks: {
         title1: 'Hello!',
         title2:
           'Here you can create a task on your problem, observe the progress of its execution.',
         title3: 'Your current tasks',
+        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.',
       },
       add: {
         alertAddInfo: 'Please fill in your details in the ',
@@ -25,6 +26,22 @@ const messages = {
         desc: 'Task description',
         desolation:
           'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
+      },
+      addBoard: {
+        h: 'Board connection',
+        title:
+          'To connect the board, you must enter a link to it, add @userup3 to the users board, as well as an improvement to CustomFields.',
+        small:
+          'Copy the link to the Trello board where you plan to take tasks. For example, https://trello.com/b/SJEN5ZMP/',
+        placeholder1: 'Link to the board in Trello ...',
+        placeholder2: 'Board Name ...',
+        placeholder3: 'Welcome description ...',
+        button: 'Check and connect',
+        conBoards: 'Connected boards',
+        desc:
+          'Here you can connect your Trello boards. Connected boards can be used by all registered users who have a link. You can send the link to clients and employees by e-mail, or post it on an internal resource or website.',
+        title1: 'Go to',
+        title2: 'Unlink board',
       },
       reg: {
         email: 'Your email ...',
@@ -55,14 +72,15 @@ const messages = {
         button: 'Check and connect',
       },
       singIn: 'Sing In',
+      singOut: 'Sing Out',
+      singOutModal: 'Hope you will be back soon :(',
+      errorModal: 'Что-то пошло не так! ',
       back: 'Back',
       close: 'Close',
       save: 'Save',
       clear: 'Clear',
       message: 'Message',
       requered: 'Requered field',
-      singOut: 'Sing Out',
-      boardsMenu: 'Boards',
       background: 'Background',
       features: 'features',
       support: 'support',
@@ -127,11 +145,13 @@ const messages = {
         yourName: 'Ваше имя ...',
         phoneNumber: 'Номер телефона ...',
         location: 'Место нахождения  ...',
+        saveModal: 'Изменения сохранены',
       },
       tasks: {
         title1: 'Привет!',
         title2: 'Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.',
         title3: 'Ваши текущие задачи',
+        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.',
       },
       add: {
         alertAddInfo: 'Пожалуйста, заполните ваши данные в разделе',
@@ -141,6 +161,22 @@ const messages = {
         desc: 'Описание задачи',
         desolation:
           'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
+      },
+      addBoard: {
+        h: 'Подключение доски',
+        title:
+          'Для подключения доски необходимо ввести ссылку на нее, добавить на доску пользователя @userup3, а также улучшение CustomFields.',
+        small:
+          'Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например, https://trello.com/b/SJEN5ZMP/',
+        placeholder1: 'Ссылка на доску в Trello ...',
+        placeholder2: 'Название доски ...',
+        placeholder3: 'Приветственное описание ...',
+        button: 'Проверить и подключить',
+        conBoards: 'Подключенные доски',
+        desc:
+          'Тут вы можете подключить Ваши доски Trello. Подключенными досками смогут пользоваться все зарегистрированные пользователи, у которых будет ссылка. Ссылку вы можете отправлять клиентам и сотрудникам по электронной почте, либо разместить на внутреннем ресурсе или сайте.',
+        title1: 'Перейти',
+        title2: 'Удалить связь с доской',
       },
       reg: {
         email: 'Электронная почта ...',
@@ -172,14 +208,15 @@ const messages = {
         button: 'Проверить и подключить',
       },
       singIn: 'Вход',
+      singOut: 'Выход',
+      singOutModal: 'Надеюсь ты скоро вернешься :(',
+      errorModal: 'Something went wrong',
       back: 'Назад',
       close: 'Закрыть',
       save: 'Сохранить',
       clear: 'Очистить',
       message: 'Cообщение',
       requered: 'Обязательное поле',
-      singOut: 'Выход',
-      boardsMenu: 'Доски',
       background: 'Фон',
       features: 'Возможности',
       support: 'Поддержка',
