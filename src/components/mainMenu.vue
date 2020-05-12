@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 <template>
   <nav
     class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg"
@@ -7,9 +8,7 @@
     <div class="container">
       <div class="navbar-translate">
         <router-link to="/" class="navbar-brand">
-          <h4 class="card-title" style="color: unset;">
-            Trello Up
-          </h4>
+          <h4 class="card-title" style="color: unset;">Trello Up</h4>
         </router-link>
         <button
           class="navbar-toggler"
@@ -37,9 +36,8 @@
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
+              >{{ $t('message.createAccaut') }}</router-link
             >
-              {{ $t('message.createAccaut') }}
-            </router-link>
           </li>
           <li
             class="nav-item"
@@ -52,9 +50,8 @@
               class="nav-link"
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
+              >{{ $t('message.support') }}</router-link
             >
-              {{ $t('message.support') }}
-            </router-link>
           </li>
           <li
             class="nav-item"
@@ -86,21 +83,24 @@
             >
               <i class="material-icons">face</i>
               {{ this.$store.getters.userName }}
-              <div class="ripple-container"
-            /></a>
+              <div class="ripple-container" />
+            </a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="showAccaunt" href="#">
-                <i class="material-icons">assignment_ind</i> {{ $t('message.accaut.main') }}
+                <i class="material-icons">assignment_ind</i>
+                {{ $t('message.accaut.main') }}
               </a>
               <a class="dropdown-item" @click="showBackgrounds" href="#">
                 <i class="material-icons">photo_size_select_actual</i>
                 {{ $t('message.background') }}
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
-                <i class="material-icons">chrome_reader_mode</i> {{ $t('message.boards') }}
+                <i class="material-icons">chrome_reader_mode</i>
+                {{ $t('message.boards') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
-                <i class="material-icons">meeting_room</i> {{ $t('message.singOut') }}
+                <i class="material-icons">meeting_room</i>
+                {{ $t('message.singOut') }}
               </a>
             </div>
           </li>
@@ -112,8 +112,8 @@
               data-toggle="dropdown"
             >
               <i class="material-icons">language</i>
-              <div class="ripple-container"
-            /></a>
+              <div class="ripple-container" />
+            </a>
             <div class="dropdown-menu dropdown-with-icons">
               <a class="dropdown-item" @click="changeLang('en')">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
@@ -154,12 +154,13 @@ export default {
       fb.auth()
         .signOut()
         .then(() => {
-          eventEmitter.$emit('showMessage', 'Надеюсь ты скоро вернешься :(');
+          eventEmitter.$emit('showMessage', this.$t('message.singOutModal'));
         })
         .catch((error) => {
           eventEmitter.$emit('showMessage', `Чтото пошло не так :( ${error.message}`);
         });
       this.$store.dispatch('singOut');
+      // eslint-disable-next-line operator-linebreak
       document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push('/');
@@ -170,7 +171,7 @@ export default {
 
 <style lang="sass" scoped>
 .navbar .navbar-brand
-    padding: 0
+  padding: 0
 .epmty-icon
   width: 24px
 </style>

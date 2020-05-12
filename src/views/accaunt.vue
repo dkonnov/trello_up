@@ -5,9 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">
-          {{ $t('message.accaut.main') }}
-        </h4>
+        <h4 class="info-title">{{ $t('message.accaut.main') }}</h4>
       </div>
 
       <form @submit.prevent="accaunt">
@@ -31,9 +29,10 @@
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.name.$error" class="form-text text-muteds small-alert">{{
-              $t('message.accaut.label1')
-            }}</small>
+            <small
+              v-if="$v.name.$error"
+              class="form-text text-muteds small-alert"
+            >{{ $t('message.accaut.label1') }}</small>
           </div>
 
           <div
@@ -55,9 +54,10 @@
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.tel.$error" class="form-text text-muteds small-alert">{{
-              $t('message.accaut.label2')
-            }}</small>
+            <small
+              v-if="$v.tel.$error"
+              class="form-text text-muteds small-alert"
+            >{{ $t('message.accaut.label2') }}</small>
           </div>
 
           <div class="input-group form-group label-floating">
@@ -79,20 +79,21 @@
 
           <br />
         </div>
-        <button :disabled="$v.$invalid" type="submit" class="btn btn-primary btn-round">
-          {{ $t('message.save') }}
-        </button>
+        <button
+          :disabled="$v.$invalid"
+          type="submit"
+          class="btn btn-primary btn-round"
+        >{{ $t('message.save') }}</button>
         <br />
         <router-link to="/changepassword">
-          <button type="button" class="btn btn-secondary btn-round">
-            {{ $t('message.changePassword') }}
-          </button>
+          <button
+            type="button"
+            class="btn btn-secondary btn-round"
+          >{{ $t('message.changePassword') }}</button>
         </router-link>
         <br />
         <a @click="$router.go(-1)">
-          <button type="button" class="btn btn-secondary btn-round">
-            {{ $t('message.back') }}
-          </button>
+          <button type="button" class="btn btn-secondary btn-round">{{ $t('message.back') }}</button>
         </a>
       </form>
     </center>
@@ -153,13 +154,14 @@ export default {
                 `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
                   value: { text: option },
+                  // eslint-disable-next-line comma-dangle
                 }
               );
             });
           }
 
           this.$router.push('/add');
-          eventEmitter.$emit('showMessage', 'Изменения сохранены!');
+          eventEmitter.$emit('showMessage', this.$t('message.accaut.saveModal'));
         })
         .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
@@ -190,7 +192,7 @@ export default {
   padding-right: 75px
   min-width: 350px
 .form-control-feedback
-    margin-top: -28px
+  margin-top: -28px
 .small-alert
   padding-left: 55px
   text-align: left
