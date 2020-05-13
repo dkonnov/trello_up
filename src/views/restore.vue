@@ -67,10 +67,7 @@ export default {
       fb.auth()
         .sendPasswordResetEmail(this.email)
         .then(() => {
-          this.$eventEmitter.$emit(
-            'showMessage',
-            'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».'
-          );
+          this.$eventEmitter.$emit('showMessage', this.$('message.reg.restoreModal'));
           this.$router.push('/');
         })
         .catch((error) => {

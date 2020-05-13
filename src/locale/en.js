@@ -57,10 +57,15 @@ const messages = {
         password2: 'Password again ...',
         notEqual: 'Password mismatch.',
         restore: 'Restore password',
+        changePasswordModal: 'Password changed.',
         restoreLabel:
           'Enter the email address that you specified when creating the account, and we will send you a link to change the password to it.',
         sendLink: 'Send link',
         restoreAlert: 'You must enter the email address to which the link will be sent.',
+        registrationModal:
+          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+        restoreModal:
+          'We have sent you an email with a link to restore access. If you did not find it, then perhaps it mistakenly got into the Spam folder.',
       },
       card: {
         deadline: 'Deadline',
@@ -202,11 +207,16 @@ const messages = {
         password2: 'Пароль еще раз ...',
         notEqual: 'Пароли не совпадают.',
         restore: 'Восстановление доступа',
+        changePasswordModal: 'Пароль изменен.',
         restoreLabel:
           'Введите адрес электронной почты, который вы указывали при регистрации, и мы отправим вам на него ссылку для смены пароля.',
         sendLink: 'Отправить ссылку',
         restoreAlert:
           'Необходимо ввести адрес электронной почты на который будет отправлена ссылка.',
+        registrationModal:
+          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+        restoreModal:
+          'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».',
       },
       card: {
         deadline: 'Срок',
