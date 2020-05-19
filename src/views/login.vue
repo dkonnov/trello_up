@@ -26,7 +26,7 @@
               @input="$v.email.$touch"
               type="email"
               class="form-control"
-              placeholder="Электронная почта ..."
+              :placeholder="$t('message.reg.email')"
             />
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -50,7 +50,7 @@
               type="password"
               @input="$v.password.$touch"
               class="form-control"
-              placeholder="Пароль ..."
+              :placeholder="$t('message.reg.password')"
             />
             <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -84,6 +84,7 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 export default {

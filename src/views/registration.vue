@@ -26,7 +26,7 @@
               @input="$v.email.$touch"
               type="email"
               class="form-control"
-              placeholder="Электронная почта ..."
+              :placeholder="$t('message.reg.email')"
             />
             <button v-if="$v.email.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -50,7 +50,7 @@
               type="password"
               @input="$v.password.$touch"
               class="form-control"
-              placeholder="Пароль ..."
+              :placeholder="$t('message.reg.password')"
             />
             <button v-if="$v.password.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -74,15 +74,15 @@
               type="password"
               @input="$v.password2.$touch"
               class="form-control"
-              placeholder="Пароль еще раз ..."
+              :placeholder="$t('message.reg.password2')"
             />
             <button v-if="$v.password2.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert"
-            >Пароли не совпадают.</small
-          >
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert">{{
+            $t('message.reg.notEqual')
+          }}</small>
         </div>
         <br />
 
@@ -103,6 +103,7 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
 
 export default {
@@ -125,7 +126,7 @@ export default {
 
           // запишем данные о пользователе
           fb.database()
-            .ref('users/' + this.uid)
+            .ref(`users/${this.uid}`)
             .set({
               background: 'patrick-tomasso-1272187-unsplash.jpg',
             })
@@ -133,7 +134,7 @@ export default {
               eventEmitter.$emit('showMessage', error.message);
             });
 
-          //Отправим письмо о подтверждении почты
+          // Отправим письмо о подтверждении почты
           fb.auth()
             .currentUser.sendEmailVerification()
             .then(() => {

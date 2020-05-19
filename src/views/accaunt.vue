@@ -5,9 +5,7 @@
         <div class="icon icon-primary">
           <i class="material-icons">assignment_ind</i>
         </div>
-        <h4 class="info-title">
-          {{ $t('message.accaut.main') }}
-        </h4>
+        <h4 class="info-title">{{ $t('message.accaut.main') }}</h4>
       </div>
 
       <form @submit.prevent="accaunt">
@@ -26,7 +24,7 @@
               @input="$v.name.$touch"
               type="text"
               class="form-control"
-              placeholder="Ваше имя ..."
+              :placeholder="$t('message.accaut.yourName')"
             />
             <button v-if="$v.name.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -50,7 +48,7 @@
               @input="$v.tel.$touch"
               type="text"
               class="form-control"
-              placeholder="Номер телефона ..."
+              :placeholder="$t('message.accaut.phoneNumber')"
             />
             <button v-if="$v.tel.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -70,7 +68,7 @@
               v-model="place"
               type="text"
               class="form-control"
-              placeholder="Место нахождения  ..."
+              :placeholder="$t('message.accaut.location')"
             />
             <button class="form-control-feedback">
               <i class="material-icons">clear</i>
@@ -153,13 +151,14 @@ export default {
                 `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
                 {
                   value: { text: option },
+                  // eslint-disable-next-line comma-dangle
                 }
               );
             });
           }
 
           this.$router.push('/add');
-          eventEmitter.$emit('showMessage', 'Изменения сохранены!');
+          eventEmitter.$emit('showMessage', this.$t('message.accaut.saveModal'));
         })
         .catch((error) => {
           eventEmitter.$emit('showMessage', error.message);
@@ -190,7 +189,7 @@ export default {
   padding-right: 75px
   min-width: 350px
 .form-control-feedback
-    margin-top: -28px
+  margin-top: -28px
 .small-alert
   padding-left: 55px
   text-align: left

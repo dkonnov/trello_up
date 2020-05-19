@@ -5,11 +5,8 @@
         <div class="icon icon-primary">
           <i class="material-icons">chrome_reader_mode</i>
         </div>
-        <h4 class="info-title">
-          Подключение доски
-        </h4>
-        Для подключения доски необходимо ввести ее <b>ID</b>, добавить на доску пользователя
-        <b>@userup3</b>, а также улучшение <b>CustomFields</b>.
+        <h4 class="info-title">{{ $t('message.addBoard.h') }}</h4>
+        {{ $t('message.addBoard.title') }}
       </div>
 
       <form @submit.prevent="add">
@@ -28,14 +25,13 @@
               @input="$v.board.$touch"
               type="text"
               class="form-control"
-              placeholder="Ссылка на доску в Trello ..."
+              :placeholder="$t('message.boards.placeholder1')"
             />
             <button v-if="$v.board.$error" class="form-control-feedback">
               <i class="material-icons">clear</i>
             </button>
-            <small v-if="$v.board.$error" class="form-text text-muteds small-alert"
-              >Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например,
-              https://trello.com/b/SJEN5ZMP/
+            <small v-if="$v.board.$error" class="form-text text-muteds small-alert">
+              {{ $t('message.addBoard.small') }}
             </small>
           </div>
 
@@ -45,7 +41,12 @@
                 <i class="material-icons">insert_comment</i>
               </span>
             </div>
-            <input v-model="name" type="text" class="form-control" placeholder="Название доски" />
+            <input
+              v-model="name"
+              type="text"
+              class="form-control"
+              :placeholder="$t('message.addBoard.placeholder2')"
+            />
           </div>
 
           <div class="input-group form-group label-floating">
@@ -58,14 +59,14 @@
               class="form-control"
               rows="4"
               v-model="desc"
-              placeholder="Приветственное описание"
+              :placeholder="$t('message.addBoard.placeholder3')"
             />
           </div>
 
           <br />
         </div>
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          Проверить и подключить
+          {{ $t('message.addBoard.button') }}
           <div v-if="loading" class="loadingio-spinner-rolling-dqk4877kj7o">
             <div class="ldio-2sjibqn51ln">
               <div></div>
@@ -84,6 +85,7 @@
 </template>
 
 <script>
+/* eslint-disable comma-dangle */
 import axios from 'axios';
 import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
@@ -108,12 +110,14 @@ export default {
       required,
       url,
       minLength: minLength(28),
-      validID: function () {
+      validID() {
         let res;
-        let arr = this.board.split('/');
+        const arr = this.board.split('/');
         if (arr.length > 3) {
+          // eslint-disable-next-line prefer-destructuring
           this.boardId = arr[4];
-          arr[4].length === 8 ? (res = true) : (res = false);
+          // eslint-disable-next-line no-unused-expressions
+          this.boardId.length === 8 ? (res = true) : (res = false);
         } else {
           res = false;
         }
@@ -142,34 +146,25 @@ export default {
                       this.desc = '';
                       this.loading = false;
                       this.$store.dispatch('getBoards');
-                      eventEmitter.$emit(
-                        'showMessage',
-                        'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!'
-                      );
+                      eventEmitter.$emit('showMessage', this.$('message.addBoard.modal1'));
                     })
-                    .catch((err) => {
-                      alert(err);
+                    .catch((e) => {
+                      console.log(e);
                     });
                 })
-                .catch((error) => {
+                .catch(() => {
                   this.loading = false;
-                  eventEmitter.$emit(
-                    'showMessage',
-                    `Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ${error}. `
-                  );
+                  eventEmitter.$emit('showMessage', this.$('message.addBoard.modal2'));
                 });
             })
             .catch(() => {
               this.loading = false;
-              eventEmitter.$emit(
-                'showMessage',
-                'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.'
-              );
+              eventEmitter.$emit('showMessage', this.$('message.addBoard.modal3'));
             });
         })
         .catch(() => {
           this.loading = false;
-          eventEmitter.$emit('showMessage', 'Данная доска уже подключена.');
+          eventEmitter.$emit('showMessage', this.$('message.addBoard.modal4'));
         });
     },
     uniqBoard(value) {
@@ -183,9 +178,9 @@ export default {
           .then((snapshot) => {
             const val = snapshot.val();
             if (val) {
-              reject(false);
+              reject();
             } else {
-              resolve(true);
+              resolve();
             }
           })
           .catch((err) => {
@@ -209,7 +204,6 @@ export default {
             resolve();
           })
           .catch((err) => {
-            console.log(`Ошибка ${err}`);
             reject(err);
           });
       });
@@ -223,13 +217,11 @@ export default {
             // тут обработаем  пустышки, конечно не самое лучшее место но всеже
             console.log(response.data);
             this.name = !this.name ? response.data.name : this.name;
-            this.desc = !this.desc
-              ? 'Тут вы можете подать вопрос и мы обязательно Вам ответим!'
-              : this.desc;
+            this.desc = !this.desc ? this.$('message.addBoard.customDesc') : this.desc;
             //
             console.log(response.data);
             axios
-              .post(`https://api.trello.com/1/customFields`, {
+              .post('https://api.trello.com/1/customFields', {
                 idModel: response.data.id,
                 modelType: 'board',
                 name: 'Trello Up User',
@@ -239,14 +231,11 @@ export default {
                 type: 'list',
                 display_cardFront: true,
               })
-              .then((response) => {
-                resolve(response.data.id);
+              .then((response2) => {
+                resolve(response2.data.id);
               })
               .catch((err) => {
-                eventEmitter.$emit(
-                  'showMessage',
-                  'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.'
-                );
+                eventEmitter.$emit('showMessage', this.$('message.addBoard.modal5'));
                 reject(err);
               });
           });
@@ -317,5 +306,4 @@ export default {
 .ldio-2sjibqn51ln div {
   box-sizing: content-box;
 }
-/* generated by https://loading.io/ */
 </style>

@@ -1,4 +1,3 @@
-// переводы
 const messages = {
   en: {
     message: {
@@ -7,13 +6,90 @@ const messages = {
         main: 'Accaunt',
         label1: 'You must enter your name so that the specialist knows how to contact you.',
         label2: 'In order to be able to contact you, enter your phone number.',
-        label3: '',
+        yourName: 'Your name ...',
+        phoneNumber: 'Phone Number ...',
+        location: 'Your location  ...',
+        saveModal: 'Изменения сохранены',
+      },
+      tasks: {
+        title1: 'Hello!',
+        title2:
+          'Here you can create a task on your problem, observe the progress of its execution.',
+        title3: 'Your current tasks',
+        add: 'Task added! In the near future it will be distributed by specialist. Expect.',
+      },
+      add: {
+        alertAddInfo: 'Please fill in your details in the ',
+        newTask: 'New task',
+        topic: 'Topic',
+        send: 'Send',
+        desc: 'Task description',
+        desolation:
+          'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
+      },
+      addBoard: {
+        h: 'Board connection',
+        title:
+          'To connect the board, you must enter a link to it, add @userup3 to the users board, as well as an improvement to CustomFields.',
+        small:
+          'Copy the link to the Trello board where you plan to take tasks. For example, https://trello.com/b/SJEN5ZMP/',
+        placeholder1: 'Link to the board in Trello ...',
+        placeholder2: 'Board Name ...',
+        placeholder3: 'Welcome description ...',
+        button: 'Check and connect',
+        conBoards: 'Connected boards',
+        desc:
+          'Here you can connect your Trello boards. Connected boards can be used by all registered users who have a link. You can send the link to clients and employees by e-mail, or post it on an internal resource or website.',
+        title1: 'Go to',
+        title2: 'Unlink board',
+        modal1:
+          'Все поучилось! Теперь можно пользоваться доской и добавлять задачи через Trello Up!',
+        modal2:
+          'Мы пытаемся создать на вашей доске Custom Field, но что-то пошло не так. Возможные причины: элемент Custom Field уже существует и его надо удалить, либо дополнение Custom Field не подключено к доске. Ошибка: ',
+        modal3:
+          'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.',
+        modal4: 'Данная доска уже подключена.',
+        modal5: 'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.',
+        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!',
+      },
+      reg: {
+        email: 'Your email ...',
+        password: 'Password ...',
+        password2: 'Password again ...',
+        notEqual: 'Password mismatch.',
+        restore: 'Restore password',
+        restoreLabel:
+          'Enter the email address that you specified when creating the account, and we will send you a link to change the password to it.',
+        sendLink: 'Send link',
+        restoreAlert: 'You must enter the email address to which the link will be sent.',
+      },
+      card: {
+        deadline: 'Deadline',
+        closeTask: 'Close task',
+        messageArchiv:
+          'Are you sure you want to move this task to the archive? Performers will not see her again.',
+      },
+      boards: {
+        name: 'Connect Trello board',
+        desc:
+          'To connect the Trello board you must enter a link to it, add to Trello board user <b>@userup3</b> and improvement <b>CustomFields</b>.',
+        placeholder1: 'Link to the Trello board ...',
+        small1:
+          'Copy the link to the Trello board into which you plan to take tasks. For instance, https://trello.com/b/SJEN5ZMP/',
+        placeholder2: 'Board name',
+        placeholder3: 'Welcome description',
+        button: 'Check and connect',
       },
       singIn: 'Sing In',
-      back: 'Back',
-      save: 'Save',
       singOut: 'Sing Out',
-      boards: 'Boards',
+      singOutModal: 'Hope you will be back soon :(',
+      errorModal: 'Что-то пошло не так! ',
+      back: 'Back',
+      close: 'Close',
+      save: 'Save',
+      clear: 'Clear',
+      message: 'Message',
+      requered: 'Requered field',
       background: 'Background',
       features: 'features',
       support: 'support',
@@ -75,12 +151,81 @@ const messages = {
         main: 'Аккаунт',
         label1: 'Необходимо ввести ваше имя, чтобы специалист знал как к вам обратиться.',
         label2: 'Для того чтобы с вами могли связаться, укажите свой номер телефона.',
+        yourName: 'Ваше имя ...',
+        phoneNumber: 'Номер телефона ...',
+        location: 'Место нахождения  ...',
+        saveModal: 'Изменения сохранены',
+      },
+      tasks: {
+        title1: 'Привет!',
+        title2: 'Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.',
+        title3: 'Ваши текущие задачи',
+        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.',
+      },
+      add: {
+        alertAddInfo: 'Пожалуйста, заполните ваши данные в разделе',
+        newTask: 'Новая задача',
+        topic: 'Тема',
+        send: 'Подать',
+        desc: 'Описание задачи',
+        desolation:
+          'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
+      },
+      addBoard: {
+        h: 'Подключение доски',
+        title:
+          'Для подключения доски необходимо ввести ссылку на нее, добавить на доску пользователя @userup3, а также улучшение CustomFields.',
+        small:
+          'Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например, https://trello.com/b/SJEN5ZMP/',
+        placeholder1: 'Ссылка на доску в Trello ...',
+        placeholder2: 'Название доски ...',
+        placeholder3: 'Приветственное описание ...',
+        button: 'Проверить и подключить',
+        conBoards: 'Подключенные доски',
+        desc:
+          'Тут вы можете подключить Ваши доски Trello. Подключенными досками смогут пользоваться все зарегистрированные пользователи, у которых будет ссылка. Ссылку вы можете отправлять клиентам и сотрудникам по электронной почте, либо разместить на внутреннем ресурсе или сайте.',
+        title1: 'Перейти',
+        title2: 'Удалить связь с доской',
+      },
+      reg: {
+        email: 'Электронная почта ...',
+        password: 'Пароль ...',
+        password2: 'Пароль еще раз ...',
+        notEqual: 'Пароли не совпадают.',
+        restore: 'Восстановление доступа',
+        restoreLabel:
+          'Введите адрес электронной почты, который вы указывали при регистрации, и мы отправим вам на него ссылку для смены пароля.',
+        sendLink: 'Отправить ссылку',
+        restoreAlert:
+          'Необходимо ввести адрес электронной почты на который будет отправлена ссылка.',
+      },
+      card: {
+        deadline: 'Срок',
+        closeTask: 'Закрыть задачу',
+        messageArchiv:
+          'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+      },
+      boards: {
+        name: 'Подключение доски Trello',
+        desc:
+          'Для подключения доски Trello необходимо ввести ссылку на нее, добавить на доску пользователя <b>@userup3</b>, а также улучшение <b>CustomFields</b>.',
+        placeholder1: 'Ссылка на доску Trello ...',
+        small1:
+          'Скопируйте ссылку на доску Trello в которой вы планируете принимать задачи. Например, https://trello.com/b/SJEN5ZMP/',
+        placeholder2: 'Название доски',
+        placeholder3: 'Приветственное описание',
+        button: 'Проверить и подключить',
       },
       singIn: 'Вход',
-      back: 'Назад',
-      save: 'Сохранить',
       singOut: 'Выход',
-      boards: 'Доски',
+      singOutModal: 'Надеюсь ты скоро вернешься :(',
+      errorModal: 'Something went wrong',
+      back: 'Назад',
+      close: 'Закрыть',
+      save: 'Сохранить',
+      clear: 'Очистить',
+      message: 'Cообщение',
+      requered: 'Обязательное поле',
       background: 'Фон',
       features: 'Возможности',
       support: 'Поддержка',

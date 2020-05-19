@@ -10,13 +10,10 @@
           <i class="material-icons">chat</i>
         </div>
         <h4 class="info-title">
-          Привет!
+          {{ $t('message.tasks.title1') }}
         </h4>
         <p>
-          Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.
-          <br />
-          <br />Для начала работы необходимо авторизоваться. Если вас нет в списке пользователей,
-          зарегистрируйтесь или обратитесь к администратору по телефону.
+          {{ $t('message.tasks.title2') }}
         </p>
       </div>
 
@@ -33,7 +30,7 @@
       </div>
       <div v-else-if="cardsCount">
         <h4 class="title" style="color: #3c4858;">
-          Ваши текущие задачи
+          {{ $t('message.tasks.title3') }}
         </h4>
         <div v-for="(card, index) of itemsOnPageArray" :key="card">
           <card :card="card" :index="index + indexPage" />
