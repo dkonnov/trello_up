@@ -133,7 +133,7 @@ export default {
     toArchive(value) {
       eventEmitter.$emit(
         'showMessage',
-        'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+        this.$('message.reg.messageArchiv'),
         // eslint-disable-next-line func-names
         function () {
           axios
