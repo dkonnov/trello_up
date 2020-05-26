@@ -138,10 +138,7 @@ export default {
           fb.auth()
             .currentUser.sendEmailVerification()
             .then(() => {
-              eventEmitter.$emit(
-                'showMessage',
-                'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.'
-              );
+              eventEmitter.$emit('showMessage', this.$('message.reg.registrationModal'));
             })
             .catch((error) => {
               eventEmitter.$emit('showMessage', error.message);

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-useless-path-segments */
 /* eslint-disable import/no-cycle */
+// eslint-disable-next-line max-len
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import * as fb from 'firebase';
 
@@ -20,10 +21,13 @@ export default {
   },
   actions: {
     deleteBoard({ dispatch }, value) {
+      // eslint-disable-next-line no-alert
+      console.log(123);
       eventEmitter.$emit(
         'showMessage',
-        'Вы действительно хотите отключеть связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
-        function () {
+        'Вы уверены?',
+        // eslint-disable-next-line prefer-arrow-callback
+        () => {
           console.log('fb');
           fb.database()
             .ref('boards/')
@@ -32,6 +36,7 @@ export default {
             .then(() => {
               dispatch('getBoards');
             });
+          // eslint-disable-next-line comma-dangle
         }
       );
     },

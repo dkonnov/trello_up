@@ -102,6 +102,7 @@ export default {
       return _.slice(
         this.$store.state.cards,
         this.itemsOnPage * this.currentTab - this.itemsOnPage,
+        // eslint-disable-next-line comma-dangle
         this.itemsOnPage * this.currentTab
       );
     },

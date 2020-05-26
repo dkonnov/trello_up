@@ -95,7 +95,7 @@
               </a>
               <a class="dropdown-item" @click="showBoards" href="#">
                 <i class="material-icons">chrome_reader_mode</i>
-                {{ $t('message.boards') }}
+                {{ $t('message.boards.menu') }}
               </a>
               <a class="dropdown-item" @click="singOut" href="#">
                 <i class="material-icons">meeting_room</i>
@@ -156,7 +156,7 @@ export default {
           eventEmitter.$emit('showMessage', this.$t('message.singOutModal'));
         })
         .catch((error) => {
-          eventEmitter.$emit('showMessage', `Чтото пошло не так :( ${error.message}`);
+          eventEmitter.$emit('showMessage', `${error.message}`);
         });
       this.$store.dispatch('singOut');
       // eslint-disable-next-line operator-linebreak

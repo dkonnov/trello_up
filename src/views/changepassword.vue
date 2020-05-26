@@ -29,10 +29,9 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password.$error"
-            class="form-text text-muteds small-alert"
-          >{{ $t('message.passwordLabel') }}</small>
+          <small v-if="$v.password.$error" class="form-text text-muteds small-alert">{{
+            $t('message.passwordLabel')
+          }}</small>
 
           <div
             class="input-group form-group label-floating"
@@ -54,18 +53,15 @@
               <i class="material-icons">clear</i>
             </button>
           </div>
-          <small
-            v-if="$v.password2.$error"
-            class="form-text text-muteds small-alert"
-          >{{ $t('message.reg.notEqual') }}</small>
+          <small v-if="$v.password2.$error" class="form-text text-muteds small-alert">{{
+            $t('message.reg.notEqual')
+          }}</small>
         </div>
         <br />
 
-        <button
-          :disabled="$v.$invalid || loading"
-          type="submit"
-          class="btn btn-primary btn-round"
-        >>{{ $t('message.save') }}</button>
+        <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
+          >{{ $t('message.save') }}
+        </button>
         <br />
       </form>
       <a @click="$router.go(-1)">
@@ -104,7 +100,7 @@ export default {
       fb.auth()
         .currentUser.updatePassword(this.password)
         .then(() => {
-          eventEmitter.$emit('showMessage', 'Пароль изменен.');
+          eventEmitter.$emit('showMessage', this.$('message.reg.changePasswordModal'));
           this.$router.push('/add');
         })
         .catch((error) => {
