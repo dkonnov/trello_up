@@ -251,6 +251,7 @@ export default {
 }
 .fields {
   margin-left: -50px;
+  max-width: 100%;
 }
 .accaunt {
   padding-left: 75px;

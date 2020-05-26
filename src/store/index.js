@@ -1,3 +1,8 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable comma-dangle */
+// eslint-disable-next-line max-len
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import Vue from 'vue';
 import Vuex from 'vuex';

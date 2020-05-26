@@ -21,9 +21,11 @@ export default {
   },
   actions: {
     deleteBoard({ dispatch }, value) {
+      // eslint-disable-next-line no-alert
+      console.log(123);
       eventEmitter.$emit(
         'showMessage',
-        'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
+        'Вы уверены?',
         // eslint-disable-next-line prefer-arrow-callback
         () => {
           console.log('fb');

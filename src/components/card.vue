@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 <template>
   <div class="card" style="width: 100%;" :class="stageClosed">
     <div class="stageLine" :class="stageColor" />
@@ -7,7 +6,7 @@
       <h6 class="card-subtitle mb-2 text-muted">
         {{ stage }}
         <span class="badge badge-pill" style="margin-top: -1px;" :class="dueColor" v-if="card.due"
-          >{{ $t('message.deadline') }}: {{ deadline }}
+          >{{ $t('message.card.deadline') }}: {{ deadline }}
         </span>
       </h6>
       <p class="card-text">
@@ -101,7 +100,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <!-- <a class="dropdown-item" href="#">Добавить файл</a> -->
             <a class="dropdown-item" href="#" @click="toArchive(card.id)">{{
-              $t('message.closeTask')
+              $t('message.card.closeTask')
             }}</a>
           </div>
         </div>

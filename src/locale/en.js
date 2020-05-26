@@ -84,6 +84,8 @@ const messages = {
         placeholder2: 'Board name',
         placeholder3: 'Welcome description',
         button: 'Check and connect',
+        deleteBoard:
+          'Are you sure you want to disconnect from this dock? Users will not be able to create new tasks in it.',
       },
       singIn: 'Sing In',
       singOut: 'Sing Out',
@@ -235,6 +237,8 @@ const messages = {
         placeholder2: 'Название доски',
         placeholder3: 'Приветственное описание',
         button: 'Проверить и подключить',
+        deleteBoard:
+          'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
       },
       singIn: 'Вход',
       singOut: 'Выход',
