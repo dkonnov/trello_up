@@ -59,7 +59,6 @@ export default {
       name: '',
       desc: '',
       selectedUser: '',
-      showAlert: false,
     };
   },
   validations: {

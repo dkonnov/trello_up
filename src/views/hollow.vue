@@ -9,7 +9,12 @@
               {{ $t('message.hollow.bottom1') }}
             </h3>
             <h5 class="description" v-html="$t('message.hollow.bottom2')"><br /><br /></h5>
-            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
+            <div
+              v-if="!this.$store.state.user.uid"
+              class="wow fadeInUp"
+              data-wow-duration="3s"
+              data-wow-delay="2s"
+            >
               <center>
                 <router-link to="/registration">
                   <button type="button" class="btn btn-info btn-round">
@@ -17,8 +22,8 @@
                   </button>
                 </router-link>
               </center>
-              <br /><br />
             </div>
+            <br /><br />
           </div>
         </div>
       </div>

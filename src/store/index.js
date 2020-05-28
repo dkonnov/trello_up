@@ -97,13 +97,26 @@ export default new Vuex.Store({
         });
     },
     getMembers({ commit, state }) {
+      console.log('getmembers');
       axios
         .get(
-          `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?members=all&key=${key}&token=${token}`
+          `http://localhost:3030/api/trello/boards/${state.boards.currentBoard.board}/?members=all`
         )
         .then((response) => {
+          console.log(response.data.members);
           commit('setMembers', response.data.members);
+        })
+        .catch((e) => {
+          console.log(e);
         });
+      console.log('getmemberEnds');
+      // axios
+      //   .get(
+      //     `https://api.trello.com/1/boards/${state.boards.currentBoard.board}/?members=all&key=${key}&token=${token}`
+      //   )
+      //   .then((response) => {
+      //     commit('setMembers', response.data.members);
+      //   });
     },
     getCards({ commit, state }) {
       commit('setCards', []);

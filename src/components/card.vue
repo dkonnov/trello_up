@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 <template>
   <div class="card" style="width: 100%;" :class="stageClosed">
     <div class="stageLine" :class="stageColor" />
