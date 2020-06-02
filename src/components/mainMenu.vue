@@ -155,7 +155,7 @@ export default {
         .then(() => {
           eventEmitter.$emit('showMessage', this.$t('message.singOutModal'));
         })
-        .catch((error) => {
+        .catch(error => {
           eventEmitter.$emit('showMessage', `${error.message}`);
         });
       this.$store.dispatch('singOut');
@@ -163,8 +163,8 @@ export default {
       document.getElementById('backgroundDiv').style.backgroundImage =
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push('/');
-    },
-  },
+    }
+  }
 };
 </script>
 

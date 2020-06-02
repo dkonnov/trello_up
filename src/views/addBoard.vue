@@ -90,6 +90,7 @@ import axios from 'axios';
 import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { eventEmitter } from '../main.js';
+import { http } from '../http.js';
 
 const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
 const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
@@ -102,7 +103,7 @@ export default {
       name: '',
       desc: '',
       loading: false,
-      stage: '',
+      stage: ''
     };
   },
   validations: {
@@ -122,8 +123,8 @@ export default {
           res = false;
         }
         return res;
-      },
-    },
+      }
+    }
   },
   methods: {
     add() {
@@ -131,14 +132,12 @@ export default {
       this.uniqBoard(this.boardId)
         .then(() => {
           // проверим доступность доски
-          axios
-            .get(
-              `https://api.trello.com/1/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true&key=${key}&token=${token}`
-            )
+          http
+            .get(`trello/boards/${this.boardId}/?cards=open&fields=all&card_customFieldItems=true`)
             .then(() => {
               // Добавим CustomFields
               this.addCustomField(this.boardId)
-                .then((result) => {
+                .then(result => {
                   this.saveBoardToFB(result)
                     .then(() => {
                       this.board = '';
@@ -148,7 +147,7 @@ export default {
                       this.$store.dispatch('getBoards');
                       eventEmitter.$emit('showMessage', this.$('message.addBoard.modal1'));
                     })
-                    .catch((e) => {
+                    .catch(e => {
                       console.log(e);
                     });
                 })
@@ -175,7 +174,7 @@ export default {
           .orderByChild('board')
           .equalTo(value)
           .once('value')
-          .then((snapshot) => {
+          .then(snapshot => {
             const val = snapshot.val();
             if (val) {
               reject();
@@ -183,7 +182,7 @@ export default {
               resolve();
             }
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err);
           });
       });
@@ -198,12 +197,12 @@ export default {
             board: this.boardId,
             name: this.name,
             desc: this.desc,
-            customfield,
+            customfield
           })
           .then(() => {
             resolve();
           })
-          .catch((err) => {
+          .catch(err => {
             reject(err);
           });
       });
@@ -211,37 +210,35 @@ export default {
     addCustomField(value) {
       // Create a new Custom Field on a board
       return new Promise((resolve, reject) => {
-        axios
-          .get(`https://api.trello.com/1/boards/${value}/?key=${key}&token=${token}`)
-          .then((response) => {
-            // тут обработаем  пустышки, конечно не самое лучшее место но всеже
-            console.log(response.data);
-            this.name = !this.name ? response.data.name : this.name;
-            this.desc = !this.desc ? this.$('message.addBoard.customDesc') : this.desc;
-            //
-            console.log(response.data);
-            axios
-              .post('https://api.trello.com/1/customFields', {
-                idModel: response.data.id,
-                modelType: 'board',
-                name: 'Trello Up User',
-                key,
-                token,
-                pos: 'bottom',
-                type: 'list',
-                display_cardFront: true,
-              })
-              .then((response2) => {
-                resolve(response2.data.id);
-              })
-              .catch((err) => {
-                eventEmitter.$emit('showMessage', this.$('message.addBoard.modal5'));
-                reject(err);
-              });
-          });
+        http.get(`trello/boards/${value}/?`).then(response => {
+          // тут обработаем  пустышки, конечно не самое лучшее место но всеже
+          console.log(response.data);
+          this.name = !this.name ? response.data.name : this.name;
+          this.desc = !this.desc ? this.$('message.addBoard.customDesc') : this.desc;
+          //
+          console.log(response.data);
+          axios
+            .post('https://api.trello.com/1/customFields', {
+              idModel: response.data.id,
+              modelType: 'board',
+              name: 'Trello Up User',
+              key,
+              token,
+              pos: 'bottom',
+              type: 'list',
+              display_cardFront: true
+            })
+            .then(response2 => {
+              resolve(response2.data.id);
+            })
+            .catch(err => {
+              eventEmitter.$emit('showMessage', this.$('message.addBoard.modal5'));
+              reject(err);
+            });
+        });
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       currentTab: 1,
-      itemsOnPage: 6,
+      itemsOnPage: 6
     };
   },
   computed: {
@@ -104,20 +104,20 @@ export default {
     },
     totalTabs() {
       return Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1;
-    },
+    }
   },
   methods: {
     changeBackground(value) {
       this.$store.commit('updateUserData', {
-        background: value,
+        background: value
       });
-    },
+    }
   },
   created() {
     eventEmitter.$on('showBackgroundForm', () => {
       $('#backgroundForm').modal('show');
     });
-  },
+  }
 };
 </script>
 
