@@ -75,13 +75,13 @@ export default {
   name: 'Tasks',
   components: {
     card,
-    add,
+    add
   },
   data() {
     return {
       users: [],
       currentTab: 1,
-      itemsOnPage: 5,
+      itemsOnPage: 5
     };
   },
   computed: {
@@ -111,11 +111,11 @@ export default {
     },
     boardDesc() {
       return this.$store.state.boards.currentBoard.desc;
-    },
+    }
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged((user) => {
+    fb.auth().onAuthStateChanged(user => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -127,7 +127,7 @@ export default {
         this.$store.dispatch('getComments');
       }
     }, 30000);
-  },
+  }
 };
 </script>
 

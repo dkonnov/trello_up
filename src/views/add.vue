@@ -44,14 +44,10 @@
 
 <script>
 /* eslint-disable comma-dangle */
-import axios from 'axios';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
   name: 'MainCard',
@@ -144,9 +140,9 @@ export default {
             )
             .then(response2 => {
               // добавим пользователя, создавшего задачу
-              axios
+              http
                 .put(
-                  `https://api.trello.com/1/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}&key=${key}&token=${token}`
+                  `trello/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}`
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);

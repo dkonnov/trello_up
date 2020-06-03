@@ -111,12 +111,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
   props: {
@@ -138,11 +134,9 @@ export default {
         // eslint-disable-next-line func-names
         // eslint-disable-next-line space-before-function-paren
         function() {
-          axios
-            .put(`https://api.trello.com/1/cards/${value}?closed=true&key=${key}&token=${token}`)
-            .then(() => {
-              this.$store.dispatch('getCards');
-            });
+          http.put(`trello/cards/${value}?closed=true`).then(() => {
+            this.$store.dispatch('getCards');
+          });
         }
       );
     },
