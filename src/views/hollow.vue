@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <div class="row">
     <div class="col-md-12 ml-auto mr-auto text-center">
@@ -34,10 +35,7 @@
             class="card card-background wow fadeInLeft"
             data-wow-duration="3s"
             data-wow-delay="2s"
-            style="
-              // eslint-disable-next-line max-len
-              background-image: url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg');
-            "
+            style="background-image: url('img/slides/christina-wocintechchat-com-unsplash.jpg');"
           >
             <a href="#pablo"></a>
             <div class="card-body">

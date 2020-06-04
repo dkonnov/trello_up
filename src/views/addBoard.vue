@@ -145,7 +145,7 @@ export default {
                       this.desc = '';
                       this.loading = false;
                       this.$store.dispatch('getBoards');
-                      eventEmitter.$emit('showMessage', this.$('message.addBoard.modal1'));
+                      eventEmitter.$emit('showMessage', this.$t('message.addBoard.modal1'));
                     })
                     .catch(e => {
                       console.log(e);
@@ -153,17 +153,17 @@ export default {
                 })
                 .catch(() => {
                   this.loading = false;
-                  eventEmitter.$emit('showMessage', this.$('message.addBoard.modal2'));
+                  eventEmitter.$emit('showMessage', this.$t('message.addBoard.modal2'));
                 });
             })
             .catch(() => {
               this.loading = false;
-              eventEmitter.$emit('showMessage', this.$('message.addBoard.modal3'));
+              eventEmitter.$emit('showMessage', this.$t('message.addBoard.modal3'));
             });
         })
         .catch(() => {
           this.loading = false;
-          eventEmitter.$emit('showMessage', this.$('message.addBoard.modal4'));
+          eventEmitter.$emit('showMessage', this.$t('message.addBoard.modal4'));
         });
     },
     uniqBoard(value) {
@@ -210,13 +210,11 @@ export default {
     addCustomField(value) {
       // Create a new Custom Field on a board
       return new Promise((resolve, reject) => {
-        http.get(`trello/boards/${value}/?`).then(response => {
-          // тут обработаем  пустышки, конечно не самое лучшее место но всеже
-          console.log(response.data);
+        http.get(`trello/boards/${value}/??`).then(response => {
+          // тут обработаем пустышки, конечно не самое лучшее место но всеже
           this.name = !this.name ? response.data.name : this.name;
-          this.desc = !this.desc ? this.$('message.addBoard.customDesc') : this.desc;
+          this.desc = !this.desc ? this.$t('message.addBoard.customDesc') : this.desc;
           //
-          console.log(response.data);
           axios
             .post('https://api.trello.com/1/customFields', {
               idModel: response.data.id,
@@ -232,7 +230,7 @@ export default {
               resolve(response2.data.id);
             })
             .catch(err => {
-              eventEmitter.$emit('showMessage', this.$('message.addBoard.modal5'));
+              eventEmitter.$emit('showMessage', this.$t('message.addBoard.modal5'));
               reject(err);
             });
         });

@@ -1,65 +1,68 @@
 <template>
-  <div class="row">
-    <div class="col-md-6" style="padding-left: 30px; padding-right: 30px; padding-bottom: 40px;">
-      <add />
-    </div>
-
-    <div class="col-md-6 rightCard">
-      <div class="info" v-if="!this.$store.state.user.uid">
-        <div class="icon icon-primary">
-          <i class="material-icons">chat</i>
-        </div>
-        <h4 class="info-title">
-          {{ $t('message.tasks.title1') }}
-        </h4>
-        <p>
-          {{ $t('message.tasks.title2') }}
-        </p>
+  <div>
+    <!-- <div class="row" style="position: absolute">{{ boardName }}</div> -->
+    <div class="row">
+      <div class="col-md-6" style="padding-left: 30px; padding-right: 30px; padding-bottom: 40px;">
+        <add />
       </div>
 
-      <div class="info" v-else-if="!cardsCount">
-        <div class="icon icon-primary">
-          <i class="material-icons">chat</i>
-        </div>
-        <h4 class="info-title">
-          {{ boardName }}
-        </h4>
-        <p>
-          {{ boardDesc }}
-        </p>
-      </div>
-      <div v-else-if="cardsCount">
-        <h4 class="title" style="color: #3c4858;">
-          {{ $t('message.tasks.title3') }}
-        </h4>
-        <div v-for="(card, index) of itemsOnPageArray" :key="card">
-          <card :card="card" :index="index + indexPage" />
-        </div>
-
-        <center v-if="totalTabs > 1">
-          <div width="100%" style="display: flex; align-items: center; justify-content: center;">
-            <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
-              <template v-for="(tab, index) in totalTabs">
-                <li
-                  class="page-item"
-                  :class="{ active: currentTab == tab }"
-                  :key="index"
-                  @click="currentTab = tab"
-                >
-                  <a
-                    class="page-link"
-                    data-toggle="tab"
-                    :href="'#tab' + tab"
-                    role="tablist"
-                    aria-expanded="true"
-                    >{{ tab }}</a
-                  >
-                </li>
-              </template>
-            </ul>
+      <div class="col-md-6 rightCard">
+        <div class="info" v-if="!this.$store.state.user.uid">
+          <div class="icon icon-primary">
+            <i class="material-icons">chat</i>
           </div>
-          <br />
-        </center>
+          <h4 class="info-title">
+            {{ $t('message.tasks.title1') }}
+          </h4>
+          <p>
+            {{ $t('message.tasks.title2') }}
+          </p>
+        </div>
+
+        <div class="info" v-else-if="!cardsCount">
+          <div class="icon icon-primary">
+            <i class="material-icons">chat</i>
+          </div>
+          <h4 class="info-title">
+            {{ boardName }}
+          </h4>
+          <p>
+            {{ boardDesc }}
+          </p>
+        </div>
+        <div v-else-if="cardsCount">
+          <h4 class="title" style="color: #3c4858;">
+            {{ $t('message.tasks.title3') }}
+          </h4>
+          <div v-for="(card, index) of itemsOnPageArray" :key="card">
+            <card :card="card" :index="index + indexPage" />
+          </div>
+
+          <center v-if="totalTabs > 1">
+            <div width="100%" style="display: flex; align-items: center; justify-content: center;">
+              <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
+                <template v-for="(tab, index) in totalTabs">
+                  <li
+                    class="page-item"
+                    :class="{ active: currentTab == tab }"
+                    :key="index"
+                    @click="currentTab = tab"
+                  >
+                    <a
+                      class="page-link"
+                      data-toggle="tab"
+                      :href="'#tab' + tab"
+                      role="tablist"
+                      aria-expanded="true"
+                      >{{ tab }}</a
+                    >
+                  </li>
+                </template>
+              </ul>
+            </div>
+            <br />
+          </center>
+        </div>
       </div>
     </div>
   </div>

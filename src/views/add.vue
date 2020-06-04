@@ -108,7 +108,7 @@ export default {
         }
         // добавим в trello соответствующий costom field
         http
-          .post(`trello/customField/${this.customfield}/options}`, {
+          .post(`trello/customField/${this.customfield}/options`, {
             value: { text: option },
             pos: 'bottom'
           })

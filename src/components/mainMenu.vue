@@ -7,7 +7,9 @@
     <div class="container">
       <div class="navbar-translate">
         <router-link to="/" class="navbar-brand">
-          <h4 class="card-title" style="color: unset;">Trello Up</h4>
+          <h4 class="card-title" style="color: unset;" :title="pagedesc">
+            {{ pagename }}
+          </h4>
         </router-link>
         <button
           class="navbar-toggler"
@@ -164,13 +166,19 @@ export default {
         "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
       this.$router.push('/');
     }
+  },
+  computed: {
+    pagename() {
+      return this.$store.state.boards.currentBoard.name || 'Trello Up';
+    },
+    pagedesc() {
+      return this.$store.state.boards.currentBoard.desc;
+    }
   }
 };
 </script>
 
 <style lang="sass" scoped>
-.navbar .navbar-brand
-  padding: 0
 .epmty-icon
   width: 24px
 </style>
