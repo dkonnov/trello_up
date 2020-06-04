@@ -6,7 +6,6 @@
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import * as fb from 'firebase';
 // eslint-disable-next-line import/no-cycle
 import boards from './boards.js';
@@ -69,7 +68,7 @@ export default new Vuex.Store({
   },
   actions: {
     getBackgrounds(context) {
-      axios.get('public/trelloup.php/getBackgrounds').then(response => {
+      http.get('/backgrounds').then(response => {
         if (response.data) {
           context.commit('setBackgrounds', response.data);
         }
@@ -93,7 +92,6 @@ export default new Vuex.Store({
       });
     },
     getMembers({ commit, state }) {
-      console.log('getmembers');
       http
         .get(`trello/boards/${state.boards.currentBoard.board}/?members=all`)
         .then(response => {
