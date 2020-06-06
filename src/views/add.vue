@@ -44,13 +44,11 @@
 
 <script>
 /* eslint-disable comma-dangle */
-import axios from 'axios';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import qs from 'qs';
 import { eventEmitter } from '../main.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
+import { http } from '../http.js';
 
 export default {
   name: 'MainCard',
@@ -58,14 +56,13 @@ export default {
     return {
       name: '',
       desc: '',
-      selectedUser: '',
-      showAlert: false,
+      selectedUser: ''
     };
   },
   validations: {
     name: {
-      required,
-    },
+      required
+    }
   },
   computed: {
     ...mapState(['userData', 'user']),
@@ -83,7 +80,7 @@ export default {
     },
     customfield() {
       return this.$store.state.boards.currentBoard.customfield;
-    },
+    }
   },
   methods: {
     clearForm() {
@@ -100,7 +97,7 @@ export default {
         cf = this.userData.cf;
       }
       const cb = this.currentBoard;
-      const res = cf.filter((b) => b.board === cb);
+      const res = cf.filter(b => b.board === cb);
 
       if (res.length === 0) {
         // подготовим значение
@@ -111,22 +108,26 @@ export default {
           option = this.user.email;
         }
         // добавим в trello соответствующий costom field
-        axios
+
+        http
           .post(
-            `https://api.trello.com/1/customField/${this.customfield}/options?key=${key}&token=${token}`,
-            {
+            `trello/customField/${this.customfield}/options/?`,
+            qs.stringify({
               value: { text: option },
-              pos: 'bottom',
+              pos: 'bottom'
+            }),
+            {
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }
           )
-          .then((response) => {
+          .then(response => {
             cf.push({
               board: this.currentBoard,
               board_cf: this.customfield,
-              id: response.data.id,
+              id: response.data.id
             });
             this.$store.commit('updateUserData', {
-              cf,
+              cf
             });
             cfId = response.data.id;
           });
@@ -135,21 +136,25 @@ export default {
       }
 
       // получим ID первого листа
-      axios
+      http
         .get(
-          `https://api.trello.com/1/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all&key=${key}&token=${token}`
+          `trello/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all`
         )
-        .then((response) => {
+        .then(response => {
           // публикуем новую карточку
-          axios
+          http
             .post(
-              `https://api.trello.com/1/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&key=${key}&token=${token}`
+              `trello/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top`
             )
-            .then((response2) => {
+            .then(response2 => {
               // добавим пользователя, создавшего задачу
-              axios
+              http
                 .put(
-                  `https://api.trello.com/1/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}&key=${key}&token=${token}`
+                  `trello/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}`,
+                  {},
+                  {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                  }
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
@@ -162,8 +167,8 @@ export default {
               this.desc = '';
             });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

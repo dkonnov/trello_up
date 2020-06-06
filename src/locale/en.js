@@ -9,14 +9,14 @@ const messages = {
         yourName: 'Your name ...',
         phoneNumber: 'Phone Number ...',
         location: 'Your location  ...',
-        saveModal: 'Изменения сохранены',
+        saveModal: 'Изменения сохранены'
       },
       tasks: {
         title1: 'Hello!',
         title2:
           'Here you can create a task on your problem, observe the progress of its execution.',
         title3: 'Your current tasks',
-        add: 'Task added! In the near future it will be distributed by specialist. Expect.',
+        add: 'Task added! In the near future it will be distributed by specialist. Expect.'
       },
       add: {
         alertAddInfo: 'Please fill in your details in the ',
@@ -25,7 +25,7 @@ const messages = {
         send: 'Send',
         desc: 'Task description',
         desolation:
-          'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.',
+          'Describe the task as detailed as possible. The task should contain all the necessary information. If necessary, describe the sequence of actions.'
       },
       addBoard: {
         h: 'Board connection',
@@ -49,7 +49,7 @@ const messages = {
           'This board cannot be added. To add a board, enter a link to the board, and invite @userup3 to the board.',
         modal4: 'This board is already connected.',
         modal5: 'Please connect Custom Fields improvement to the board and try again.',
-        customDesc: 'Here you can submit a question and we will answer you!',
+        customDesc: 'Here you can submit a question and we will answer you!'
       },
       reg: {
         email: 'Your email ...',
@@ -65,13 +65,13 @@ const messages = {
         registrationModal:
           'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
         restoreModal:
-          'We have sent you an email with a link to restore access. If you did not find it, then perhaps it mistakenly got into the Spam folder.',
+          'We have sent you an email with a link to restore access. If you did not find it, then perhaps it mistakenly got into the Spam folder.'
       },
       card: {
         deadline: 'Deadline',
         closeTask: 'Close task',
         messageArchiv:
-          'Are you sure you want to move this task to the archive? Performers will not see her again.',
+          'Are you sure you want to move this task to the archive? Performers will not see her again.'
       },
       boards: {
         menu: 'Boards',
@@ -85,7 +85,7 @@ const messages = {
         placeholder3: 'Welcome description',
         button: 'Check and connect',
         deleteBoard:
-          'Are you sure you want to disconnect from this dock? Users will not be able to create new tasks in it.',
+          'Are you sure you want to disconnect from this dock? Users will not be able to create new tasks in it.'
       },
       singIn: 'Sing In',
       singOut: 'Sing Out',
@@ -147,9 +147,9 @@ const messages = {
         review31: 'All you need and more!',
         review32:
           'This is not just a personal area for applications. Here is the whole power of the kanban from Trello. Users submit tasks and we can already set up the necessary automation on our board, schedule work on the calendar, etc. This is a really good combination.',
-        revisew33: 'Mark Elizarov',
-      },
-    },
+        revisew33: 'Mark Elizarov'
+      }
+    }
   },
   ru: {
     message: {
@@ -161,13 +161,13 @@ const messages = {
         yourName: 'Ваше имя ...',
         phoneNumber: 'Номер телефона ...',
         location: 'Место нахождения  ...',
-        saveModal: 'Изменения сохранены',
+        saveModal: 'Изменения сохранены'
       },
       tasks: {
         title1: 'Привет!',
         title2: 'Тут вы можете создать задачу по вашей проблеме, наблюдать за ходом ее исполнения.',
         title3: 'Ваши текущие задачи',
-        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.',
+        add: 'Задача добавлена! В ближайшее время она будет распределена на специалиста. Ожидайте.'
       },
       add: {
         alertAddInfo: 'Пожалуйста, заполните ваши данные в разделе',
@@ -176,7 +176,7 @@ const messages = {
         send: 'Подать',
         desc: 'Описание задачи',
         desolation:
-          'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.',
+          'Максимально подробно опишите задачу. Задача должна содержать всю необходиму информацию. При необходимости опишите последовательность выполнения действий.'
       },
       addBoard: {
         h: 'Подключение доски',
@@ -201,7 +201,7 @@ const messages = {
           'Данную доску невозможно добавить. Для добавления доски введите ссылку на доску, а также пригласите на доску пользователя @userup3.',
         modal4: 'Данная доска уже подключена.',
         modal5: 'Пожалуйста, подключите к доске улучшение Custom Fields и повторите попытку.',
-        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!',
+        customDesc: 'Тут вы можете подать вопрос и мы обязательно Вам ответим!'
       },
       reg: {
         email: 'Электронная почта ...',
@@ -218,13 +218,13 @@ const messages = {
         registrationModal:
           'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
         restoreModal:
-          'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».',
+          'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».'
       },
       card: {
         deadline: 'Срок',
         closeTask: 'Закрыть задачу',
         messageArchiv:
-          'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.',
+          'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.'
       },
       boards: {
         menu: 'Доски',
@@ -238,7 +238,7 @@ const messages = {
         placeholder3: 'Приветственное описание',
         button: 'Проверить и подключить',
         deleteBoard:
-          'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
+          'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.'
       },
       singIn: 'Вход',
       singOut: 'Выход',
@@ -303,10 +303,10 @@ const messages = {
         review31: 'Все что нужно и даже больше!',
         review32:
           'Это не просто личный кабинет для заявок. Тут вся мощь канбана от Trello. Пользователи подают заявки, а мы уже можем настроить у себя на доске необходимую автоматизацию, запланировать работы в календаре и т.д. Это действительно удачное сочетание.',
-        review33: 'Марк Елизаров',
-      },
-    },
-  },
+        review33: 'Марк Елизаров'
+      }
+    }
+  }
 };
 
 // экспортируем переводы

@@ -36,12 +36,12 @@ export default {
   components: {
     modal,
     mainMenu,
-    background,
+    background
   },
   computed: {
     background() {
       return this.$store.state.userData.background;
-    },
+    }
   },
   mounted() {
     // установим фоновое изображение
@@ -49,13 +49,13 @@ export default {
       "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   watch: {
-    background: (value) => {
+    background: value => {
       // сменим фон, если он изменился в state
       document.getElementById(
         'backgroundDiv'
       ).style.backgroundImage = `url('img/backgrounds/${value}')`;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -74,25 +74,25 @@ export default {
   opacity: 0
 
 .form-control-feedback
-	position: absolute
-	right: 0
-	z-index: 200
-	display: block
-	width: 24px
-	height: 24px
-	line-height: 24px
-	text-align: center
-	pointer-events: auto
-	background: transparent
-	padding-left: 0px
-	padding-right: 0px
+  position: absolute
+  right: 0
+  z-index: 200
+  display: block
+  width: 24px
+  height: 24px
+  line-height: 24px
+  text-align: center
+  pointer-events: auto
+  background: transparent
+  padding-left: 0px
+  padding-right: 0px
   border: 0px
-	border-left-width: 0px
-	border-left-style: solid
-	border-top-width: 0px
-	border-top-style: solid
-	border-right-width: 0px
-	border-right-style: solid
-	border-bottom-width: 0px
-	border-bottom-style: solid
+  border-left-width: 0px
+  border-left-style: solid
+  border-top-width: 0px
+  border-top-style: solid
+  border-right-width: 0px
+  border-right-style: solid
+  border-bottom-width: 0px
+  border-bottom-style: solid
 </style>

@@ -18,8 +18,8 @@
             </h2>
             <div class="card-body">
               <div class="row">
-                <template v-for="img in itemsOnPageArray">
-                  <div class="col-md-4" :key="img" @click="changeBackground(img.src)">
+                <template v-for="(img, index) in itemsOnPageArray">
+                  <div class="col-md-4" :key="index" @click="changeBackground(img.src)">
                     <div class="card card-plain">
                       <div class="card-header card-header-image">
                         <div class="card-header-image-bg" />
@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       currentTab: 1,
-      itemsOnPage: 6,
+      itemsOnPage: 6
     };
   },
   computed: {
@@ -104,20 +104,20 @@ export default {
     },
     totalTabs() {
       return Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1;
-    },
+    }
   },
   methods: {
     changeBackground(value) {
       this.$store.commit('updateUserData', {
-        background: value,
+        background: value
       });
-    },
+    }
   },
   created() {
     eventEmitter.$on('showBackgroundForm', () => {
       $('#backgroundForm').modal('show');
     });
-  },
+  }
 };
 </script>
 
@@ -143,14 +143,14 @@ export default {
 .material-icons
   font-size: 48px
 .modal-dialog
-	max-width: 1300px
+  max-width: 1300px
 .pagination
   .page-item.active
     a, span, .page-link:focus, span:focus
       background-color: #9c27b0
       border-color: #9c27b0
       color: #fff
-      box-shadow: 0 4px 5px 0 rgba(156,39,176,.14),0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
+      box-shadow: 0 4px 5px 0 rgba(156,39,176,.14), 0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
   .page-item
     span:hover, .page-link:hover
       background-color: rgb(243, 241, 241)

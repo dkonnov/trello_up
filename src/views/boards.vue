@@ -59,26 +59,26 @@ import addBoard from './addBoard.vue';
 export default {
   name: 'Boards',
   components: {
-    addBoard,
+    addBoard
   },
   methods: {
     deleteBoard(id) {
       this.$store.dispatch('deleteBoard', id);
-    },
+    }
   },
   computed: {
     boards() {
       return this.$store.state.boards.boards;
-    },
+    }
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged((user) => {
+    fb.auth().onAuthStateChanged(user => {
       if (!user) {
         this.$router.push('/login/back');
       }
     });
-  },
+  }
 };
 </script>
 

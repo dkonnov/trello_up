@@ -9,7 +9,7 @@ import { eventEmitter } from '../main.js';
 export default {
   state: {
     boards: [],
-    currentBoard: [],
+    currentBoard: []
   },
   mutations: {
     setCurrentBoard(state, payload) {
@@ -17,7 +17,7 @@ export default {
     },
     setBoards(state, payload) {
       state.boards = payload;
-    },
+    }
   },
   actions: {
     deleteBoard({ dispatch }, value) {
@@ -45,7 +45,7 @@ export default {
         .ref('boards')
         .orderByChild('board')
         .equalTo(value)
-        .on('child_added', (snapshot) => {
+        .on('child_added', snapshot => {
           commit('setCurrentBoard', snapshot.val());
           // получим данные из Trello
           dispatch('getMembers');
@@ -60,22 +60,22 @@ export default {
         .orderByChild('user_id')
         .equalTo(rootState.user.uid)
         .once('value')
-        .then((snapshot) => {
+        .then(snapshot => {
           const res = snapshot.val();
           const newArr = [];
           if (res) {
-            Object.keys(res).forEach((key) => {
+            Object.keys(res).forEach(key => {
               newArr.push({
                 id: key,
                 user_id: res[key].user_id,
                 board: res[key].board,
                 name: res[key].name,
-                desc: res[key].desc,
+                desc: res[key].desc
               });
             });
           }
           commit('setBoards', newArr);
         });
-    },
-  },
+    }
+  }
 };

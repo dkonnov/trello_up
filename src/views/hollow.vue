@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <div class="row">
     <div class="col-md-12 ml-auto mr-auto text-center">
@@ -9,7 +10,12 @@
               {{ $t('message.hollow.bottom1') }}
             </h3>
             <h5 class="description" v-html="$t('message.hollow.bottom2')"><br /><br /></h5>
-            <div class="wow fadeInUp" data-wow-duration="3s" data-wow-delay="2s">
+            <div
+              v-if="!this.$store.state.user.uid"
+              class="wow fadeInUp"
+              data-wow-duration="3s"
+              data-wow-delay="2s"
+            >
               <center>
                 <router-link to="/registration">
                   <button type="button" class="btn btn-info btn-round">
@@ -17,8 +23,8 @@
                   </button>
                 </router-link>
               </center>
-              <br /><br />
             </div>
+            <br /><br />
           </div>
         </div>
       </div>
@@ -29,9 +35,7 @@
             class="card card-background wow fadeInLeft"
             data-wow-duration="3s"
             data-wow-delay="2s"
-            style="
-              background-image: url('img/slides/christina-wocintechchat-com-TR0GG3U81i0-unsplash.jpg');
-            "
+            style="background-image: url('img/slides/christina-wocintechchat-com-unsplash.jpg');"
           >
             <a href="#pablo"></a>
             <div class="card-body">

@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 <template>
   <div class="card" style="width: 100%;" :class="stageClosed">
     <div class="stageLine" :class="stageColor" />
@@ -110,21 +111,18 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { eventEmitter } from '../main.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
+import { http } from '../http.js';
 
 export default {
   props: {
     card: Object,
-    index: Number,
+    index: Number
   },
   data() {
     return {
       comment: '',
-      files: [],
+      files: []
     };
   },
   methods: {
@@ -132,30 +130,25 @@ export default {
     toArchive(value) {
       eventEmitter.$emit(
         'showMessage',
-        this.$('message.reg.messageArchiv'),
+        this.$t('message.card.messageArchiv'),
         // eslint-disable-next-line func-names
-        function () {
-          axios
-            .put(`https://api.trello.com/1/cards/${value}?closed=true&key=${key}&token=${token}`)
-            .then(() => {
-              this.$store.dispatch('getCards');
-            });
+        // eslint-disable-next-line space-before-function-paren
+        function() {
+          http.put(`trello/cards/${value}?closed=true`).then(() => {
+            this.$store.dispatch('getCards');
+          });
         }
       );
     },
     sendComment(cardId) {
-      axios
-        .post(
-          `https://api.trello.com/1/cards/${cardId}/actions/comments?text=${this.comment}&key=${key}&token=${token}`
-        )
-        .then(() => {
-          this.$store.dispatch('getComments');
-          this.comment = '';
-        });
+      http.post(`trello/cards/${cardId}/actions/comments?text=${this.comment}`).then(() => {
+        this.$store.dispatch('getComments');
+        this.comment = '';
+      });
     },
     getAvatarURL(value) {
       let url;
-      this.members.forEach((item) => {
+      this.members.forEach(item => {
         if (value === item.id) {
           if (item.avatarUrl) {
             url = `${item.avatarUrl}/30.png`;
@@ -168,7 +161,7 @@ export default {
     },
     getmemberBollean(value) {
       let tooltip;
-      this.members.forEach((item) => {
+      this.members.forEach(item => {
         if (value === item.id) {
           if (item.fullName === 'Trello Up User') {
             tooltip = false;
@@ -181,7 +174,7 @@ export default {
     },
     getmemberTooltip(value) {
       let tooltip;
-      this.members.forEach((item) => {
+      this.members.forEach(item => {
         if (value === item.id) {
           if (item.fullName === 'Trello Up User') {
             tooltip = 'Я';
@@ -193,7 +186,7 @@ export default {
       return tooltip;
     },
     commentsOnCard(value) {
-      const newArr = this.$store.state.comments.filter((arr) => {
+      const newArr = this.$store.state.comments.filter(arr => {
         let res;
         if (arr.data.card.id === value) {
           res = arr;
@@ -205,12 +198,10 @@ export default {
     },
     getAttach(value) {
       // выводит список файлов прикрепленных к карточке
-      axios
-        .get(`https://api.trello.com/1/cards/${value}/attachments/?key=${key}&token=${token}`)
-        .then((response) => {
-          this.files = response.data;
-        });
-    },
+      http.get(`trello/cards/${value}/attachments/?`).then(response => {
+        this.files = response.data;
+      });
+    }
   },
   computed: {
     deadline() {
@@ -279,8 +270,8 @@ export default {
     },
     members() {
       return this.$store.state.members;
-    },
-  },
+    }
+  }
 };
 </script>
 
