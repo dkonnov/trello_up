@@ -98,15 +98,13 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { mapState } from 'vuex';
+import qs from 'qs';
 // eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
+import { http } from '../http.js';
 
 export default {
   data() {
@@ -141,23 +139,25 @@ export default {
           displayName: this.name
         })
         .then(() => {
-          // подготовим значение
-          const option = `${this.name} (${this.tel}, ${this.place}, ${this.user.email})`;
           // изменим значения CustomFields
           if (this.userData.cf) {
-            const cf = this.userData;
-            cf.forEach(value => {
-              axios.put(
-                `https://api.trello.com/1/customField/${value.board_cf}/options/${value.id}/?key=${key}&token=${token}`,
-                {
+            // подготовим значение
+            const option = `${this.name} (${this.tel}, ${this.place}, ${this.user.email})`;
+            this.userData.cf.forEach(value => {
+              http.put(
+                `trello/customField/${value.board_cf}/options/${value.id}/?`,
+                qs.stringify({
                   value: { text: option }
                   // eslint-disable-next-line comma-dangle
+                }),
+                {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }
               );
             });
           }
 
-          this.$router.push('/add');
+          this.$router.go(-1);
           eventEmitter.$emit('showMessage', this.$t('message.accaut.saveModal'));
         })
         .catch(error => {

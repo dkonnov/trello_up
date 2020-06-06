@@ -130,7 +130,7 @@ export default {
     toArchive(value) {
       eventEmitter.$emit(
         'showMessage',
-        this.$t('message.reg.messageArchiv'),
+        this.$t('message.card.messageArchiv'),
         // eslint-disable-next-line func-names
         // eslint-disable-next-line space-before-function-paren
         function() {

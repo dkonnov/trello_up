@@ -46,6 +46,7 @@
 /* eslint-disable comma-dangle */
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import qs from 'qs';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
 
@@ -107,11 +108,18 @@ export default {
           option = this.user.email;
         }
         // добавим в trello соответствующий costom field
+
         http
-          .post(`trello/customField/${this.customfield}/options`, {
-            value: { text: option },
-            pos: 'bottom'
-          })
+          .post(
+            `trello/customField/${this.customfield}/options/?`,
+            qs.stringify({
+              value: { text: option },
+              pos: 'bottom'
+            }),
+            {
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }
+          )
           .then(response => {
             cf.push({
               board: this.currentBoard,
@@ -142,7 +150,11 @@ export default {
               // добавим пользователя, создавшего задачу
               http
                 .put(
-                  `trello/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}`
+                  `trello/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}`,
+                  {},
+                  {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                  }
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
