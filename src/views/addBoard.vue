@@ -86,14 +86,11 @@
 
 <script>
 /* eslint-disable comma-dangle */
-import axios from 'axios';
 import { required, url, minLength } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
+import qs from 'qs';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
-
-const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
-const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
 
 export default {
   data() {
@@ -215,17 +212,21 @@ export default {
           this.name = !this.name ? response.data.name : this.name;
           this.desc = !this.desc ? this.$t('message.addBoard.customDesc') : this.desc;
           //
-          axios
-            .post('https://api.trello.com/1/customFields', {
-              idModel: response.data.id,
-              modelType: 'board',
-              name: 'Trello Up User',
-              key,
-              token,
-              pos: 'bottom',
-              type: 'list',
-              display_cardFront: true
-            })
+          http
+            .post(
+              'trello/customFields/?',
+              qs.stringify({
+                idModel: response.data.id,
+                modelType: 'board',
+                name: 'Trello Up User',
+                pos: 'bottom',
+                type: 'list',
+                display_cardFront: true
+              }),
+              {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+              }
+            )
             .then(response2 => {
               resolve(response2.data.id);
             })
