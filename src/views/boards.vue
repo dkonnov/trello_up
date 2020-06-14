@@ -23,7 +23,7 @@
               {{ board.desc }}
               <div align="right">
                 <div style="display: block; float: right; margin: 2px;">
-                  <router-link :to="board.board">
+                  <router-link :to="board.id">
                     <button
                       class="btn btn-secondary btn-fab btn-fab-mini btn-round"
                       type="button"
@@ -37,7 +37,7 @@
                   <button
                     class="btn btn-secondary btn-fab btn-fab-mini btn-round"
                     type="button"
-                    @click="share(board.board)"
+                    @click="share(board.id)"
                     title="Copy to clipboard"
                   >
                     <i class="material-icons">share</i>
@@ -78,7 +78,7 @@ export default {
       this.$clipboard(`http://trello-up.ru/${id}`);
       eventEmitter.$emit(
         'showMessage',
-        'Ссылка на доску скопирована в буфер обмена. Вы можете отправить ее своим клиентам или сотрудникам, разместить на внутреннем портале, сайте или в социальной сети.'
+        `Ссылка на доску скопирована в буфер обмена. Вы можете отправить ее своим клиентам или сотрудникам, разместить на внутреннем портале, сайте или в социальной сети. \n\n http://trello-up.ru/${id}`
       );
     },
     deleteBoard(id) {

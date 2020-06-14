@@ -1,6 +1,6 @@
 {
-  "name": "trello_form",
-  "version": "0.1.0",
+  "name": "trello_up",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

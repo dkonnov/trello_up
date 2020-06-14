@@ -28,7 +28,6 @@ export default {
         'Вы уверены?',
         // eslint-disable-next-line prefer-arrow-callback
         () => {
-          console.log('fb');
           fb.database()
             .ref('boards/')
             .child(value)
@@ -42,10 +41,9 @@ export default {
     },
     getCurrentBoard({ commit, dispatch }, value) {
       fb.database()
-        .ref('boards')
-        .orderByChild('board')
-        .equalTo(value)
-        .on('child_added', snapshot => {
+        .ref(`boards/${value}`)
+        .once('value')
+        .then(snapshot => {
           commit('setCurrentBoard', snapshot.val());
           // получим данные из Trello
           dispatch('getMembers');
