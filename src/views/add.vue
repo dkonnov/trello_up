@@ -107,8 +107,8 @@ export default {
         } else {
           option = this.user.email;
         }
-        // добавим в trello соответствующий costom field
 
+        // добавим в trello соответствующий costom field
         http
           .post(
             `trello/customField/${this.customfield}/options/?`,

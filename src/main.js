@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import Vuelidate from 'vuelidate';
 import VueRouter from 'vue-router';
+import Clipboard from 'v-clipboard';
 import * as fb from 'firebase';
 import App from './App.vue';
 import './css/material-kit.min.css';
@@ -16,6 +17,7 @@ import messages from './locale/en.js';
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.use(VueI18n);
+Vue.use(Clipboard);
 
 Vue.config.productionTip = false;
 
@@ -27,7 +29,7 @@ const lang = window.navigator.language === 'ru-RU' ? 'ru' : 'en';
 
 const i18n = new VueI18n({
   locale: lang, // set locale
-  messages, // set locale messages
+  messages // set locale messages
 });
 
 new Vue({
@@ -43,13 +45,13 @@ new Vue({
       storageBucket: 'trello-up-ec2eb.appspot.com',
       messagingSenderId: '282586375421',
       appId: '1:282586375421:web:b6b6fa5a005e57885f8a94',
-      measurementId: 'G-ECJKWGT3P1',
+      measurementId: 'G-ECJKWGT3P1'
     };
     // Initialize Firebase
     fb.initializeApp(firebaseConfig);
     fb.analytics();
     // поддержим сессию
-    fb.auth().onAuthStateChanged((user) => {
+    fb.auth().onAuthStateChanged(user => {
       if (user) {
         // запишем данные о пользователе
         this.$store.commit('setUser', user);
@@ -60,5 +62,5 @@ new Vue({
       }
     });
   },
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount('#app');

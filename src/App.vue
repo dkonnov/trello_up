@@ -45,8 +45,7 @@ export default {
   },
   mounted() {
     // установим фоновое изображение
-    document.getElementById('backgroundDiv').style.backgroundImage =
-      "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
+    document.getElementById('backgroundDiv').style.backgroundImage = "url('img/backgrounds/patrick-tomasso-1272187-unsplash.jpg')";
   },
   watch: {
     background: value => {
