@@ -100,8 +100,8 @@ space-before-function-paren */ /* eslint-disable comma-dangle */
             <i class="material-icons">more_horiz</i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <input type="file" id="chooser" /><br />
-            <a class="dropdown-item" href="#" @click="sendFile(card.id)">Добавить файл</a>
+            <input type="file" hidden id="chooser" @change="sendFile(card.id)" />
+            <a class="dropdown-item" href="#" @click="showInput()">Добавить файл</a>
             <a class="dropdown-item" href="#" @click="toArchive(card.id)">{{
               $t('message.card.closeTask')
             }}</a>
@@ -129,6 +129,9 @@ export default {
     };
   },
   methods: {
+    showInput() {
+      $('#chooser').click();
+    },
     sendFile(value) {
       const formData = new FormData();
       const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
