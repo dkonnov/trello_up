@@ -1,4 +1,5 @@
-/* eslint-disable comma-dangle */
+/* eslint-disable func-names */ /* eslint-disable func-names */ /* eslint-disable
+space-before-function-paren */ /* eslint-disable comma-dangle */
 <template>
   <div class="card" style="width: 100%;" :class="stageClosed">
     <div class="stageLine" :class="stageColor" />
@@ -75,7 +76,7 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-            v-if="card.badges.attachments > 0"
+            v-if="card.badges.attachments > 0 || newFile"
             @click="getAttach(card.id)"
           >
             <i class="material-icons">attach_file</i>
@@ -99,7 +100,8 @@
             <i class="material-icons">more_horiz</i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <!-- <a class="dropdown-item" href="#">Добавить файл</a> -->
+            <input type="file" hidden id="chooser" @change="sendFile(card.id)" />
+            <a class="dropdown-item" href="#" @click="showInput()">Добавить файл</a>
             <a class="dropdown-item" href="#" @click="toArchive(card.id)">{{
               $t('message.card.closeTask')
             }}</a>
@@ -111,6 +113,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
 
@@ -122,23 +125,44 @@ export default {
   data() {
     return {
       comment: '',
-      files: []
+      files: [],
+      newFile: false
     };
   },
   methods: {
+    showInput() {
+      $('#chooser').click();
+    },
+    sendFile(value) {
+      const formData = new FormData();
+      const key = 'd02290573e1e3121c00a8bcb3bd08a1f';
+      const token = '57b6866c777bc31f1f6ca58c1a9a540873221292bbb1cf7ccfdd027d08c54349';
+      formData.append('token', token);
+      formData.append('key', key);
+
+      // HTML file input, chosen by user
+
+      formData.append('file', document.getElementById('chooser').files[0]);
+      axios
+        .post(`https://api.trello.com/1/cards/${value}/attachments`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(() => {
+          eventEmitter.$emit('showMessage', 'Файл загружен');
+          this.newFile = true;
+        });
+    },
     // eslint-disable-next-line no-unused-vars
     toArchive(value) {
-      eventEmitter.$emit(
-        'showMessage',
-        this.$t('message.card.messageArchiv'),
-        // eslint-disable-next-line func-names
-        // eslint-disable-next-line space-before-function-paren
-        function() {
-          http.put(`trello/cards/${value}?closed=true`).then(() => {
-            this.$store.dispatch('getCards');
-          });
-        }
-      );
+      // eslint-disable-next-line func-names
+      // eslint-disable-next-line space-before-function-paren
+      eventEmitter.$emit('showMessage', this.$t('message.card.messageArchiv'), function() {
+        http.put(`trello/cards/${value}?closed=true`).then(() => {
+          this.$store.dispatch('getCards');
+        });
+      });
     },
     sendComment(cardId) {
       http.post(`trello/cards/${cardId}/actions/comments?text=${this.comment}`).then(() => {

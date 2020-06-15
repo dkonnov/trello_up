@@ -114,9 +114,12 @@ export default {
     },
     boardDesc() {
       return this.$store.state.boards.currentBoard.desc;
+    },
+    currentRoute() {
+      return this.$router.currentRoute.params.board;
     }
   },
-  beforeMount() {
+  mounted() {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {
@@ -124,12 +127,16 @@ export default {
       }
     });
     // получим информацию о текущей доске
-    this.$store.dispatch('getCurrentBoard', this.$router.currentRoute.params.board);
+    this.$store.dispatch('getCurrentBoard', this.currentRoute);
     setInterval(() => {
       if (this.$store.state.user.uid) {
         this.$store.dispatch('getComments');
       }
     }, 30000);
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.$store.dispatch('getCurrentBoard', to.params.board);
+    next();
   }
 };
 </script>

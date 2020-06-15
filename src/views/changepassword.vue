@@ -83,12 +83,12 @@ export default {
       password: '',
       password2: '',
       uid: '',
-      loading: false,
+      loading: false
     };
   },
   beforeMount() {
     // своебразная защита роута
-    fb.auth().onAuthStateChanged((user) => {
+    fb.auth().onAuthStateChanged(user => {
       if (!user) {
         this.$router.push('/login/back');
       }
@@ -103,22 +103,22 @@ export default {
           eventEmitter.$emit('showMessage', this.$('message.reg.changePasswordModal'));
           this.$router.push('/add');
         })
-        .catch((error) => {
+        .catch(error => {
           eventEmitter.$emit('showMessage', error.message);
           this.loading = false;
         });
-    },
+    }
   },
   validations: {
     password: {
       minLength: minLength(6),
-      required,
+      required
     },
     password2: {
       sameAs: sameAs('password'),
-      required,
-    },
-  },
+      required
+    }
+  }
 };
 </script>
 

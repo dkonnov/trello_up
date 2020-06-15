@@ -101,7 +101,9 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
+import {
+  required, email, minLength, sameAs
+} from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 // eslint-disable-next-line import/no-cycle
 import { eventEmitter } from '../main.js';

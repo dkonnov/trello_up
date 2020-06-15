@@ -46,11 +46,11 @@ export default {
   name: 'Modal',
   data() {
     return {
-      messageText: '',
+      messageText: ''
     };
   },
   methods: {
-    callback() {},
+    callback() {}
   },
   created() {
     eventEmitter.$on('showMessage', (value, callback) => {
@@ -58,6 +58,6 @@ export default {
       this.callback = callback;
       $('#modalWindow').modal('show');
     });
-  },
+  }
 };
 </script>
