@@ -75,11 +75,8 @@ export default {
       }
       return res;
     },
-    currentBoard() {
-      return this.$store.state.boards.currentBoard.board;
-    },
-    customfield() {
-      return this.$store.state.boards.currentBoard.customfield;
+    current() {
+      return this.$store.state.boards.currentBoard;
     }
   },
   methods: {
@@ -96,7 +93,7 @@ export default {
       } else {
         cf = this.userData.cf;
       }
-      const cb = this.currentBoard;
+      const cb = this.current.board;
       const res = cf.filter(b => b.board === cb);
 
       if (res.length === 0) {
@@ -111,7 +108,7 @@ export default {
         // добавим в trello соответствующий costom field
         http
           .post(
-            `trello/customField/${this.customfield}/options/?`,
+            `trello/customField/${this.current.customfield}/options/?`,
             qs.stringify({
               value: { text: option },
               pos: 'bottom'
@@ -122,8 +119,10 @@ export default {
           )
           .then(response => {
             cf.push({
-              board: this.currentBoard,
-              board_cf: this.customfield,
+              board_id: this.current.id,
+              board: this.current.board,
+              name: this.current.name,
+              board_cf: this.current.customfield,
               id: response.data.id
             });
             this.$store.commit('updateUserData', {
@@ -138,7 +137,7 @@ export default {
       // получим ID первого листа
       http
         .get(
-          `trello/boards/${this.$store.state.boards.currentBoard.board}/lists?cards=open&card_fields=all&filter=open&fields=all`
+          `trello/boards/${this.current.board}/lists?cards=open&card_fields=all&filter=open&fields=all`
         )
         .then(response => {
           // публикуем новую карточку
@@ -148,9 +147,10 @@ export default {
             )
             .then(response2 => {
               // добавим пользователя, создавшего задачу
+              console.log(`${this.current.customfield}`);
               http
                 .put(
-                  `trello/card/${response2.data.id}/customField/${this.customfield}/item?idValue=${cfId}`,
+                  `trello/card/${response2.data.id}/customField/${this.current.customfield}/item?idValue=${cfId}`,
                   {},
                   {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

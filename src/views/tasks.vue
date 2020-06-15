@@ -116,7 +116,7 @@ export default {
       return this.$store.state.boards.currentBoard.desc;
     }
   },
-  beforeMount() {
+  mounted() {
     // своебразная защита роута
     fb.auth().onAuthStateChanged(user => {
       if (!user) {

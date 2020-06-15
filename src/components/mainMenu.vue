@@ -74,6 +74,30 @@
           <li
             class="dropdown nav-item"
             style="margin-top: 22px; margin-right: 15px;"
+            v-if="this.$store.state.userData.cf"
+          >
+            <a
+              class="dropdown-toggle nav-link"
+              aria-expanded="false"
+              href="#"
+              data-toggle="dropdown"
+            >
+              Мои заявки
+              <div class="ripple-container" />
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <template v-for="(board, index) in cf">
+                <router-link :to="`/${board.board_id}`" :key="index">
+                  <a class="dropdown-item" href="#">
+                    {{ board.name }}
+                  </a>
+                </router-link>
+              </template>
+            </div>
+          </li>
+          <li
+            class="dropdown nav-item"
+            style="margin-top: 22px; margin-right: 15px;"
             v-if="this.$store.state.user.uid"
           >
             <a
@@ -168,6 +192,9 @@ export default {
     }
   },
   computed: {
+    cf() {
+      return this.$store.state.userData.cf;
+    },
     pagename() {
       return this.$store.state.boards.currentBoard.name || 'Trello Up';
     },

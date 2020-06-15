@@ -44,7 +44,9 @@ export default {
         .ref(`boards/${value}`)
         .once('value')
         .then(snapshot => {
-          commit('setCurrentBoard', snapshot.val());
+          const values = snapshot.val();
+          values.id = value;
+          commit('setCurrentBoard', values);
           // получим данные из Trello
           dispatch('getMembers');
           dispatch('getLists');
