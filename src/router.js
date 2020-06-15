@@ -26,10 +26,6 @@ export default new Router({
       component: login
     },
     {
-      path: '/tasks',
-      component: tasks
-    },
-    {
       path: '/boards',
       component: boards
     },

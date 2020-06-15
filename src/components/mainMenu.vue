@@ -89,6 +89,11 @@
               <template v-for="(board, index) in cf">
                 <router-link :to="`/${board.board_id}`" :key="index">
                   <a class="dropdown-item" href="#">
+                    <i
+                      class="material-icons epmty-icon"
+                      v-show="board.board_id != currentRoute"
+                    ></i>
+                    <i class="material-icons" v-show="board.board_id == currentRoute">check</i>
                     {{ board.name }}
                   </a>
                 </router-link>
@@ -197,6 +202,9 @@ export default {
     },
     pagename() {
       return this.$store.state.boards.currentBoard.name || 'Trello Up';
+    },
+    currentRoute() {
+      return this.$store.state.boards.currentBoard.id;
     },
     pagedesc() {
       return this.$store.state.boards.currentBoard.desc;

@@ -76,7 +76,7 @@ space-before-function-paren */ /* eslint-disable comma-dangle */
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-            v-if="card.badges.attachments > 0"
+            v-if="card.badges.attachments > 0 || newFile"
             @click="getAttach(card.id)"
           >
             <i class="material-icons">attach_file</i>
@@ -125,7 +125,8 @@ export default {
   data() {
     return {
       comment: '',
-      files: []
+      files: [],
+      newFile: false
     };
   },
   methods: {
@@ -150,6 +151,7 @@ export default {
         })
         .then(() => {
           eventEmitter.$emit('showMessage', 'Файл загружен');
+          this.newFile = true;
         });
     },
     // eslint-disable-next-line no-unused-vars
