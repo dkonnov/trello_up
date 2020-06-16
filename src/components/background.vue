@@ -144,15 +144,16 @@ export default {
   font-size: 48px
 .modal-dialog
   max-width: 1300px
-.pagination
-  .page-item.active
-    a, span, .page-link:focus, span:focus
-      background-color: #9c27b0
-      border-color: #9c27b0
-      color: #fff
-      box-shadow: 0 4px 5px 0 rgba(156,39,176,.14), 0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
-  .page-item
-    span:hover, .page-link:hover
-      background-color: rgb(243, 241, 241)
-      border-color: rgb(243, 241, 241)
+// .pagination
+//   .page-item.active
+//     a, span, .page-link:focus, span:focus
+//       background-color: #9c27b0
+//       border-color: #9c27b0
+//       color: #fff
+//       box-shadow: 0 4px 5px 0 rgba(156,39,176,.14), 0 1px 10px 0
+//rgba(156,39,176,.12), 0 2px 4px -1px rgba(156,39,176,.2)
+//   .page-item
+//     span:hover, .page-link:hover
+//       background-color: rgb(243, 241, 241)
+//       border-color: rgb(243, 241, 241)
 </style>
