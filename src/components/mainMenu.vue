@@ -46,7 +46,7 @@
             v-if="this.$store.state.user.uid"
           >
             <router-link
-              to="/hlQcFPTq"
+              to="/-M4IAbwAzaCd7TS6LjIR"
               style="a.color: unset;"
               class="nav-link"
               data-toggle="collapse"
@@ -82,7 +82,7 @@
               href="#"
               data-toggle="dropdown"
             >
-              Мои заявки
+              {{ $t('message.menuMyTasks') }}
               <div class="ripple-container" />
             </a>
             <div class="dropdown-menu dropdown-with-icons">

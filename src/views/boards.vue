@@ -76,10 +76,7 @@ export default {
   methods: {
     share(id) {
       this.$clipboard(`http://trello-up.ru/${id}`);
-      eventEmitter.$emit(
-        'showMessage',
-        `Ссылка на доску скопирована в буфер обмена. Вы можете отправить ее своим клиентам или сотрудникам, разместить на внутреннем портале, сайте или в социальной сети. \n\n http://trello-up.ru/${id}`
-      );
+      eventEmitter.$emit('showMessage', this.$t('message.boards.shared'));
     },
     deleteBoard(id) {
       this.$store.dispatch('deleteBoard', id);

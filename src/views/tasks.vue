@@ -134,6 +134,9 @@ export default {
       }
     }, 30000);
   },
+  beforeDestroy() {
+    this.$store.dispatch('clearCurrent');
+  },
   beforeRouteUpdate(to, from, next) {
     this.$store.dispatch('getCurrentBoard', to.params.board);
     next();

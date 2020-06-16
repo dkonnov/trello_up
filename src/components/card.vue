@@ -101,7 +101,9 @@ space-before-function-paren */ /* eslint-disable comma-dangle */
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <input type="file" hidden id="chooser" @change="sendFile(card.id)" />
-            <a class="dropdown-item" href="#" @click="showInput()">Добавить файл</a>
+            <a class="dropdown-item" href="#" @click="showInput()">{{
+              $t('message.card.uploadFile')
+            }}</a>
             <a class="dropdown-item" href="#" @click="toArchive(card.id)">{{
               $t('message.card.closeTask')
             }}</a>
@@ -150,7 +152,7 @@ export default {
           }
         })
         .then(() => {
-          eventEmitter.$emit('showMessage', 'Файл загружен');
+          eventEmitter.$emit('showMessage', this.$t('message.card.fileUploaded'));
           this.newFile = true;
         });
     },

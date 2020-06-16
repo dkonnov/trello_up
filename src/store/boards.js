@@ -17,9 +17,15 @@ export default {
     },
     setBoards(state, payload) {
       state.boards = payload;
+    },
+    clearCurrentBoard(state) {
+      state.currentBoard = [];
     }
   },
   actions: {
+    clearCurrent({ commit }) {
+      commit('clearCurrentBoard');
+    },
     deleteBoard({ dispatch }, value) {
       // eslint-disable-next-line no-alert
       console.log(123);
