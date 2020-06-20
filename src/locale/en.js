@@ -63,7 +63,7 @@ const messages = {
         sendLink: 'Send link',
         restoreAlert: 'You must enter the email address to which the link will be sent.',
         registrationModal:
-          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+          'Thank you for registering. Now you can get to work. We have sent you an email to confirm your registration.',
         restoreModal:
           'We have sent you an email with a link to restore access. If you did not find it, then perhaps it mistakenly got into the Spam folder.'
       },
@@ -221,7 +221,7 @@ const messages = {
         restoreAlert:
           'Необходимо ввести адрес электронной почты на который будет отправлена ссылка.',
         registrationModal:
-          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+          'Спасибо за регистрацию. Теперь можно приступать к работе. Мы отправили вам письмо для подтверждения регистрации.',
         restoreModal:
           'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».'
       },

@@ -141,8 +141,9 @@
           </div>
         </div>
       </div>
-
+      <hr v-show="this.$store.state.user.uid" />
       <div
+        v-show="!this.$store.state.user.uid"
         class="card card-background wow fadeIn"
         data-wow-duration="2s"
         data-wow-delay="1s"
@@ -166,7 +167,7 @@
                   class="card-body"
                   style="min-height: 0px; padding-top: 30px; padding-bottom: 30px;"
                 >
-                  <form method="" action="">
+                  <form @submit.prevent="login">
                     <div class="row">
                       <div class="col-lg-8 col-md-6">
                         <span class="bmd-form-group"
@@ -178,14 +179,19 @@
                             </div>
                             <input
                               type="email"
-                              value=""
+                              v-model="email"
+                              @input="$v.email.$touch"
                               placeholder="Your Email..."
                               class="form-control"
                             /></div
                         ></span>
                       </div>
                       <div class="col-lg-4 col-md-6">
-                        <button type="button" class="btn btn-primary btn-block">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-block"
+                          :disabled="$v.$invalid || loading"
+                        >
                           {{ $t('message.singIn') }}
                         </button>
                       </div>
@@ -282,11 +288,54 @@
       </div>
       <hr />
       <h6 class="card-category text-info">
-        <a href="mailto:info@trello-up.ru">info@trello-up.ru</a>
+        <a href="mailto:info@trello-up.com">info@trello-up.com</a>
       </h6>
     </div>
   </div>
 </template>
+
+<script>
+import { required, email } from 'vuelidate/lib/validators/';
+import * as fb from 'firebase';
+// eslint-disable-next-line import/no-cycle
+import { eventEmitter } from '../main.js';
+
+export default {
+  name: 'Hellow',
+  data() {
+    return {
+      email: '',
+      loading: false
+    };
+  },
+  validations: {
+    email: {
+      email,
+      required
+    }
+  },
+  methods: {
+    login() {
+      this.loading = true;
+      fb.auth()
+        .signInWithEmailAndPassword('try@mail.com', '123456')
+        .then(user => {
+          // запишем данные о пользователе
+          this.$store.commit('setUser', user.user);
+          // получим дополнительные данные о пользователе
+          this.$store.dispatch('getUserData');
+          this.$store.dispatch('getBackgrounds');
+          this.$router.push('/-M4IAbwAzaCd7TS6LjIR');
+        })
+        .catch(error => {
+          // отобразим ошибку логина
+          this.loading = false;
+          eventEmitter.$emit('showMessage', error.message);
+        });
+    }
+  }
+};
+</script>
 
 <style scoped>
 .info {
