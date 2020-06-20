@@ -60,7 +60,7 @@
         <br />
 
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          >{{ $t('message.save') }}
+          {{ $t('message.save') }}
         </button>
         <br />
       </form>
