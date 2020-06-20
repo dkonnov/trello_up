@@ -63,13 +63,15 @@ const messages = {
         sendLink: 'Send link',
         restoreAlert: 'You must enter the email address to which the link will be sent.',
         registrationModal:
-          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+          'Thank you for registering. Now you can get to work. We have sent you an email to confirm your registration.',
         restoreModal:
           'We have sent you an email with a link to restore access. If you did not find it, then perhaps it mistakenly got into the Spam folder.'
       },
       card: {
         deadline: 'Deadline',
         closeTask: 'Close task',
+        uploadFile: 'Upload file',
+        fileUploaded: 'File uploaded',
         messageArchiv:
           'Are you sure you want to move this task to the archive? Performers will not see her again.'
       },
@@ -85,7 +87,9 @@ const messages = {
         placeholder3: 'Welcome description',
         button: 'Check and connect',
         deleteBoard:
-          'Are you sure you want to disconnect from this dock? Users will not be able to create new tasks in it.'
+          'Are you sure you want to disconnect from this dock? Users will not be able to create new tasks in it.',
+        shared:
+          'The link to the board is copied to the clipboard. You can send it to your customers or employees, post it on an internal portal, website or social network.'
       },
       singIn: 'Sing In',
       singOut: 'Sing Out',
@@ -94,6 +98,7 @@ const messages = {
       back: 'Back',
       close: 'Close',
       save: 'Save',
+      menuMyTasks: 'My tasks',
       clear: 'Clear',
       message: 'Message',
       requered: 'Requered field',
@@ -216,13 +221,15 @@ const messages = {
         restoreAlert:
           'Необходимо ввести адрес электронной почты на который будет отправлена ссылка.',
         registrationModal:
-          'Спасибо за регистрацию. Теперь можно войти в систему. Мы отправили вам письмо для подтверждения регистрации.',
+          'Спасибо за регистрацию. Теперь можно приступать к работе. Мы отправили вам письмо для подтверждения регистрации.',
         restoreModal:
           'Мы отправили вам письмо со ссылкой для восстановления доступа. Если вы его не нашли, то возможно оно по ошибке попало в папку «Спам».'
       },
       card: {
         deadline: 'Срок',
         closeTask: 'Закрыть задачу',
+        uploadFile: 'Добавть файл',
+        fileUploaded: 'Файл загружен',
         messageArchiv:
           'Вы действительно ходите переместить данную задачу в архив? Исполнители больше ее не увидят.'
       },
@@ -238,7 +245,9 @@ const messages = {
         placeholder3: 'Приветственное описание',
         button: 'Проверить и подключить',
         deleteBoard:
-          'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.'
+          'Вы действительно хотите отключить связь с этой докой? Пользователи не смогут создавать в ней новые задачи.',
+        shared:
+          'Ссылка на доску скопирована в буфер обмена. Вы можете отправить ее своим клиентам или сотрудникам, разместить на внутреннем портале, сайте или в социальной сети.'
       },
       singIn: 'Вход',
       singOut: 'Выход',
@@ -247,6 +256,7 @@ const messages = {
       back: 'Назад',
       close: 'Закрыть',
       save: 'Сохранить',
+      menuMyTasks: 'Мои заявки',
       clear: 'Очистить',
       message: 'Cообщение',
       requered: 'Обязательное поле',

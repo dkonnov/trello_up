@@ -1,9 +1,9 @@
 /* eslint-disable import/no-useless-path-segments */
-/* eslint-disable import/no-cycle */
 // eslint-disable-next-line max-len
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import * as fb from 'firebase';
 
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 
 export default {
@@ -17,15 +17,21 @@ export default {
     },
     setBoards(state, payload) {
       state.boards = payload;
+    },
+    clearCurrentBoard(state) {
+      state.currentBoard = [];
     }
   },
   actions: {
+    clearCurrent({ commit }) {
+      commit('clearCurrentBoard');
+    },
     deleteBoard({ dispatch }, value) {
       // eslint-disable-next-line no-alert
       console.log(123);
       eventEmitter.$emit(
         'showMessage',
-        'Вы уверены?',
+        'Are you sure?',
         // eslint-disable-next-line prefer-arrow-callback
         () => {
           fb.database()

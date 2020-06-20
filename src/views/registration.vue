@@ -101,11 +101,10 @@
 </template>
 
 <script>
-import {
-  required, email, minLength, sameAs
-} from 'vuelidate/lib/validators/';
+// eslint-disable-next-line object-curly-newline
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 
 export default {
@@ -140,7 +139,7 @@ export default {
           fb.auth()
             .currentUser.sendEmailVerification()
             .then(() => {
-              eventEmitter.$emit('showMessage', this.$('message.reg.registrationModal'));
+              eventEmitter.$emit('showMessage', this.$t('message.reg.registrationModal'));
             })
             .catch(error => {
               eventEmitter.$emit('showMessage', error.message);

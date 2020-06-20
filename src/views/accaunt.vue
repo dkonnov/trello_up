@@ -102,7 +102,7 @@ import { required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
 import { mapState } from 'vuex';
 import qs from 'qs';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
 

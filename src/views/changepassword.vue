@@ -60,7 +60,7 @@
         <br />
 
         <button :disabled="$v.$invalid || loading" type="submit" class="btn btn-primary btn-round">
-          >{{ $t('message.save') }}
+          {{ $t('message.save') }}
         </button>
         <br />
       </form>
@@ -74,7 +74,7 @@
 <script>
 import { minLength, sameAs, required } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 
 export default {
