@@ -31,7 +31,7 @@ export default {
       console.log(123);
       eventEmitter.$emit(
         'showMessage',
-        'Вы уверены?',
+        'Are you sure?',
         // eslint-disable-next-line prefer-arrow-callback
         () => {
           fb.database()
