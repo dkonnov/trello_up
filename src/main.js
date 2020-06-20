@@ -9,7 +9,7 @@ import './css/material-kit.min.css';
 import './css/animate.min.css';
 
 import router from './router.js';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import store from './store/index.js';
 
 import messages from './locale/en.js';

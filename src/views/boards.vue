@@ -64,7 +64,7 @@
 
 <script>
 import * as fb from 'firebase';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 import addBoard from './addBoard.vue';
 

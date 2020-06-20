@@ -1,9 +1,9 @@
 /* eslint-disable import/no-useless-path-segments */
-/* eslint-disable import/no-cycle */
 // eslint-disable-next-line max-len
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }] */
 import * as fb from 'firebase';
 
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 
 export default {

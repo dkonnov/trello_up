@@ -7,7 +7,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as fb from 'firebase';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import boards from './boards.js';
 import { http } from '../http.js';
 

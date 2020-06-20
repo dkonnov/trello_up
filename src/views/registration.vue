@@ -104,7 +104,7 @@
 // eslint-disable-next-line object-curly-newline
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators/';
 import * as fb from 'firebase';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line
 import { eventEmitter } from '../main.js';
 
 export default {
