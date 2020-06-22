@@ -24,7 +24,8 @@ export default new Vuex.Store({
     comments: {},
     user: {},
     userData: {},
-    backgrounds: {}
+    backgrounds: {},
+    notifications: {}
   },
   getters: {
     userName(state) {
@@ -64,6 +65,9 @@ export default new Vuex.Store({
     },
     setBackgrounds(state, payload) {
       state.backgrounds = payload;
+    },
+    setNotifications(state, payload) {
+      state.notifications = payload;
     }
   },
   actions: {
@@ -136,6 +140,11 @@ export default new Vuex.Store({
         .then(response => {
           commit('setComments', response.data);
         });
+    },
+    getNotifications({ commit }) {
+      http.get('trello/members/5e3757ca0dd19552615e40e9/notifications?').then(response => {
+        commit('setNotifications', response.data);
+      });
     }
   }
 });

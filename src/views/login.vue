@@ -106,6 +106,7 @@ export default {
           this.$store.commit('setUser', user.user);
           // получим дополнительные данные о пользователе
           this.$store.dispatch('getUserData');
+          this.$store.dispatch('getNotifications');
           this.$store.dispatch('getBackgrounds');
           if (this.$route.params.back) {
             this.$router.go(-1);

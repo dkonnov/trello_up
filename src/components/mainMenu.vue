@@ -95,6 +95,11 @@
                     ></i>
                     <i class="material-icons" v-show="board.board_id == currentRoute">check</i>
                     {{ board.name }}
+                    <span
+                      v-show="countOfNotifications(board.board)"
+                      class="badge badge-pill badge-info"
+                      >{{ countOfNotifications(board.board) }}</span
+                    >
                   </a>
                 </router-link>
               </template>
@@ -168,6 +173,11 @@ import { eventEmitter } from '../main.js';
 export default {
   name: 'MainMenu',
   methods: {
+    countOfNotifications(value) {
+      const res = this.$store.state.notifications.filter(e => e.data.board.shortLink === value);
+      console.log(`${value}`);
+      return res.length;
+    },
     changeLang(value) {
       this.$i18n.locale = value;
     },

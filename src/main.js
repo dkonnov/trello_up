@@ -57,6 +57,7 @@ new Vue({
         this.$store.commit('setUser', user);
         // получим дополнительные данные о пользователе
         this.$store.dispatch('getUserData');
+        this.$store.dispatch('getNotifications');
         this.$store.dispatch('getBackgrounds');
         this.$store.dispatch('getBoards');
       }
