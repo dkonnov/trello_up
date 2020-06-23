@@ -143,7 +143,7 @@ export default {
           // публикуем новую карточку
           http
             .post(
-              `trello/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top`
+              `trello/cards?name=${this.name}&desc=${this.desc}&idList=${response.data[0].id}&keepFromSource=all&pos=top&subscribed=true`
             )
             .then(response2 => {
               // добавим пользователя, создавшего задачу
