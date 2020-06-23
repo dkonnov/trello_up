@@ -57,11 +57,16 @@ new Vue({
         this.$store.commit('setUser', user);
         // получим дополнительные данные о пользователе
         this.$store.dispatch('getUserData');
-        this.$store.dispatch('getNotifications');
         this.$store.dispatch('getBackgrounds');
         this.$store.dispatch('getBoards');
+        this.$store.dispatch('getUserCards');
       }
     });
+    setInterval(() => {
+      if (this.$store.state.user.uid) {
+        this.$store.dispatch('getNotifications');
+      }
+    }, 60000);
   },
   render: h => h(App)
 }).$mount('#app');

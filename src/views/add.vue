@@ -47,6 +47,7 @@
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import qs from 'qs';
+import * as fb from 'firebase';
 import { eventEmitter } from '../main.js';
 import { http } from '../http.js';
 
@@ -158,6 +159,13 @@ export default {
                 )
                 .then(() => {
                   this.$store.dispatch('getCards', this.$store.state.user);
+                  // запишем в нашу БД сведения о пользователе и о карточке
+                  fb.database()
+                    .ref('cards/')
+                    .push({
+                      user_id: this.$store.state.user.uid,
+                      card_id: response2.data.id
+                    });
                 });
 
               // напишем сообщение об успешной публикации карточки

@@ -21,6 +21,7 @@ export default new Vuex.Store({
     lists: {},
     members: {},
     cards: {},
+    userCards: {},
     comments: {},
     user: {},
     userData: {},
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     setCards(state, payload) {
       state.cards = payload;
+    },
+    setUserCards(state, payload) {
+      state.userCards = payload;
     },
     setComments(state, payload) {
       state.comments = payload;
@@ -105,6 +109,7 @@ export default new Vuex.Store({
           console.log(e);
         });
     },
+    // заберем карточки из Trello
     getCards({ commit, state }) {
       commit('setCards', []);
       http
@@ -131,6 +136,28 @@ export default new Vuex.Store({
           commit('setCards', newArrSorted);
         });
     },
+    // заберем карточки из FB
+    getUserCards({ commit, dispatch, state }) {
+      fb.database()
+        .ref('cards')
+        .orderByChild('user_id')
+        .equalTo(state.user.uid)
+        .once('value')
+        .then(snapshot => {
+          const res = snapshot.val();
+          const newArr = [];
+          if (res) {
+            Object.keys(res).forEach(key => {
+              newArr.push({
+                user_id: res[key].user_id,
+                card_id: res[key].card_id
+              });
+            });
+          }
+          commit('setUserCards', newArr);
+          dispatch('getNotifications');
+        });
+    },
     // читаем комментарии
     getComments({ commit, state }) {
       http
@@ -141,9 +168,15 @@ export default new Vuex.Store({
           commit('setComments', response.data);
         });
     },
-    getNotifications({ commit }) {
+    getNotifications({ commit, state }) {
       http.get('trello/members/5e3757ca0dd19552615e40e9/notifications?').then(response => {
-        commit('setNotifications', response.data);
+        console.log(state.userCards);
+        console.log(response.data);
+        const intersection = response.data.filter(a =>
+          state.userCards.some(b => a.data.card.id === b.card_id)
+        );
+        console.log(intersection);
+        commit('setNotifications', intersection);
       });
     }
   }

@@ -95,11 +95,13 @@
                     ></i>
                     <i class="material-icons" v-show="board.board_id == currentRoute">check</i>
                     {{ board.name }}
-                    <span
-                      v-show="countOfNotifications(board.board)"
-                      class="badge badge-pill badge-info"
-                      >{{ countOfNotifications(board.board) }}</span
-                    >
+                    <div style="padding-left: 15px;">
+                      <span
+                        v-show="countOfNotifications(board.board)"
+                        class="badge badge-pill badge-info"
+                        >{{ countOfNotifications(board.board) }}</span
+                      >
+                    </div>
                   </a>
                 </router-link>
               </template>
