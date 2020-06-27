@@ -89,13 +89,15 @@
               <template v-for="(board, index) in cf">
                 <router-link :to="`/${board.board_id}`" :key="index">
                   <a class="dropdown-item" href="#">
-                    <i
-                      class="material-icons epmty-icon"
-                      v-show="board.board_id != currentRoute"
-                    ></i>
-                    <i class="material-icons" v-show="board.board_id == currentRoute">check</i>
-                    {{ board.name }}
-                    <div style="padding-left: 15px;">
+                    <div>
+                      <i
+                        class="material-icons epmty-icon"
+                        v-show="board.board_id != currentRoute"
+                      ></i>
+                      <i class="material-icons" v-show="board.board_id == currentRoute">check</i>
+                      {{ board.name }}
+                    </div>
+                    <div style="padding-left: 15px; width:100%; text-align: right;">
                       <span
                         v-show="countOfNotifications(board.board)"
                         class="badge badge-pill badge-info"
