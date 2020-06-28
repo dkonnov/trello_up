@@ -145,6 +145,31 @@
           </li>
           <li class="dropdown nav-item" style="margin-top: 22px; margin-right: 15px;">
             <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="material-icons">notifications</i>
+              <span class="notification">{{ countNotification }}</span>
+              <p class="d-lg-none d-md-block">
+                Some Actions
+              </p>
+              <div class="ripple-container"></div
+            ></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <template v-for="(item, index) of this.$store.state.notifications">
+                <a class="dropdown-item" href="#" :key="index">
+                  Новый комментарий к задаче:<br />
+                  <i>{{ item.data.text }}</i></a
+                >
+              </template>
+            </div>
+          </li>
+          <li class="dropdown nav-item" style="margin-top: 22px; margin-right: 15px;">
+            <a
               class="dropdown-toggle nav-link"
               aria-expanded="false"
               href="#"
@@ -214,6 +239,9 @@ export default {
     cf() {
       return this.$store.state.userData.cf;
     },
+    countNotification() {
+      return this.$store.state.notifications.length;
+    },
     pagename() {
       return this.$store.state.boards.currentBoard.name || 'Trello Up';
     },
@@ -230,4 +258,20 @@ export default {
 <style lang="sass" scoped>
 .epmty-icon
   width: 24px
+.notification
+  position: absolute
+  top: 5px
+  border: 0px
+  right: 10px
+  font-size: 9px
+  background: #f44336
+  color: #fff
+  min-width: 20px
+  padding: 0 5px
+  height: 20px
+  border-radius: 10px
+  text-align: center
+  line-height: 19px
+  vertical-align: middle;
+  display: block
 </style>
