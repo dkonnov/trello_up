@@ -74,7 +74,7 @@
           <li
             class="dropdown nav-item"
             style="margin-top: 22px; margin-right: 15px;"
-            v-if="this.$store.state.userData.cf"
+            v-if="this.$store.state.user.uid"
           >
             <a
               class="dropdown-toggle nav-link"
@@ -85,7 +85,8 @@
               {{ $t('message.menuMyTasks') }}
               <div class="ripple-container" />
             </a>
-            <div v-if="this.$store.state.user.uid" class="dropdown-menu dropdown-with-icons">
+            <div class="dropdown-menu dropdown-with-icons">
+              <a class="dropdown-item" v-show="!cf" href="#" disabled="true"> Пока тут пусто</a>
               <template v-for="(board, index) in cf">
                 <router-link :to="`/${board.board_id}`" :key="index">
                   <a class="dropdown-item" href="#">
@@ -143,7 +144,11 @@
               </a>
             </div>
           </li>
-          <li class="dropdown nav-item" style="margin-top: 22px; margin-right: 15px;">
+          <li
+            v-if="this.$store.state.user.uid"
+            class="dropdown nav-item"
+            style="margin-top: 22px; margin-right: 15px;"
+          >
             <a
               class="nav-link"
               href="#"
@@ -153,13 +158,12 @@
               aria-expanded="false"
             >
               <i class="material-icons">notifications</i>
-              <span class="notification">{{ countNotification }}</span>
-              <p class="d-lg-none d-md-block">
-                Some Actions
-              </p>
-              <div class="ripple-container"></div
-            ></a>
+              <span class="notification" v-show="countNotification">{{ countNotification }}</span>
+            </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" v-show="!countNotification" href="#" disabled="true">
+                Пока тут пусто</a
+              >
               <template v-for="(item, index) of this.$store.state.notifications">
                 <a class="dropdown-item" href="#" :key="index">
                   Новый комментарий к задаче:<br />
