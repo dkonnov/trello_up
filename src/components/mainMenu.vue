@@ -86,7 +86,9 @@
               <div class="ripple-container" />
             </a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a class="dropdown-item" v-show="!cf" href="#" disabled="true"> Пока тут пусто</a>
+              <a class="dropdown-item" v-show="!cf" href="#" disabled="true">{{
+                $t('message.emptyMenu')
+              }}</a>
               <template v-for="(board, index) in cf">
                 <router-link :to="`/${board.board_id}`" :key="index">
                   <a class="dropdown-item" href="#">
@@ -162,7 +164,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" v-show="!countNotification" href="#" disabled="true">
-                Пока тут пусто</a
+                {{ $t('message.emptyMenu') }}</a
               >
               <template v-for="(item, index) of this.$store.state.notifications">
                 <a class="dropdown-item" href="#" :key="index">
@@ -186,7 +188,6 @@
               <a class="dropdown-item" href="#" @click="changeLang('en')">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'en'"></i>
                 <i class="material-icons" v-show="this.$i18n.locale == 'en'">check</i> English
-                {{ $i18n.locale }}
               </a>
               <a class="dropdown-item" href="#" @click="changeLang('ru')">
                 <i class="material-icons epmty-icon" v-show="this.$i18n.locale != 'ru'"></i>
