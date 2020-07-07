@@ -103,7 +103,9 @@ export default {
       return this.$store.state.userData.background;
     },
     totalTabs() {
-      return Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1;
+      return this.$store.state.backgrounds.length
+        ? Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage)
+        : 0;
     }
   },
   methods: {

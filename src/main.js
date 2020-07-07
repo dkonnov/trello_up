@@ -14,11 +14,10 @@ import store from './store/index.js';
 
 import messages from './locale/en.js';
 
+Vue.use(VueI18n);
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
-Vue.use(VueI18n);
 Vue.use(Clipboard);
-
 Vue.config.productionTip = false;
 
 // eslint-disable-next-line import/prefer-default-export
