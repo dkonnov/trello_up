@@ -167,10 +167,21 @@
                 {{ $t('message.emptyMenu') }}</a
               >
               <template v-for="(item, index) of this.$store.state.notifications">
-                <a class="dropdown-item" href="#" :key="index">
-                  Новый комментарий к задаче:<br />
-                  <i>{{ item.data.text }}</i></a
-                >
+                <div :key="index">
+                  <a class="dropdown-item notification-display" href="#">
+                    <img
+                      :src="getAvatarURL(item.memberCreator.avatarUrl)"
+                      width="24px"
+                      class="img-raised rounded-circle img-fluid"
+                      style="margin-right: 10px;"
+                    />
+                    Новый комментарий<br />
+                    <b>{{ item.data.card.name }}</b
+                    ><br />
+                    <i>"{{ item.data.text }}"</i></a
+                  >
+                  <div class="dropdown-divider"></div>
+                </div>
               </template>
             </div>
           </li>
@@ -208,6 +219,9 @@ import { eventEmitter } from '../main.js';
 export default {
   name: 'MainMenu',
   methods: {
+    getAvatarURL(value) {
+      return value ? `${value}/30.png` : 'img/placeholder.jpg';
+    },
     countOfNotifications(value) {
       const res = this.$store.state.notifications.filter(e => e.data.board.shortLink === value);
       console.log(`${value}`);
@@ -264,6 +278,8 @@ export default {
 <style lang="sass" scoped>
 .epmty-icon
   width: 24px
+.notification-display
+  display: block !important
 .notification
   position: absolute
   top: 5px
